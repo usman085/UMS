@@ -6,7 +6,7 @@
 
 
 <script>
-import login from './StudentComponents/LoginComponent/LoginComponent';
+import login from './LoginComponent/LoginComponent';
 
     export default {
          components:{login},

@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+    <div> 
     <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
       <v-list shaped>
         <template v-for="item in items">
@@ -47,6 +47,7 @@
 
     <v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" app color="blue darken-3" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
       <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
         <span class="hidden-sm-and-down font-weight-bold display-1">UMS</span>
       </v-toolbar-title>
@@ -87,22 +88,15 @@
         </v-avatar>
       </v-btn>
     </v-app-bar>
-    <v-content>
-      <v-container>
-
-            <HeaderComponent></HeaderComponent>
-      
-      </v-container>
-    </v-content>
-  </v-app>
+    </div>
 </template>
 
 <script>
-import HeaderComponent from '../DashboardComponent/HeaderComponent';
+
 export default {
   name : "SideBar",
   components : {
-      HeaderComponent,
+    
   },
   props: {
     source: String

@@ -1,12 +1,15 @@
 require('./bootstrap');
 import Vue from 'vue';
 import vuetify from './vuetify';
-import router from './router';
+import router from './router/router';
 
 //
 
 
 import Main from './components/MainComponent';
+
+Vue.component('appstudentportal', require('./components/StudentPortal/AppStudentComponent').default); //Root Component
+
 
 
 new Vue({
@@ -14,7 +17,7 @@ new Vue({
     vuetify,
     router,
     components: {
-        'main-component': Main
+        Main,
     }
 
 });
