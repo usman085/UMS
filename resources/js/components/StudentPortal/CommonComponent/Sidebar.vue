@@ -1,6 +1,6 @@
 <template>
     <div>
-    <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
+    <v-navigation-drawer width="271" v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
       <v-list shaped>
         <template v-for="item in items">
           <v-row v-if="item.heading" :key="item.heading" align="center">
@@ -29,17 +29,23 @@
                 <v-icon>{{ child.icon }}</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title>{{ child.text }}</v-list-item-title>
+                <v-list-item-title><router-link :to="child.url">{{ child.text }}</router-link></v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list-group>
           <v-list-item v-else :key="item.text" link>
-            <v-list-item-action>
+
+               <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>
+
             <v-list-item-content>
-              <v-list-item-title>{{ item.text }}</v-list-item-title>
+              <router-link :to="item.url">
+                <v-list-item-title>{{ item.text }}</v-list-item-title>
+              </router-link>
             </v-list-item-content>
+
+
           </v-list-item>
         </template>
       </v-list>
@@ -106,28 +112,17 @@ export default {
     dialog: false,
     drawer: null,
     items: [
-          { icon: " mdi-account-check", text: "Dashboard" },
-      { icon: " mdi-account-check", text: "Attendance" },
-      { icon: "mdi-bell-ring", text: "Notifications" },
-
-      {
-        icon: "mdi-chevron-up",
-        "icon-alt": "mdi-chevron-down",
-        text: "Semester",
+      { icon: " mdi-account-check", text: "Dash Board" ,url:'/dash-board' },
+      {  icon: "mdi-chevron-up","icon-alt": "mdi-chevron-down",text: "Academic Assignments",
         model: false,
         children: [
-          { text: "Department" , icon:" mdi-arrow-right"},
-          { text: "Semester Subjects" , icon:" mdi-arrow-right"},
-          { text: "Total Subjects" , icon:" mdi-arrow-right"}
-        ]
-      },
-      { icon: "mdi-cellphone-link", text: "Application" },
-      { icon: " mdi-calendar-text", text: "Class Routine" },
-       { icon: " mdi-calendar-text", text: "Exam Routine" },
-      { icon: "mdi-cog", text: "Settings" },
-      { icon: "mdi-message", text: "Send feedback" },
-      { icon: "mdi-help-circle", text: "Help" }
+        { text: "Asign Assignments",icon:" mdi-arrow-right",url:'/Assignments'},
+        ]},
+
+
     ]
+
+
   })
 };
 </script>

@@ -1,15 +1,16 @@
 import StudentDashboard from '../components/StudentPortal/Pages/DashboardComponent';
-import Main from '../components/MainComponent';
+import Assignment from '../components/StudentPortal/Pages/AssignmentComponent';
+
 
 
 const StudentRoutes = [{
-        path: '/',
-        component: Main
-    },
-    {
         path: '/dash-board',
         component: StudentDashboard
     },
+    {
+        path: '/Assignments',
+        component: Assignment
+    }
 ]
 
 
