@@ -2859,7 +2859,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.v-application a[data-v-11ca86fc] {\n  text-decoration: none;\n}\n", ""]);
+exports.push([module.i, "\n.v-application a[data-v-11ca86fc] {\r\n  text-decoration: none;\n}\r\n", ""]);
 
 // exports
 
@@ -2878,7 +2878,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.assignment-title[data-v-394c5fa2] {\n  padding-top: 0;\n}\n.CountDown[data-v-394c5fa2] {\n  font-size: 12px;\n  display: table;\n  margin: 0 auto;\n  color: red;\n}\n.assignments-dates[data-v-394c5fa2] {\n  font-size: 13px;\n}\n.wrapper-back[data-v-394c5fa2] {\n  padding: 20px;\n  border-radius: 0 !important;\n  background: #eeeeee24;\n}\n.dots-vertical[data-v-394c5fa2] {\n  float: right;\n}\n.theme--light.v-data-table thead tr th[data-v-394c5fa2] {\n  color: black !important;\n}\n.request[data-v-394c5fa2] {\n  color: green;\n}\n", ""]);
+exports.push([module.i, "\n.assignment-title[data-v-394c5fa2] {\r\n  padding-top: 0;\n}\n.CountDown[data-v-394c5fa2] {\r\n  font-size: 12px;\r\n  display: table;\r\n  margin: 0 auto;\r\n  color: red;\n}\n.assignments-dates[data-v-394c5fa2] {\r\n  font-size: 13px;\n}\n.wrapper-back[data-v-394c5fa2] {\r\n  padding: 20px;\r\n  border-radius: 0 !important;\r\n  background: #eeeeee24;\n}\n.dots-vertical[data-v-394c5fa2] {\r\n  float: right;\n}\n.theme--light.v-data-table thead tr th[data-v-394c5fa2] {\r\n  color: black !important;\n}\n.request[data-v-394c5fa2] {\r\n  color: green;\n}\r\n", ""]);
 
 // exports
 
@@ -79915,8 +79915,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\POS_FYP\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\POS_FYP\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\UMS\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\UMS\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
