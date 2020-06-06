@@ -25275,5 +25275,7 @@ html.overflow-y-hidden {
   .v-application .float-print-right {
     float: right !important;
   }
+}.ck-editor__editable {
+  min-height: 100px;
 }
 

@@ -32,16 +32,16 @@
                       <v-list-item-title>
                         <v-icon>mdi-eye</v-icon>
 
-                        <span>View Detail</span>
+                        <span> View Detail</span>
                       </v-list-item-title>
 
                     </v-list-item>
 
                     <v-list-item>
-                    <v-list-item-title>
+                    <v-list-item-title @click="SubmitAssignmentModal()">
                         <v-icon>mdi-comment-text</v-icon>
 
-                        <span>Assignment Collecter</span>
+                        <span> Submit Assignment </span>
                     </v-list-item-title>
                     </v-list-item>
 
@@ -55,31 +55,36 @@
             </td>
           </tr>
           <tr>
-
-            <VueCountdown class="CountDown" :time="2 * 24 * 60 * 60 * 1000">
+             <td colspan="6" class="time-lap">
+            <VueCountdown class="CountDown" :time="3 * 24 * 60 * 60 * 1000">
               <template
                 slot-scope="props"
-                class="CountDown"
+                class="CountDown" v-if="props.days == 1"
               >Time Remaining：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.</template>
             </VueCountdown>
+            </td>
           </tr>
         </tbody>
       </template>
     </v-simple-table>
+    <!-- SubmitAssignment -->
+    <SubmitAssignment></SubmitAssignment>
+    <!-- SubmitAssignment -->
   </div>
   <!--"assignments-content-wrapper-->
 </template>
 
 <script>
 import VueCountdown from "@chenfengyuan/vue-countdown";
+import SubmitAssignment from './SubmitAssignmentComponnent';
 export default {
   name: "AssignmentBlock",
-  components: { VueCountdown },
+  components: { VueCountdown,SubmitAssignment },
   data() {
     return {
       desserts: [
         {
-          subject: "Math",
+          subject: "Software Engineering ",
           title: "Derivation",
           assignBy: "Danish Javed",
           assignDate: "02-May-2020",
@@ -87,6 +92,11 @@ export default {
         }
       ]
     };
+  },
+  methods:{
+    SubmitAssignmentModal:function(){
+      this.$store.dispatch('SubmitAssignmentModalToggle');
+    }
   }
 };
 </script>
@@ -95,11 +105,17 @@ export default {
 .assignment-title {
   padding-top: 0;
 }
+.v-list-item:hover{
+cursor: pointer;
+background: #e0e0e0;
+}
 .CountDown {
   font-size: 12px;
   display: table;
   margin: 0 auto;
   color: red;
+  border: 1px solid #e0e0e0;
+  border-top: none;
 }
 .assignments-dates {
   font-size: 13px;
@@ -114,6 +130,9 @@ export default {
 }
 .theme--light.v-data-table thead tr th {
   color: black !important;
+}
+.time-lap{
+  height: 0;
 }
 .request {
   color: green;

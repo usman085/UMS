@@ -3,3 +3,6 @@
 @import url('https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css');
 // vuetify.css;
 @import '~vuetify/dist/vuetify.css';
+.ck-editor__editable {
+    min-height: 100px;
+}

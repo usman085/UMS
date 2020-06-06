@@ -2,7 +2,7 @@ require('./bootstrap');
 import Vue from 'vue';
 import vuetify from './vuetify';
 import router from './router/router';
-
+import store from './Store/store';
 //
 
 
@@ -15,6 +15,7 @@ Vue.component('appstudentportal', require('./components/StudentPortal/AppStudent
 new Vue({
     el: '#app',
     vuetify,
+    store,
     router,
     components: {
         Main,
