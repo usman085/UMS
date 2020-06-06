@@ -1,5 +1,5 @@
 <template>
-    <div> 
+    <div>
     <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
       <v-list shaped>
         <template v-for="item in items">
@@ -96,7 +96,7 @@
 export default {
   name : "SideBar",
   components : {
-    
+
   },
   props: {
     source: String
@@ -106,6 +106,7 @@ export default {
     dialog: false,
     drawer: null,
     items: [
+          { icon: " mdi-account-check", text: "Dashboard" },
       { icon: " mdi-account-check", text: "Attendance" },
       { icon: "mdi-bell-ring", text: "Notifications" },
 
@@ -116,13 +117,13 @@ export default {
         model: false,
         children: [
           { text: "Department" , icon:" mdi-arrow-right"},
-          { text: "Course For Current Semester", icon:" mdi-arrow-right" },
-          { text: "Current Semester" , icon:" mdi-arrow-right"},
+          { text: "Semester Subjects" , icon:" mdi-arrow-right"},
           { text: "Total Subjects" , icon:" mdi-arrow-right"}
         ]
       },
       { icon: "mdi-cellphone-link", text: "Application" },
-      { icon: " mdi-calendar-text", text: "Schedule" },
+      { icon: " mdi-calendar-text", text: "Class Routine" },
+       { icon: " mdi-calendar-text", text: "Exam Routine" },
       { icon: "mdi-cog", text: "Settings" },
       { icon: "mdi-message", text: "Send feedback" },
       { icon: "mdi-help-circle", text: "Help" }

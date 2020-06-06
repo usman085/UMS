@@ -1,22 +1,22 @@
 <template>
-<div>
-   
-                  <!-- Component Render-->
-           
-        <HeaderComponent></HeaderComponent>
-                   <!-- Component Render-->
-    
-</div>
+  <div>
+    <!-- Component Render-->
+    <v-row>
+      <DashBoardHead blockHeading="Assignment"></DashBoardHead>
+      <DashBoardHead></DashBoardHead>
+      <DashBoardHead></DashBoardHead>
+      <!-- Component Render-->
+    </v-row>
+  </div>
 </template>
 
 <script>
-import HeaderComponent from '../PartialsComponent/HeaderComponent'
+import DashBoardHead from "../PartialsComponent/DashBoardHead";
 export default {
-    name:"StudentDashboard",
-    components:{HeaderComponent}
-}
+  name: "StudentDashboard",
+  components: { DashBoardHead }
+};
 </script>
 
 <style scoped>
-
 </style>

@@ -2158,6 +2158,9 @@ __webpack_require__.r(__webpack_exports__);
       drawer: null,
       items: [{
         icon: " mdi-account-check",
+        text: "Dashboard"
+      }, {
+        icon: " mdi-account-check",
         text: "Attendance"
       }, {
         icon: "mdi-bell-ring",
@@ -2171,10 +2174,7 @@ __webpack_require__.r(__webpack_exports__);
           text: "Department",
           icon: " mdi-arrow-right"
         }, {
-          text: "Course For Current Semester",
-          icon: " mdi-arrow-right"
-        }, {
-          text: "Current Semester",
+          text: "Semester Subjects",
           icon: " mdi-arrow-right"
         }, {
           text: "Total Subjects",
@@ -2185,7 +2185,10 @@ __webpack_require__.r(__webpack_exports__);
         text: "Application"
       }, {
         icon: " mdi-calendar-text",
-        text: "Schedule"
+        text: "Class Routine"
+      }, {
+        icon: " mdi-calendar-text",
+        text: "Exam Routine"
       }, {
         icon: "mdi-cog",
         text: "Settings"
@@ -2211,7 +2214,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PartialsComponent_HeaderComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../PartialsComponent/HeaderComponent */ "./resources/js/components/StudentPortal/PartialsComponent/HeaderComponent.vue");
+/* harmony import */ var _PartialsComponent_DashBoardHead__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../PartialsComponent/DashBoardHead */ "./resources/js/components/StudentPortal/PartialsComponent/DashBoardHead.vue");
+//
 //
 //
 //
@@ -2227,16 +2231,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "StudentDashboard",
   components: {
-    HeaderComponent: _PartialsComponent_HeaderComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
+    DashBoardHead: _PartialsComponent_DashBoardHead__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentPortal/PartialsComponent/HeaderComponent.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/StudentPortal/PartialsComponent/HeaderComponent.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentPortal/PartialsComponent/DashBoardHead.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/StudentPortal/PartialsComponent/DashBoardHead.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2260,44 +2264,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "HeaderComponent"
+  name: "DashBoardHead",
+  props: ["blockHeading"]
 });
 
 /***/ }),
@@ -2314,7 +2283,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.v-application a[data-v-11ca86fc] {\r\n  text-decoration: none;\n}\r\n", ""]);
+exports.push([module.i, "\n.v-application a[data-v-11ca86fc] {\n  text-decoration: none;\n}\n", ""]);
 
 // exports
 
@@ -21067,7 +21036,23 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("HeaderComponent")], 1)
+  return _c(
+    "div",
+    [
+      _c(
+        "v-row",
+        [
+          _c("DashBoardHead", { attrs: { blockHeading: "Assignment" } }),
+          _vm._v(" "),
+          _c("DashBoardHead"),
+          _vm._v(" "),
+          _c("DashBoardHead")
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -21076,10 +21061,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentPortal/PartialsComponent/HeaderComponent.vue?vue&type=template&id=f55394ee&scoped=true&":
-/*!**************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/StudentPortal/PartialsComponent/HeaderComponent.vue?vue&type=template&id=f55394ee&scoped=true& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentPortal/PartialsComponent/DashBoardHead.vue?vue&type=template&id=3fb34d66&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/StudentPortal/PartialsComponent/DashBoardHead.vue?vue&type=template&id=3fb34d66&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -21092,151 +21077,43 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-row",
+    "v-card",
+    {
+      staticClass: "mx-auto mt-5",
+      attrs: { "max-width": "344", outlined: "" }
+    },
     [
       _c(
-        "v-card",
-        {
-          staticClass: "mx-auto mt-5",
-          attrs: { "max-width": "344", shaped: "" }
-        },
+        "v-list-item",
+        { attrs: { "three-line": "" } },
         [
           _c(
-            "v-list-item",
-            { attrs: { "three-line": "" } },
+            "v-list-item-content",
             [
-              _c(
-                "v-list-item-content",
-                [
-                  _c("div", { staticClass: "overline mb-4" }, [
-                    _vm._v("OVERLINE")
-                  ]),
-                  _vm._v(" "),
-                  _c("v-list-item-title", { staticClass: "headline mb-1" }, [
-                    _vm._v("Headline 5")
-                  ]),
-                  _vm._v(" "),
-                  _c("v-list-item-subtitle", [
-                    _vm._v("Greyhound divisely hello coldly fonwderfully")
-                  ])
-                ],
-                1
-              ),
+              _c("v-list-item-title", { staticClass: "headline mb-1" }, [
+                _vm._v(_vm._s(_vm.blockHeading))
+              ]),
               _vm._v(" "),
-              _c("v-list-item-avatar", {
-                attrs: { tile: "", size: "80", color: "grey" }
-              })
+              _c("v-list-item-subtitle", [
+                _vm._v("Greyhound divisely hello coldly fonwderfully")
+              ])
             ],
             1
           ),
           _vm._v(" "),
-          _c(
-            "v-card-actions",
-            [
-              _c("v-btn", { attrs: { text: "" } }, [_vm._v("Button")]),
-              _vm._v(" "),
-              _c("v-btn", { attrs: { text: "" } }, [_vm._v("Button")])
-            ],
-            1
-          )
+          _c("v-list-item-avatar", {
+            attrs: { tile: "", size: "80", color: "grey" }
+          })
         ],
         1
       ),
       _vm._v(" "),
       _c(
-        "v-card",
-        {
-          staticClass: "mx-auto mt-5",
-          attrs: { "max-width": "344", shaped: "" }
-        },
+        "v-card-actions",
         [
-          _c(
-            "v-list-item",
-            { attrs: { "three-line": "" } },
-            [
-              _c(
-                "v-list-item-content",
-                [
-                  _c("div", { staticClass: "overline mb-4" }, [
-                    _vm._v("OVERLINE")
-                  ]),
-                  _vm._v(" "),
-                  _c("v-list-item-title", { staticClass: "headline mb-1" }, [
-                    _vm._v("Headline 5")
-                  ]),
-                  _vm._v(" "),
-                  _c("v-list-item-subtitle", [
-                    _vm._v("Greyhound divisely hello coldly fonwderfully")
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("v-list-item-avatar", {
-                attrs: { tile: "", size: "80", color: "grey" }
-              })
-            ],
-            1
-          ),
+          _c("v-btn", { attrs: { text: "" } }, [_vm._v("Button")]),
           _vm._v(" "),
-          _c(
-            "v-card-actions",
-            [
-              _c("v-btn", { attrs: { text: "" } }, [_vm._v("Button")]),
-              _vm._v(" "),
-              _c("v-btn", { attrs: { text: "" } }, [_vm._v("Button")])
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-card",
-        {
-          staticClass: "mx-auto mt-5",
-          attrs: { "max-width": "344", shaped: "" }
-        },
-        [
-          _c(
-            "v-list-item",
-            { attrs: { "three-line": "" } },
-            [
-              _c(
-                "v-list-item-content",
-                [
-                  _c("div", { staticClass: "overline mb-4" }, [
-                    _vm._v("OVERLINE")
-                  ]),
-                  _vm._v(" "),
-                  _c("v-list-item-title", { staticClass: "headline mb-1" }, [
-                    _vm._v("Headline 5")
-                  ]),
-                  _vm._v(" "),
-                  _c("v-list-item-subtitle", [
-                    _vm._v("Greyhound divisely hello coldly fonwderfully")
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("v-list-item-avatar", {
-                attrs: { tile: "", size: "80", color: "grey" }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-card-actions",
-            [
-              _c("v-btn", { attrs: { text: "" } }, [_vm._v("Button")]),
-              _vm._v(" "),
-              _c("v-btn", { attrs: { text: "" } }, [_vm._v("Button")])
-            ],
-            1
-          )
+          _c("v-btn", { attrs: { text: "" } }, [_vm._v("Button")])
         ],
         1
       )
@@ -78668,17 +78545,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/StudentPortal/PartialsComponent/HeaderComponent.vue":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/components/StudentPortal/PartialsComponent/HeaderComponent.vue ***!
-  \*************************************************************************************/
+/***/ "./resources/js/components/StudentPortal/PartialsComponent/DashBoardHead.vue":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/StudentPortal/PartialsComponent/DashBoardHead.vue ***!
+  \***********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _HeaderComponent_vue_vue_type_template_id_f55394ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HeaderComponent.vue?vue&type=template&id=f55394ee&scoped=true& */ "./resources/js/components/StudentPortal/PartialsComponent/HeaderComponent.vue?vue&type=template&id=f55394ee&scoped=true&");
-/* harmony import */ var _HeaderComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HeaderComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/StudentPortal/PartialsComponent/HeaderComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _DashBoardHead_vue_vue_type_template_id_3fb34d66_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DashBoardHead.vue?vue&type=template&id=3fb34d66&scoped=true& */ "./resources/js/components/StudentPortal/PartialsComponent/DashBoardHead.vue?vue&type=template&id=3fb34d66&scoped=true&");
+/* harmony import */ var _DashBoardHead_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DashBoardHead.vue?vue&type=script&lang=js& */ "./resources/js/components/StudentPortal/PartialsComponent/DashBoardHead.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -78688,50 +78565,50 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _HeaderComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _HeaderComponent_vue_vue_type_template_id_f55394ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _HeaderComponent_vue_vue_type_template_id_f55394ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _DashBoardHead_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DashBoardHead_vue_vue_type_template_id_3fb34d66_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DashBoardHead_vue_vue_type_template_id_3fb34d66_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "f55394ee",
+  "3fb34d66",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/StudentPortal/PartialsComponent/HeaderComponent.vue"
+component.options.__file = "resources/js/components/StudentPortal/PartialsComponent/DashBoardHead.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/StudentPortal/PartialsComponent/HeaderComponent.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************!*\
-  !*** ./resources/js/components/StudentPortal/PartialsComponent/HeaderComponent.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************/
+/***/ "./resources/js/components/StudentPortal/PartialsComponent/DashBoardHead.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/StudentPortal/PartialsComponent/DashBoardHead.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HeaderComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./HeaderComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentPortal/PartialsComponent/HeaderComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_HeaderComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DashBoardHead_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DashBoardHead.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentPortal/PartialsComponent/DashBoardHead.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DashBoardHead_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/StudentPortal/PartialsComponent/HeaderComponent.vue?vue&type=template&id=f55394ee&scoped=true&":
-/*!********************************************************************************************************************************!*\
-  !*** ./resources/js/components/StudentPortal/PartialsComponent/HeaderComponent.vue?vue&type=template&id=f55394ee&scoped=true& ***!
-  \********************************************************************************************************************************/
+/***/ "./resources/js/components/StudentPortal/PartialsComponent/DashBoardHead.vue?vue&type=template&id=3fb34d66&scoped=true&":
+/*!******************************************************************************************************************************!*\
+  !*** ./resources/js/components/StudentPortal/PartialsComponent/DashBoardHead.vue?vue&type=template&id=3fb34d66&scoped=true& ***!
+  \******************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HeaderComponent_vue_vue_type_template_id_f55394ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./HeaderComponent.vue?vue&type=template&id=f55394ee&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentPortal/PartialsComponent/HeaderComponent.vue?vue&type=template&id=f55394ee&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HeaderComponent_vue_vue_type_template_id_f55394ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashBoardHead_vue_vue_type_template_id_3fb34d66_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DashBoardHead.vue?vue&type=template&id=3fb34d66&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentPortal/PartialsComponent/DashBoardHead.vue?vue&type=template&id=3fb34d66&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashBoardHead_vue_vue_type_template_id_3fb34d66_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_HeaderComponent_vue_vue_type_template_id_f55394ee_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DashBoardHead_vue_vue_type_template_id_3fb34d66_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -78747,8 +78624,13 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_StudentPortal_Pages_DashboardComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/StudentPortal/Pages/DashboardComponent */ "./resources/js/components/StudentPortal/Pages/DashboardComponent.vue");
+/* harmony import */ var _components_MainComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/MainComponent */ "./resources/js/components/MainComponent.vue");
+
 
 var StudentRoutes = [{
+  path: '/',
+  component: _components_MainComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
+}, {
   path: '/dash-board',
   component: _components_StudentPortal_Pages_DashboardComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
 }];
@@ -78822,8 +78704,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\UMS\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\UMS\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\POS_FYP\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\POS_FYP\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
