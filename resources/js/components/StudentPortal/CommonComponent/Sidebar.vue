@@ -112,12 +112,14 @@ export default {
     dialog: false,
     drawer: null,
     items: [
-      { icon: " mdi-account-check", text: "Dash Board" ,url:'/dash-board' },
+      
+      { icon: "mdi-view-dashboard", text: "Dash Board" ,url:'/dash-board' },
       {  icon: "mdi-chevron-up","icon-alt": "mdi-chevron-down",text: "Academic Assignments",
         model: false,
         children: [
         { text: "Asign Assignments",icon:" mdi-arrow-right",url:'/Assignments'},
         ]},
+         { icon: "mdi-application", text: "Application" ,url:'/application' },
 
 
     ]

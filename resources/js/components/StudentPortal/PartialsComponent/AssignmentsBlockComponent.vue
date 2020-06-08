@@ -29,7 +29,7 @@
                   </template>
                   <v-list >
                     <v-list-item>
-                      <v-list-item-title>
+                      <v-list-item-title @click="AssignmentDetailModal()">
                         <v-icon>mdi-eye</v-icon>
 
                         <span> View Detail</span>
@@ -45,8 +45,8 @@
                     </v-list-item-title>
                     </v-list-item>
 
-                    <v-list-item>
-                       <v-icon>  mdi-av-timer </v-icon>
+                    <v-list-item @click="RequestTimeApplicationModal()">
+                       <v-icon class="request">  mdi-av-timer </v-icon>
                       <v-list-item-title class="request ml-1">Request For Time</v-list-item-title>
                     </v-list-item>
                   </v-list>
@@ -70,16 +70,32 @@
     <!-- SubmitAssignment -->
     <SubmitAssignment></SubmitAssignment>
     <!-- SubmitAssignment -->
+  
+    <!--assignments-content-wrapper-->
+
+   <!-- AssignmentDetailPage -->
+
+   <AssignmentDetailPage></AssignmentDetailPage>
+
+   <!-- AssignmentDetailPage -->
+
+
+
+    <!-- RequestTimeApplication -->
+        <RequestTimeApplication></RequestTimeApplication>
+    <!-- RequestTimeApplication -->
   </div>
-  <!--"assignments-content-wrapper-->
+  
 </template>
 
 <script>
 import VueCountdown from "@chenfengyuan/vue-countdown";
 import SubmitAssignment from './SubmitAssignmentComponnent';
+import RequestTimeApplication from './RequestTimeApplication';
+import AssignmentDetailPage from './AssignmentDetailPage';
 export default {
   name: "AssignmentBlock",
-  components: { VueCountdown,SubmitAssignment },
+  components: { VueCountdown,SubmitAssignment,RequestTimeApplication,AssignmentDetailPage },
   data() {
     return {
       desserts: [
@@ -96,6 +112,12 @@ export default {
   methods:{
     SubmitAssignmentModal:function(){
       this.$store.dispatch('SubmitAssignmentModalToggle');
+    },
+    RequestTimeApplicationModal:function(){
+      this.$store.dispatch('ApplicationRequestTimeModalToggle');
+    },
+    AssignmentDetailModal:function(){
+      this.$store.dispatch('AssignmentDetailPageModalToggle');
     }
   }
 };
