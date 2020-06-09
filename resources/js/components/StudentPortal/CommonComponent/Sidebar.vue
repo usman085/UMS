@@ -118,6 +118,7 @@ export default {
         children: [
         { text: "Asign Assignments",icon:" mdi-arrow-right",url:'/Assignments'},
         ]},
+             { icon: "mdi-calendar-text", text: "Class Routine" ,url:'/Class-Routine' }
 
 
     ]
