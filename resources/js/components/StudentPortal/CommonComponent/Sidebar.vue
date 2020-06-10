@@ -18,13 +18,14 @@
             v-model="item.model"
             :prepend-icon="item.model ? item.icon : item['icon-alt']"
             append-icon
+            class="list-acnhor"
           >
             <template v-slot:activator>
-              <v-list-item-content>
+              <v-list-item-content class="list-acnhor">
                 <v-list-item-title >{{ item.text }}</v-list-item-title>
               </v-list-item-content>
             </template>
-            <v-list-item v-for="(child, i) in item.children" :key="i" link>
+            <v-list-item class="list-acnhor" v-for="(child, i) in item.children" :key="i" link>
               <v-list-item-action v-if="child.icon">
                 <v-icon>{{ child.icon }}</v-icon>
               </v-list-item-action>
@@ -35,11 +36,11 @@
           </v-list-group>
           <v-list-item v-else :key="item.text" link>
 
-               <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
+               <v-list-item-action class="list-acnhor" >
+              <v-icon class="list-acnhor" >{{ item.icon }}</v-icon>
             </v-list-item-action>
 
-            <v-list-item-content>
+            <v-list-item-content class="list-acnhor">
               <router-link :to="item.url">
                 <v-list-item-title>{{ item.text }}</v-list-item-title>
               </router-link>
@@ -120,6 +121,7 @@ export default {
         { text: "Asign Assignments",icon:" mdi-arrow-right",url:'/Assignments'},
         ]},
          { icon: "mdi-application", text: "Application" ,url:'/application' },
+         {icon:'mdi-bell',text:'Notifications', url:'/notification'}
 
 
     ]
@@ -130,7 +132,11 @@ export default {
 </script>
 
 <style  scoped>
+.list-acnhor{
+   color: #1976d2 !important;
+}
 .v-application a {
   text-decoration: none;
+  color: #1976d2 !important;
 }
 </style>
