@@ -9,18 +9,13 @@
          </router-link>
 
         <router-link to="/application/inbox">
-         <v-chip class="ma-2" color="primary" outlined>
+         <v-chip class="ma-2 " color="primary" outlined >
               <v-icon left>mdi-inbox</v-icon>
-                Inbox
+                Application Box
           </v-chip>
         </router-link>
 
-         <router-link to="/application/sentBox">
-         <v-chip class="ma-2" color="primary" outlined>
-              <v-icon left>mdi-file-send</v-icon>
-                Sent
-          </v-chip>
-        </router-link>
+      
    
 
        
@@ -36,7 +31,14 @@
 
 export default {
     name:"Application",
-    components:{}
+    components:{},
+    data:function(){
+      return{
+    
+      }
+     
+    }
+
 }
 </script>
 
