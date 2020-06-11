@@ -91,7 +91,8 @@
       </v-btn>
       <v-btn icon large>
         <v-avatar size="32px" item>
-          <v-img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" alt="Vuetify"></v-img>
+          <router-link to="/Profile-Component"> <v-img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" alt="Vuetify"></v-img>
+      </router-link>
         </v-avatar>
       </v-btn>
     </v-app-bar>
@@ -113,13 +114,17 @@ export default {
     dialog: false,
     drawer: null,
     items: [
-      
-      { icon: "mdi-view-dashboard", text: "Dash Board" ,url:'/dash-board' },
-      {  icon: "mdi-chevron-up","icon-alt": "mdi-chevron-down",text: "Academic Assignments",
+
+    { icon: "mdi-view-dashboard", text: "Dash Board" ,url:'/dash-board' },
+    {  icon: "mdi-chevron-up","icon-alt": "mdi-chevron-down",text: "Academic Assignments",
         model: false,
         children: [
-        { text: "Asign Assignments",icon:" mdi-arrow-right",url:'/Assignments'},
+    { text: "Asign Assignments",icon:" mdi-arrow-right",url:'/Assignments'},
         ]},
+    { icon: "mdi-calendar-text", text: "Class Routine" ,url:'/Class-Routine' },
+    { icon: "mdi-calendar-text", text: "Exam Routine" ,url:'/Exam-Routine' },
+    { icon: " mdi-email", text: "Application" ,url:'/application' },
+     { icon: "mdi-application", text: "Attendance Sheet" ,url:'/Attendance-Sheet' },
          { icon: "mdi-application", text: "Application" ,url:'/application' },
          {icon:'mdi-bell',text:'Notifications', url:'/notification'},
 
