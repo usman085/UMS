@@ -7,6 +7,7 @@ import ApplicationSentDetail from '../components/StudentPortal/PartialsComponent
 import Notification from '../components/StudentPortal/Pages/NotificationComponent';
 import notificationDetail from '../components/StudentPortal/PartialsComponent/NotificationDetail';
 import NotificationList from '../components/StudentPortal/PartialsComponent/NotificationListComponent';
+import feedback from '../components/StudentPortal/Pages/feedbackComponent';
 const StudentRoutes = [{
         path: '/dash-board',
         component: StudentDashboard
@@ -33,6 +34,10 @@ const StudentRoutes = [{
             { path: '*', redirect: 'inbox' }
         ]
 
+    },
+    {
+        path: '/feedback',
+        component: feedback
     },
     {
         path: '/notification',

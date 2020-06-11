@@ -121,7 +121,9 @@ export default {
         { text: "Asign Assignments",icon:" mdi-arrow-right",url:'/Assignments'},
         ]},
          { icon: "mdi-application", text: "Application" ,url:'/application' },
-         {icon:'mdi-bell',text:'Notifications', url:'/notification'}
+         {icon:'mdi-bell',text:'Notifications', url:'/notification'},
+
+         {icon:'mdi-comment-text-outline',text:'Send Feedback',url:'/feedback'}
 
 
     ]
