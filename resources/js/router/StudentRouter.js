@@ -12,7 +12,7 @@ import Notification from '../components/StudentPortal/Pages/NotificationComponen
 import notificationDetail from '../components/StudentPortal/PartialsComponent/NotificationDetail';
 import NotificationList from '../components/StudentPortal/PartialsComponent/NotificationListComponent';
 import feedback from '../components/StudentPortal/Pages/feedbackComponent';
-import customSupport from '../components/StudentPortal/Pages/customerSupport'
+import customSupport from '../components/StudentPortal/Pages/customSupport'
 const StudentRoutes = [{
         path: '/dash-board',
         component: StudentDashboard
@@ -49,21 +49,15 @@ const StudentRoutes = [{
                 path: 'compose',
                 component: composeApplication
             }, {
-                path: 'sentBox',
-                component: ApplicationSentbox
+                path: 'sent-detail/:id/:slug',
+                component: ApplicationSentDetail
             }
-        ]
-
-    }, {
-        path: 'compose',
-        component: composeApplication
-    },
-    {
-        path: 'sent-detail/:id/:slug',
-        component: ApplicationSentDetail
-    },
+            ,
     { path: '/', redirect: 'inbox' },
     { path: '*', redirect: 'inbox' },
+        ]
+
+    },
     {
         path: '/support',
         component: customSupport

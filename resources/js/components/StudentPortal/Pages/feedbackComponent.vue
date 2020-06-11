@@ -37,7 +37,7 @@
                  <v-divider></v-divider>
                 <div class="descption-box-wrapper">
                   <div class="descption-content"> 
-                      <span class="descripton-head">Describe your experiance here.</span>
+                      <span class="descripton-head">Describe your experience here.</span>
                         <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
                   </div><!--descption-content-->
                 </div><!-- descption-box-wrapper -->
@@ -76,7 +76,7 @@ export default {
     padding: 5px 0;
 }
 .descption-content{
-    padding:10px ;
+    padding:10px ;    
 }
 .feedback-button{
     padding:18px 0;

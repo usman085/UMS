@@ -125,9 +125,9 @@ export default {
     { icon: "mdi-calendar-text", text: "Exam Routine" ,url:'/Exam-Routine' },
     { icon: " mdi-email", text: "Application" ,url:'/application' },
      { icon: "mdi-application", text: "Attendance Sheet" ,url:'/Attendance-Sheet' },
-         { icon: "mdi-application", text: "Application" ,url:'/application' },
+         
          {icon:'mdi-bell',text:'Notifications', url:'/notification'},
-
+       {icon:'mdi-account',text:'My Profile', url:'/Profile-Component'},
          {icon:'mdi-comment-text-outline',text:'Send Feedback',url:'/feedback'},
          {icon:'mdi-account',text:'Contact Support',url:'/support'}
 
