@@ -4,60 +4,37 @@
       <thead>
         <tr>
           <th></th>
-          <th class="text-center headline">Monday</th>
-          <th class="text-center headline">Tuesday</th>
-          <th class="text-center headline">Wednesday</th>
-          <th class="text-center headline">Thursday</th>
-          <th class="text-center headline">Friday</th>
+          <th class="text-center headline">9:00 - 1:00</th>
+          <th class="text-center headline">1:00 - 2:00</th>
+          <th class="text-center headline">2:00 - 3:00</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in items" :key="item.name">
-          <td class="title">{{ item.time }}</td>
+          <td class="title">{{ item.day }}</td>
           <td class="text-center body-1">
-
-            <span class="float-left">{{ item.teacher }}</span>
+            <span class="float-left">{{ item.teacher1 }}</span>
             <br />
-            <span class="font-weight-black mt-1 title">{{ item.mon}}</span>
+            <span class="font-weight-black mt-1 title">{{ item.sub1}}</span>
             <br />
-            <span class="float-right">{{ item.room }}</span>
-
+            <span class="float-right">{{ item.room1 }}</span>
           </td>
 
           <td class="text-center body-1">
-            <span class="float-left">{{ item.teacher }}</span>
+            <span class="float-left">{{ item.teacher2 }}</span>
             <br />
-            <span class="font-weight-black mt-1 title">{{ item.tue }}</span>
+            <span class="font-weight-black mt-1 title">{{ item.sub2 }}</span>
             <br />
-            <span class="float-right">{{ item.room }}</span>
+            <span class="float-right">{{ item.room2 }}</span>
           </td>
 
           <td class="text-center body-1">
-
-            <span class="float-left">{{ item.teacher }}</span>
+            <span class="float-left">{{ item.teacher3 }}</span>
             <br />
-            <span class="font-weight-black mt-1 title">{{ item.wed }}</span>
+            <span class="font-weight-black mt-1 title">{{ item.sub3 }}</span>
             <br />
-            <span class="float-right">{{ item.room }}</span>
-
+            <span class="float-right">{{ item.room3 }}</span>
           </td>
-
-          <td class="text-center body-1">
-            <span class="float-left">{{ item.teacher }}</span>
-            <br />
-         <span class="font-weight-black mt-1 title">{{ item.thu }}</span>
-            <br />
-            <span class="float-right">{{ item.room }}</span>
-          </td>
-
-          <td class="text-center body-1">
-            <span class="float-left">{{ item.teacher }}</span>
-            <br />
-             <span class="font-weight-black mt-1 title">{{ item.fri }}</span>
-            <br />
-            <span class="float-right">{{ item.room }}</span>
-          </td>
-
         </tr>
       </tbody>
     </template>
@@ -70,34 +47,76 @@ export default {
     return {
       items: [
         {
-          time: "9:00 - 11:00",
-          teacher: "Ijaz Hussain",
-          mon: "Islamiyat",
-          room: "Cr 2",
-          tue: "PakStudies",
-          wed: "",
-          thu: "Computer",
-          fri: "Isl"
+          day: "Monday",
+
+          teacher1: "Ijaz Hussain",
+          teacher2: "Sabir",
+          teacher3: "Usman",
+
+          sub1: "Islamiyat",
+          sub2: "Urdu",
+          sub3: "English",
+
+          room1: "Cr 2",
+          room2: "Cr 4",
+          room3: "Cr 3"
         },
         {
-          time: "11:00 - 1:00",
-           teacher: "Ijaz Hussain",
-          mon: "Urdu",
-            room: "Cr 2",
-          tue: "",
-          wed: "Computer",
-          thu: "PakStudies",
-          fri: ""
+          day: "Tuesday",
+
+          teacher1: "Ijaz",
+          teacher2: "Asslam",
+          teacher3: "Uzair",
+
+          sub1: "Computer",
+          sub2: "Physics",
+          sub3: "Urdu",
+
+          room1: "Cr 6",
+          room2: "Cr 2",
+          room3: "Cr 5"
         },
         {
-          time: "1:00 - 3:00",
-           teacher: "Ijaz Hussain",
-             room: "Cr 2",
-          mon: "English",
-          tue: "Computer",
-          wed: "",
-          thu: "English",
-          fri: "English"
+          day: "Wednesday",
+          teacher1: "Hussain",
+          teacher2: "Usman",
+          teacher3: "Sabir",
+
+          sub1: "English",
+          sub2: "Urdu",
+          sub3: "Islamiyat",
+
+          room1: "Cr 1",
+          room2: "Cr 3",
+          room3: "Cr 2"
+        },
+        {
+          day: "Thursday",
+          teacher1: "Ijaz Hussain",
+          teacher2: "Sabir",
+          teacher3: "Usman",
+
+          sub1: "Islamiyat",
+          sub2: "Urdu",
+          sub3: "English",
+
+          room1: "Cr 5",
+          room2: "Cr 3",
+          room3: "Cr 1"
+        },
+        {
+          day: "Friday",
+          teacher1: "Ijaz Hussain",
+          teacher2: "Sabir",
+          teacher3: "Usman",
+
+          sub1: "Islamiyat",
+          sub2: "Urdu",
+          sub3: "English",
+
+          room1: "Cr 1",
+          room2: "Cr 4",
+          room3: "Cr 3"
         }
       ]
     };
