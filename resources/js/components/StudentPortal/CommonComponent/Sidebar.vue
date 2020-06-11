@@ -123,7 +123,9 @@ export default {
          { icon: "mdi-application", text: "Application" ,url:'/application' },
          {icon:'mdi-bell',text:'Notifications', url:'/notification'},
 
-         {icon:'mdi-comment-text-outline',text:'Send Feedback',url:'/feedback'}
+         {icon:'mdi-comment-text-outline',text:'Send Feedback',url:'/feedback'},
+         {icon:'mdi-account',text:'Contact Support',url:'/support'}
+
 
 
     ]

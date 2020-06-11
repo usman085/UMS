@@ -8,6 +8,7 @@ import Notification from '../components/StudentPortal/Pages/NotificationComponen
 import notificationDetail from '../components/StudentPortal/PartialsComponent/NotificationDetail';
 import NotificationList from '../components/StudentPortal/PartialsComponent/NotificationListComponent';
 import feedback from '../components/StudentPortal/Pages/feedbackComponent';
+import customSupport from '../components/StudentPortal/Pages/customerSupport'
 const StudentRoutes = [{
         path: '/dash-board',
         component: StudentDashboard
@@ -34,6 +35,10 @@ const StudentRoutes = [{
             { path: '*', redirect: 'inbox' }
         ]
 
+    },
+    {
+        path: '/support',
+        component: customSupport
     },
     {
         path: '/feedback',
