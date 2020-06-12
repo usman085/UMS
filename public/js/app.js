@@ -87086,10 +87086,7 @@ var StudentRoutes = [{
   }, {
     path: 'compose',
     component: _components_StudentPortal_PartialsComponent_ComposeApplication__WEBPACK_IMPORTED_MODULE_8__["default"]
-  }, {
-    path: 'sentBox',
-    component: ApplicationSentbox
-  }]
+  }, {}]
 }, {
   path: 'compose',
   component: _components_StudentPortal_PartialsComponent_ComposeApplication__WEBPACK_IMPORTED_MODULE_8__["default"]

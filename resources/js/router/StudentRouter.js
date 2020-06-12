@@ -47,8 +47,7 @@ const StudentRoutes = [{
                 path: 'compose',
                 component: composeApplication
             }, {
-                path: 'sentBox',
-                component: ApplicationSentbox
+
             }
         ]
 
