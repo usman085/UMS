@@ -3569,6 +3569,58 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentPortal/PartialsComponent/BadWordAlert.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/StudentPortal/PartialsComponent/BadWordAlert.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'badWord',
+  computed: {
+    dialog: function dialog() {
+      return this.$store.state.BadWordModal;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentPortal/PartialsComponent/ClassRoutineBlock.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/StudentPortal/PartialsComponent/ClassRoutineBlock.vue?vue&type=script&lang=js& ***!
@@ -3724,6 +3776,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
 /* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _BadWordAlert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./BadWordAlert */ "./resources/js/components/StudentPortal/PartialsComponent/BadWordAlert.vue");
+//
+//
 //
 //
 //
@@ -3774,8 +3829,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_1___default.a);
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'composeApplication',
+  components: {
+    badWord: _BadWordAlert__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
   data: function data() {
     return {
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_2___default.a,
@@ -3784,8 +3843,22 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_ckeditor_ckeditor5_vue__WEBPACK_
       values: [],
       value: null,
       editorConfig: {// The configuration of the editor.
-      }
+      },
+      submitBtn: false,
+      applictionTitle: ''
     };
+  },
+  methods: {
+    checkWords: function checkWords(data) {
+      var banned = ["lun", "bond", "banana"];
+      var words = data.toLowerCase();
+
+      for (var i = 0; i < banned.length; i++) {
+        if (words.includes(banned[i])) {
+          this.$store.dispatch('BadWordModalToggle');
+        }
+      }
+    }
   }
 });
 
@@ -25356,6 +25429,95 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentPortal/PartialsComponent/BadWordAlert.vue?vue&type=template&id=09cd8ba4&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/StudentPortal/PartialsComponent/BadWordAlert.vue?vue&type=template&id=09cd8ba4& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "text-center" },
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: { width: "500" },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-card-title",
+                {
+                  staticClass: "headline grey lighten-2",
+                  attrs: { color: "primary" }
+                },
+                [_vm._v("\n        Policy Violation\n      ")]
+              ),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v(
+                  "\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n      "
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "#0091ea", text: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.$store.dispatch("BadWordModalToggle")
+                        }
+                      }
+                    },
+                    [_vm._v("\n          Ok!\n        ")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentPortal/PartialsComponent/ClassRoutineBlock.vue?vue&type=template&id=77ebd79a&scoped=true&":
 /*!****************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/StudentPortal/PartialsComponent/ClassRoutineBlock.vue?vue&type=template&id=77ebd79a&scoped=true& ***!
@@ -25569,9 +25731,21 @@ var render = function() {
                 [
                   _c("v-text-field", {
                     attrs: {
-                      counter: 25,
+                      counter: 45,
                       label: "Application Title*",
                       required: ""
+                    },
+                    on: {
+                      blur: function($event) {
+                        return _vm.checkWords(_vm.applictionTitle)
+                      }
+                    },
+                    model: {
+                      value: _vm.applictionTitle,
+                      callback: function($$v) {
+                        _vm.applictionTitle = $$v
+                      },
+                      expression: "applictionTitle"
                     }
                   })
                 ],
@@ -25586,6 +25760,11 @@ var render = function() {
                   _vm._v(" "),
                   _c("ckeditor", {
                     attrs: { editor: _vm.editor, config: _vm.editorConfig },
+                    on: {
+                      blur: function($event) {
+                        return _vm.checkWords(_vm.editorData)
+                      }
+                    },
                     model: {
                       value: _vm.editorData,
                       callback: function($$v) {
@@ -25606,9 +25785,21 @@ var render = function() {
                       "div",
                       { staticClass: "my-2" },
                       [
-                        _c("v-btn", { attrs: { color: "primary" } }, [
-                          _vm._v("Submit")
-                        ])
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: {
+                              color: "primary",
+                              disabled: _vm.submitBtn
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.Submit()
+                              }
+                            }
+                          },
+                          [_vm._v("Submit")]
+                        )
                       ],
                       1
                     )
@@ -25621,7 +25812,9 @@ var render = function() {
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("badWord")
     ],
     1
   )
@@ -85103,9 +85296,13 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
   state: {
     SubmitAssignmentModal: false,
     ApplicationRequestTimeModal: false,
-    AssignmentDetailPageModal: false
+    AssignmentDetailPageModal: false,
+    BadWordModal: false
   },
   mutations: {
+    BadWordModalToggle: function BadWordModalToggle(state) {
+      state.BadWordModal = !state.BadWordModal;
+    },
     SubmitAssignmentModalToggle: function SubmitAssignmentModalToggle(state) {
       state.SubmitAssignmentModal = !state.SubmitAssignmentModal;
     },
@@ -85117,6 +85314,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
     }
   },
   actions: {
+    BadWordModalToggle: function BadWordModalToggle(context) {
+      context.commit('BadWordModalToggle');
+    },
     SubmitAssignmentModalToggle: function SubmitAssignmentModalToggle(context) {
       context.commit('SubmitAssignmentModalToggle');
     },
@@ -86675,6 +86875,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AttendanceSheet_vue_vue_type_template_id_071f64e2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AttendanceSheet_vue_vue_type_template_id_071f64e2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/StudentPortal/PartialsComponent/BadWordAlert.vue":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/StudentPortal/PartialsComponent/BadWordAlert.vue ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BadWordAlert_vue_vue_type_template_id_09cd8ba4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BadWordAlert.vue?vue&type=template&id=09cd8ba4& */ "./resources/js/components/StudentPortal/PartialsComponent/BadWordAlert.vue?vue&type=template&id=09cd8ba4&");
+/* harmony import */ var _BadWordAlert_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BadWordAlert.vue?vue&type=script&lang=js& */ "./resources/js/components/StudentPortal/PartialsComponent/BadWordAlert.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BadWordAlert_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BadWordAlert_vue_vue_type_template_id_09cd8ba4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BadWordAlert_vue_vue_type_template_id_09cd8ba4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/StudentPortal/PartialsComponent/BadWordAlert.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/StudentPortal/PartialsComponent/BadWordAlert.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/StudentPortal/PartialsComponent/BadWordAlert.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BadWordAlert_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./BadWordAlert.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentPortal/PartialsComponent/BadWordAlert.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BadWordAlert_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/StudentPortal/PartialsComponent/BadWordAlert.vue?vue&type=template&id=09cd8ba4&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/StudentPortal/PartialsComponent/BadWordAlert.vue?vue&type=template&id=09cd8ba4& ***!
+  \*****************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BadWordAlert_vue_vue_type_template_id_09cd8ba4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./BadWordAlert.vue?vue&type=template&id=09cd8ba4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/StudentPortal/PartialsComponent/BadWordAlert.vue?vue&type=template&id=09cd8ba4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BadWordAlert_vue_vue_type_template_id_09cd8ba4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BadWordAlert_vue_vue_type_template_id_09cd8ba4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

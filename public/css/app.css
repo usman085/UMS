@@ -25279,3 +25279,7 @@ html.overflow-y-hidden {
   min-height: 100px;
 }
 
+* {
+  font-family: "Allerta";
+}
+

@@ -7,9 +7,13 @@ const store = new Vuex.Store({
     state: {
         SubmitAssignmentModal: false,
         ApplicationRequestTimeModal: false,
-        AssignmentDetailPageModal: false
+        AssignmentDetailPageModal: false,
+        BadWordModal: false
     },
     mutations: {
+        BadWordModalToggle(state) {
+            state.BadWordModal = !state.BadWordModal;
+        },
         SubmitAssignmentModalToggle(state) {
             state.SubmitAssignmentModal = !state.SubmitAssignmentModal;
         },
@@ -21,6 +25,9 @@ const store = new Vuex.Store({
         }
     },
     actions: {
+        BadWordModalToggle(context) {
+            context.commit('BadWordModalToggle');
+        },
         SubmitAssignmentModalToggle(context) {
             context.commit('SubmitAssignmentModalToggle');
         },
