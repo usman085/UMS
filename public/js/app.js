@@ -2806,6 +2806,10 @@ __webpack_require__.r(__webpack_exports__);
           url: '/student-portal/Assignments'
         }]
       }, {
+        icon: '',
+        text: 'Academic-syllabus',
+        url: '/student-portal/Academic-syllabus'
+      }, {
         icon: "mdi-calendar-text",
         text: "Class Routine",
         url: '/student-portal/Class-Routine'
@@ -24667,7 +24671,7 @@ var render = function() {
                 [
                   _c(
                     "router-link",
-                    { attrs: { to: "" } },
+                    { attrs: { to: { name: "ProfileComponent" } } },
                     [
                       _c("v-img", {
                         attrs: {
@@ -89292,6 +89296,9 @@ var StudentRoutes = [{
   children: [{
     path: 'dash-board',
     component: _components_StudentPortal_Pages_DashboardComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }, {
+    path: 'Academic-syllabus',
+    component: _components_StudentPortal_Pages_AcademicSyllabusComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
     path: 'Assignments',
     component: _components_StudentPortal_Pages_AssignmentComponent__WEBPACK_IMPORTED_MODULE_1__["default"]

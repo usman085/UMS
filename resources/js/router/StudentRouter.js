@@ -23,6 +23,10 @@ const StudentRoutes = [{
             component: StudentDashboard
         },
         {
+            path: 'Academic-syllabus',
+            component: AcademicSyllabus
+        },
+        {
             path: 'Assignments',
             component: Assignment
         },

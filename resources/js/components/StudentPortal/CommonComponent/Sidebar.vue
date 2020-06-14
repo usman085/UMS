@@ -91,7 +91,7 @@
       </v-btn>
       <v-btn icon large>
         <v-avatar size="32px" item>
-          <router-link to="">
+          <router-link :to="{name:'ProfileComponent'}">
             <v-img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" alt="Vuetify"></v-img>
           </router-link>
         </v-avatar>
@@ -119,6 +119,7 @@ export default {
         children: [
     { text: "Asign Assignments",icon:" mdi-arrow-right",url:'/student-portal/Assignments'},
         ]},
+     {icon:'',text:'Academic-syllabus',url:'/student-portal/Academic-syllabus'},   
     { icon: "mdi-calendar-text", text: "Class Routine" ,url:'/student-portal/Class-Routine' },
     { icon: "mdi-calendar-text", text: "Exam Routine" ,url:'/student-portal/Exam-Routine' },
     { icon: " mdi-email", text: "Application" ,url:'/student-portal/application' },
@@ -128,6 +129,7 @@ export default {
        {icon:'mdi-account',text:'My Profile', url:'/student-portal/Profile-Component'},
          {icon:'mdi-comment-text-outline',text:'Send Feedback',url:'/student-portal/feedback'},
          {icon:'mdi-account',text:'Contact Support',url:'/student-portal/customer-support'}
+
 
 
 
