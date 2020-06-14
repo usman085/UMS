@@ -24261,7 +24261,7 @@ var render = function() {
                 [
                   _c(
                     "router-link",
-                    { attrs: { to: "/Profile-Component" } },
+                    { attrs: { to: { name: "ProfileComponent" } } },
                     [
                       _c("v-img", {
                         attrs: {
@@ -88082,7 +88082,8 @@ var StudentRoutes = [{
     component: _components_StudentPortal_Pages_ExamRoutineComponent__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
     path: 'Profile-Component',
-    component: _components_StudentPortal_Pages_ProfileComponent__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _components_StudentPortal_Pages_ProfileComponent__WEBPACK_IMPORTED_MODULE_5__["default"],
+    name: 'ProfileComponent'
   }, {
     path: 'customer-support',
     component: _components_CommonGobalComponent_customSupport__WEBPACK_IMPORTED_MODULE_14__["default"],

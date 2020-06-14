@@ -39,7 +39,8 @@ const StudentRoutes = [{
         },
         {
             path: 'Profile-Component',
-            component: ProfileComponent
+            component: ProfileComponent,
+            name: 'ProfileComponent'
         },
         {
             path: 'customer-support',

@@ -91,7 +91,7 @@
       </v-btn>
       <v-btn icon large>
         <v-avatar size="32px" item>
-          <router-link to="/Profile-Component"> <v-img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" alt="Vuetify"></v-img>
+          <router-link :to="{ name:'ProfileComponent' }"> <v-img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" alt="Vuetify"></v-img>
       </router-link>
         </v-avatar>
       </v-btn>
