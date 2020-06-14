@@ -131,6 +131,6 @@ export default {
   border: thin solid rgba(0, 0, 0, 0.12);
 }
 .v-data-table td {
-  height: 100px;
+  height: 50px;
 }
 </style>

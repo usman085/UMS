@@ -1,5 +1,6 @@
 import StudentDashboard from '../components/StudentPortal/Pages/DashboardComponent';
 import Assignment from '../components/StudentPortal/Pages/AssignmentComponent';
+import AcademicSyllabus from '../components/StudentPortal/Pages/AcademicSyllabusComponent';
 import ClassRoutine from '../components/StudentPortal/Pages/ClassRoutineComponent';
 import ExamRoutine from '../components/StudentPortal/Pages/ExamRoutineComponent';
 import AttendanceSheet from '../components/StudentPortal/Pages/AttendanceComponent';
@@ -11,6 +12,8 @@ import ApplicationSentDetail from '../components/StudentPortal/PartialsComponent
 import Notification from '../components/StudentPortal/Pages/NotificationComponent';
 import notificationDetail from '../components/StudentPortal/PartialsComponent/NotificationDetail';
 import NotificationList from '../components/StudentPortal/PartialsComponent/NotificationListComponent';
+import feedback from '../components/StudentPortal/Pages/feedbackComponent';
+import customSupport from '../components/StudentPortal/Pages/customSupport'
 const StudentRoutes = [{
         path: '/dash-board',
         component: StudentDashboard
@@ -18,6 +21,10 @@ const StudentRoutes = [{
     {
         path: '/Assignments',
         component: Assignment
+    },
+    {
+        path: '/Academic-Syllabus',
+        component: AcademicSyllabus
     },
     {
         path: '/Class-Routine',
@@ -47,20 +54,20 @@ const StudentRoutes = [{
                 path: 'compose',
                 component: composeApplication
             }, {
-
-            }
+                path: 'sent-detail/:id/:slug',
+            },
+            { path: '*', redirect: 'inbox' },
         ]
 
-    }, {
-        path: 'compose',
-        component: composeApplication
     },
     {
-        path: 'sent-detail/:id/:slug',
-        component: ApplicationSentDetail
+        path: '/support',
+        component: customSupport
     },
-    { path: '/', redirect: 'inbox' },
-    { path: '*', redirect: 'inbox' },
+    {
+        path: '/feedback',
+        component: feedback
+    },
     {
         path: '/notification',
         component: Notification,
