@@ -8,6 +8,7 @@ const store = new Vuex.Store({
         SubmitAssignmentModal: false,
         ApplicationRequestTimeModal: false,
         AssignmentDetailPageModal: false,
+        CourseOutlinePageModal: false,
         BadWordModal: false
     },
     mutations: {
@@ -22,7 +23,11 @@ const store = new Vuex.Store({
         },
         AssignmentDetailPageModalToggle(state) {
             state.AssignmentDetailPageModal = !state.AssignmentDetailPageModal;
+        },
+        CourseOutlinePageModalToggle(state) {
+            state.CourseOutlinePageModal = !state.CourseOutlinePageModal;
         }
+
     },
     actions: {
         BadWordModalToggle(context) {
@@ -36,6 +41,9 @@ const store = new Vuex.Store({
         },
         AssignmentDetailPageModalToggle(context) {
             context.commit('AssignmentDetailPageModalToggle');
+        },
+        CourseOutlinePageModalToggle(context) {
+            context.commit('CourseOutlinePageModalToggle');
         }
     }
 })

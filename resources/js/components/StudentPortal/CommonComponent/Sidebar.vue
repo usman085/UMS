@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div>
     <v-navigation-drawer width="271" v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
       <v-list shaped>
         <template v-for="item in items">
@@ -12,7 +12,6 @@
             </v-col>
           </v-row>
           <v-list-group
-
             v-else-if="item.children"
             :key="item.text"
             v-model="item.model"
@@ -22,7 +21,7 @@
           >
             <template v-slot:activator>
               <v-list-item-content class="list-acnhor">
-                <v-list-item-title >{{ item.text }}</v-list-item-title>
+                <v-list-item-title>{{ item.text }}</v-list-item-title>
               </v-list-item-content>
             </template>
             <v-list-item class="list-acnhor" v-for="(child, i) in item.children" :key="i" link>
@@ -30,24 +29,25 @@
                 <v-icon>{{ child.icon }}</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title><router-link :to="child.url">{{ child.text }}</router-link></v-list-item-title>
+                <v-list-item-title>
+                  <router-link :to="child.url">{{ child.text }}</router-link>
+                </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list-group>
-          <v-list-item v-else :key="item.text" link>
+          <div v-else :key="item.text">
+            <router-link :to="item.url">
+              <v-list-item link>
+                <v-list-item-action class="list-acnhor">
+                  <v-icon class="list-acnhor">{{ item.icon }}</v-icon>
+                </v-list-item-action>
 
-               <v-list-item-action class="list-acnhor" >
-              <v-icon class="list-acnhor" >{{ item.icon }}</v-icon>
-            </v-list-item-action>
-
-            <v-list-item-content class="list-acnhor">
-              <router-link :to="item.url">
-                <v-list-item-title>{{ item.text }}</v-list-item-title>
-              </router-link>
-            </v-list-item-content>
-
-
-          </v-list-item>
+                <v-list-item-content class="list-acnhor">
+                  <v-list-item-title>{{ item.text }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </router-link>
+          </div>
         </template>
       </v-list>
     </v-navigation-drawer>
@@ -91,21 +91,19 @@
       </v-btn>
       <v-btn icon large>
         <v-avatar size="32px" item>
-          <router-link :to="{ name:'ProfileComponent' }"> <v-img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" alt="Vuetify"></v-img>
-      </router-link>
+          <router-link to="">
+            <v-img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" alt="Vuetify"></v-img>
+          </router-link>
         </v-avatar>
       </v-btn>
     </v-app-bar>
-    </div>
+  </div>
 </template>
 
 <script>
-
 export default {
-  name : "SideBar",
-  components : {
-
-  },
+  name: "SideBar",
+  components: {},
   props: {
     source: String
   },
@@ -134,18 +132,12 @@ export default {
 
 
     ]
-
-
   })
 };
 </script>
 
 <style  scoped>
-.list-acnhor{
-   color: #1976d2 !important;
-}
 .v-application a {
   text-decoration: none;
-  color: #1976d2 !important;
 }
 </style>

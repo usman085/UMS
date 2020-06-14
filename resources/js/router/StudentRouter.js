@@ -1,5 +1,6 @@
 import StudentDashboard from '../components/StudentPortal/Pages/DashboardComponent';
 import Assignment from '../components/StudentPortal/Pages/AssignmentComponent';
+import AcademicSyllabus from '../components/StudentPortal/Pages/AcademicSyllabusComponent';
 import ClassRoutine from '../components/StudentPortal/Pages/ClassRoutineComponent';
 import ExamRoutine from '../components/StudentPortal/Pages/ExamRoutineComponent';
 import AttendanceSheet from '../components/StudentPortal/Pages/AttendanceComponent';

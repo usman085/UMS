@@ -16,7 +16,7 @@ export default {
   data: function() {
     return {
       titleName: "Your's Assignments",
-    
+
     };
   }
 };

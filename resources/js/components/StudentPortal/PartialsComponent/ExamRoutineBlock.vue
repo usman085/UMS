@@ -3,7 +3,7 @@
     <template v-slot:default>
       <thead>
         <tr>
-          <th class="text-center headline font-weight-black">Day & Date</th>
+          <th class="text-center headline ">Day & Date</th>
           <th class="text-center headline font-weight-black">Time</th>
           <th class="text-center headline font-weight-black">Subject</th>
           <th class="text-center headline font-weight-black">Room</th>
@@ -11,14 +11,14 @@
       </thead>
       <tbody>
         <tr v-for="item in items" :key="item.name">
-          <td class="text-center title font-weight-bold">
+          <td class="text-center title">
             <span>{{ item.day }}</span>
             <span class="ml-2 mr-2">&</span>
             <span>{{ item.date }}</span>
           </td>
-          <td class="text-center title font-weight-bold">{{ item.time }}</td>
-          <td class="text-center title font-weight-bold">{{ item.subject }}</td>
-          <td class="text-center title font-weight-bold">{{ item.room }}</td>
+          <td class="text-center title">{{ item.time }}</td>
+          <td class="text-center title">{{ item.subject }}</td>
+          <td class="text-center title">{{ item.room }}</td>
         </tr>
       </tbody>
     </template>
@@ -79,6 +79,6 @@ export default {
   border: thin solid rgba(0, 0, 0, 0.12);
 }
 .v-data-table td {
-  height: 100px;
+  height: 50px;
 }
 </style>
