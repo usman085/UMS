@@ -15,7 +15,8 @@
     <body>
 <div id="app">
 
-<appstudentportal/>
+<!-- <appstudentportal/> -->
+<appcomponent/>
 
 </div>
         <script src="{{ asset('js/app.js') }}"></script>

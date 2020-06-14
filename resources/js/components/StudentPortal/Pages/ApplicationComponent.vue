@@ -1,14 +1,14 @@
 <template>
     <div class="Application-form">
         <v-divider></v-divider>
-         <router-link to="/application/compose">
+         <router-link :to="{name:'applicationCompose'}">
          <v-chip class="ma-2" color="primary" outlined>
               <v-icon left>mdi-comment-plus-outline</v-icon>
                 Compose
           </v-chip>
          </router-link>
 
-        <router-link to="/application/inbox">
+        <router-link :to="{name:'ApplicationInbox'}">
          <v-chip class="ma-2 " color="primary" outlined >
               <v-icon left>mdi-inbox</v-icon>
                 Application Box

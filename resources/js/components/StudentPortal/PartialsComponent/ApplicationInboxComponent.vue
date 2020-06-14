@@ -25,7 +25,7 @@
           </v-list-item-avatar>
             
           <v-list-item-content>
-            <router-link :to="{path:'/application/sent-detail/'+id+'/'+item.title}" class="application-content">
+            <router-link :to="{name:'ApplicationDetail',params: { id: id } }" class="application-content">
             <v-list-item-title v-html="item.title "></v-list-item-title>
             <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
             </router-link>

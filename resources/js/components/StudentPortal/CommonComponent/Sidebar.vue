@@ -115,21 +115,21 @@ export default {
     drawer: null,
     items: [
 
-    { icon: "mdi-view-dashboard", text: "Dash Board" ,url:'/dash-board' },
+    { icon: "mdi-view-dashboard", text: "Dash Board" ,url:'/student-portal/dash-board' },
     {  icon: "mdi-chevron-up","icon-alt": "mdi-chevron-down",text: "Academic Assignments",
         model: false,
         children: [
-    { text: "Asign Assignments",icon:" mdi-arrow-right",url:'/Assignments'},
+    { text: "Asign Assignments",icon:" mdi-arrow-right",url:'/student-portal/Assignments'},
         ]},
-    { icon: "mdi-calendar-text", text: "Class Routine" ,url:'/Class-Routine' },
-    { icon: "mdi-calendar-text", text: "Exam Routine" ,url:'/Exam-Routine' },
-    { icon: " mdi-email", text: "Application" ,url:'/application' },
-     { icon: "mdi-application", text: "Attendance Sheet" ,url:'/Attendance-Sheet' },
+    { icon: "mdi-calendar-text", text: "Class Routine" ,url:'/student-portal/Class-Routine' },
+    { icon: "mdi-calendar-text", text: "Exam Routine" ,url:'/student-portal/Exam-Routine' },
+    { icon: " mdi-email", text: "Application" ,url:'/student-portal/application' },
+     { icon: "mdi-application", text: "Attendance Sheet" ,url:'/student-portal/Attendance-Sheet' },
          
-         {icon:'mdi-bell',text:'Notifications', url:'/notification'},
-       {icon:'mdi-account',text:'My Profile', url:'/Profile-Component'},
-         {icon:'mdi-comment-text-outline',text:'Send Feedback',url:'/feedback'},
-         {icon:'mdi-account',text:'Contact Support',url:'/support'}
+         {icon:'mdi-bell',text:'Notifications', url:'/student-portal/notification'},
+       {icon:'mdi-account',text:'My Profile', url:'/student-portal/Profile-Component'},
+         {icon:'mdi-comment-text-outline',text:'Send Feedback',url:'/student-portal/feedback'},
+         {icon:'mdi-account',text:'Contact Support',url:'/student-portal/customer-support'}
 
 
 

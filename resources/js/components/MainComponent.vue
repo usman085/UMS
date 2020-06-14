@@ -1,15 +1,15 @@
 <template>
 
-<login></login>
+<router-view></router-view>
 
 </template>
 
 
 <script>
-import login from './LoginComponent/LoginComponent';
+
 
     export default {
-         components:{login},
+         name:'MainAppComponent',
         mounted() {
             console.log('Component mounted.')
         }

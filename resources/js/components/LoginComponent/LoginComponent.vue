@@ -46,7 +46,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn to="/dash-board">Login</v-btn>
+                <v-btn to="/student-portal">Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>

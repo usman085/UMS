@@ -4,7 +4,7 @@
     class="mx-auto"
     max-width="95%"
   >
-           <router-link to="/notification/Show-notifications" class="back-button-wrapper">
+           <router-link :to="{name:'ShowAllNotification'}" class="back-button-wrapper">
                 <v-btn icon class="back-button">
                             <v-icon>mdi-arrow-left</v-icon>
                             </v-btn>

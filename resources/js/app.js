@@ -6,7 +6,7 @@ import store from './Store/store';
 //
 
 
-import Main from './components/MainComponent';
+import MainAppComponent from './components/MainComponent';
 
 Vue.component('appstudentportal', require('./components/StudentPortal/AppStudentComponent').default); //Root Component
 
@@ -22,7 +22,7 @@ new Vue({
     store,
     router,
     components: {
-        Main,
+        'appcomponent': MainAppComponent
     }
 
 });

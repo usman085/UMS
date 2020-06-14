@@ -38,7 +38,7 @@
                             <v-list-item-content>
                                 <v-list-item-title >Your Application Is Approved</v-list-item-title>
                                 <v-list-item-subtitle>Hi, Dear Friend Your Application is Approved Now By HOD, Kindly Contact ti office</v-list-item-subtitle>
-                                <router-link to="/notification/notification-detail/23" class="read-now">Read Now</router-link>
+                                <router-link :to="{name:'notificationDetail',params:{id:'12'}}" class="read-now">Read Now</router-link>
                                 <span class="notification-time">1 day ago</span>
                             </v-list-item-content>
                             </v-list-item>
