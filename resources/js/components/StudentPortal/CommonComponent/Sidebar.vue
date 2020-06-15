@@ -81,7 +81,7 @@
           </v-list-item>
           <v-list-item>
             <v-list-item-title>
-              <router-link to="/">Logout</router-link>
+              <v-btn @click="logout()">Logout</v-btn>
             </v-list-item-title>
           </v-list-item>
         </v-list>
@@ -107,6 +107,11 @@ export default {
   props: {
     source: String
   },
+  methods:{logout:function(){
+         localStorage.removeItem('studentLogin');
+         this.$router.push({name:'login'})
+
+    }},
 
   data: () => ({
     dialog: false,
@@ -119,7 +124,7 @@ export default {
         children: [
     { text: "Asign Assignments",icon:" mdi-arrow-right",url:'/student-portal/Assignments'},
         ]},
-     {icon:'',text:'Academic-syllabus',url:'/student-portal/Academic-syllabus'},   
+     {icon:'mdi-calendar-text',text:'Academic Syllabus',url:'/student-portal/Academic-syllabus'},   
     { icon: "mdi-calendar-text", text: "Class Routine" ,url:'/student-portal/Class-Routine' },
     { icon: "mdi-calendar-text", text: "Exam Routine" ,url:'/student-portal/Exam-Routine' },
     { icon: " mdi-email", text: "Application" ,url:'/student-portal/application' },

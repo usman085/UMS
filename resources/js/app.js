@@ -16,6 +16,7 @@ Vue.filter('capitalize', function(value) {
     return value.charAt(0).toUpperCase() + value.slice(1)
 })
 
+
 new Vue({
     el: '#app',
     vuetify,

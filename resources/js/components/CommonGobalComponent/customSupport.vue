@@ -9,7 +9,7 @@
             <div class="form-card">
                 <v-container>
                     <v-row>
-                           <v-col cols="8">
+                           <v-col cols="8"  xs="12" >
                               <v-text-field
                                 label="Name"
                                 ></v-text-field>

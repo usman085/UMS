@@ -32,6 +32,7 @@
                     label="Login"
                     name="login"
                     prepend-icon="mdi-account"
+                    v-model="email"
                     type="text"
                   ></v-text-field>
 
@@ -39,6 +40,7 @@
                     id="password"
                     label="Password"
                     name="password"
+                    v-model="password"
                     prepend-icon="mdi-lock"
                     type="password"
                   ></v-text-field>
@@ -46,7 +48,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn to="/student-portal">Login</v-btn>
+                <v-btn  @click="loginValidate()">Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -58,12 +60,36 @@
 
 
 <script>
+import  cryptoJSON from 'crypto-json';
 export default {
     name : "login",
+    data(){
+      return{
+        email:'',
+        password:'',
+        test:{
+          name:'usman'
+        }
+    }},
+    methods:{
+      loginValidate:function(){
+        if(this.email=='admin' && this.password=='admin'){
+          adminUser={'email':this.email,'password':this.password};
+          let adminUser=cryptoJSON.encrypt(adminUser,'orbit');
+          localStorage.setItem('adminLogin',adminUser);
+          console.log(adminUser.email);
+          var d=cryptoJSON.decrypt(adminUser,'orbit');
+          console.log(d.email);
+          this.$router.push({ name: 'adminPortal'});
 
-    props: {
-    source: String,
-    },
+        }
+        if(this.email=='student' && this.password=='student'){
+          localStorage.setItem('studentLogin','student');
+          this.$router.push('/student-portal/dash-board');
+        }
+
+      }
+    }
 }
 </script>
 

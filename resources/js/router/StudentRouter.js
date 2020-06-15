@@ -15,9 +15,20 @@ import NotificationList from '../components/StudentPortal/PartialsComponent/Noti
 import feedback from '../components/CommonGobalComponent/feedbackComponent';
 import customSupport from '../components/CommonGobalComponent/customSupport'
 import AppStudent from '../components/StudentPortal/AppStudentComponent';
+
+function gurdRouteStudent(to, from, next) {
+
+    if (localStorage.getItem('studentLogin'))
+        next()
+    else
+
+        next('/login'); // go to '/login';
+}
 const StudentRoutes = [{
     path: '/student-portal',
     component: AppStudent,
+    name: 'studentPortal',
+    beforeEnter: gurdRouteStudent,
     children: [{
             path: 'dash-board',
             component: StudentDashboard
