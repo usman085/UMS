@@ -8,7 +8,8 @@ import Vue from 'vue';
 Vue.use(Vuex);
 
 // *** VueX Object
-// *** Store Variable 
+// *** Store Variable
+
 const store = new Vuex.Store({
 
     // *** State Variables
@@ -57,6 +58,7 @@ const store = new Vuex.Store({
         }
     }
 })
+
 
 // *** Export Store Variable -- Store Object
 export default store;
