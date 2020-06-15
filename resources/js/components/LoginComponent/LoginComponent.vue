@@ -74,12 +74,14 @@ export default {
     methods:{
       loginValidate:function(){
         if(this.email=='admin' && this.password=='admin'){
+
           adminUser={'email':this.email,'password':this.password};
+
           let adminUser=cryptoJSON.encrypt(adminUser,'orbit');
           localStorage.setItem('adminLogin',adminUser);
-          console.log(adminUser.email);
-          var d=cryptoJSON.decrypt(adminUser,'orbit');
-          console.log(d.email);
+          
+          // var d=cryptoJSON.decrypt(adminUser,'orbit');
+          
           this.$router.push({ name: 'adminPortal'});
 
         }

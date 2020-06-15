@@ -1,9 +1,17 @@
+// *** Import Vuex Instant
 import Vuex from 'vuex';
+
+// *** Import Vue  Instant
 import Vue from 'vue';
 
+// *** Passing Vuex To Vue Constructor
 Vue.use(Vuex);
 
+// *** VueX Object
+// *** Store Variable 
 const store = new Vuex.Store({
+
+    // *** State Variables
     state: {
         SubmitAssignmentModal: false,
         ApplicationRequestTimeModal: false,
@@ -11,6 +19,7 @@ const store = new Vuex.Store({
         CourseOutlinePageModal: false,
         BadWordModal: false
     },
+    //  *** Mutations Function
     mutations: {
         BadWordModalToggle(state) {
             state.BadWordModal = !state.BadWordModal;
@@ -29,6 +38,7 @@ const store = new Vuex.Store({
         }
 
     },
+    // *** Action Functions
     actions: {
         BadWordModalToggle(context) {
             context.commit('BadWordModalToggle');
@@ -48,4 +58,5 @@ const store = new Vuex.Store({
     }
 })
 
+// *** Export Store Variable -- Store Object
 export default store;
