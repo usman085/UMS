@@ -1,28 +1,23 @@
+// *** Import Admin Portal Component 
 import AdminPortal from '../components/AdminPortal/AppAdminPortalComponent';
 
+//**** ****  Import Guard Router 
+import { guardRouteAdmin } from './RouterGuard';
 
-function gurdRouteAdmin(to, from, next) {
 
-    if (localStorage.getItem('adminLogin'))
-        next()
-    else
-
-        next('/login'); // go to '/login';
-}
-
+// **** **** Admin Portal Routes & Child Routes Components Paths
 
 const AdminRoutes = [{
-
+    /* *** Admin Portal Router With Guard Function  *** */
     path: '/admin-portal',
     component: AdminPortal,
     name: 'adminPortal',
-    beforeEnter: gurdRouteAdmin
+    beforeEnter: guardRouteAdmin,
+    // **** Root Router End
 
+    //*** Children Routes */
+    //children:[]
 
-
-
-
-    //Root Router End
 }];
 
 

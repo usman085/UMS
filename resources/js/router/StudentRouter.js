@@ -16,99 +16,121 @@ import feedback from '../components/CommonGobalComponent/feedbackComponent';
 import customSupport from '../components/CommonGobalComponent/customSupport'
 import AppStudent from '../components/StudentPortal/AppStudentComponent';
 
-function gurdRouteStudent(to, from, next) {
+//**** ****  Import Guard Router 
+import { guardRouteStudent } from './RouterGuard'; //Student Route Guard
 
-    if (localStorage.getItem('studentLogin'))
-        next()
-    else
-
-        next('/login'); // go to '/login';
-}
+// **** **** Student Portal Routes & Child Routes Components Paths
 const StudentRoutes = [{
+    /* *** Admin Portal Router With Guard Function  *** */
     path: '/student-portal',
     component: AppStudent,
     name: 'studentPortal',
-    beforeEnter: gurdRouteStudent,
+    beforeEnter: guardRouteStudent,
+
+    // ***Children Routes 
     children: [{
+            // *** Dash Board Route
             path: 'dash-board',
             component: StudentDashboard
         },
         {
+            // *** Academic Syllabus Route
             path: 'Academic-syllabus',
             component: AcademicSyllabus
         },
         {
+            // ***Assignments Route
             path: 'Assignments',
             component: Assignment
         },
         {
+            // *** Class Routine Route
             path: 'Class-Routine',
             component: ClassRoutine
         },
         {
+            // *** Attendance Sheet Route
             path: 'Attendance-Sheet',
             component: AttendanceSheet
         },
         {
+            // *** Exam Routine Route
             path: 'Exam-Routine',
             component: ExamRoutine
         },
         {
+            // *** Profile Route
             path: 'Profile-Component',
             component: ProfileComponent,
             name: 'ProfileComponent'
         },
         {
+            // *** Customer Support Route
             path: 'customer-support',
             component: customSupport,
             name: 'customerSupport'
         },
         {
+            // *** Feedback Route
             path: 'feedback',
             component: feedback,
             name: 'feedback'
         },
         {
-
+            // *** Application Route
             path: 'application',
             component: Application,
+            // **** Aplication Children Route
             children: [{
+                    // *** Application Inbox Route
                     path: 'inbox',
                     component: ApplicationInbox,
                     name: 'ApplicationInbox'
                 },
                 {
+                    // *** Application Compose Route
                     path: 'compose',
                     component: composeApplication,
                     name: 'applicationCompose'
-                }, {
+                },
+                {
+                    // *** Application Detail Page Route
                     path: 'sent-detail/:id',
                     component: ApplicationSentDetail,
                     name: 'ApplicationDetail'
                 },
+                // *** Application Route Wild Card
                 { path: '/', redirect: 'inbox' },
                 { path: '*', redirect: 'inbox' },
             ]
 
         },
         {
+            // *** Notification Route
             path: 'notification',
             component: Notification,
+            // *** Notification Children Route
             children: [{
-                path: 'notification-detail/:id',
-                component: notificationDetail,
-                name: 'notificationDetail'
-            }, {
-                path: 'Show-notifications',
-                component: NotificationList,
-                name: 'ShowAllNotification'
-            }, {
-                path: '/',
-                redirect: 'Show-notifications'
-            }]
+                    // *** Notification Detail Route
+                    path: 'notification-detail/:id',
+                    component: notificationDetail,
+                    name: 'notificationDetail'
+                },
+                {
+                    // *** Show All Notification Route
+                    path: 'Show-notifications',
+                    component: NotificationList,
+                    name: 'ShowAllNotification'
+                },
+                {
+                    // *** Wild Card Route
+                    path: '/',
+                    redirect: 'Show-notifications'
+                }
+            ]
         },
 
-
+        //    **** Wild Cards
         { path: '/', redirect: 'dash-board' },
         { path: '*', redirect: 'dash-board' },
 
@@ -116,5 +138,5 @@ const StudentRoutes = [{
     ]
 }]
 
-
+// *** Export All Student Routes
 export default StudentRoutes;
