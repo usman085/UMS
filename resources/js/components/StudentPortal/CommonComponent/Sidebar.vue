@@ -86,7 +86,7 @@
           </v-list-item>
           <v-list-item>
             <v-list-item-title>
-              <router-link to="/">Logout</router-link>
+              <v-btn @click="logout()">Logout</v-btn>
             </v-list-item-title>
           </v-list-item>
         </v-list>
@@ -112,6 +112,11 @@ export default {
   props: {
     source: String
   },
+  methods:{logout:function(){
+         localStorage.removeItem('studentLogin');
+         this.$router.push({name:'login'})
+
+    }},
 
   data: () => ({
     dialog: false,
@@ -128,39 +133,18 @@ export default {
         text: "Academic Assignments",
         model: false,
         children: [
-          {
-            text: "Asign Assignments",
-            icon: " mdi-arrow-right",
-            url: "/student-portal/Assignments"
-          }
-        ]
-      },
-      {
-        icon: "mdi-book-open-page-variant",
-        text: "Academic-syllabus",
-        url: "/student-portal/Academic-syllabus"
-      },
-      {
-        icon: "mdi-calendar-text",
-        text: "Class Routine",
-        url: "/student-portal/Class-Routine"
-      },
-      {
-        icon: "mdi-calendar-text",
-        text: "Exam Routine",
-        url: "/student-portal/Exam-Routine"
-      },
-      {
-        icon: " mdi-email",
-        text: "Application",
-        url: "/student-portal/application"
-      },
-      {
-        icon: "mdi-account-check",
-        text: "Attendance Sheet",
-        url: "/student-portal/Attendance-Sheet"
-      },
+    { text: "Asign Assignments",icon:" mdi-arrow-right",url:'/student-portal/Assignments'},
+        ]},
+     {icon:'mdi-calendar-text',text:'Academic Syllabus',url:'/student-portal/Academic-syllabus'},
+    { icon: "mdi-calendar-text", text: "Class Routine" ,url:'/student-portal/Class-Routine' },
+    { icon: "mdi-calendar-text", text: "Exam Routine" ,url:'/student-portal/Exam-Routine' },
+    { icon: " mdi-email", text: "Application" ,url:'/student-portal/application' },
+     { icon: "mdi-application", text: "Attendance Sheet" ,url:'/student-portal/Attendance-Sheet' },
 
+         {icon:'mdi-bell',text:'Notifications', url:'/student-portal/notification'},
+       {icon:'mdi-account',text:'My Profile', url:'/student-portal/Profile-Component'},
+         {icon:'mdi-comment-text-outline',text:'Send Feedback',url:'/student-portal/feedback'},
+         {icon:'mdi-account',text:'Contact Support',url:'/student-portal/customer-support'},
       {
         icon: "mdi-bell",
         text: "Notifications",

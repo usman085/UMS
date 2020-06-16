@@ -71,7 +71,7 @@ export default {
     },
     methods:{
         checkWords:function(data){
-               var banned = ["lun", "bond", "banana"];
+               var banned = ["lun", "apple", "banana"];
               let words=data.toLowerCase();
     		for (var i = 0; i < banned.length; i++) {
     			if (words.includes(banned[i])) {
