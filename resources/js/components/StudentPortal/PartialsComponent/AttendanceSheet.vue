@@ -1,50 +1,53 @@
 <template>
-  <v-card
+  <v-expansion-panels>
+    <v-expansion-panel v-for="item in items " :key="item.name">
+      <v-expansion-panel-header>{{ item.week }}</v-expansion-panel-header>
+      <v-expansion-panel-content>
+            <v-simple-table>
+    <template v-slot:default>
+      <thead>
+        <tr>
+          <th class="text-left">Subject</th>
+          <th class="text-left">Lecture #</th>
+          <th class="text-left">Date</th>
+           <th class="text-left">Time</th>
+          <th class="text-left">Attendance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="detail in details" :key="detail.name">
+          <td>{{ detail.subject }}</td>
+            <td>{{ detail.lecture }}</td>
+            <td>{{ detail.date }}</td>
+            <td>{{ detail.time }}</td>
+            <td>{{ detail.attendance }}</td>
+        </tr>
+      </tbody>
+    </template>
+  </v-simple-table>
 
-    class="mx-auto float-left"
-    max-width="100%"
-    tile
-  >
-    <v-img
-    width="100%"
-      height="100%"
-      src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"
-    >
-      <v-row
-
-      >
-        <v-col
-          align-self="start"
-          class="pa-0"
-          cols="12"
-        >
-          <v-avatar
-            class="profile"
-            color="grey"
-            size="164"
-            tile
-          >
-            <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
-          </v-avatar>
-        </v-col>
-        <v-col class="py-0">
-          <v-list-item
-            color="rgba(0, 0, 0, .4)"
-            dark
-          >
-            <v-list-item-content>
-              <v-list-item-title class="title">Marcus Obrien</v-list-item-title>
-              <v-list-item-subtitle>Network Engineer</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-col>
-      </v-row>
-    </v-img>
-  </v-card>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+  </v-expansion-panels>
 </template>
 
 <script>
 export default {
-    name:'AttendanceSheet',
-}
+  name: "AttendanceSheet",
+  data() {
+    return {
+      items: [{ week: "week 1," }],
+      details: [
+        {
+        subject:"Urdu",
+        lecture:"Lecture 1",
+        date:"01-02-2020",
+        time:"10:00 to 11:00",
+        Attendance:"Present"
+        },
+
+      ]
+    };
+  }
+};
 </script>

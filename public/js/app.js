@@ -2781,6 +2781,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SideBar",
   components: {},
@@ -2794,7 +2799,7 @@ __webpack_require__.r(__webpack_exports__);
       items: [{
         icon: "mdi-view-dashboard",
         text: "Dash Board",
-        url: '/student-portal/dash-board'
+        url: "/student-portal/dash-board"
       }, {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
@@ -2803,44 +2808,44 @@ __webpack_require__.r(__webpack_exports__);
         children: [{
           text: "Asign Assignments",
           icon: " mdi-arrow-right",
-          url: '/student-portal/Assignments'
+          url: "/student-portal/Assignments"
         }]
       }, {
-        icon: '',
-        text: 'Academic-syllabus',
-        url: '/student-portal/Academic-syllabus'
+        icon: "mdi-book-open-page-variant",
+        text: "Academic-syllabus",
+        url: "/student-portal/Academic-syllabus"
       }, {
         icon: "mdi-calendar-text",
         text: "Class Routine",
-        url: '/student-portal/Class-Routine'
+        url: "/student-portal/Class-Routine"
       }, {
         icon: "mdi-calendar-text",
         text: "Exam Routine",
-        url: '/student-portal/Exam-Routine'
+        url: "/student-portal/Exam-Routine"
       }, {
         icon: " mdi-email",
         text: "Application",
-        url: '/student-portal/application'
+        url: "/student-portal/application"
       }, {
-        icon: "mdi-application",
+        icon: "mdi-account-check",
         text: "Attendance Sheet",
-        url: '/student-portal/Attendance-Sheet'
+        url: "/student-portal/Attendance-Sheet"
       }, {
-        icon: 'mdi-bell',
-        text: 'Notifications',
-        url: '/student-portal/notification'
+        icon: "mdi-bell",
+        text: "Notifications",
+        url: "/student-portal/notification"
       }, {
-        icon: 'mdi-account',
-        text: 'My Profile',
-        url: '/student-portal/Profile-Component'
+        icon: "mdi-account",
+        text: "My Profile",
+        url: "/student-portal/Profile-Component"
       }, {
-        icon: 'mdi-comment-text-outline',
-        text: 'Send Feedback',
-        url: '/student-portal/feedback'
+        icon: "mdi-comment-text-outline",
+        text: "Send Feedback",
+        url: "/student-portal/feedback"
       }, {
-        icon: 'mdi-account',
-        text: 'Contact Support',
-        url: '/student-portal/customer-support'
+        icon: "mdi-account",
+        text: "Contact Support",
+        url: "/student-portal/customer-support"
       }]
     };
   }
@@ -3749,20 +3754,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'AttendanceSheet'
+  name: "AttendanceSheet",
+  data: function data() {
+    return {
+      items: [{
+        week: "week 1,"
+      }],
+      details: [{
+        subject: "Urdu",
+        lecture: "Lecture 1",
+        date: "01-02-2020",
+        time: "10:00 to 11:00",
+        Attendance: "Present"
+      }]
+    };
+  }
 });
 
 /***/ }),
@@ -4934,7 +4941,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.v-application a[data-v-11ca86fc] {\r\n  text-decoration: none;\n}\r\n", ""]);
+exports.push([module.i, "\n.v-application a[data-v-11ca86fc] {\n  text-decoration: none;\n}\n\n", ""]);
 
 // exports
 
@@ -4972,7 +4979,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.theme--light.v-data-table tbody tr td[data-v-183feb3a] {\r\n  border: thin solid rgba(0, 0, 0, 0.12);\n}\n.theme--light.v-data-table thead tr:last-child th[data-v-183feb3a] {\r\n  border: thin solid rgba(0, 0, 0, 0.12);\n}\n.v-data-table td[data-v-183feb3a] {\r\n  height: 50px;\n}\r\n", ""]);
+exports.push([module.i, "\n.theme--light.v-data-table tbody tr td[data-v-183feb3a] {\n  border: thin solid rgba(0, 0, 0, 0.12);\n}\n.theme--light.v-data-table thead tr:last-child th[data-v-183feb3a] {\n  border: thin solid rgba(0, 0, 0, 0.12);\n}\n.v-data-table td[data-v-183feb3a] {\n  height: 50px;\n}\n", ""]);
 
 // exports
 
@@ -5067,7 +5074,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.theme--light.v-data-table tbody tr td[data-v-77ebd79a] {\r\n  border: thin solid rgba(0, 0, 0, 0.12);\n}\n.theme--light.v-data-table thead tr:last-child th[data-v-77ebd79a] {\r\n  border: thin solid rgba(0, 0, 0, 0.12);\n}\n.v-data-table td[data-v-77ebd79a] {\r\n  height: 50px;\n}\r\n", ""]);
+exports.push([module.i, "\n.theme--light.v-data-table tbody tr td[data-v-77ebd79a] {\n  border: thin solid rgba(0, 0, 0, 0.12);\n}\n.theme--light.v-data-table thead tr:last-child th[data-v-77ebd79a] {\n  border: thin solid rgba(0, 0, 0, 0.12);\n}\n.v-data-table td[data-v-77ebd79a] {\n  height: 50px;\n}\n", ""]);
 
 // exports
 
@@ -5105,7 +5112,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.ref-doc-wrapper[data-v-646cd7a2]{\r\n    width: 50%;\n}\n.ref-doc[data-v-646cd7a2]{\r\n    width: 50%;\r\n    font-size: 11px;\r\n    color: rgba(0, 0, 0, 0.6);\r\n    padding:5px;\r\n    background:rgba(200, 200, 200, 1);\r\n    font-weight: bold;\n}\n.list-detail[data-v-646cd7a2]{\r\n    color: rgba(0, 0, 0, 0.6);\r\n    line-height: 1.2;\r\n    font-size: 0.875rem;\n}\n.download-file[data-v-646cd7a2]{\r\n   text-align: right;\r\n   font-size: 11px;\r\n   padding-left: 10px;\r\n   padding-right: 5px;\n}\n.mdi-arrow-collapse-down[data-v-646cd7a2],.mdi-arrow-collapse-down[data-v-646cd7a2]:hover{\r\n   text-align: right;\r\n   cursor: pointer;\r\n   font-size: 15px;\r\n   font-weight: bold;\n}\r\n", ""]);
+exports.push([module.i, "\n.ref-doc-wrapper[data-v-646cd7a2]{\n    width: 50%;\n}\n.ref-doc[data-v-646cd7a2]{\n    width: 50%;\n    font-size: 11px;\n    color: rgba(0, 0, 0, 0.6);\n    padding:5px;\n    background:rgba(200, 200, 200, 1);\n    font-weight: bold;\n}\n.list-detail[data-v-646cd7a2]{\n    color: rgba(0, 0, 0, 0.6);\n    line-height: 1.2;\n    font-size: 0.875rem;\n}\n.download-file[data-v-646cd7a2]{\n   text-align: right;\n   font-size: 11px;\n   padding-left: 10px;\n   padding-right: 5px;\n}\n.mdi-arrow-collapse-down[data-v-646cd7a2],.mdi-arrow-collapse-down[data-v-646cd7a2]:hover{\n   text-align: right;\n   cursor: pointer;\n   font-size: 15px;\n   font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -5124,7 +5131,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.theme--light.v-data-table tbody tr td[data-v-25b9509f] {\r\n  border: thin solid rgba(0, 0, 0, 0.12);\n}\n.theme--light.v-data-table thead tr:last-child th[data-v-25b9509f] {\r\n  border: thin solid rgba(0, 0, 0, 0.12);\n}\n.v-data-table td[data-v-25b9509f] {\r\n  height: 50px;\n}\r\n", ""]);
+exports.push([module.i, "\n.theme--light.v-data-table tbody tr td[data-v-25b9509f] {\n  border: thin solid rgba(0, 0, 0, 0.12);\n}\n.theme--light.v-data-table thead tr:last-child th[data-v-25b9509f] {\n  border: thin solid rgba(0, 0, 0, 0.12);\n}\n.v-data-table td[data-v-25b9509f] {\n  height: 50px;\n}\n", ""]);
 
 // exports
 
@@ -24445,31 +24452,23 @@ var render = function() {
                               "v-list-item",
                               {
                                 key: i,
-                                staticClass: "list-acnhor",
+                                staticClass: "list-acnhor body-2",
                                 attrs: { link: "" }
                               },
                               [
-                                child.icon
-                                  ? _c(
-                                      "v-list-item-action",
-                                      [
-                                        _c("v-icon", [
-                                          _vm._v(_vm._s(child.icon))
-                                        ])
-                                      ],
-                                      1
-                                    )
-                                  : _vm._e(),
-                                _vm._v(" "),
                                 _c(
                                   "v-list-item-content",
                                   [
                                     _c(
                                       "v-list-item-title",
+                                      { staticClass: "body-2" },
                                       [
                                         _c(
                                           "router-link",
-                                          { attrs: { to: child.url } },
+                                          {
+                                            staticClass: "float-right",
+                                            attrs: { to: child.url }
+                                          },
                                           [_vm._v(_vm._s(child.text))]
                                         )
                                       ],
@@ -24477,7 +24476,21 @@ var render = function() {
                                     )
                                   ],
                                   1
-                                )
+                                ),
+                                _vm._v(" "),
+                                child.icon
+                                  ? _c(
+                                      "v-list-item-action",
+                                      [
+                                        _c(
+                                          "v-icon",
+                                          { staticClass: "body-2" },
+                                          [_vm._v(_vm._s(child.icon))]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  : _vm._e()
                               ],
                               1
                             )
@@ -26010,86 +26023,81 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-card",
-    {
-      staticClass: "mx-auto float-left",
-      attrs: { "max-width": "100%", tile: "" }
-    },
-    [
-      _c(
-        "v-img",
-        {
-          attrs: {
-            width: "100%",
-            height: "100%",
-            src: "https://cdn.vuetifyjs.com/images/cards/server-room.jpg"
-          }
-        },
+    "v-expansion-panels",
+    _vm._l(_vm.items, function(item) {
+      return _c(
+        "v-expansion-panel",
+        { key: item.name },
         [
+          _c("v-expansion-panel-header", [_vm._v(_vm._s(item.week))]),
+          _vm._v(" "),
           _c(
-            "v-row",
+            "v-expansion-panel-content",
             [
-              _c(
-                "v-col",
-                {
-                  staticClass: "pa-0",
-                  attrs: { "align-self": "start", cols: "12" }
-                },
-                [
-                  _c(
-                    "v-avatar",
+              _c("v-simple-table", {
+                scopedSlots: _vm._u(
+                  [
                     {
-                      staticClass: "profile",
-                      attrs: { color: "grey", size: "164", tile: "" }
-                    },
-                    [
-                      _c("v-img", {
-                        attrs: {
-                          src:
-                            "https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-col",
-                { staticClass: "py-0" },
-                [
-                  _c(
-                    "v-list-item",
-                    { attrs: { color: "rgba(0, 0, 0, .4)", dark: "" } },
-                    [
-                      _c(
-                        "v-list-item-content",
-                        [
-                          _c("v-list-item-title", { staticClass: "title" }, [
-                            _vm._v("Marcus Obrien")
+                      key: "default",
+                      fn: function() {
+                        return [
+                          _c("thead", [
+                            _c("tr", [
+                              _c("th", { staticClass: "text-left" }, [
+                                _vm._v("Subject")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { staticClass: "text-left" }, [
+                                _vm._v("Lecture #")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { staticClass: "text-left" }, [
+                                _vm._v("Date")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { staticClass: "text-left" }, [
+                                _vm._v("Time")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", { staticClass: "text-left" }, [
+                                _vm._v("Attendance")
+                              ])
+                            ])
                           ]),
                           _vm._v(" "),
-                          _c("v-list-item-subtitle", [
-                            _vm._v("Network Engineer")
-                          ])
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.details, function(detail) {
+                              return _c("tr", { key: detail.name }, [
+                                _c("td", [_vm._v(_vm._s(detail.subject))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(detail.lecture))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(detail.date))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(detail.time))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(detail.attendance))])
+                              ])
+                            }),
+                            0
+                          )
+                        ]
+                      },
+                      proxy: true
+                    }
+                  ],
+                  null,
+                  true
+                )
+              })
             ],
             1
           )
         ],
         1
       )
-    ],
+    }),
     1
   )
 }
@@ -89452,8 +89460,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuetify__WEBPACK_IMPORTED_MODULE_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\UMS\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\UMS\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\POS_FYP\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\POS_FYP\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

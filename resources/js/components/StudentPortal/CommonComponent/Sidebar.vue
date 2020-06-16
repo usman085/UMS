@@ -24,15 +24,20 @@
                 <v-list-item-title>{{ item.text }}</v-list-item-title>
               </v-list-item-content>
             </template>
-            <v-list-item class="list-acnhor" v-for="(child, i) in item.children" :key="i" link>
-              <v-list-item-action v-if="child.icon">
-                <v-icon>{{ child.icon }}</v-icon>
-              </v-list-item-action>
+            <v-list-item
+              class="list-acnhor body-2"
+              v-for="(child, i) in item.children"
+              :key="i"
+              link
+            >
               <v-list-item-content>
-                <v-list-item-title>
-                  <router-link :to="child.url">{{ child.text }}</router-link>
+                <v-list-item-title class="body-2">
+                  <router-link class="float-right" :to="child.url">{{ child.text }}</router-link>
                 </v-list-item-title>
               </v-list-item-content>
+              <v-list-item-action v-if="child.icon">
+                <v-icon class="body-2">{{ child.icon }}</v-icon>
+              </v-list-item-action>
             </v-list-item>
           </v-list-group>
           <div v-else :key="item.text">
@@ -112,27 +117,70 @@ export default {
     dialog: false,
     drawer: null,
     items: [
-
-    { icon: "mdi-view-dashboard", text: "Dash Board" ,url:'/student-portal/dash-board' },
-    {  icon: "mdi-chevron-up","icon-alt": "mdi-chevron-down",text: "Academic Assignments",
+      {
+        icon: "mdi-view-dashboard",
+        text: "Dash Board",
+        url: "/student-portal/dash-board"
+      },
+      {
+        icon: "mdi-chevron-up",
+        "icon-alt": "mdi-chevron-down",
+        text: "Academic Assignments",
         model: false,
         children: [
-    { text: "Asign Assignments",icon:" mdi-arrow-right",url:'/student-portal/Assignments'},
-        ]},
-     {icon:'',text:'Academic-syllabus',url:'/student-portal/Academic-syllabus'},   
-    { icon: "mdi-calendar-text", text: "Class Routine" ,url:'/student-portal/Class-Routine' },
-    { icon: "mdi-calendar-text", text: "Exam Routine" ,url:'/student-portal/Exam-Routine' },
-    { icon: " mdi-email", text: "Application" ,url:'/student-portal/application' },
-     { icon: "mdi-application", text: "Attendance Sheet" ,url:'/student-portal/Attendance-Sheet' },
-         
-         {icon:'mdi-bell',text:'Notifications', url:'/student-portal/notification'},
-       {icon:'mdi-account',text:'My Profile', url:'/student-portal/Profile-Component'},
-         {icon:'mdi-comment-text-outline',text:'Send Feedback',url:'/student-portal/feedback'},
-         {icon:'mdi-account',text:'Contact Support',url:'/student-portal/customer-support'}
+          {
+            text: "Asign Assignments",
+            icon: " mdi-arrow-right",
+            url: "/student-portal/Assignments"
+          }
+        ]
+      },
+      {
+        icon: "mdi-book-open-page-variant",
+        text: "Academic-syllabus",
+        url: "/student-portal/Academic-syllabus"
+      },
+      {
+        icon: "mdi-calendar-text",
+        text: "Class Routine",
+        url: "/student-portal/Class-Routine"
+      },
+      {
+        icon: "mdi-calendar-text",
+        text: "Exam Routine",
+        url: "/student-portal/Exam-Routine"
+      },
+      {
+        icon: " mdi-email",
+        text: "Application",
+        url: "/student-portal/application"
+      },
+      {
+        icon: "mdi-account-check",
+        text: "Attendance Sheet",
+        url: "/student-portal/Attendance-Sheet"
+      },
 
-
-
-
+      {
+        icon: "mdi-bell",
+        text: "Notifications",
+        url: "/student-portal/notification"
+      },
+      {
+        icon: "mdi-account",
+        text: "My Profile",
+        url: "/student-portal/Profile-Component"
+      },
+      {
+        icon: "mdi-comment-text-outline",
+        text: "Send Feedback",
+        url: "/student-portal/feedback"
+      },
+      {
+        icon: "mdi-account",
+        text: "Contact Support",
+        url: "/student-portal/customer-support"
+      }
     ]
   })
 };
@@ -142,4 +190,5 @@ export default {
 .v-application a {
   text-decoration: none;
 }
+
 </style>
