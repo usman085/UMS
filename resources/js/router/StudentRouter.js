@@ -13,7 +13,7 @@ import Notification from '../components/StudentPortal/Pages/NotificationComponen
 import notificationDetail from '../components/StudentPortal/PartialsComponent/NotificationDetail';
 import NotificationList from '../components/StudentPortal/PartialsComponent/NotificationListComponent';
 import feedback from '../components/CommonGobalComponent/feedbackComponent';
-import customSupport from '../components/CommonGobalComponent/customSupport'
+import customSupport from '../components/CommonGobalComponent/customSupport';
 import AppStudent from '../components/StudentPortal/AppStudentComponent';
 
 //**** ****  Import Guard Router 
