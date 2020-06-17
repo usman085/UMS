@@ -120,7 +120,7 @@ export default {
     items: [
 
     { icon: "mdi-view-dashboard", text: "Dash Board" ,url:'/student-portal/dash-board' },
-    {  icon: "mdi-chevron-up","icon-alt": "mdi-chevron-down",text: "Student Mangement",
+    {  icon: "mdi-chevron-up","icon-alt": "mdi-chevron-down",text: "Manage Student",
         model: false,
         children: [
             // ***** Student Sub List
