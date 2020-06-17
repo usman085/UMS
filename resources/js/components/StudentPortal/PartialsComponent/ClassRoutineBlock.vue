@@ -3,39 +3,48 @@
     <template>
       <thead>
         <tr>
-          <th></th>
-          <th class="text-center headline">9:00 - 1:00</th>
-          <th class="text-center headline">1:00 - 2:00</th>
-          <th class="text-center headline">2:00 - 3:00</th>
+          <th colspan="4">Class Routine Day By Day</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in items" :key="item.name">
-          <td class="title">{{ item.day }}</td>
-          <td class="text-center body-1">
-            <span class="float-left">{{ item.teacher1 }}</span>
-            <br />
-            <span class="font-weight-black mt-1 title">{{ item.sub1}}</span>
-            <br />
-            <span class="float-right">{{ item.room1 }}</span>
-          </td>
+        <template v-for="(item,index) in items">
+        <tr :key="item.id">
+          <template v-if="item.day=='monday' && index == 0">
+              <td class="day">{{ item.day | capitalize }}</td>
+                <td v-for="(timeTable,index) in mondaySchdule" :key="index" >
 
-          <td class="text-center body-1">
-            <span class="float-left">{{ item.teacher2 }}</span>
-            <br />
-            <span class="font-weight-black mt-1 title">{{ item.sub2 }}</span>
-            <br />
-            <span class="float-right">{{ item.room2 }}</span>
-          </td>
-
-          <td class="text-center body-1">
-            <span class="float-left">{{ item.teacher3 }}</span>
-            <br />
-            <span class="font-weight-black mt-1 title">{{ item.sub3 }}</span>
-            <br />
-            <span class="float-right">{{ item.room3 }}</span>
-          </td>
+                  <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
+                  <span class="class-time">{{ timeTable.time | capitalize  }}</span>
+                  <br>
+                 <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
+                  <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
+                   
+                    
+                </td>  
+          </template>  
         </tr>
+       
+         <tr :key="item.id">
+          <template v-if="item.day=='tuesday' && index == 1">
+              <td class="day">{{ item.day | capitalize }}</td>
+                <td v-for="(timeTable,index) in tuesdaySchdule" :key="index" >
+
+                  <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
+                  <span class="class-time">{{ timeTable.time | capitalize  }}</span>
+                  <br>
+                 <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
+                  <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
+                   
+                    
+                </td>  
+          </template>  
+        </tr>
+       
+
+         </template>
+
+        
+        
       </tbody>
     </template>
   </v-simple-table>
@@ -43,83 +52,55 @@
 <script>
 export default {
   name: "ClassRoutineBlock",
+  
   data() {
     return {
       items: [
         {
-          day: "Monday",
-          teacher1: "Ijaz Hussain",
-          teacher2: "Sabir",
-          teacher3: "Usman",
+          day:'monday',
+          teacher:'usman',
+          subject:'English',
+          time:'9:00-10:00',
+          classRoom:'cr3'
 
-          sub1: "Islamiyat",
-          sub2: "Urdu",
-          sub3: "English",
-
-          room1: "Cr 2",
-          room2: "Cr 4",
-          room3: "Cr 3"
         },
         {
-          day: "Tuesday",
-
-          teacher1: "Ijaz",
-          teacher2: "Asslam",
-          teacher3: "Uzair",
-
-          sub1: "Computer",
-          sub2: "Physics",
-          sub3: "Urdu",
-
-          room1: "Cr 6",
-          room2: "Cr 2",
-          room3: "Cr 5"
-        },
-        {
-          day: "Wednesday",
-          teacher1: "Hussain",
-          teacher2: "Usman",
-          teacher3: "Sabir",
-
-          sub1: "English",
-          sub2: "Urdu",
-          sub3: "Islamiyat",
-
-          room1: "Cr 1",
-          room2: "Cr 3",
-          room3: "Cr 2"
-        },
-        {
-          day: "Thursday",
-          teacher1: "Ijaz Hussain",
-          teacher2: "Sabir",
-          teacher3: "Usman",
-
-          sub1: "Islamiyat",
-          sub2: "Urdu",
-          sub3: "English",
-
-          room1: "Cr 5",
-          room2: "Cr 3",
-          room3: "Cr 1"
-        },
-        {
-          day: "Friday",
-          teacher1: "Ijaz Hussain",
-          teacher2: "Sabir",
-          teacher3: "Usman",
-
-          sub1: "Islamiyat",
-          sub2: "Urdu",
-          sub3: "English",
-
-          room1: "Cr 1",
-          room2: "Cr 4",
-          room3: "Cr 3"
+          day:'tuesday',
+          teacher:'test1',
+          
         }
+        , {
+          day:'Wednesday',
+          teacher:'test3',
+          
+        },
+         {
+          day:'monday',
+          teacher:'usman',
+
+        },
+        {
+          day:'monday',
+          teacher:'test1',
+          
+        }
+        , {
+          day:'friday',
+          teacher:'test3',
+          
+        }
+      
       ]
     };
-  }
+  },
+  computed:{
+    mondaySchdule:function(){
+      return this.items.filter(data=>data.day == 'monday');
+    },
+    tuesdaySchdule:function(){
+       return this.items.filter(data=>data.day == 'tuesday');
+    }
+  },
 };
 </script>
 <style  scoped>
@@ -131,5 +112,24 @@ export default {
 }
 .v-data-table td {
   height: 50px;
+}
+.class-name{
+  float: left !important;
+
+}
+.class-time{
+  float: right !important;
+  font-size: 15px;
+}
+.day{
+  font-size: 18px;
+}
+.teacher-name{
+  font-size: 18px;
+  display: table;
+  margin: 0 auto;
+}
+.subject-name{
+  text-align: left;
 }
 </style>
