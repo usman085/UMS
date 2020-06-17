@@ -4,21 +4,21 @@
       <template v-slot:default>
         <thead>
           <tr>
-            <th class="text-left title font-weight-bold th">Subject</th>
-            <th class="text-left title font-weight-bold">Assignment Title</th>
-            <th class="text-left title font-weight-bold">Assign By</th>
-            <th class="text-left title font-weight-bold">Assign Date</th>
-            <th class="text-left title font-weight-bold">Submission Date</th>
-            <th class="text-left title font-weight-bold">Action</th>
+            <th class="text-left body-2  font-weight-bold th">Subject</th>
+            <th class="text-left body-2  font-weight-bold">Assignment Title</th>
+            <th class="text-left body-2  font-weight-bold">Assign By</th>
+            <th class="text-left body-2 font-weight-bold">Assign Date</th>
+            <th class="text-left body-2 font-weight-bold">Submission Date</th>
+            <th class="text-left body-2 font-weight-bold">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in desserts" :key="item.name">
-            <td class="subtitle-2 body-1 font-weight-medium">{{ item.subject }}</td>
-            <td class="subtitle-2 body-1 font-weight-medium">{{ item.title }}</td>
-            <td class="subtitle-2 body-1 font-weight-medium">{{ item.assignBy }}</td>
-            <td class="subtitle-2 body-1 font-weight-medium">{{ item.assignDate }}</td>
-            <td class="subtitle-2 body-1 font-weight-medium">{{ item.submissionDate }}</td>
+            <td class="subtitle-2  font-weight-medium">{{ item.subject }}</td>
+            <td class="subtitle-2  font-weight-medium">{{ item.title }}</td>
+            <td class="subtitle-2  font-weight-medium">{{ item.assignBy }}</td>
+            <td class="subtitle-2  font-weight-medium">{{ item.assignDate }}</td>
+            <td class="subtitle-2  font-weight-medium">{{ item.submissionDate }}</td>
             <td>
               <span class="dots-vertical">
                 <v-menu offset-y>
@@ -70,7 +70,7 @@
     <!-- SubmitAssignment -->
     <SubmitAssignment></SubmitAssignment>
     <!-- SubmitAssignment -->
-  
+
     <!--assignments-content-wrapper-->
 
    <!-- AssignmentDetailPage -->
@@ -85,7 +85,7 @@
         <RequestTimeApplication></RequestTimeApplication>
     <!-- RequestTimeApplication -->
   </div>
-  
+
 </template>
 
 <script>

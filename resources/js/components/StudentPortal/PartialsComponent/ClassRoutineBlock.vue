@@ -17,6 +17,7 @@
             <br />
             <span class="font-weight-black mt-1 title">{{ item.sub1}}</span>
             <br />
+               <span class="float-left">{{ item.teacher1 }}</span>
             <span class="float-right">{{ item.room1 }}</span>
           </td>
 
