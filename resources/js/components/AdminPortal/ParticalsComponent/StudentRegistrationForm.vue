@@ -130,7 +130,7 @@
 
         </fieldset>
         <v-container>
-            <p class="fee-addition">Do You want to {{ feeAdd ? 'Modify ' : 'Add' }} Fee Structure Fee Structure? </p>
+            <p class="fee-addition">Do You want to {{ feeAdd ? 'Modify ' : 'Add' }}  Fee Structure? </p>
             <p class="fee-addition"><v-btn color="primary" small @click="dialog =true">{{ feeAdd ? 'Modify ' : 'Add' }} Fee Structure</v-btn></p>
         </v-container>
         <!-- Officail Information  -->
