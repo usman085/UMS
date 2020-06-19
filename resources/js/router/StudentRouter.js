@@ -1,6 +1,7 @@
 import StudentDashboard from '../components/StudentPortal/Pages/DashboardComponent';
 import Assignment from '../components/StudentPortal/Pages/AssignmentComponent';
 import AssignmentCollector from '../components/StudentPortal/Pages/AssignmentCollectorComponent';
+import AssignmentFiles from '../components/StudentPortal/PartialsComponent/AssignmentCollectorFiles';
 import AcademicSyllabus from '../components/StudentPortal/Pages/AcademicSyllabusComponent';
 import ClassRoutine from '../components/StudentPortal/Pages/ClassRoutineComponent';
 import ExamRoutine from '../components/StudentPortal/Pages/ExamRoutineComponent';
@@ -47,7 +48,13 @@ const StudentRoutes = [{
         {
             // *** Assignment Collector Route
             path: 'Assignment-collector',
-            component: AssignmentCollector
+            component: AssignmentCollector,
+        },
+        {
+            // Assignments files
+            path: 'files',
+            component: AssignmentFiles,
+            name: 'AssignmentFiles'
         },
         {
             // *** Class Routine Route

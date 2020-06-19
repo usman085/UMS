@@ -15,13 +15,13 @@
           </v-chip>
         </router-link>
 
-      
-   
-
-       
 
 
-         
+
+
+
+
+
 
         <v-divider></v-divider>
        <router-view></router-view>
@@ -34,9 +34,9 @@ export default {
     components:{},
     data:function(){
       return{
-    
+
       }
-     
+
     }
 
 }
@@ -47,7 +47,7 @@ export default {
     text-decoration: none;
     cursor: pointer;
 
-} 
+}
 </style>
 
 
