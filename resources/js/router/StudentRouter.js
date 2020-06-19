@@ -1,5 +1,6 @@
 import StudentDashboard from '../components/StudentPortal/Pages/DashboardComponent';
 import Assignment from '../components/StudentPortal/Pages/AssignmentComponent';
+import AssignmentCollector from '../components/StudentPortal/Pages/AssignmentCollectorComponent';
 import AcademicSyllabus from '../components/StudentPortal/Pages/AcademicSyllabusComponent';
 import ClassRoutine from '../components/StudentPortal/Pages/ClassRoutineComponent';
 import ExamRoutine from '../components/StudentPortal/Pages/ExamRoutineComponent';
@@ -13,10 +14,10 @@ import Notification from '../components/StudentPortal/Pages/NotificationComponen
 import notificationDetail from '../components/StudentPortal/PartialsComponent/NotificationDetail';
 import NotificationList from '../components/StudentPortal/PartialsComponent/NotificationListComponent';
 import feedback from '../components/CommonGobalComponent/feedbackComponent';
-import customSupport from '../components/CommonGobalComponent/customSupport'
+import customSupport from '../components/CommonGobalComponent/customSupport';
 import AppStudent from '../components/StudentPortal/AppStudentComponent';
 
-//**** ****  Import Guard Router 
+//**** ****  Import Guard Router
 import { guardRouteStudent } from './RouterGuard'; //Student Route Guard
 
 // **** **** Student Portal Routes & Child Routes Components Paths
@@ -27,7 +28,7 @@ const StudentRoutes = [{
     name: 'studentPortal',
     beforeEnter: guardRouteStudent,
 
-    // ***Children Routes 
+    // ***Children Routes
     children: [{
             // *** Dash Board Route
             path: 'dash-board',
@@ -39,9 +40,9 @@ const StudentRoutes = [{
             component: AcademicSyllabus
         },
         {
-            // ***Assignments Route
-            path: 'Assignments',
-            component: Assignment
+            // *** Academic Syllabus Route
+            path: '  Assignment-Collecter',
+            component: AssignmentCollector
         },
         {
             // *** Class Routine Route

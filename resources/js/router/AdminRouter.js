@@ -1,5 +1,8 @@
 // *** Import Admin Portal Component 
 import AdminPortal from '../components/AdminPortal/AppAdminPortalComponent';
+import feedback from '../components/CommonGobalComponent/feedbackComponent';
+import customSupport from '../components/CommonGobalComponent/customSupport';
+import registerStudent from '../components/AdminPortal/Pages/RegisterStudent';
 
 //**** ****  Import Guard Router 
 import { guardRouteAdmin } from './RouterGuard';
@@ -16,7 +19,25 @@ const AdminRoutes = [{
     // **** Root Router End
 
     //*** Children Routes */
-    //children:[]
+    children: [{
+            path: 'register-new-student',
+            component: registerStudent
+
+        },
+        {
+            // *** Customer Support Route
+            path: 'customer-support',
+            component: customSupport,
+            name: 'customerSupport'
+        },
+        {
+            // *** Feedback Route
+            path: 'feedback',
+            component: feedback,
+            name: 'feedback'
+        },
+        // children Route End
+    ]
 
 }];
 

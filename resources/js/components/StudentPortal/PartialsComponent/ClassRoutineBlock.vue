@@ -49,7 +49,6 @@ export default {
       items: [
         {
           day: "Monday",
-
           teacher1: "Ijaz Hussain",
           teacher2: "Sabir",
           teacher3: "Usman",

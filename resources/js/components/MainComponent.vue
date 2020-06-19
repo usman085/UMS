@@ -1,6 +1,10 @@
 <template>
 
-<router-view></router-view>
+     <!-- Different Component Render -->
+
+       <router-view/>
+
+     <!-- Different Component Render -->
 
 </template>
 
@@ -10,8 +14,5 @@
 
     export default {
          name:'MainAppComponent',
-        mounted() {
-            console.log('Component mounted.')
-        }
     }
 </script>

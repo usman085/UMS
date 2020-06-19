@@ -26,11 +26,11 @@
             </template>
             <v-list-item class="list-acnhor" v-for="(child, i) in item.children" :key="i" link>
               <v-list-item-action v-if="child.icon">
-                <v-icon>{{ child.icon }}</v-icon>
+                <v-icon class="child-list-icon">{{ child.icon }}</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title>
-                  <router-link :to="child.url">{{ child.text }}</router-link>
+                <v-list-item-title class="child-list-text">
+                  <router-link :to="child.url" >{{ child.text }}</router-link>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -120,21 +120,20 @@ export default {
     items: [
 
     { icon: "mdi-view-dashboard", text: "Dash Board" ,url:'/student-portal/dash-board' },
-    {  icon: "mdi-chevron-up","icon-alt": "mdi-chevron-down",text: "Academic Assignments",
+    {  icon: "mdi-chevron-up","icon-alt": "mdi-chevron-down",text: "Manage Student",
         model: false,
         children: [
-    { text: "Asign Assignments",icon:" mdi-arrow-right",url:'/student-portal/Assignments'},
+            // ***** Student Sub List
+        { text: "Register Student",icon:"mdi-account-check",url:'/admin-portal/register-new-student'},
+        { text: "Mange Time Table",icon:"mdi-table-edit",url:''},
+        { text: "Sections",icon:"mdi-format-section",url:''},
+         { text: "Manage Class",icon:"mdi-format-section",url:''},
+           
+       // **** Student Sub List
         ]},
-     {icon:'mdi-calendar-text',text:'Academic Syllabus',url:'/student-portal/Academic-syllabus'},   
-    { icon: "mdi-calendar-text", text: "Class Routine" ,url:'/student-portal/Class-Routine' },
-    { icon: "mdi-calendar-text", text: "Exam Routine" ,url:'/student-portal/Exam-Routine' },
-    { icon: " mdi-email", text: "Application" ,url:'/student-portal/application' },
-     { icon: "mdi-application", text: "Attendance Sheet" ,url:'/student-portal/Attendance-Sheet' },
-         
-         {icon:'mdi-bell',text:'Notifications', url:'/student-portal/notification'},
-       {icon:'mdi-account',text:'My Profile', url:'/student-portal/Profile-Component'},
-         {icon:'mdi-comment-text-outline',text:'Send Feedback',url:'/student-portal/feedback'},
-         {icon:'mdi-account',text:'Contact Support',url:'/student-portal/customer-support'}
+   
+         {icon:'mdi-comment-text-outline',text:'Send Feedback',url:'/admin-portal/feedback'},
+         {icon:'mdi-account',text:'Contact Support',url:'/admin-portal/customer-support'}
 
 
 
@@ -145,7 +144,16 @@ export default {
 </script>
 
 <style  scoped>
-.v-application a {
+
+.v-application a,.v-application a:focus {
   text-decoration: none;
+  color: inherit;
+}
+.child-list-text{
+  font-size: 15px;
+  /* text-align: right; */
+}
+.child-list-icon{
+  font-size: 22px;
 }
 </style>
