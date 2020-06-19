@@ -7,22 +7,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in items" :key="item.name">
-          <td class="title">{{ item.day }}</td>
-          <td class="text-center body-1">
-            <span class="float-left">{{ item.teacher1 }}</span>
-            <br />
-            <span class="font-weight-black mt-1 title">{{ item.sub1}}</span>
-            <br />
-               <span class="float-left">{{ item.teacher1 }}</span>
-            <span class="float-right">{{ item.room1 }}</span>
-          </td>
         <template v-for="(item,index) in items">
         <tr :key="item.id">
           <template v-if="item.day=='monday' && index == 0">
               <td class="day">{{ item.day | capitalize }}</td>
                 <td v-for="(timeTable,index) in mondaySchdule" :key="index" >
-
 
                   <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
                   <span class="class-time">{{ timeTable.time | capitalize  }}</span>
@@ -73,7 +62,6 @@ export default {
           subject:'English',
           time:'9:00-10:00',
           classRoom:'cr3'
-
         },
         {
           day:'tuesday',
@@ -88,7 +76,6 @@ export default {
          {
           day:'monday',
           teacher:'usman',
-
         },
         {
           day:'monday',
@@ -126,7 +113,6 @@ export default {
 }
 .class-name{
   float: left !important;
-
 }
 .class-time{
   float: right !important;

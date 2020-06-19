@@ -1,16 +1,16 @@
 <template>
     <div>
-        <AssignmentCollecterTiltle></AssignmentCollecterTiltle>
+        <AssignmentCollectorTitle></AssignmentCollectorTitle>
         <AssignmentCollecterBlock></AssignmentCollecterBlock>
     </div>
 </template>
 <script>
 import AssignmentCollecterBlock from "../PartialsComponent/AssignmentCollecterBlock";
-import AssignmentCollecterTiltle from "../PartialsComponent/AssignmentCollecterTiltle";
+import AssignmentCollectorTitle from "../PartialsComponent/AssignmentCollectorTitle";
 export default {
     name: "AssignmentCollector",
     components: {
-        AssignmentCollecterTiltle,
+        AssignmentCollectorTitle,
         AssignmentCollecterBlock
     }
 };

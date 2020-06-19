@@ -41,7 +41,12 @@ const StudentRoutes = [{
         },
         {
             // *** Academic Syllabus Route
-            path: '  Assignment-Collecter',
+            path: 'Assignments',
+            component: Assignment
+        },
+        {
+            // *** Assignment Collector Route
+            path: 'Assignment-collector',
             component: AssignmentCollector
         },
         {
