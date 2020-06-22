@@ -7,10 +7,11 @@
         </tr>
       </thead>
       <tbody>
-        <template v-for="(item,index) in items">
-        <tr :key="item.id">
-          <template v-if="item.day=='monday' && index == 0">
-              <td class="day">{{ item.day | capitalize }}</td>
+        
+          
+        <tr>
+              <td class="day">Monday</td>
+
                 <td v-for="(timeTable,index) in mondaySchdule" :key="index" >
 
                   <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
@@ -21,12 +22,12 @@
                    
                     
                 </td>  
-          </template>  
-        </tr>
-       
-         <tr :key="item.id">
-          <template v-if="item.day=='tuesday' && index == 1">
-              <td class="day">{{ item.day | capitalize }}</td>
+          
+        </tr> 
+
+        <tr>
+              <td class="day">Tuesday</td>
+
                 <td v-for="(timeTable,index) in tuesdaySchdule" :key="index" >
 
                   <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
@@ -37,11 +38,74 @@
                    
                     
                 </td>  
-          </template>  
-        </tr>
-       
+          
+        </tr> 
 
-         </template>
+         <tr>
+              <td class="day">Wednesday</td>
+
+                <td v-for="(timeTable,index) in wednesdaySchdule" :key="index" >
+
+                  <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
+                  <span class="class-time">{{ timeTable.time | capitalize  }}</span>
+                  <br>
+                 <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
+                  <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
+                   
+                    
+                </td>  
+          
+        </tr> 
+
+        <tr>
+              <td class="day">Thrusday</td>
+
+                <td v-for="(timeTable,index) in thrusdaySchdule" :key="index" >
+
+                  <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
+                  <span class="class-time">{{ timeTable.time | capitalize  }}</span>
+                  <br>
+                 <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
+                  <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
+                   
+                    
+                </td>  
+          
+        </tr> 
+
+        <tr>
+              <td class="day">Friday</td>
+
+                <td v-for="(timeTable,index) in thrusdaySchdule" :key="index" >
+
+                  <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
+                  <span class="class-time">{{ timeTable.time | capitalize  }}</span>
+                  <br>
+                 <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
+                  <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
+                   
+                    
+                </td>  
+          
+        </tr> 
+
+         <tr>
+              <td class="day">Saturday</td>
+
+                <td v-for="(timeTable,index) in saturdaySchdule" :key="index" >
+
+                  <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
+                  <span class="class-time">{{ timeTable.time | capitalize  }}</span>
+                  <br>
+                 <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
+                  <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
+                   
+                    
+                </td>  
+          
+        </tr> 
+       
+        
 
         
         
@@ -57,6 +121,7 @@ export default {
     return {
       items: [
         {
+          id:4,
           day:'monday',
           teacher:'usman',
           subject:'English',
@@ -64,41 +129,123 @@ export default {
           classRoom:'cr3'
 
         },
-        {
-          day:'tuesday',
-          teacher:'test1',
-          
-        }
-        , {
-          day:'Wednesday',
-          teacher:'test3',
-          
-        },
          {
+          id:4,
           day:'monday',
-          teacher:'usman',
+          teacher:'mehreen',
+          subject:'Math',
+          time:'9:00-10:00',
+          classRoom:'cr3'
+
+        },
+          {
+          id:4,
+          day:'monday',
+          teacher:'Ijaz',
+          subject:'OOP',
+          time:'9:00-10:00',
+          classRoom:'cr4'
 
         },
         {
-          day:'monday',
-          teacher:'test1',
-          
-        }
-        , {
+           id:32,
+          day:'tuesday',
+          teacher:'usman',
+          subject:'English',
+          time:'9:00-10:00',
+          classRoom:'cr3'
+
+        },
+        {
+           id:32,
+          day:'tuesday',
+          teacher:'test',
+          subject:'English',
+          time:'9:00-10:00',
+          classRoom:'cr3'
+
+        },
+        {
+           id:32,
+          day:'saturday',
+          teacher:'test',
+          subject:'English',
+          time:'9:00-10:00',
+          classRoom:'cr3'
+
+        },
+         {
+            id:43,
+          day:'Wednesday',
+          teacher:'usman',
+          subject:'English',
+          time:'9:00-10:00',
+          classRoom:'cr3'
+
+        },{
+           id:334,
+          day:'thrusday',
+          teacher:'usman',
+          subject:'English',
+          time:'9:00-10:00',
+          classRoom:'cr3'
+
+        },
+         {
+            id:544,
           day:'friday',
-          teacher:'test3',
-          
-        }
+          teacher:'usman',
+          subject:'English',
+          time:'9:00-10:00',
+          classRoom:'cr3'
+
+        },
+        
+       {
+          id:644, 
+          day:'sunday',
+          teacher:'usman',
+          subject:'English',
+          time:'9:00-10:00',
+          classRoom:'cr3'
+
+        },
+        {
+            id:43,
+          day:'Wednesday',
+          teacher:'usman',
+          subject:'English',
+          Time:'9:00',
+          classRoom:'cr3'
+
+        },
+       
+        
       
       ]
     };
   },
   computed:{
     mondaySchdule:function(){
-      return this.items.filter(data=>data.day == 'monday');
+      return this.items.filter(data=> data.day.toLowerCase() == 'monday'  );
     },
     tuesdaySchdule:function(){
-       return this.items.filter(data=>data.day == 'tuesday');
+       return this.items.filter(data=>data.day.toLowerCase() == 'tuesday');
+    },
+    wednesdaySchdule:function(){
+       return this.items.filter(data=>data.day.toLowerCase() == 'wednesday');
+    },
+    thrusdaySchdule:function(){
+       return this.items.filter(data=>data.day.toLowerCase() == 'thrusday');
+    },
+    fridaySchdule:function(){
+       return this.items.filter(data=>data.day.toLowerCase() == 'friday');
+    },
+    saturdaySchdule:function(){
+       return this.items.filter(data=>data.day.toLowerCase() == 'saturday');
+    },
+    sundaySchdule:function(){
+       return this.items.filter(data=>data.day.toLowerCase() == 'sunday');
     }
   },
 };

@@ -16,14 +16,9 @@ import store from './Store/store';
 
 import MainAppComponent from './components/MainComponent';
 
+import './filters/filters';
 
-// *** Vue Global Filter
-//  *** Capitalize the String
-Vue.filter('capitalize', function(value) {
-    if (!value) return ''
-    value = value.toString()
-    return value.charAt(0).toUpperCase() + value.slice(1)
-})
+
 
 
 // *** Create Vue Instant

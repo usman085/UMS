@@ -125,7 +125,7 @@ export default {
         children: [
             // ***** Student Sub List
         { text: "Register Student",icon:"mdi-account-check",url:'/admin-portal/register-new-student'},
-        { text: "Mange Time Table",icon:"mdi-table-edit",url:''},
+        { text: "Mange Time Table",icon:"mdi-table-edit",url:'/admin-portal/Mange-Time-Table'},
         { text: "Sections",icon:"mdi-format-section",url:''},
          { text: "Manage Class",icon:"mdi-format-section",url:''},
            

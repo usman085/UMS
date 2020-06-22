@@ -3,6 +3,9 @@ import AdminPortal from '../components/AdminPortal/AppAdminPortalComponent';
 import feedback from '../components/CommonGobalComponent/feedbackComponent';
 import customSupport from '../components/CommonGobalComponent/customSupport';
 import registerStudent from '../components/AdminPortal/Pages/RegisterStudent';
+import MangeTimeTable from '../components/AdminPortal/Pages/MangeTimeTable';
+import AllTimeTable from '../components/AdminPortal/ParticalsComponent/AllTimeTable';
+import createTimeTable from '../components/AdminPortal/ParticalsComponent/createTimeTable';
 
 //**** ****  Import Guard Router 
 import { guardRouteAdmin } from './RouterGuard';
@@ -36,6 +39,26 @@ const AdminRoutes = [{
             component: feedback,
             name: 'feedback'
         },
+        {
+            //***  Manage Time Table
+            path: 'Mange-Time-Table',
+            component: MangeTimeTable,
+            children: [{
+                    path: 'all-time-table',
+                    component: AllTimeTable
+                },
+                {
+                    path: 'create-time-table',
+                    component: createTimeTable,
+                    name: 'createTimeTable'
+                },
+                {
+                    path: '/',
+                    redirect: 'all-time-table'
+                }
+            ]
+
+        }
         // children Route End
     ]
 
