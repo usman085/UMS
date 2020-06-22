@@ -5,6 +5,7 @@ import AssignmentFiles from '../components/StudentPortal/PartialsComponent/Assig
 import AcademicSyllabus from '../components/StudentPortal/Pages/AcademicSyllabusComponent';
 import ClassRoutine from '../components/StudentPortal/Pages/ClassRoutineComponent';
 import ExamRoutine from '../components/StudentPortal/Pages/ExamRoutineComponent';
+import ResultCardComponent from '../components/StudentPortal/Pages/ResultCardComponent';
 import AttendanceSheet from '../components/StudentPortal/Pages/AttendanceComponent';
 import ProfileComponent from '../components/StudentPortal/Pages/ProfileComponent';
 import Application from '../components/StudentPortal/Pages/ApplicationComponent';
@@ -67,9 +68,12 @@ const StudentRoutes = [{
             component: AttendanceSheet
         },
         {
-            // *** Exam Routine Route
             path: 'Exam-Routine',
             component: ExamRoutine
+        }, {
+            // *** Exam Routine Route
+            path: 'Result-Card',
+            component: ResultCardComponent
         },
         {
             // *** Profile Route
