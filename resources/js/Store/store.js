@@ -18,10 +18,19 @@ const store = new Vuex.Store({
         ApplicationRequestTimeModal: false,
         AssignmentDetailPageModal: false,
         CourseOutlinePageModal: false,
-        BadWordModal: false
+        BadWordModal: false,
+        CreateTimeTableModal: false,
+        TimeTableDetailModal: false,
+        days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        subjects: ['Eng', 'urdu', 'Math'],
+        teachers: ['ijaz', 'usman'],
+        classRooms: ['cr2', 'cr3'],
     },
     //  *** Mutations Function
     mutations: {
+        TimeTableDetailModal(state) {
+            state.TimeTableDetailModal = !state.TimeTableDetailModal;
+        },
         BadWordModalToggle(state) {
             state.BadWordModal = !state.BadWordModal;
         },
@@ -36,11 +45,20 @@ const store = new Vuex.Store({
         },
         CourseOutlinePageModalToggle(state) {
             state.CourseOutlinePageModal = !state.CourseOutlinePageModal;
+        },
+        CreateTimeTableModal(state) {
+            state.CreateTimeTableModal = !state.CreateTimeTableModal;
         }
 
     },
     // *** Action Functions
     actions: {
+        TimeTableDetailModal(context) {
+            context.commit('TimeTableDetailModal');
+        },
+        CreateTimeTableModal(context) {
+            context.commit('CreateTimeTableModal')
+        },
         BadWordModalToggle(context) {
             context.commit('BadWordModalToggle');
         },

@@ -59,7 +59,7 @@
             <VueCountdown class="CountDown" :time="3 * 24 * 60 * 60 * 1000">
               <template
                 slot-scope="props"
-                class="CountDown" v-if="props.days == 1"
+                class="CountDown"
               >Time Remaining：{{ props.days }} days, {{ props.hours }} hours, {{ props.minutes }} minutes, {{ props.seconds }} seconds.</template>
             </VueCountdown>
             </td>

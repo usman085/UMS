@@ -264,7 +264,6 @@ export default {
       items:['Parents','etc'],
       program:['BSCS','BSSE','BSIT'],
       sections:['A','B'],
-      feeAdd:false
     }),
 
     computed: {
@@ -272,7 +271,7 @@ export default {
         return this.formatDate(this.date)
       },
       feeAdd:function(){
-          return this.feeAdd;
+          return false;
       }
     },
 
