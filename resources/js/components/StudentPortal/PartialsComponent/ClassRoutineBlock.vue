@@ -7,8 +7,8 @@
         </tr>
       </thead>
       <tbody>
-        
-          
+
+
         <tr>
               <td class="day">Monday</td>
 
@@ -19,11 +19,11 @@
                   <br>
                  <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
                   <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
-                   
-                    
-                </td>  
-          
-        </tr> 
+
+
+                </td>
+
+        </tr>
 
         <tr>
               <td class="day">Tuesday</td>
@@ -35,11 +35,11 @@
                   <br>
                  <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
                   <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
-                   
-                    
-                </td>  
-          
-        </tr> 
+
+
+                </td>
+
+        </tr>
 
          <tr>
               <td class="day">Wednesday</td>
@@ -51,11 +51,11 @@
                   <br>
                  <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
                   <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
-                   
-                    
-                </td>  
-          
-        </tr> 
+
+
+                </td>
+
+        </tr>
 
         <tr>
               <td class="day">Thrusday</td>
@@ -67,11 +67,11 @@
                   <br>
                  <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
                   <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
-                   
-                    
-                </td>  
-          
-        </tr> 
+
+
+                </td>
+
+        </tr>
 
         <tr>
               <td class="day">Friday</td>
@@ -83,11 +83,11 @@
                   <br>
                  <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
                   <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
-                   
-                    
-                </td>  
-          
-        </tr> 
+
+
+                </td>
+
+        </tr>
 
          <tr>
               <td class="day">Saturday</td>
@@ -99,16 +99,16 @@
                   <br>
                  <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
                   <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
-                   
-                    
-                </td>  
-          
-        </tr> 
-       
-        
 
-        
-        
+
+                </td>
+
+        </tr>
+
+
+
+
+
       </tbody>
     </template>
   </v-simple-table>
@@ -116,7 +116,7 @@
 <script>
 export default {
   name: "ClassRoutineBlock",
-  
+
   data() {
     return {
       items: [
@@ -127,7 +127,6 @@ export default {
           subject:'English',
           time:'9:00-10:00',
           classRoom:'cr3'
-
         },
          {
           id:4,
@@ -200,9 +199,9 @@ export default {
           classRoom:'cr3'
 
         },
-        
+
        {
-          id:644, 
+          id:644,
           day:'sunday',
           teacher:'usman',
           subject:'English',
@@ -219,9 +218,9 @@ export default {
           classRoom:'cr3'
 
         },
-       
-        
-      
+
+
+
       ]
     };
   },
@@ -262,7 +261,6 @@ export default {
 }
 .class-name{
   float: left !important;
-
 }
 .class-time{
   float: right !important;

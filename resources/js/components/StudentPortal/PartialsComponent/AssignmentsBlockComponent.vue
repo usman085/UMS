@@ -4,21 +4,21 @@
       <template v-slot:default>
         <thead>
           <tr>
-            <th class="text-left title font-weight-bold th">Subject</th>
-            <th class="text-left title font-weight-bold">Assignment Title</th>
-            <th class="text-left title font-weight-bold">Assign By</th>
-            <th class="text-left title font-weight-bold">Assign Date</th>
-            <th class="text-left title font-weight-bold">Submission Date</th>
-            <th class="text-left title font-weight-bold">Action</th>
+            <th class="text-left ">Subject</th>
+            <th class="text-left ">Assignment Title</th>
+            <th class="text-left ">Assign By</th>
+            <th class="text-left ">Assign Date</th>
+            <th class="text-left">Submission Date</th>
+            <th class="text-left ">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in desserts" :key="item.name">
-            <td class="subtitle-2 body-1 font-weight-medium">{{ item.subject }}</td>
-            <td class="subtitle-2 body-1 font-weight-medium">{{ item.title }}</td>
-            <td class="subtitle-2 body-1 font-weight-medium">{{ item.assignBy }}</td>
-            <td class="subtitle-2 body-1 font-weight-medium">{{ item.assignDate }}</td>
-            <td class="subtitle-2 body-1 font-weight-medium">{{ item.submissionDate }}</td>
+            <td>{{ item.subject }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.assignBy }}</td>
+            <td>{{ item.assignDate }}</td>
+            <td>{{ item.submissionDate }}</td>
             <td>
               <span class="dots-vertical">
                 <v-menu offset-y>
@@ -28,8 +28,8 @@
                     </v-btn>
                   </template>
                   <v-list >
-                    <v-list-item>
-                      <v-list-item-title @click="AssignmentDetailModal()">
+                    <v-list-item @click="AssignmentDetailModal()">
+                      <v-list-item-title >
                         <v-icon>mdi-eye</v-icon>
 
                         <span> View Detail</span>
@@ -37,8 +37,8 @@
 
                     </v-list-item>
 
-                    <v-list-item>
-                    <v-list-item-title @click="SubmitAssignmentModal()">
+                    <v-list-item @click="SubmitAssignmentModal()">
+                    <v-list-item-title >
                         <v-icon>mdi-comment-text</v-icon>
 
                         <span> Submit Assignment </span>
@@ -70,7 +70,7 @@
     <!-- SubmitAssignment -->
     <SubmitAssignment></SubmitAssignment>
     <!-- SubmitAssignment -->
-  
+
     <!--assignments-content-wrapper-->
 
    <!-- AssignmentDetailPage -->
@@ -85,7 +85,7 @@
         <RequestTimeApplication></RequestTimeApplication>
     <!-- RequestTimeApplication -->
   </div>
-  
+
 </template>
 
 <script>
@@ -150,9 +150,7 @@ background: #e0e0e0;
 .dots-vertical {
   float: right;
 }
-.theme--light.v-data-table thead tr th {
-  color: black !important;
-}
+
 .time-lap{
   height: 0;
 }

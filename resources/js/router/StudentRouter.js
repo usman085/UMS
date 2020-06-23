@@ -1,8 +1,11 @@
 import StudentDashboard from '../components/StudentPortal/Pages/DashboardComponent';
 import Assignment from '../components/StudentPortal/Pages/AssignmentComponent';
+import AssignmentCollector from '../components/StudentPortal/Pages/AssignmentCollectorComponent';
+import AssignmentFiles from '../components/StudentPortal/PartialsComponent/AssignmentCollectorFiles';
 import AcademicSyllabus from '../components/StudentPortal/Pages/AcademicSyllabusComponent';
 import ClassRoutine from '../components/StudentPortal/Pages/ClassRoutineComponent';
 import ExamRoutine from '../components/StudentPortal/Pages/ExamRoutineComponent';
+import ResultCardComponent from '../components/StudentPortal/Pages/ResultCardComponent';
 import AttendanceSheet from '../components/StudentPortal/Pages/AttendanceComponent';
 import ProfileComponent from '../components/StudentPortal/Pages/ProfileComponent';
 import Application from '../components/StudentPortal/Pages/ApplicationComponent';
@@ -16,7 +19,7 @@ import feedback from '../components/CommonGobalComponent/feedbackComponent';
 import customSupport from '../components/CommonGobalComponent/customSupport';
 import AppStudent from '../components/StudentPortal/AppStudentComponent';
 
-//**** ****  Import Guard Router 
+//**** ****  Import Guard Router
 import { guardRouteStudent } from './RouterGuard'; //Student Route Guard
 
 // **** **** Student Portal Routes & Child Routes Components Paths
@@ -27,7 +30,7 @@ const StudentRoutes = [{
     name: 'studentPortal',
     beforeEnter: guardRouteStudent,
 
-    // ***Children Routes 
+    // ***Children Routes
     children: [{
             // *** Dash Board Route
             path: 'dash-board',
@@ -39,9 +42,20 @@ const StudentRoutes = [{
             component: AcademicSyllabus
         },
         {
-            // ***Assignments Route
+            // *** Academic Syllabus Route
             path: 'Assignments',
             component: Assignment
+        },
+        {
+            // *** Assignment Collector Route
+            path: 'Assignment-collector',
+            component: AssignmentCollector,
+        },
+        {
+            // Assignments files
+            path: 'files',
+            component: AssignmentFiles,
+            name: 'AssignmentFiles'
         },
         {
             // *** Class Routine Route
@@ -54,9 +68,12 @@ const StudentRoutes = [{
             component: AttendanceSheet
         },
         {
-            // *** Exam Routine Route
             path: 'Exam-Routine',
             component: ExamRoutine
+        }, {
+            // *** Exam Routine Route
+            path: 'Result-Card',
+            component: ResultCardComponent
         },
         {
             // *** Profile Route

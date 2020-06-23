@@ -5,7 +5,11 @@
         <template v-for="item in items">
           <v-row v-if="item.heading" :key="item.heading" align="center">
             <v-col cols="6">
-              <v-subheader v-if="item.heading">{{ item.heading }}</v-subheader>
+              <v-subheader v-if="item.heading">
+                {{
+                item.heading
+                }}
+              </v-subheader>
             </v-col>
             <v-col cols="6" class="text-center">
               <a href="#!" class="body-2 black--text">EDIT</a>
@@ -15,22 +19,38 @@
             v-else-if="item.children"
             :key="item.text"
             v-model="item.model"
-            :prepend-icon="item.model ? item.icon : item['icon-alt']"
+            :prepend-icon="
+                            item.model ? item.icon : item['icon-alt']
+                        "
             append-icon
             class="list-acnhor"
+            color="primary"
           >
             <template v-slot:activator>
               <v-list-item-content class="list-acnhor">
-                <v-list-item-title>{{ item.text }}</v-list-item-title>
+                <v-list-item-title>
+                  {{
+                  item.text
+                  }}
+                </v-list-item-title>
               </v-list-item-content>
             </template>
-            <v-list-item class="list-acnhor" v-for="(child, i) in item.children" :key="i" link>
+            <v-list-item
+              class="list-acnhor body-2"
+              v-for="(child, i) in item.children"
+              :key="i"
+              link
+            >
               <v-list-item-action v-if="child.icon">
                 <v-icon>{{ child.icon }}</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title>
-                  <router-link :to="child.url">{{ child.text }}</router-link>
+                <v-list-item-title class="body-2">
+                  <router-link :to="child.url">
+                    {{
+                    child.text
+                    }}
+                  </router-link>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -39,11 +59,19 @@
             <router-link :to="item.url">
               <v-list-item link>
                 <v-list-item-action class="list-acnhor">
-                  <v-icon class="list-acnhor">{{ item.icon }}</v-icon>
+                  <v-icon class="list-acnhor">
+                    {{
+                    item.icon
+                    }}
+                  </v-icon>
                 </v-list-item-action>
 
                 <v-list-item-content class="list-acnhor">
-                  <v-list-item-title>{{ item.text }}</v-list-item-title>
+                  <v-list-item-title>
+                    {{
+                    item.text
+                    }}
+                  </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </router-link>
@@ -91,7 +119,7 @@
       </v-btn>
       <v-btn icon large>
         <v-avatar size="32px" item>
-          <router-link :to="{name:'ProfileComponent'}">
+          <router-link :to="{ name: 'ProfileComponent' }">
             <v-img src="https://cdn.vuetifyjs.com/images/logos/logo.svg" alt="Vuetify"></v-img>
           </router-link>
         </v-avatar>
@@ -107,44 +135,111 @@ export default {
   props: {
     source: String
   },
-  methods:{logout:function(){
-         localStorage.removeItem('studentLogin');
-         this.$router.push({name:'login'})
-
-    }},
+  methods: {
+    logout: function() {
+      localStorage.removeItem("studentLogin");
+      this.$router.push({ name: "login" });
+    }
+  },
 
   data: () => ({
     dialog: false,
     drawer: null,
     items: [
-
-    { icon: "mdi-view-dashboard", text: "Dash Board" ,url:'/student-portal/dash-board' },
-    {  icon: "mdi-chevron-up","icon-alt": "mdi-chevron-down",text: "Academic Assignments",
+      {
+        icon: "mdi-view-dashboard",
+        text: "Dash Board",
+        url: "/student-portal/dash-board"
+      },
+      {
+        icon: "mdi-chevron-up",
+        "icon-alt": "mdi-chevron-down",
+        text: "Assignments",
         model: false,
         children: [
-    { text: "Asign Assignments",icon:" mdi-arrow-right",url:'/student-portal/Assignments'},
-        ]},
-     {icon:'mdi-calendar-text',text:'Academic Syllabus',url:'/student-portal/Academic-syllabus'},   
-    { icon: "mdi-calendar-text", text: "Class Routine" ,url:'/student-portal/Class-Routine' },
-    { icon: "mdi-calendar-text", text: "Exam Routine" ,url:'/student-portal/Exam-Routine' },
-    { icon: " mdi-email", text: "Application" ,url:'/student-portal/application' },
-     { icon: "mdi-application", text: "Attendance Sheet" ,url:'/student-portal/Attendance-Sheet' },
-         
-         {icon:'mdi-bell',text:'Notifications', url:'/student-portal/notification'},
-       {icon:'mdi-account',text:'My Profile', url:'/student-portal/Profile-Component'},
-         {icon:'mdi-comment-text-outline',text:'Send Feedback',url:'/student-portal/feedback'},
-         {icon:'mdi-account',text:'Contact Support',url:'/student-portal/customer-support'}
+          {
+            text: "Asign Assignments",
+            icon: " mdi-tooltip-edit ",
+            url: "/student-portal/Assignments"
+          },
+          {
+            text: "Assignment Collector",
+            icon: "mdi-clipboard-text",
+            url: "/student-portal/Assignment-collector"
+          }
+        ]
+      },
+      {
+        icon: "mdi-book-open-page-variant",
+        text: "Academic Syllabus",
+        url: "/student-portal/Academic-syllabus"
+      },
+      {
+        icon: "mdi-calendar-text",
+        text: "Class Routine",
+        url: "/student-portal/Class-Routine"
+      },
+      {
+        icon: "mdi-calendar-text",
+        text: "Exam Routine",
+        url: "/student-portal/Exam-Routine"
+      },
+      {
+        icon: "mdi-calendar-text",
+        text: " Result Card",
+        url: "/student-portal/Result-Card"
+      },
+     
+      {
+        icon: " mdi-email",
+        text: "Application",
+        url: "/student-portal/application"
+      },
+      {
+        icon: "mdi-account-check",
+        text: "Attendance Sheet",
+        url: "/student-portal/Attendance-Sheet"
+      },
 
+      {
+        icon: "mdi-bell",
+        text: "Notifications",
+        url: "/student-portal/notification"
+      },
 
-
-
+      {
+        icon: "mdi-comment-text-outline",
+        text: "Send Feedback",
+        url: "/student-portal/feedback"
+      },
+      {
+        icon: "mdi-account",
+        text: "Contact Support",
+        url: "/student-portal/customer-support"
+      }
     ]
   })
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .v-application a {
   text-decoration: none;
+  color: rgba(0, 0, 0, 0.87) !important;
 }
+.v-list-item__title {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+.v-navigation-drawer__content {
+height: 100% ;
+overflow-y: auto; 
+overflow-x: hidden !important; 
+
+ }   
+::-webkit-scrollbar 
+{ 
+    width: 15px; 
+    border: 2px solid blue; 
+} 
+
 </style>
