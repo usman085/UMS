@@ -2,7 +2,7 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
       <v-card>
-        <v-col cols="12" sm="12" md="12">
+
           <v-toolbar height:100 dark color="primary">
             <v-btn
               icon
@@ -44,8 +44,7 @@
             </v-row>
           </v-toolbar>
 
-        </v-col>
-        <v-col cols="12" sm="12" md="12">
+
           <v-card class="mx-auto">
             <v-list-item three-line>
               <v-list-item-content>
@@ -108,9 +107,9 @@
               </v-list-item-content>
             </v-list-item>
           </v-card>
-        </v-col>
 
-        <v-col cols="12" sm="12" md="12">
+
+
           <v-card class="mx-auto">
             <v-list-item three-line>
               <v-list-item-content>
@@ -118,7 +117,7 @@
               </v-list-item-content>
             </v-list-item>
           </v-card>
-        </v-col>
+        
       </v-card>
     </v-dialog>
   </v-row>

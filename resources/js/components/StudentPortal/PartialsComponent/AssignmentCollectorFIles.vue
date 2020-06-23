@@ -1,12 +1,11 @@
 <template>
   <div>
-
-  <div>
-    <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
-  </div>
+    <div>
+      <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
+    </div>
 
     <v-list-item-content>
-      <v-list-item-title>Subject name</v-list-item-title>
+      <v-list-item-title class="ml-5">Subject name</v-list-item-title>
     </v-list-item-content>
     <v-list-item v-for="item in items2" :key="item.title">
       <v-list-item-avatar>
@@ -44,19 +43,18 @@ export default {
         subtitle: "Jan 10, 2014"
       }
     ],
-      items: [
-        {
-          text: 'Courses',
-          disabled: false,
-          href: 'Assignment-collector'
-        },
-        {
-          text: 'Object Oriented Programming',
-          disabled: false,
-          href: 'Files'
-        },
-      ]
-
+    items: [
+      {
+        text: "Courses",
+        disabled: false,
+        href: "Assignment-collector"
+      },
+      {
+        text: "Object Oriented Programming",
+        disabled: false,
+        href: "Files"
+      }
+    ]
   })
 };
 </script>
