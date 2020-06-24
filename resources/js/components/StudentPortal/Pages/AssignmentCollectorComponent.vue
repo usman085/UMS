@@ -1,17 +1,14 @@
 <template>
     <div>
-        <AssignmentCollectorTitle></AssignmentCollectorTitle>
-        <AssignmentCollecterBlock></AssignmentCollecterBlock>
+        
+        <router-view/>
     </div>
 </template>
 <script>
 import AssignmentCollecterBlock from "../PartialsComponent/AssignmentCollecterBlock";
-import AssignmentCollectorTitle from "../PartialsComponent/AssignmentCollectorTitle";
+
 export default {
     name: "AssignmentCollector",
-    components: {
-        AssignmentCollectorTitle,
-        AssignmentCollecterBlock
-    }
+
 };
 </script>

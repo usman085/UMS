@@ -147,7 +147,7 @@ export default {
 
 .v-application a,.v-application a:focus {
   text-decoration: none;
-  color: inherit;
+  /* color: inherit; */
 }
 .child-list-text{
   font-size: 15px;
@@ -156,4 +156,17 @@ export default {
 .child-list-icon{
   font-size: 22px;
 }
+.v-navigation-drawer__content{
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden !important;
+}
+  ::-webkit-scrollbar{
+    width: 1px;
+  }                                        
+  ::-webkit-scrollbar-thumb{
+    background: black;                          
+    border-radius: 20px;
+  }  
+  
 </style>

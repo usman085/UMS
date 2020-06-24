@@ -3,7 +3,7 @@
     <template v-slot:default>
       <thead>
         <tr>
-          <th class="text-left">Subject</th>
+          <th class="text-left">Subject Names</th>
           <th class="text-center" v-for="day in days" :key="day.name">{{ day.day }}</th>
         </tr>
       </thead>
@@ -51,6 +51,8 @@
 <script>
 export default {
   name: "AttendanceSheet",
+ 
+  
   data() {
     return {
       attendances: [

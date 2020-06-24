@@ -5,7 +5,8 @@ import AssignmentFiles from '../components/StudentPortal/PartialsComponent/Assig
 import AcademicSyllabus from '../components/StudentPortal/Pages/AcademicSyllabusComponent';
 import ClassRoutine from '../components/StudentPortal/Pages/ClassRoutineComponent';
 import ExamRoutine from '../components/StudentPortal/Pages/ExamRoutineComponent';
-import ResultCardComponent from '../components/StudentPortal/Pages/ResultCardComponent';
+import finalResultCardComponent from '../components/StudentPortal/Pages/FinalResultCardComponent';
+import sectionalResultCardComponent from '../components/StudentPortal/Pages/SectionalResultCardComponent';
 import AttendanceSheet from '../components/StudentPortal/Pages/AttendanceComponent';
 import ProfileComponent from '../components/StudentPortal/Pages/ProfileComponent';
 import Application from '../components/StudentPortal/Pages/ApplicationComponent';
@@ -18,6 +19,7 @@ import NotificationList from '../components/StudentPortal/PartialsComponent/Noti
 import feedback from '../components/CommonGobalComponent/feedbackComponent';
 import customSupport from '../components/CommonGobalComponent/customSupport';
 import AppStudent from '../components/StudentPortal/AppStudentComponent';
+import AssignmentCollecterBlock from '../components/StudentPortal/PartialsComponent/AssignmentCollecterBlock'
 
 //**** ****  Import Guard Router
 import { guardRouteStudent } from './RouterGuard'; //Student Route Guard
@@ -50,13 +52,23 @@ const StudentRoutes = [{
             // *** Assignment Collector Route
             path: 'Assignment-collector',
             component: AssignmentCollector,
+            children: [{
+                    path: 'course',
+                    component: AssignmentCollecterBlock
+                },
+                {
+                    // Assignments files
+                    path: 'files/:id/:slug',
+                    component: AssignmentFiles,
+                    name: 'AssignmentFiles'
+                },
+                {
+                    path: '',
+                    redirect: 'course'
+                }
+            ]
         },
-        {
-            // Assignments files
-            path: 'files',
-            component: AssignmentFiles,
-            name: 'AssignmentFiles'
-        },
+
         {
             // *** Class Routine Route
             path: 'Class-Routine',
@@ -70,10 +82,15 @@ const StudentRoutes = [{
         {
             path: 'Exam-Routine',
             component: ExamRoutine
-        }, {
+        },
+        {
             // *** Exam Routine Route
-            path: 'Result-Card',
-            component: ResultCardComponent
+            path: 'Result-Card-final',
+            component: finalResultCardComponent
+        },
+        {
+            path: 'Result-Card-Sectional',
+            component: sectionalResultCardComponent
         },
         {
             // *** Profile Route
@@ -148,8 +165,8 @@ const StudentRoutes = [{
         },
 
         //    **** Wild Cards
-        { path: '/', redirect: 'dash-board' },
-        { path: '*', redirect: 'dash-board' },
+        // { path: '/', redirect: 'dash-board' },
+        // { path: '*', redirect: 'dash-board' },
 
         // root children end
     ]

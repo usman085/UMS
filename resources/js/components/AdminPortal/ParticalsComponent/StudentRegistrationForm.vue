@@ -264,15 +264,16 @@ export default {
       items:['Parents','etc'],
       program:['BSCS','BSSE','BSIT'],
       sections:['A','B'],
+      feeAdd:false
     }),
 
     computed: {
       computedDateFormatted () {
         return this.formatDate(this.date)
       },
-      feeAdd:function(){
-          return false;
-      }
+    //   feeAdd:function(){
+    //       return false;
+    //   }
     },
 
     watch: {

@@ -178,9 +178,22 @@ export default {
         url: "/student-portal/Exam-Routine"
       },
       {
-        icon: "mdi-calendar-text",
-        text: " Result Card",
-        url: "/student-portal/Result-Card"
+        icon: "mdi-chevron-up",
+        "icon-alt": "mdi-chevron-down",
+        text: "Result Cards",
+        model: false,
+        children: [
+          {
+            text: "Final Exam",
+            icon: "mdi-tooltip-edit ",
+            url: "/student-portal/Result-Card-final"
+          },
+          {
+            text: "Sectional Exam",
+            icon: "mdi-clipboard-text",
+            url: "/student-portal/Result-Card-sectional"
+          }
+        ]
       },
 
       {
