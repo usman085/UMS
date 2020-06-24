@@ -19,12 +19,10 @@
             v-else-if="item.children"
             :key="item.text"
             v-model="item.model"
-            :prepend-icon="
-                            item.model ? item.icon : item['icon-alt']
-                        "
+            :prepend-icon=" item.model ? item.icon : item['icon-alt']"
             append-icon
             class="list-acnhor"
-            color="primary"
+
           >
             <template v-slot:activator>
               <v-list-item-content class="list-acnhor">
@@ -35,25 +33,20 @@
                 </v-list-item-title>
               </v-list-item-content>
             </template>
-            <v-list-item
-              class="list-acnhor body-2"
-              v-for="(child, i) in item.children"
-              :key="i"
-              link
-            >
-              <v-list-item-action v-if="child.icon">
-                <v-icon>{{ child.icon }}</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title class="body-2">
-                  <router-link :to="child.url">
-                    {{
-                    child.text
-                    }}
-                  </router-link>
-                </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
+            <div v-for="(child, i) in item.children" :key="i">
+              <router-link :to="child.url">
+                <v-list-item class="list-acnhor body-2" link>
+                  <v-list-item-action v-if="child.icon">
+                    <v-icon>{{ child.icon }}</v-icon>
+                  </v-list-item-action>
+                  <v-list-item-content>
+                    <v-list-item-title >
+                      <v-item>{{ child.text }}</v-item>
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </router-link>
+            </div>
           </v-list-group>
           <div v-else :key="item.text">
             <router-link :to="item.url">
@@ -189,7 +182,7 @@ export default {
         text: " Result Card",
         url: "/student-portal/Result-Card"
       },
-     
+
       {
         icon: " mdi-email",
         text: "Application",
@@ -231,15 +224,17 @@ export default {
   color: rgba(0, 0, 0, 0.87) !important;
 }
 .v-navigation-drawer__content {
-height: 100% ;
-overflow-y: auto; 
-overflow-x: hidden !important; 
-
- }   
-::-webkit-scrollbar 
-{ 
-    width: 15px; 
-    border: 2px solid blue; 
-} 
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden !important;
+}
+::-webkit-scrollbar {
+  width: 15px;
+  border: 2px solid blue;
+}
+.v-application .primary--text {
+        color:  rgba(0, 0, 0, 0.54) !important;
+    caret-color: rgba(0, 0, 0, 0.54) !important;
+}
 
 </style>

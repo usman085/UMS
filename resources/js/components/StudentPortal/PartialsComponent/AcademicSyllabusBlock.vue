@@ -15,63 +15,61 @@
             <td class="text-center body-1">{{ ite.coursecode }}</td>
             <td class="text-center body-1">{{ ite.coursetitle }}</td>
             <td class="text-center body-1">{{ ite.credithours }}</td>
-            <td class="text-center body-1"  @click="CourseOutlineModal()">
+            <td class="text-center body-1" @click="CourseOutlineModal()">
               <v-icon class="list-acnhor">{{ ite.courseoutline }}</v-icon>
             </td>
           </tr>
         </tbody>
       </template>
     </v-simple-table>
-<div class="mt-7 " >
-    <span v-for="itemm in itemms" :key="itemm.name">
-      <v-menu offset-y>
-        <template v-slot:activator="{ on }">
-          <v-btn class="my-2" v-on="on">{{ itemm.semester }}</v-btn>
-        </template>
-
-        <v-simple-table class="mt-7 elevation-2">
-          <template>
-            <thead>
-              <tr>
-                <th class="text-center">Course Code</th>
-                <th class="text-center">Course Title</th>
-                <th class="text-center">Credit Hours</th>
-                <th class="text-center">Course Outline</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="semester in semesters" :key="semester.name">
-                <td class="text-center">{{ semester.coursecodeS1 }}</td>
-                <td class="text-center">{{ semester.coursetitleS1 }}</td>
-                <td class="text-center">{{ semester.credithoursS1 }}</td>
-                <td class="text-center">
-                  <v-icon class="list-acnhor">{{ semester.courseoutlineS1 }}</v-icon>
-                </td>
-              </tr>
-            </tbody>
+    <div class="mt-7">
+      <span v-for="itemm in itemms" :key="itemm.name">
+        <v-menu offset-y>
+          <template v-slot:activator="{ on }">
+            <v-btn class="my-2" v-on="on">{{ itemm.semester }}</v-btn>
           </template>
-        </v-simple-table>
-      </v-menu>
-    </span>
-</div>
 
- <!-- AssignmentDetailPage -->
+          <v-simple-table class="mt-7 elevation-2">
+            <template>
+              <thead>
+                <tr>
+                  <th class="text-center">Course Code</th>
+                  <th class="text-center">Course Title</th>
+                  <th class="text-center">Credit Hours</th>
+                  <th class="text-center">Scheme of Studies</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="semester in semesters" :key="semester.name">
+                  <td class="text-center">{{ semester.coursecodeS1 }}</td>
+                  <td class="text-center">{{ semester.coursetitleS1 }}</td>
+                  <td class="text-center">{{ semester.credithoursS1 }}</td>
+                  <td class="text-center">
+                    <v-icon class="list-acnhor">{{ semester.courseoutlineS1 }}</v-icon>
+                  </td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </v-menu>
+      </span>
+    </div>
 
-   <CourseOutlinePage></CourseOutlinePage>
+    <!-- AssignmentDetailPage -->
 
-   <!-- AssignmentDetailPage -->
+    <CourseOutlinePage></CourseOutlinePage>
 
-</div>
-
+    <!-- AssignmentDetailPage -->
+  </div>
 </template>
 <script>
-import CourseOutlinePage from './CourseOutlinePage';
+import CourseOutlinePage from "./CourseOutlinePage";
 export default {
   name: "ClassRoutineBlock",
   components: { CourseOutlinePage },
-  methods:{
-CourseOutlineModal:function(){
-      this.$store.dispatch('CourseOutlinePageModalToggle');
+  methods: {
+    CourseOutlineModal: function() {
+      this.$store.dispatch("CourseOutlinePageModalToggle");
     }
   },
   data() {
