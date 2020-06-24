@@ -1,9 +1,12 @@
 <template>
+<div>
+  <AssignmentCollectorTitle/>
+
   <v-card max-width="100%" class="mx-auto mt-5">
     <v-list two-line subheader>
       <v-subheader inset>Courses</v-subheader>
 
-      <v-list-item v-for="item in items" :key="item.title" to="Files">
+      <v-list-item v-for="item in items" :key="item.title" :to="{name:'AssignmentFiles',params:{id :'1',slug:'vcdd'} }">
         <v-list-item-avatar>
           <v-icon :class="[item.iconClass]" v-text="item.icon"></v-icon>
         </v-list-item-avatar>
@@ -24,11 +27,14 @@
     </v-list>
 
   </v-card>
+  </div>
 </template>
 
 <script>
+import AssignmentCollectorTitle from "./AssignmentCollectorTitle";
 export default {
   name: "AssignmentCollecterBlock",
+  components:{AssignmentCollectorTitle},
   data: () => ({
     items: [
       {

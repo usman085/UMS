@@ -191,12 +191,12 @@ export default {
         model: false,
         children: [
           {
-            text: "Final Exam Results",
+            text: "Final Exam",
             icon: "mdi-tooltip-edit ",
             url: "/student-portal/Result-Card-final"
           },
           {
-            text: "Sectional Exam Result",
+            text: "Sectional Exam",
             icon: "mdi-clipboard-text",
             url: "/student-portal/Result-Card-sectional"
           }

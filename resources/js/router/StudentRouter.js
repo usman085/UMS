@@ -19,6 +19,7 @@ import NotificationList from '../components/StudentPortal/PartialsComponent/Noti
 import feedback from '../components/CommonGobalComponent/feedbackComponent';
 import customSupport from '../components/CommonGobalComponent/customSupport';
 import AppStudent from '../components/StudentPortal/AppStudentComponent';
+import AssignmentCollecterBlock from '../components/StudentPortal/PartialsComponent/AssignmentCollecterBlock'
 
 //**** ****  Import Guard Router
 import { guardRouteStudent } from './RouterGuard'; //Student Route Guard
@@ -51,13 +52,23 @@ const StudentRoutes = [{
             // *** Assignment Collector Route
             path: 'Assignment-collector',
             component: AssignmentCollector,
+            children: [{
+                    path: 'course',
+                    component: AssignmentCollecterBlock
+                },
+                {
+                    // Assignments files
+                    path: 'files/:id/:slug',
+                    component: AssignmentFiles,
+                    name: 'AssignmentFiles'
+                },
+                {
+                    path: '',
+                    redirect: 'course'
+                }
+            ]
         },
-        {
-            // Assignments files
-            path: 'files',
-            component: AssignmentFiles,
-            name: 'AssignmentFiles'
-        },
+
         {
             // *** Class Routine Route
             path: 'Class-Routine',
@@ -154,8 +165,8 @@ const StudentRoutes = [{
         },
 
         //    **** Wild Cards
-        { path: '/', redirect: 'dash-board' },
-        { path: '*', redirect: 'dash-board' },
+        // { path: '/', redirect: 'dash-board' },
+        // { path: '*', redirect: 'dash-board' },
 
         // root children end
     ]
