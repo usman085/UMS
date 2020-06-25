@@ -15,14 +15,9 @@
               <a href="#!" class="body-2 black--text">EDIT</a>
             </v-col>
           </v-row>
-          <v-list-group
-            v-else-if="item.children"
-            :key="item.text"
-            v-model="item.model"
-            :prepend-icon=" item.model ? item.icon : item['icon-alt']"
-            append-icon
-            class="list-acnhor"
-          >
+          <v-list-group v-else-if="item.children" :key="item.text" v-model="item.model"
+            :prepend-icon=" item.model ? item.icon : item['icon-alt']" append-icon
+            class="list-acnhor" >
             <template v-slot:activator>
               <v-list-item-content class="list-acnhor">
                 <v-list-item-title>
@@ -32,9 +27,9 @@
                 </v-list-item-title>
               </v-list-item-content>
             </template>
-            <div v-for="(child, i) in item.children" :key="i">
-              <router-link :to="child.url">
-                <v-list-item class="list-acnhor body-2" link>
+            <div>
+           
+                <v-list-item class="list-acnhor body-2"  v-for="(child, i) in item.children" :key="i"  :to="child.url">
                   <v-list-item-action v-if="child.icon">
                     <v-icon>{{ child.icon }}</v-icon>
                   </v-list-item-action>
@@ -44,12 +39,12 @@
                     </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
-              </router-link>
+        
             </div>
           </v-list-group>
-          <div v-else :key="item.text">
-            <router-link :to="item.url">
-              <v-list-item link>
+         
+           
+              <v-list-item v-else :key="item.text"   router :to="item.url"  >
                 <v-list-item-action class="list-acnhor">
                   <v-icon class="list-acnhor">
                     {{
@@ -66,8 +61,8 @@
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-            </router-link>
-          </div>
+          
+          
         </template>
       </v-list>
     </v-navigation-drawer>

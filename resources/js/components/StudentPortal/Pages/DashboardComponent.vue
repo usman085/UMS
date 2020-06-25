@@ -21,7 +21,7 @@
                 url="/student-portal/Attendance-Sheet"
             ></DashBoardHead>
 
-            <line-chart 
+            <line-chart
                 class="mt-4"
                 :data="{
                     '2017-05-13': 0,
@@ -37,6 +37,7 @@
 
             <!-- Component Render-->
         </v-row>
+        
     </div>
 </template>
 
