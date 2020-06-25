@@ -22,7 +22,6 @@
             :prepend-icon=" item.model ? item.icon : item['icon-alt']"
             append-icon
             class="list-acnhor"
-
           >
             <template v-slot:activator>
               <v-list-item-content class="list-acnhor">
@@ -40,7 +39,7 @@
                     <v-icon>{{ child.icon }}</v-icon>
                   </v-list-item-action>
                   <v-list-item-content>
-                    <v-list-item-title >
+                    <v-list-item-title class="text">
                       <v-item>{{ child.text }}</v-item>
                     </v-list-item-title>
                   </v-list-item-content>
@@ -92,22 +91,23 @@
         <v-list>
           <v-list-item>
             <v-list-item-title>
-              <router-link to="/">Setting</router-link>
+              <router-link :to="{ name: 'ProfileComponent' }">
+                <v-icon color="blue">mdi-account</v-icon>
+                <span class="ml-1 mt-1">My Profile</span>
+              </router-link>
             </v-list-item-title>
           </v-list-item>
+
           <v-list-item>
             <v-list-item-title>
-              <router-link to="/">Help!</router-link>
-            </v-list-item-title>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title>
-              <v-btn @click="logout()">Logout</v-btn>
+              <v-btn small color="primary" @click="logout()" class="ml-1">
+                <v-icon class="mr-2">mdi-logout</v-icon>Logout
+              </v-btn>
             </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
-      <v-btn icon>
+      <v-btn icon to="/student-portal/notification">
         <v-icon>mdi-bell</v-icon>
       </v-btn>
       <v-btn icon large>
@@ -220,7 +220,7 @@ export default {
       },
       {
         icon: "mdi-account",
-        text: "Contact Support",
+        text: "Contact Us",
         url: "/student-portal/customer-support"
       }
     ]
@@ -231,23 +231,20 @@ export default {
 <style scoped>
 .v-application a {
   text-decoration: none;
-  color: rgba(0, 0, 0, 0.87) !important;
 }
 .v-list-item__title {
   color: rgba(0, 0, 0, 0.87) !important;
 }
-.v-navigation-drawer__content {
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden !important;
-}
-::-webkit-scrollbar {
-  width: 15px;
-  border: 2px solid blue;
-}
-.v-application .primary--text {
-        color:  rgba(0, 0, 0, 0.54) !important;
-    caret-color: rgba(0, 0, 0, 0.54) !important;
-}
 
+
+.v-application .primary--text {
+  color: rgba(0, 0, 0, 0.54) !important;
+  caret-color: rgba(0, 0, 0, 0.54) !important;
+}
+.v-menu__content {
+  top: 44px !important;
+}
+.text {
+  font-size: 14px !important;
+}
 </style>

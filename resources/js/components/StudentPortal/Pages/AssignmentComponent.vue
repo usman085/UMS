@@ -1,6 +1,6 @@
 <template>
   <div class="assignment-wrapper">
-    <TitleBlock :titleName="titleName"></TitleBlock>
+    <TitleBlock  :titleName="titleName" :subtitle="subtitle"></TitleBlock>
 
     <AssignmentBlock></AssignmentBlock>
   </div>
@@ -15,8 +15,8 @@ export default {
   components: { TitleBlock, AssignmentBlock },
   data: function() {
     return {
-      titleName: "Your's Assignments",
-
+      titleName: "Assignments",
+      subtitle : "assigned assignments detail",
     };
   }
 };

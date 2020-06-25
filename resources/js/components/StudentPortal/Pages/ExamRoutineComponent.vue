@@ -1,17 +1,25 @@
 <template>
-<div>
-<ExamRoutineTitle></ExamRoutineTitle>
-<ExamRoutineBlock></ExamRoutineBlock>
-</div>
+  <div>
+      <TitleBlock :titleName="titleName" :subtitle="subtitle"></TitleBlock>
+    <ExamRoutineBlock></ExamRoutineBlock>
+  </div>
 </template>
 
 <script>
+import TitleBlock from "../PartialsComponent/TitleBlock";
 import ExamRoutineBlock from "../PartialsComponent/ExamRoutineBlock";
-import ExamRoutineTitle from "../PartialsComponent/ExamRoutineTitle";
+
 export default {
-    components:{
-        ExamRoutineBlock,
-        ExamRoutineTitle
-    }
-}
+  components: {
+    ExamRoutineBlock,
+    TitleBlock
+  },
+  data: function() {
+    return {
+      titleName: "Exam Routine",
+      subtitle : "exam schedual"
+    };
+  }
+};
 </script>
+

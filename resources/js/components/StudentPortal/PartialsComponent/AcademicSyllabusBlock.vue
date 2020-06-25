@@ -16,7 +16,7 @@
             <td class="text-center body-1">{{ ite.coursetitle }}</td>
             <td class="text-center body-1">{{ ite.credithours }}</td>
             <td class="text-center body-1" @click="CourseOutlineModal()">
-              <v-icon class="list-acnhor">{{ ite.courseoutline }}</v-icon>
+              <v-icon class="list-acnhor">mdi-eye</v-icon>
             </td>
           </tr>
         </tbody>
@@ -45,7 +45,7 @@
                   <td class="text-center">{{ semester.coursetitleS1 }}</td>
                   <td class="text-center">{{ semester.credithoursS1 }}</td>
                   <td class="text-center">
-                    <v-icon class="list-acnhor">{{ semester.courseoutlineS1 }}</v-icon>
+                    <v-icon class="list-acnhor">mdi-eye</v-icon>
                   </td>
                 </tr>
               </tbody>
@@ -79,25 +79,25 @@ export default {
           coursecode: "CSI-402",
           coursetitle: "DBMS",
           credithours: "4(3-1)",
-          courseoutline: "mdi-eye"
+
         },
         {
           coursecode: "CRI-472",
           coursetitle: "Software Engineering",
           credithours: "4(3-0)",
-          courseoutline: "mdi-eye"
+
         },
         {
           coursecode: "PAK-402",
           coursetitle: "Economics",
           credithours: "3(3-0)",
-          courseoutline: "mdi-eye"
+
         },
         {
           coursecode: "CSI-402",
           coursetitle: "DBMS",
           credithours: "4(3-1)",
-          courseoutline: "mdi-eye"
+
         }
       ],
       semesters: [
@@ -105,25 +105,25 @@ export default {
           coursecodeS1: "CSI-402",
           coursetitleS1: "DBMS",
           credithourS1: "4(3-1)",
-          courseoutlineS1: "mdi-eye"
+
         },
         {
           coursecodeS1: "CRI-472",
           coursetitle: "Software Engineering",
           credithours: "4(3-0)",
-          courseoutline: "mdi-eye"
+
         },
         {
           coursecode: "PAK-402",
           coursetitle: "Economics",
           credithours: "3(3-0)",
-          courseoutline: "mdi-eye"
+
         },
         {
           coursecode: "CSI-402",
           coursetitle: "DBMS",
           credithours: "4(3-1)",
-          courseoutline: "mdi-eye"
+
         }
       ],
       itemms: [{ semester: "semester 2" }, { semester: "semester 3" }]
