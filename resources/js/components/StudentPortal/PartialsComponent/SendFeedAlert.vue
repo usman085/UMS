@@ -7,7 +7,7 @@
         <v-card-title class="headline">Thank You for Visiting Our Student Portal</v-card-title>
 
         <v-card-text>
-          TKindly give us your feedback.Your feedback is important For us
+          Kindly give us your valuable feedback.Thank You!!
         </v-card-text>
 
         <v-card-actions>

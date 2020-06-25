@@ -4,9 +4,9 @@
       <thead>
         <tr>
           <th class="text-center headline ">Date</th>
-          <th class="text-center headline font-weight-black">Time</th>
-          <th class="text-center headline font-weight-black">Subject</th>
-          <th class="text-center headline font-weight-black">Room</th>
+          <th class="text-center headline ">Time</th>
+          <th class="text-center headline ">Subject</th>
+          <th class="text-center headline ">Room</th>
         </tr>
       </thead>
       <tbody>
