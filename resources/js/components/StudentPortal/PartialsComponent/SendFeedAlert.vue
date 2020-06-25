@@ -35,9 +35,9 @@ export default {
         }
     },
     mounted(){
-        setInterval(()=>{
+        setTimeout(()=>{
             this.dialog=true;
-        },180000)
+        },120000)
     }
 }
 </script>
