@@ -17,7 +17,7 @@ export default {
     data: function() {
     return {
       titleName: "Class Routine",
-      subtitle: "clasess schedual"
+      subtitle: "Schedual of Clasess"
     };
   }
 }

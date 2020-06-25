@@ -4,7 +4,7 @@
     <v-card max-width="100%" class="mx-auto">
 
       <v-card-title >Submitted Assignments</v-card-title>
-      <v-card-subtitle>all subjects submitted assignments</v-card-subtitle>
+      <v-card-subtitle>Submitted Assignments of All Courses</v-card-subtitle>
 
     </v-card>
   </div>

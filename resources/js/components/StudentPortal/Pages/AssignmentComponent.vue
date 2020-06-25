@@ -16,7 +16,7 @@ export default {
   data: function() {
     return {
       titleName: "Assignments",
-      subtitle : "assigned assignments detail",
+      subtitle : "Assigned Assignments Detail",
     };
   }
 };

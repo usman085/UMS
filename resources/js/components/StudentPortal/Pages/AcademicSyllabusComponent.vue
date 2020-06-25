@@ -19,8 +19,8 @@ components:{
 
   data: function() {
     return {
-      titleName: "Semester 6 th",
-      subtitle: "scheme of studies"
+      titleName: "Semester 6 ",
+      subtitle: "Scheme of Studies"
     };
   }
 }

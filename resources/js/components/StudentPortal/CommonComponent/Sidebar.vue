@@ -145,6 +145,21 @@ export default {
         url: "/student-portal/dash-board"
       },
       {
+        icon: "mdi-bell",
+        text: "Notifications",
+        url: "/student-portal/notification"
+      },
+         {
+        icon: "mdi-calendar-text",
+        text: "Class Routine",
+        url: "/student-portal/Class-Routine"
+      },
+       {
+        icon: "mdi-book-open-page-variant",
+        text: "Academic Syllabus",
+        url: "/student-portal/Academic-syllabus"
+      },
+      {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
         text: "Assignments",
@@ -162,21 +177,20 @@ export default {
           }
         ]
       },
-      {
-        icon: "mdi-book-open-page-variant",
-        text: "Academic Syllabus",
-        url: "/student-portal/Academic-syllabus"
-      },
-      {
-        icon: "mdi-calendar-text",
-        text: "Class Routine",
-        url: "/student-portal/Class-Routine"
-      },
+     
+   
       {
         icon: "mdi-calendar-text",
         text: "Exam Routine",
         url: "/student-portal/Exam-Routine"
       },
+        
+        {
+        icon: "mdi-account-check",
+        text: "Attendance Sheet",
+        url: "/student-portal/Attendance-Sheet"
+      },
+
       {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
@@ -194,25 +208,12 @@ export default {
             url: "/student-portal/Result-Card-sectional"
           }
         ]
-      },
-
+      },     
       {
         icon: " mdi-email",
         text: "Application",
         url: "/student-portal/application"
-      },
-      {
-        icon: "mdi-account-check",
-        text: "Attendance Sheet",
-        url: "/student-portal/Attendance-Sheet"
-      },
-
-      {
-        icon: "mdi-bell",
-        text: "Notifications",
-        url: "/student-portal/notification"
-      },
-
+      }, 
       {
         icon: "mdi-comment-text-outline",
         text: "Send Feedback",

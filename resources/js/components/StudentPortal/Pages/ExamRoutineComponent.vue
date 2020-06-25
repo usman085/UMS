@@ -17,7 +17,7 @@ export default {
   data: function() {
     return {
       titleName: "Exam Routine",
-      subtitle : "exam schedual"
+      subtitle : "Schedual for Exams"
     };
   }
 };
