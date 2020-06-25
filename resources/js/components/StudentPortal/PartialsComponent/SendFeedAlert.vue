@@ -1,0 +1,43 @@
+<template>
+    <v-dialog
+      v-model="dialog"
+      max-width="590" persistent
+    >
+      <v-card>
+        <v-card-title class="headline">Thank You for Visiting Our Student Portal</v-card-title>
+
+        <v-card-text>
+          TKindly give us your feedback.Your feedback is important For us
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn
+            color="green darken-1"
+            text
+            @click="dialog = false"
+          >
+            OK!
+          </v-btn>
+
+         
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+</template>
+<script>
+export default {
+    name:'sendFeedbackAlert',
+    data:function(){
+        return{
+            dialog:false
+        }
+    },
+    mounted(){
+        setInterval(()=>{
+            this.dialog=true;
+        },180000)
+    }
+}
+</script>

@@ -14,17 +14,19 @@
        </v-container>
     </v-content>
     </v-app>
+    
+    <sendFeedbackAlert/>
 </div>
 </template>
 
 <script>
 import SideBar from './CommonComponent/Sidebar';
-
+import sendFeedbackAlert from './PartialsComponent/SendFeedAlert';
 export default {
 
     name:"AppStudent",
 
-    components:{SideBar}
+    components:{SideBar,sendFeedbackAlert}
 
 }
 </script>

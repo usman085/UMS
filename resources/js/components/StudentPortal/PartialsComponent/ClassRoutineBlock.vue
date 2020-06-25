@@ -17,8 +17,8 @@
                   <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
                   <span class="class-time">{{ timeTable.time | capitalize  }}</span>
                   <br>
-                 <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
-                  <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
+                 <span class="teacher-name text-center">{{ timeTable.subject | capitalize  }}<br></span>
+                  <span class="subject-name">({{ timeTable.teacher | capitalize  }})</span>
 
 
                 </td>
@@ -33,8 +33,8 @@
                   <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
                   <span class="class-time">{{ timeTable.time | capitalize  }}</span>
                   <br>
-                 <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
-                  <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
+                 <span class="teacher-name text-center">{{ timeTable.subject | capitalize  }}<br></span>
+                  <span class="subject-name">({{ timeTable.teacher | capitalize  }})</span>
 
 
                 </td>
@@ -49,8 +49,8 @@
                   <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
                   <span class="class-time">{{ timeTable.time | capitalize  }}</span>
                   <br>
-                 <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
-                  <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
+                 <span class="teacher-name text-center">{{ timeTable.subject | capitalize  }}<br></span>
+                  <span class="subject-name">({{ timeTable.teacher | capitalize  }})</span>
 
 
                 </td>
@@ -65,8 +65,8 @@
                   <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
                   <span class="class-time">{{ timeTable.time | capitalize  }}</span>
                   <br>
-                 <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
-                  <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
+                 <span class="teacher-name text-center">{{ timeTable.subject | capitalize  }}<br></span>
+                  <span class="subject-name">({{ timeTable.teacher | capitalize  }})</span>
 
 
                 </td>
@@ -81,8 +81,8 @@
                   <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
                   <span class="class-time">{{ timeTable.time | capitalize  }}</span>
                   <br>
-                 <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
-                  <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
+                 <span class="teacher-name text-center">{{ timeTable.subject | capitalize  }}<br></span>
+                  <span class="subject-name">({{ timeTable.teacher | capitalize  }})</span>
 
 
                 </td>
@@ -97,8 +97,8 @@
                   <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
                   <span class="class-time">{{ timeTable.time | capitalize  }}</span>
                   <br>
-                 <span class="teacher-name text-center">{{ timeTable.teacher | capitalize  }}<br></span>
-                  <span class="subject-name">({{ timeTable.subject | capitalize  }})</span>
+                 <span class="teacher-name text-center">{{ timeTable.subject | capitalize  }}<br></span>
+                  <span class="subject-name">({{ timeTable.teacher | capitalize  }})</span>
 
 
                 </td>

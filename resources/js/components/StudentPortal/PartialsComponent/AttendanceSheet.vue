@@ -1,104 +1,132 @@
 <template>
+<div>
+    <v-card  class="attendance-card">
+     <v-card-title>Monthly Attendance</v-card-title>
+     <v-card-subtitle>Use Filter to Get preview Attendance Records</v-card-subtitle>
+     <v-divider></v-divider>
+     <fieldset class="form-field-sets">
+       <legend class="form-field-set-name text-center">         
+         <div class="text-center">
+            <v-chip class="ma-2" @click="dialog =true">           
+              <span> {{ monthName +' '+ currentYear }} </span>     
+            </v-chip>
+          </div>
+        </legend>
+        
+         <v-card-text>
   <v-simple-table>
     <template v-slot:default>
       <thead>
         <tr>
           <th class="text-left">Subject Names</th>
-          <th class="text-center" v-for="day in days" :key="day.name">{{ day.day }}</th>
+           <th v-for="day in daysInMonth" :key="day">{{ day }}</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="text-center" v-for="attendance in attendances" :key="attendance.name">
-          <td>{{ attendance.subject }}</td>
-          <td>{{ attendance.present1 }}</td>
-          <td>{{ attendance.present2 }}</td>
-          <td>{{ attendance.present3 }}</td>
-          <td>{{ attendance.present4 }}</td>
-          <td>{{ attendance.present5 }}</td>
-          <td>{{ attendance.present6 }}</td>
-          <td>{{ attendance.present7 }}</td>
-          <td>{{ attendance.present8 }}</td>
-          <td>{{ attendance.present9 }}</td>
-          <td>{{ attendance.present10 }}</td>
-          <td>{{ attendance.present11 }}</td>
-          <td>{{ attendance.present12 }}</td>
-          <td>{{ attendance.present13 }}</td>
-          <td>{{ attendance.present14 }}</td>
-          <td>{{ attendance.present15 }}</td>
-          <td>{{ attendance.present16 }}</td>
-          <td>{{ attendance.present17 }}</td>
-          <td>{{ attendance.present18 }}</td>
-          <td>{{ attendance.present19 }}</td>
-          <td>{{ attendance.present20 }}</td>
-          <td>{{ attendance.present21 }}</td>
-          <td>{{ attendance.present22 }}</td>
-          <td>{{ attendance.present23 }}</td>
-          <td>{{ attendance.present24 }}</td>
-          <td>{{ attendance.present25 }}</td>
-          <td>{{ attendance.present26 }}</td>
-          <td>{{ attendance.present27 }}</td>
-          <td>{{ attendance.present28 }}</td>
-          <td>{{ attendance.present29 }}</td>
-          <td>{{ attendance.present30 }}</td>
-          <td>{{ attendance.present31 }}</td>
-
-        </tr>
+       <tr v-for="(item,index) in item" :key="index">
+         <td>{{item.subject}}</td>
+      </tr>
+         
+        
+        
       </tbody>
     </template>
   </v-simple-table>
+  
+<!-- Modal Box -->
+
+    <v-dialog v-model="dialog" max-width="400">
+      <v-card>
+        <v-card-title class="headline">Select Month & Year?</v-card-title>
+        <v-card-text>
+            <v-select :items="allMonths"  label="Select Month"  v-model="selectedMonth"></v-select>
+            <v-select :items="years" :item-text="selectedYear"  label="Select Years"  v-model="selectedYear"></v-select>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" text @click="selectedDropFilter()">
+            Filter
+          </v-btn>
+          <v-btn color="green darken-1"  text  @click="dialog = false">
+            Cancel
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+     </v-card-text>
+     </fieldset>
+    
+   </v-card>
+  
+</div>
 </template>
 
 <script>
+import * as moment from 'moment'
 export default {
   name: "AttendanceSheet",
- 
-  
+  computed:{
+    allMonths:function(){
+       return moment.months();
+    },
+    monthName:function(){
+      return moment.months(this.currentMonth);
+    },
+    daysInMonth:function(){
+         return moment(this.currentMonth+1, "MM").daysInMonth();
+    },
+    selectedYear:function(){
+      return this.currentYear;
+    }
+  },
   data() {
     return {
-      attendances: [
-        { subject: "urdu", present1:"p",present2:"p", },
-        { subject: "english" },
-        { subject: "Ismal" },
-        { subject: "english" }
-      ],
-      days: [
-        { day: "1" },
-        { day: "2" },
-        { day: "3" },
-        { day: "4" },
-        { day: "5" },
-        { day: "6" },
-        { day: "7" },
-        { day: "8" },
-        { day: "9" },
-        { day: "10" },
-        { day: "11" },
-        { day: "12" },
-        { day: "13" },
-        { day: "14" },
-        { day: "15" },
-        { day: "16" },
-        { day: "17" },
-        { day: "18" },
-        { day: "19" },
-        { day: "20" },
-        { day: "21" },
-        { day: "22" },
-        { day: "23" },
-        { day: "24" },
-        { day: "25" },
-        { day: "26" },
-        { day: "27" },
-        { day: "28" },
-        { day: "29" },
-        { day: "30" },
-        { day: "31" }
-      ]
-    };
-  }
+        selectedMonth:'',
+        dialog:false,
+        currentMonth:moment().month(),
+        currentYear:new Date().getFullYear(),
+        years:['2020','2019','2018'],
+      item:[
+        {subject:'Computer Network'},
+        {subject:'Object Oriented'},
+        {subject:'Software Engineering'},
+        {subject:'Artifical Integien'},
+        {subject:'Web Engieeing'},
+        {subject:'Computer Science'}
+        ]
+
+    }
+  },
+  methods:{
+   selectedDropFilter:function(){
+     this.currentMonth=moment().month(this.selectedMonth).format("M")-1;
+     this.currentYear =this.selectedYear;
+     this.dialog=false;
+   }
+    }
+  
+    
+      
 };
 </script>
 <style  scoped>
+.form-field-sets{
+ 
+
+    padding: 10px;
+    border-radius: 6px;
+    border-color:rgba(0, 0, 0, 0.12);
+    margin:10px;
+}
+.form-field-set-name{
+    font-weight: bold;
+    color:rgba(0, 0, 0, 0.45);
+    padding: 0 5px;
+}
+.attendance-card{
+  padding-bottom:6px ;
+}
 .theme--light.v-data-table tbody tr td {
   border: thin solid rgba(0, 0, 0, 0.12);
 }

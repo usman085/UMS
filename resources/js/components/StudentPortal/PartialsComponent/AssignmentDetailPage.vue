@@ -25,8 +25,14 @@
             </v-toolbar-title>
 
             <v-divider class="mx-4" inset vertical></v-divider>
-            <v-spacer></v-spacer>
+           
 
+            <v-toolbar-items  class="">
+              
+
+              <span class="marks text-centertext-center"> Define Constructor</span>
+            </v-toolbar-items>
+            <v-spacer></v-spacer>
             <v-toolbar-items  class=" float-right">
               <v-divider inset vertical></v-divider>
 
@@ -45,11 +51,30 @@
              <p>Please Read the following instruction carefully before Submitting Assignment.</p>
              <nav>
                <ul>
-                 <li></li>
+                 <li>The Assignment is Submitted after due date.</li>
+                 <li>The Submitted assignment does not open or file is corrupt.</li>
+                 <li>All Types of plagiarism are strictly prohibited.</li>
+                 <li>This is a simple assignment so do not cheat.</li>
                </ul>
              </nav>
+             
              </div>
            </fieldset>
+           </v-container>
+           <v-divider></v-divider>
+           <v-container fluid>
+             <v-row>
+               <v-col cols="12">
+                <h4>Assignment :</h4> 
+                <span class="assignment-detail">It is a long established fact that a reader will be distracted by the readable content of 
+                  a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less
+                   normal distribution of letters, as opposed to using 'Content here, content here', making it 
+                   look like readable English. Many desktop publishing packages and web page editors now use
+                    Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web 
+                    sites still in their infancy. Various versions have evolved over the years, sometimes by accident,
+                     sometimes on purpose (injected humour and the like).</span>
+               </v-col>
+             </v-row>
            </v-container>
       </v-card>
     </v-dialog>
@@ -84,6 +109,9 @@ export default {
 }
 .instruction-block{
   font-size:12px ;
+}
+.assignment-detail{
+  font-size: 14px;
 }
 .instruction-block ul li{
   list-style-type: square;
