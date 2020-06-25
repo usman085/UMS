@@ -42,7 +42,7 @@
            </v-row>
 
         </v-container>
-     <badWord/>
+     <badWord :badWords="badWords"/>
     </div>
 </template>
 
@@ -57,6 +57,7 @@ export default {
     components:{badWord},
     data(){
         return{
+             badWords:'',
                  editor: ClassicEditor,
                 editorData: '<p><b>Dear Sir/Mam.</b></p>',
                 items: ['Admin', 'Account Office', 'HOD', 'Libray'],
@@ -68,7 +69,7 @@ export default {
                 submitBtn:false,
                 applictionTitle:''
        }
-    },
+    }, 
     methods:{
         checkWords:function(data){
                var banned = ["lun", "apple", "banana"];

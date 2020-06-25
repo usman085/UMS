@@ -17,6 +17,7 @@
                 </div>
             </div>
             <!--form-wraper-title-->
+          <v-form v-model="valid">
             <div class="form-rating">
                 <div class="rating">
                     <span class="rating-head"
@@ -25,7 +26,9 @@
                             <v-rating
                                 v-model="rating"
                                 :length="5"
+                               
                                 color="#0091ea"
+                               
                                 background-color="grey lighten-1"
                             ></v-rating>
                             <div>
@@ -44,18 +47,13 @@
             <!--form-rating-->
             
             <v-divider></v-divider>
-        
+          
             <div class="descption-box-wrapper">
                 <v-container>
                 <v-row>
                 <v-col cols="12" sm="12">
-                    <v-text-field
-                       
-                        label="Your Name"
-                           
-                    
-                     
-                    ></v-text-field>
+                    <v-text-field label="Your Name" required  :rules="nameRules" @blur="checkWords(name)" v-model="name"
+                        ></v-text-field>
                 </v-col>
             </v-row>
             </v-container>
@@ -64,8 +62,12 @@
                         >Describe your experience here.</span
                     >
                     <ckeditor
+                    
+                     @blur="checkWords(editorData)" 
                         :editor="editor"
                         v-model="editorData"
+                         :rules="nameRules"
+                         required
                         :config="editorConfig"
                     ></ckeditor>
                 </div>
@@ -73,9 +75,12 @@
             </div>
             <!-- descption-box-wrapper -->
             <div class="my-2 feedback-button text-center">
-                <v-btn color="primary">Send Feedback</v-btn>
+                
+                <v-btn color="primary" :disabled="!valid || badWordFind" >Send Feedback</v-btn>
             </div>
+            </v-form>
         </v-card>
+        <badWord :badWords='badWordFiltered'/>
     </div>
     <!--feed-back-form-wrapper-->
 </template>
@@ -84,19 +89,48 @@
 import Vue from "vue";
 import CKEditor from "@ckeditor/ckeditor5-vue";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import badWord from '../StudentPortal/PartialsComponent/BadWordAlert';
 Vue.use(CKEditor);
 export default {
     name: "feedback",
+    components:{
+        badWord
+    },
     data: function() {
         return {
+             nameRules: [
+                 v => !!v || 'Name is required',
+                 v => v.length <= 15 || 'Name must be less than 15 characters',
+                ],
+            badWordFiltered:'',
+            valid:true,
+            name:'',
             rating: 0,
             editor: ClassicEditor,
             editorData: "<p></p>",
+            badWordFind:false,
             editorConfig: {
                 // The configuration of the editor.
             }
         };
+    },
+    methods:{
+        checkWords:function(data){
+                var banned = ["lun", "apple", "banana"];
+                let words=data.toLowerCase();
+    		for (var i = 0; i < banned.length; i++) {
+    			if (words.includes(banned[i])) {
+                    this.badWordFiltered=banned[i]; 
+                    this.$store.dispatch('BadWordModalToggle');
+                    this.badWordFind=true;   
+                    break;   
+                }else{
+                    this.badWordFind=false;
+                }
+    		}
+        }
     }
+
 };
 </script>
 <style scoped>

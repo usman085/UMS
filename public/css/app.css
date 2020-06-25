@@ -25283,3 +25283,7 @@ html.overflow-y-hidden {
   font-family: "Allerta";
 }
 
+.ck-file-dialog-button {
+  display: none;
+}
+
