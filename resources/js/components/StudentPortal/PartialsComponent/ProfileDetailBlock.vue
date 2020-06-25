@@ -68,7 +68,7 @@
         <v-row>
           <v-col cols="4" xs="8" sm="4" md="5">
             <div class="ml-4">
-              <p class="body-1">Registeration #</p>
+              <p class="body-1">Religion</p>
             </div>
           </v-col>
 
@@ -80,7 +80,7 @@
 
           <v-col cols="5" xs="8" sm="6" md="6">
             <div class="ml-4">
-              <p class="body-1">GCUF-2017-085345</p>
+              <p class="body-1">Islam</p>
             </div>
           </v-col>
         </v-row>
@@ -88,7 +88,7 @@
         <v-row>
           <v-col cols="4" xs="8" sm="4" md="5">
             <div class="ml-4">
-              <p class="body-1">Session</p>
+              <p class="body-1">Date of Birth</p>
             </div>
           </v-col>
 
@@ -100,7 +100,7 @@
 
           <v-col cols="5" xs="8" sm="6" md="6">
             <div class="ml-4">
-              <p class="body-1">2017 - 2021</p>
+              <p class="body-1">March 10,1999</p>
             </div>
           </v-col>
         </v-row>
@@ -108,7 +108,7 @@
         <v-row>
           <v-col cols="4" xs="8" sm="4 " md="5">
             <div class="ml-4">
-              <p class="body-1">Current Semester</p>
+              <p class="body-1">Gender</p>
             </div>
           </v-col>
           <v-col cols="1">

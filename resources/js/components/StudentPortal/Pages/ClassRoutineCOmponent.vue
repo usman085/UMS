@@ -1,19 +1,25 @@
 <template>
 <div>
-<ClassRoutineTitle></ClassRoutineTitle>
+  <TitleBlock  :titleName="titleName" :subtitle="subtitle"></TitleBlock>
 <ClassRoutineBlock></ClassRoutineBlock>
 </div>
 </template>
 
 <script>
 import ClassRoutineBlock from "../PartialsComponent/ClassRoutineBlock";
-import ClassRoutineTitle from "../PartialsComponent/ClassRoutineTitle";
+import TitleBlock from "../PartialsComponent/TitleBlock";
 export default {
     components:{
         ClassRoutineBlock,
-        ClassRoutineTitle
+        TitleBlock
 
-    }
+    },
+    data: function() {
+    return {
+      titleName: "Class Routine",
+      subtitle: "clasess schedual"
+    };
+  }
 }
 </script>
 

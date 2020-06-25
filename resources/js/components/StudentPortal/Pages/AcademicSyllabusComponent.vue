@@ -1,20 +1,27 @@
 <template>
 <div>
+    <TitleBlock  :titleName="titleName" :subtitle="subtitle"></TitleBlock>
 
-<AcademicSyllabusTitle></AcademicSyllabusTitle>
 <AcademicSyllabusBlock></AcademicSyllabusBlock>
 
-</div> 
+</div>
 </template>
 <script>
-import AcademicSyllabusTitle from '../PartialsComponent/AcademicSyllabusTitle';
+import TitleBlock from "../PartialsComponent/TitleBlock";
 import AcademicSyllabusBlock from '../PartialsComponent/AcademicSyllabusBlock';
 
 export default {
 components:{
-    AcademicSyllabusTitle,
+    TitleBlock,
     AcademicSyllabusBlock,
 
-}
+},
+
+  data: function() {
+    return {
+      titleName: "Semester 6 th",
+      subtitle: "scheme of studies"
+    };
+  }
 }
 </script>

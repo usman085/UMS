@@ -1,7 +1,11 @@
 <template>
   <div>
-    <div>
-      <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
+    <div class="pt-5 pl-5">
+      <p>
+        <router-link :to="{name:'AssignmentCourses'}">Course</router-link>
+        <span class="ml-2 mr-2">>></span>
+        <span class="blue--text">OOP</span>
+      </p>
     </div>
 
     <v-list-item-content>
@@ -19,7 +23,16 @@
 
       <v-list-item-action>
         <v-btn icon>
-          <v-icon color="grey lighten-1">mdi-information</v-icon>
+          <v-icon color="grey lighten-1">
+            mdi-eye
+            
+          </v-icon>
+        </v-btn>
+        <v-btn icon>
+          <v-icon color="grey lighten-1">
+            mdi-arrow-down-bold-circle
+            <span class="ml-2">Preview</span>
+          </v-icon>
         </v-btn>
       </v-list-item-action>
     </v-list-item>
@@ -58,3 +71,8 @@ export default {
   })
 };
 </script>
+<style scoped>
+.v-application a {
+  text-decoration: none;
+}
+</style>

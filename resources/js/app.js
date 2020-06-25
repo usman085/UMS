@@ -1,15 +1,18 @@
 require('./bootstrap');
-// *** Import Vue Instance 
+// *** Import Vue Instance
 import Vue from 'vue';
 
-// *** Import Vuetify 
+// *** Import Vuetify
 import vuetify from './vuetify';
 
-// *** Import Root Router 
+// *** Import Root Router
 import router from './router/router';
 
 // *** Import Vuex Store
 import store from './Store/store';
+
+import Chart from './chart/chart';
+
 
 // *** Import Root Component
 // *** *** This Component Is responsible For All Components Rendering
@@ -26,8 +29,9 @@ new Vue({
     el: '#app', // *** Root Element
     vuetify, // *** Passing Vuetify Object
     store, // *** Store Object --- Vuex
-    router, // *** All Routers Pass 
-    // **** *** Root Components  
+    router, // *** All Routers Pass
+    Chart,
+    // **** *** Root Components
     components: {
         // *** AppComponent Root Component
         'appcomponent': MainAppComponent

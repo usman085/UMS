@@ -54,7 +54,8 @@ const StudentRoutes = [{
             component: AssignmentCollector,
             children: [{
                     path: 'course',
-                    component: AssignmentCollecterBlock
+                    component: AssignmentCollecterBlock,
+                    name: 'AssignmentCourses'
                 },
                 {
                     // Assignments files
@@ -165,8 +166,8 @@ const StudentRoutes = [{
         },
 
         //    **** Wild Cards
-        // { path: '/', redirect: 'dash-board' },
-        // { path: '*', redirect: 'dash-board' },
+        { path: '/', redirect: 'dash-board' },
+        { path: '*', redirect: 'dash-board' },
 
         // root children end
     ]
