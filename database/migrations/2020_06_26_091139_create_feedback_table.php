@@ -17,7 +17,7 @@ class CreateFeedbackTable extends Migration
             $table->bigIncrements('id');
             $table->integer('rating');
             $table->string('name',40)->notNullable();
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

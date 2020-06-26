@@ -13,7 +13,7 @@
         <tr v-for="item in items" :key="item.name">
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
-        <td>{{ item.description}}</td>
+        <td v-html="item.description"></td>
         <td>{{ item.rating }}</td>
         </tr>
       </tbody>
@@ -38,3 +38,8 @@
     }
   }
 </script>
+<style scoped>
+td{
+  border: 1px solid #eee;
+}
+</style>
