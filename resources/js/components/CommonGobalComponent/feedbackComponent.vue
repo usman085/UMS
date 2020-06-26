@@ -76,7 +76,7 @@
             <!-- descption-box-wrapper -->
             <div class="my-2 feedback-button text-center">
                 
-                <v-btn color="primary" :disabled="!valid || badWordFind" >Send Feedback</v-btn>
+                <v-btn color="primary" :disabled="!valid || badWordFind"  >Send Feedback</v-btn>
             </div>
             </v-form>
         </v-card>
@@ -116,8 +116,8 @@ export default {
     },
     methods:{
         checkWords:function(data){
-                var banned = ["lun", "apple", "banana"];
-                let words=data.toLowerCase();
+            var banned = ["lun","fuck","lora","phudi","bond","motherFucker"];
+            let words=data.toLowerCase();
     		for (var i = 0; i < banned.length; i++) {
     			if (words.includes(banned[i])) {
                     this.badWordFiltered=banned[i]; 
@@ -130,6 +130,7 @@ export default {
     		}
         }
     }
+
 
 };
 </script>
