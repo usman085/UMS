@@ -26,9 +26,9 @@
                             <v-rating
                                 v-model="rating"
                                 :length="5"
-                               
+
                                 color="#0091ea"
-                               
+
                                 background-color="grey lighten-1"
                             ></v-rating>
                             <div>
@@ -45,9 +45,9 @@
                 <!--rating-->
             </div>
             <!--form-rating-->
-            
+
             <v-divider></v-divider>
-          
+
             <div class="descption-box-wrapper">
                 <v-container>
                 <v-row>
@@ -62,8 +62,8 @@
                         >Describe your experience here.</span
                     >
                     <ckeditor
-                    
-                     @blur="checkWords(editorData)" 
+
+                     @blur="checkWords(editorData)"
                         :editor="editor"
                         v-model="editorData"
                          :rules="nameRules"
@@ -75,8 +75,8 @@
             </div>
             <!-- descption-box-wrapper -->
             <div class="my-2 feedback-button text-center">
-                
-                <v-btn color="primary" :disabled="!valid || badWordFind"  >Send Feedback</v-btn>
+
+                <v-btn color="primary" @click="sendfeedback()" :disabled="!valid || badWordFind"  >Send Feedback</v-btn>
             </div>
             </v-form>
         </v-card>
@@ -96,7 +96,7 @@ export default {
     components:{
         badWord
     },
-    data: function() {
+    data: ()=> {
         return {
              nameRules: [
                  v => !!v || 'Name is required',
@@ -115,15 +115,28 @@ export default {
         };
     },
     methods:{
+        sendfeedback :()=>{
+            //   axios.post('http://localhost:8000/api/feedback',{ 
+            //         'name':this.name,
+            //         'rating':this.rating,
+            //         'description':this.editorData
+            //    })
+            //   .then(data=>
+            //       console.log(data)
+
+            //   )
+            //   .catch()
+  console.log(this.name)
+        },
         checkWords:function(data){
             var banned = ["lun","fuck","lora","phudi","bond","motherFucker"];
             let words=data.toLowerCase();
     		for (var i = 0; i < banned.length; i++) {
     			if (words.includes(banned[i])) {
-                    this.badWordFiltered=banned[i]; 
+                    this.badWordFiltered=banned[i];
                     this.$store.dispatch('BadWordModalToggle');
-                    this.badWordFind=true;   
-                    break;   
+                    this.badWordFind=true;
+                    break;
                 }else{
                     this.badWordFind=false;
                 }
