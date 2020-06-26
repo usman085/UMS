@@ -18,5 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::Post('/feedback',function(Request $request){
+    
       return $request->all();
 });

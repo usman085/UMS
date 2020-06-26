@@ -17,9 +17,12 @@
                 </div>
             </div>
             <!--form-wraper-title-->
-          <v-form v-model="valid">
+          
             <div class="form-rating">
                 <div class="rating">
+                     <v-alert type="error" v-if="error">
+                                 Select Rating Stars
+                               </v-alert>
                     <span class="rating-head"
                         >How was your experiance?
                         <div class="rating-star">
@@ -37,7 +40,8 @@
                                 >
                                 <span class="font-weight-bold">
                                     {{ rating }}
-                                </span>
+                                </span><br/>
+                               
                             </div>
                         </div>
                     </span>
@@ -47,7 +51,7 @@
             <!--form-rating-->
 
             <v-divider></v-divider>
-
+        <v-form v-model="valid" ref="form">
             <div class="descption-box-wrapper">
                 <v-container>
                 <v-row>
@@ -81,6 +85,25 @@
             </v-form>
         </v-card>
         <badWord :badWords='badWordFiltered'/>
+         <v-snackbar
+         top=""
+         right=""
+      v-model="snackbar"
+      color="success"
+    >
+     Your Feedback is send successfully!
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="pink"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
     </div>
     <!--feed-back-form-wrapper-->
 </template>
@@ -96,15 +119,16 @@ export default {
     components:{
         badWord
     },
-    data: ()=> {
+    data: function() {
         return {
              nameRules: [
-                 v => !!v || 'Name is required',
-                 v => v.length <= 15 || 'Name must be less than 15 characters',
+                 v => !!v || 'Name is required'
                 ],
             badWordFiltered:'',
+            snackbar:false,
             valid:true,
             name:'',
+            error:false,
             rating: 0,
             editor: ClassicEditor,
             editorData: "<p></p>",
@@ -114,19 +138,30 @@ export default {
             }
         };
     },
-    methods:{
-        sendfeedback :()=>{
-            //   axios.post('http://localhost:8000/api/feedback',{ 
-            //         'name':this.name,
-            //         'rating':this.rating,
-            //         'description':this.editorData
-            //    })
-            //   .then(data=>
-            //       console.log(data)
 
-            //   )
-            //   .catch()
-  console.log(this.name)
+    methods:{
+        sendfeedback :function(){
+            
+            if(this.rating > 0){
+                this.error=false;
+                this.valid=false;
+              axios.post('http://localhost:8000/api/feedback',{ 
+                    'name':this.name,
+                    'rating':this.rating,
+                    'description':this.editorData
+               })
+              .then(data=>{
+                  this.snackbar=true;
+                  this.valid=true;
+                  this.$refs.form.reset();
+                  this.editorData='';
+                  this.rating=0;
+                  
+              })
+              .catch();}
+              else{
+                  this.error=true;
+              }
         },
         checkWords:function(data){
             var banned = ["lun","fuck","lora","phudi","bond","motherFucker"];
