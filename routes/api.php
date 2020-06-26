@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::Post('/feedback','FeedbackController@store');
+Route::Get('/feedbackView','FeedbackController@view');

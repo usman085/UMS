@@ -21,11 +21,14 @@ import customSupport from '../components/CommonGobalComponent/customSupport';
 import AppStudent from '../components/StudentPortal/AppStudentComponent';
 import AssignmentCollecterBlock from '../components/StudentPortal/PartialsComponent/AssignmentCollecterBlock'
 
+// temporary route
+import feedBackView from '../components/temporaryPage/feedbackDescriptionView';
 //**** ****  Import Guard Router
 import { guardRouteStudent } from './RouterGuard'; //Student Route Guard
 
 // **** **** Student Portal Routes & Child Routes Components Paths
 const StudentRoutes = [{
+
     /* *** Admin Portal Router With Guard Function  *** */
     path: '/student-portal',
     component: AppStudent,
@@ -37,6 +40,10 @@ const StudentRoutes = [{
             // *** Dash Board Route
             path: 'dash-board',
             component: StudentDashboard
+        },
+        {
+            path: 'FeedBackDescriptionView',
+            component: feedBackView
         },
         {
             // *** Academic Syllabus Route

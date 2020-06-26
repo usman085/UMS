@@ -13,4 +13,10 @@ class FeedbackController extends Controller
         $Feedback = Feedback::create($request->all());
        
     }
+    public function  view()
+    {
+
+        return Feedback::all();
+       
+    }
 }
