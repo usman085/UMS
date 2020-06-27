@@ -18,8 +18,12 @@
           </v-list-item>
           <v-list-item>
             <v-list-item-content>
-              <v-list-item-title><span cl>Course Name </span>: DBMS</v-list-item-title>
-              <v-list-item-title>Course Structure: Lectures: 3, Labs: 1 Credit Hours: 4</v-list-item-title>
+              <v-list-item-title>
+                <span cl>Course Name</span>: DBMS
+              </v-list-item-title>
+              <v-list-item-title>
+                <span>Structure: Lectures: 3, Labs: 1 Credit Hours: 4</span>
+              </v-list-item-title>
 
               <v-list-item-title>Prerequisites: None</v-list-item-title>
             </v-list-item-content>
@@ -36,20 +40,17 @@
           </v-list-item>
           <v-list-item>
             <v-list-item-content>
-              <v-list-item-title>Course Outline: </v-list-item-title>
+              <v-list-item-title>Course Outline:</v-list-item-title>
               <v-list-item-subtitle>Overview of computers and programming. Overview of language for e.g. C language C. Basics of structured and Modular programming. Basic Algorithms and problem solving, development of basic algorithms, analyzing problem, designing solution, testing designed solution. Fundamental programming constructs, translation of algorithms to programs, data types, control structures, functions, arrays, records, files, testing programs</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
           <v-list-item>
             <v-list-item-content>
-              <v-list-item-title>Reference Material: </v-list-item-title>
-              <v-list-item-subtitle>1. Problem Solving and Program Design in C / 6E Hanly & Koffman   Addison-Wesley | Published: 02/06/2009 ISBN-10: 0321535421 | ISBN-13: 9780321535429
-  </v-list-item-subtitle>
-            <v-list-item-subtitle>2. C How to Program, 5/E   (Harvey & Paul) Deitel & Deitel, ISBN-10: 0132404168 ISBN13: 9780132404167 Publisher: Prentice Hall Copyright: 2007</v-list-item-subtitle>
+              <v-list-item-title>Reference Material:</v-list-item-title>
+              <v-list-item-subtitle>1. Problem Solving and Program Design in C / 6E Hanly & Koffman Addison-Wesley | Published: 02/06/2009 ISBN-10: 0321535421 | ISBN-13: 9780321535429</v-list-item-subtitle>
+              <v-list-item-subtitle>2. C How to Program, 5/E (Harvey & Paul) Deitel & Deitel, ISBN-10: 0132404168 ISBN13: 9780132404167 Publisher: Prentice Hall Copyright: 2007</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
-
-
         </v-list>
       </v-card>
     </v-dialog>
@@ -71,33 +72,18 @@ export default {
 </script>
 
 <style scoped>
-.ref-doc-wrapper {
-  width: 50%;
+
+.v-list--three-line .v-list-item .v-list-item__subtitle, .v-list-item--three-line .v-list-item__subtitle {
+    white-space: initial;
+    -webkit-line-clamp: unset !important;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
 }
-.ref-doc {
-  width: 50%;
-  font-size: 11px;
-  color: rgba(0, 0, 0, 0.6);
-  padding: 5px;
-  background: rgba(200, 200, 200, 1);
-  font-weight: bold;
+.v-list-item__title, .v-list-item__subtitle {
+    flex: 1 1 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: unset !important;
 }
-.list-detail {
-  color: rgba(0, 0, 0, 0.6);
-  line-height: 1.2;
-  font-size: 0.875rem;
-}
-.download-file {
-  text-align: right;
-  font-size: 11px;
-  padding-left: 10px;
-  padding-right: 5px;
-}
-.mdi-arrow-collapse-down,
-.mdi-arrow-collapse-down:hover {
-  text-align: right;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: bold;
-}
+
 </style>

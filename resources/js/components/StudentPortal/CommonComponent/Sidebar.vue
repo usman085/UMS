@@ -28,7 +28,7 @@
               </v-list-item-content>
             </template>
             <div>
-           
+
                 <v-list-item class="list-acnhor body-2"  v-for="(child, i) in item.children" :key="i"  :to="child.url">
                   <v-list-item-action v-if="child.icon">
                     <v-icon>{{ child.icon }}</v-icon>
@@ -39,11 +39,11 @@
                     </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
-        
+
             </div>
           </v-list-group>
-         
-           
+
+
               <v-list-item v-else :key="item.text"   :to="item.url"  >
                 <v-list-item-action class="list-acnhor">
                   <v-icon class="list-acnhor">
@@ -61,8 +61,8 @@
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
-          
-          
+
+
         </template>
       </v-list>
     </v-navigation-drawer>
@@ -182,14 +182,14 @@ export default {
         text: "Attendance Sheet",
         url: "/student-portal/Attendance-Sheet"
       },
-   
+
     {
         icon: "mdi-calendar-text",
         text: "Exam Routine",
         url: "/student-portal/Exam-Routine"
       },
-        
-      
+
+
 
       {
         icon: "mdi-chevron-up",
@@ -203,13 +203,13 @@ export default {
             url: "/student-portal/Result-Card-final"
           },
           {
-            text: "Sectional Exam",
+            text: "Mid Term Exam",
             icon: "mdi-clipboard-text",
             url: "/student-portal/Result-Card-sectional"
           }
         ]
-      },     
-     
+      },
+
       {
         icon: "mdi-comment-text-outline",
         text: "Send Feedback",
@@ -243,5 +243,9 @@ export default {
 }
 .text {
   font-size: 14px !important;
+}
+.v-list .v-list-item--active {
+    color: inherit;
+    background-color: #1565c02e;
 }
 </style>
