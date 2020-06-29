@@ -4,6 +4,8 @@
      <v-card-title>Monthly Attendance</v-card-title>
      <v-card-subtitle>Use Filter to Get preview Attendance Records</v-card-subtitle>
      <v-divider></v-divider>
+      <v-row>
+          <v-col cols="12">
      <fieldset class="form-field-sets">
        <legend class="form-field-set-name text-center">         
          <div class="text-center">
@@ -14,6 +16,7 @@
         </legend>
         
          <v-card-text>
+          
   <v-simple-table>
     <template v-slot:default>
       <thead>
@@ -32,6 +35,7 @@
       </tbody>
     </template>
   </v-simple-table>
+  
   
 <!-- Modal Box -->
 
@@ -56,6 +60,8 @@
     </v-dialog>
      </v-card-text>
      </fieldset>
+     </v-col>
+        </v-row>
     
    </v-card>
   
