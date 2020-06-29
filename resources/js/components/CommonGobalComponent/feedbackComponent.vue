@@ -7,8 +7,8 @@
             <span class="head-title">Send us your Feedback !</span>
           </v-card-title>
           <v-card-subtitle>
-            <p class="form-card-subtitle">Do you have a suggestion or found some bugs ?</p>
-            <p class="form-card-subtitle">Let us know in the field below.</p>
+            <p class="form-card-subtitle">Do you have a suggestion or found some bugs?</p>
+            <p class="form-card-subtitle">Please Let us know .</p>
           </v-card-subtitle>
         </div>
       </div>

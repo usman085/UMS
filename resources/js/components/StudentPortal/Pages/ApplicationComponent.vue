@@ -48,6 +48,13 @@ export default {
     cursor: pointer;
 
 }
+
+@media screen and (max-width:341px) {
+.v-application .ma-2 {
+    font-size: 12px;
+    margin-right: 0 !important;
+}
+}
 </style>
 
 

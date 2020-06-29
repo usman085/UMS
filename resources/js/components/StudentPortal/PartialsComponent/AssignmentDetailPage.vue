@@ -6,16 +6,14 @@
           <v-btn
             icon
             dark
-            @click="
-                            $store.dispatch('AssignmentDetailPageModalToggle')
-                        "
+            @click="$store.dispatch('AssignmentDetailPageModalToggle')"
           >
             <v-icon>mdi-close</v-icon>
           </v-btn>
           <v-row>
             <v-toolbar-title class="subject text-center">Object Oriented Programming</v-toolbar-title>
 
-            <v-item></v-item>
+            
             <v-spacer></v-spacer>
 
             <span class="mr-6">Assignment # 2</span>

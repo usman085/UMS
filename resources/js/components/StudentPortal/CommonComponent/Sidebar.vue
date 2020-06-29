@@ -95,7 +95,7 @@
 
           <v-list-item>
             <v-list-item-title>
-              <v-btn small color="primary" @click="logout()" class="ml-1">
+              <v-btn small color="primary" class="ml-1">
                 <v-icon class="mr-2">mdi-logout</v-icon>Logout
               </v-btn>
             </v-list-item-title>

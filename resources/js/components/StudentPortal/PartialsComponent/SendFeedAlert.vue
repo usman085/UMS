@@ -28,3 +28,13 @@ export default {
   }
 };
 </script>
+<style scoped>
+.headline{
+      word-break: break-word;
+}
+@media screen and (max-width: 566px) {
+  .headline {
+    font-size: 21px !important;
+  }
+}
+</style>

@@ -36,7 +36,7 @@
               <v-select :items="allMonths" label="Select Month" v-model="selectedMonth"></v-select>
               <v-select
                 :items="years"
-                :item-text="selectedYear"
+
                 label="Select Years"
                 v-model="selectedYear"
               ></v-select>
@@ -68,13 +68,12 @@ export default {
     daysInMonth: function() {
       return moment(this.currentMonth + 1, "MM").daysInMonth();
     },
-    selectedYear: function() {
-      return this.currentYear;
-    }
+   
   },
   data() {
     return {
       selectedMonth: "",
+      selectedYear:new Date().getFullYear(),
       dialog: false,
       currentMonth: moment().month(),
       currentYear: new Date().getFullYear(),

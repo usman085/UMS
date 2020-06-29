@@ -155,4 +155,9 @@ export default {
 .hover{
     cursor: pointer;
 }
+@media screen and (max-width:770px) {
+.v-application .headline {
+    font-size: 20px !important;
+    }
+}
 </style>

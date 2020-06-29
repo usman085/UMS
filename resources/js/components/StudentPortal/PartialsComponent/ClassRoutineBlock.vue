@@ -347,9 +347,10 @@ export default {
 .subject-name {
     text-align: left;
 }
-@media  only screen and (max-width:560px){
-.v-data-table td, .v-data-table th {
-    padding: 0 4px;
+@media  only screen and (max-width:700px){
+.v-data-table td {
+    min-width:200px !important;
 }
 }
+
 </style>

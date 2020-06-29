@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-// **** ****  Login Component Import **** **** **** 
+// **** ****  Login Component Import **** **** ****
 
 import login from '../components/LoginComponent/LoginComponent';
 
 
-// **** ****  Portal Router Import **** **** **** **** 
+// **** ****  Portal Router Import **** **** **** ****
 
 import AdminRoutes from './AdminRouter';
 import StudentRoutes from './StudentRouter';
@@ -24,22 +24,22 @@ Vue.use(VueRouter);
 
 // **** **** Root Components Paths
 
-const routes = [{
-        /* *** Login Router With Guard Function  *** */
-        path: '/login',
-        component: login,
-        name: 'login',
-        beforeEnter: checkCurrentLogin
-    },
+const routes = [
+    /* *** Login Router With Guard Function  *** */
+    // path: '/login',
+    // component: login,
+    // name: 'login',
+    // beforeEnter: checkCurrentLogin
+
     // **** Main Root Wild Card
     {
 
         path: '/',
-        redirect: '/login'
+        redirect: '/student-portal/dash-board'
     },
     {
         path: '*',
-        redirect: '/login'
+        redirect: '/student-portal/dash-board'
     }
 ];
 
@@ -58,12 +58,12 @@ Array.prototype.push.apply(routes, TeacherRoutes);
 
 
 //****  Pass routes to Vue Router  ****/
-// **** Use History Mode 
+// **** Use History Mode
 const router = new VueRouter({
     mode: 'history',
     routes
 });
 
 
-// *** Export Router Object 
+// *** Export Router Object
 export default router;
