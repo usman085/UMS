@@ -276,7 +276,7 @@ export default {
                     time: "9:00-10:00",
                     classRoom: "cr3"
                 },
-               
+
             ]
         };
     },
@@ -347,4 +347,10 @@ export default {
 .subject-name {
     text-align: left;
 }
+@media  only screen and (max-width:700px){
+.v-data-table td {
+    min-width:200px !important;
+}
+}
+
 </style>

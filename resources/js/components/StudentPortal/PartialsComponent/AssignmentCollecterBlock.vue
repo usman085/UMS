@@ -41,19 +41,19 @@ export default {
         icon: "mdi-folder",
         iconClass: "grey lighten-1 white--text",
         title: "Object Oriented Programming",
-        subtitle: "Jan 9, 2014"
+        subtitle: "Jan 9, 2020"
       },
       {
         icon: "mdi-folder",
         iconClass: "grey lighten-1 white--text",
         title: "Professional Practices",
-        subtitle: "Jan 17, 2014"
+        subtitle: "Jan 17, 2020"
       },
       {
         icon: "mdi-folder",
         iconClass: "grey lighten-1 white--text",
         title: "English Grammer",
-        subtitle: "Jan 28, 2014"
+        subtitle: "Jan 28, 2020"
       }
     ],
     items2: [
@@ -61,16 +61,22 @@ export default {
         icon: "mdi-file",
         iconClass: "blue white--text",
         title: "Vacation itinerary",
-        subtitle: "Jan 20, 2014"
+        subtitle: "Jan 20, 2020"
       },
       {
         icon: "mdi-file",
         iconClass: "amber white--text",
         title: "Kitchen remodel",
-        subtitle: "Jan 10, 2014"
+        subtitle: "Jan 10, 2020"
       }
     ]
   })
 };
 </script>
 
+<style  scoped>
+.v-application .grey.lighten-1 {
+    background-color: #1565c0 !important;
+    border-color: #1565c0 !important;
+}
+</style>

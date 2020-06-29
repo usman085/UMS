@@ -3,10 +3,10 @@
     <template v-slot:default>
       <thead>
         <tr>
-          <th class="text-center headline ">Date</th>
-          <th class="text-center headline ">Time</th>
-          <th class="text-center headline ">Subject</th>
-          <th class="text-center headline ">Room</th>
+          <th class="text-center headline">Date</th>
+          <th class="text-center headline">Time</th>
+          <th class="text-center headline">Subject</th>
+          <th class="text-center headline">Room</th>
         </tr>
       </thead>
       <tbody>
@@ -29,7 +29,6 @@ export default {
     return {
       items: [
         {
-          
           date: "Monday 02,2020",
           time: "9:00 am to 1:00 pm",
           subject: "English",
@@ -42,21 +41,18 @@ export default {
           room: "Cr 2"
         },
         {
-          
           date: "Monday 02,2020",
           time: "9:00 am to 1:00 pm",
           subject: "Islamiyat",
           room: "Cr 3"
         },
         {
-          
           date: "Monday 02,2020",
           time: "9:00 am to 1:00 pm",
           subject: "Pak-Studies",
           room: "Cr 4"
         },
         {
-          
           date: "Monday 02,2020",
           time: "9:00 am to 1:00 pm",
           subject: "Physics",
@@ -77,5 +73,10 @@ export default {
 }
 .v-data-table td {
   height: 50px;
+}
+@media only screen and (max-width: 700px) {
+  .v-data-table td {
+    min-width: 225px !important;
+  }
 }
 </style>

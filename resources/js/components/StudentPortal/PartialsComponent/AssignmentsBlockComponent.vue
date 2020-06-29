@@ -6,9 +6,9 @@
           <tr>
             <th class="text-left ">Subject</th>
             <th class="text-left ">Assignment Title</th>
-            <th class="text-left ">Assign By</th>
-            <th class="text-left ">Assign Date</th>
-            <th class="text-left">Submission Date</th>
+            <th class="text-left ">Assigned By</th>
+            <th class="text-left ">Assigned Date</th>
+            <th class="text-left">Due Date</th>
             <th class="text-left ">Action</th>
           </tr>
         </thead>

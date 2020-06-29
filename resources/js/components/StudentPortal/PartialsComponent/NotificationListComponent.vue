@@ -4,7 +4,7 @@
        <v-card class="mx-auto box" append-icon="mdi-search" max-width="100%">
           <h3 class="box-title">Notifications</h3>
           <v-row>
-              <v-col cols="8"> 
+              <v-col cols="8">
                 <v-text-field label="Search" ></v-text-field>
               </v-col>
               <v-col cols="4">
@@ -28,8 +28,8 @@
           <div class="notifications-content">
                <v-divider></v-divider>
               <v-row v-for="item in 5" :key="item" class="notification-lines">
-              
-              
+
+
                         <v-list-item three-line>
                             <v-list-item-avatar>
                                 <span class="tag-badge">T</span>
@@ -99,5 +99,12 @@ padding: 10px;
     text-align: right;
     color: rgba(0, 0, 0, 0.6);
     font-size: 13px;
+}
+.v-list-item--three-line {
+    width: -webkit-fill-available;
+}
+.v-list-item__title, .v-list-item__subtitle {
+   
+    white-space: unset;
 }
 </style>

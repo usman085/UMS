@@ -1,8 +1,9 @@
 <template>
    <div class="result-car-wrapper">
-     <fieldset class="form-field-sets">
-       <legend class="form-field-set-name text-center">1st Semester</legend>
-    <v-simple-table dense>
+
+<v-card class="mt-4">
+  <div class="pa-3 text-center">1st Semester</div>
+    <v-simple-table >
       <template v-slot:default>
         <thead>
           <tr>
@@ -12,7 +13,7 @@
             <th class="text-left">Marks </th>
             <th class="text-left">Grade</th>
           </tr>
-          
+
         </thead>
         <tbody>
           <tr>
@@ -52,9 +53,10 @@
         </tbody>
       </template>
     </v-simple-table>
-    </fieldset>
-    
-  </div>
+
+</v-card>
+</div>
+
 </template>
 <script>
 export default {

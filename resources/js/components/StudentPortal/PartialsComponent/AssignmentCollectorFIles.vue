@@ -9,7 +9,7 @@
     </div>
 
     <v-list-item-content>
-      <v-list-item-title class="ml-5">Subject name</v-list-item-title>
+     
     </v-list-item-content>
     <v-list-item v-for="item in items2" :key="item.title">
       <v-list-item-avatar>
@@ -25,7 +25,7 @@
         <v-btn icon>
           <v-icon color="grey lighten-1">
             mdi-eye
-            
+
           </v-icon>
         </v-btn>
         <v-btn icon>
@@ -46,14 +46,14 @@ export default {
       {
         icon: "mdi-file",
         iconClass: "blue white--text",
-        title: "Vacation itinerary",
-        subtitle: "Jan 20, 2014"
+        title: "Concepts of Queue",
+        subtitle: "Jan 20, 2020"
       },
       {
         icon: "mdi-file",
         iconClass: "amber white--text",
-        title: "Kitchen remodel",
-        subtitle: "Jan 10, 2014"
+        title: "OOP in C++",
+        subtitle: "Jan 10, 2020"
       }
     ],
     items: [

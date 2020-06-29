@@ -11,7 +11,7 @@
             <DashBoardHead
                 blockHeading="Class Routine"
                 icon="mdi-calendar-text"
-                link="Schedual"
+                link="Class Schedual"
                 url="/student-portal/Class-Routine"
             ></DashBoardHead>
             <DashBoardHead
