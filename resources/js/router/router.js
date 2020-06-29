@@ -26,20 +26,22 @@ Vue.use(VueRouter);
 
 const routes = [
     /* *** Login Router With Guard Function  *** */
-    // path: '/login',
-    // component: login,
-    // name: 'login',
-    // beforeEnter: checkCurrentLogin
+    {
+        path: '/login',
+        component: login,
+        name: 'login',
+        beforeEnter: checkCurrentLogin
+    },
 
     // **** Main Root Wild Card
     {
 
         path: '/',
-        redirect: '/student-portal/dash-board'
+        redirect: '/student-portal/login'
     },
     {
         path: '*',
-        redirect: '/student-portal/dash-board'
+        redirect: '/student-portal/login'
     }
 ];
 

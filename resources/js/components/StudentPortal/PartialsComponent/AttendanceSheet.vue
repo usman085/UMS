@@ -125,4 +125,5 @@ export default {
 .v-data-table th {
   padding: 0 5px;
 }
+
 </style>

@@ -33,7 +33,7 @@ const StudentRoutes = [{
     path: '/student-portal',
     component: AppStudent,
     name: 'studentPortal',
-    // beforeEnter: guardRouteStudent,
+    beforeEnter: guardRouteStudent,
 
     // ***Children Routes
     children: [{
