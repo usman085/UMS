@@ -18,7 +18,7 @@
 
               <v-col cols="12">
                 <v-select
-                  v-model="select"
+                
                   :items="items"
                   item-text="state"
                   label="Select Duration*"
@@ -42,7 +42,14 @@
       </v-card>
     </v-dialog>
   </v-row>
+<v-snackbar top right v-model="snackbar" color="success">
+      Course is Added successfully! 
 
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+      </template>
+    </v-snackbar>
     </div>
 </template>
 
@@ -51,7 +58,7 @@ export default {
   name: "AddProgramModel",
   data() {
     return {
-     
+      snackbar: false,
       items: [
         { state: "1 years" },
         { state: "2 years" },

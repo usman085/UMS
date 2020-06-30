@@ -36,24 +36,30 @@
         </v-card>
       </v-dialog>
     </v-row>
-   
+    <v-snackbar top right v-model="snackbar" color="success">
+      Course is Added successfully! 
+
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
 <script>
 export default {
   name: "AddCourseModel",
-  
   data() {
     return {
+        snackbar: false,
      
     };
   },
   computed: {
     dialog: function() {
       return this.$store.state.AddCourseModal;
-    },
-  
+    }
   }
 };
 </script>
