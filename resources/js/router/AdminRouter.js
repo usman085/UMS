@@ -9,7 +9,8 @@ import registerStudent from '../components/AdminPortal/Pages/RegisterStudent';
 import MangeTimeTable from '../components/AdminPortal/Pages/MangeTimeTable';
 import AllTimeTable from '../components/AdminPortal/PartialComponents/AllTimeTable';
 import createTimeTable from '../components/AdminPortal/PartialComponents/createTimeTable';
-
+import PreviewTimeTable from '../components/AdminPortal/PartialComponents/PreviewTimeTable';
+import EditTimeTable from '../components/AdminPortal/PartialComponents/EditTimeTable';
 //**** ****  Import Guard Router 
 import {
     guardRouteAdmin
@@ -70,7 +71,18 @@ const AdminRoutes = [{
             component: MangeTimeTable,
             children: [{
                     path: 'all-time-table',
-                    component: AllTimeTable
+                    component: AllTimeTable,
+                    name: 'AllTimeTable'
+                },
+                {
+                    path: 'PreviewTimeTable',
+                    component: PreviewTimeTable,
+                    name: 'PreviewTimeTable'
+                },
+                {
+                    path: 'EditTimeTable',
+                    component: EditTimeTable,
+                    name: 'EditTimeTable'
                 },
                 {
                     path: 'create-time-table',
