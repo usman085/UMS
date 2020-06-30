@@ -11,9 +11,7 @@
                 }}
               </v-subheader>
             </v-col>
-            <v-col cols="6" class="text-center">
-              <a href="#!" class="body-2 black--text">EDIT</a>
-            </v-col>
+           
           </v-row>
           <v-list-group v-else-if="item.children" :key="item.text" v-model="item.model"
             :prepend-icon=" item.model ? item.icon : item['icon-alt']" append-icon
@@ -95,8 +93,8 @@
 
           <v-list-item>
             <v-list-item-title>
-              <v-btn small color="primary" class="ml-1">
-                <v-icon class="mr-2">mdi-logout</v-icon>Logout
+              <v-btn @click ='logout()' small color="primary" class="ml-1">
+                <v-icon  class="mr-2">mdi-logout</v-icon>Logout
               </v-btn>
             </v-list-item-title>
           </v-list-item>
