@@ -14,7 +14,7 @@ export default {
     },
        data: function() {
     return {
-      titleName: "Fianl Exam Result Card",
+      titleName: "Final Exam Result Card",
 
     };
   }

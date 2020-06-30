@@ -1,14 +1,19 @@
 // *** Import Admin Portal Component 
 import AdminPortal from '../components/AdminPortal/AppAdminPortalComponent';
+import AdminDashboard from '../components/AdminPortal/Pages/AdminDashboard';
+import ManageCourse from '../components/AdminPortal/Pages/ManageCourse';
+import ManageProgram from '../components/AdminPortal/Pages/ManageProgram';
 import feedback from '../components/CommonGobalComponent/feedbackComponent';
 import customSupport from '../components/CommonGobalComponent/customSupport';
 import registerStudent from '../components/AdminPortal/Pages/RegisterStudent';
 import MangeTimeTable from '../components/AdminPortal/Pages/MangeTimeTable';
-import AllTimeTable from '../components/AdminPortal/ParticalsComponent/AllTimeTable';
-import createTimeTable from '../components/AdminPortal/ParticalsComponent/createTimeTable';
+import AllTimeTable from '../components/AdminPortal/PartialComponents/AllTimeTable';
+import createTimeTable from '../components/AdminPortal/PartialComponents/createTimeTable';
 
 //**** ****  Import Guard Router 
-import { guardRouteAdmin } from './RouterGuard';
+import {
+    guardRouteAdmin
+} from './RouterGuard';
 
 
 // **** **** Admin Portal Routes & Child Routes Components Paths
@@ -22,10 +27,30 @@ const AdminRoutes = [{
     // **** Root Router End
 
     //*** Children Routes */
-    children: [{
+    children: [
+
+        {
+            path: 'dash-board',
+            component: AdminDashboard
+
+        },
+
+        {
             path: 'register-new-student',
             component: registerStudent
 
+        },
+        {
+            // *** ManageProgram Route
+            path: 'manage-program',
+            component: ManageProgram,
+            name: 'ManageProgram'
+        },
+        {
+            // *** ManageProgram Route
+            path: 'manage-course',
+            component: ManageCourse,
+            name: 'ManageCourse'
         },
         {
             // *** Customer Support Route

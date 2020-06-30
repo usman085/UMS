@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import StudentRegistratonForm from '../ParticalsComponent/StudentRegistrationForm';
+import StudentRegistratonForm from '../PartialComponents/StudentRegistrationForm';
 export default {
     name:'registerStudent',
     components:{StudentRegistratonForm}

@@ -11,7 +11,6 @@ Vue.use(Vuex);
 // *** Store Variable
 
 const store = new Vuex.Store({
-
     // *** State Variables
     state: {
         SubmitAssignmentModal: false,
@@ -21,10 +20,20 @@ const store = new Vuex.Store({
         BadWordModal: false,
         CreateTimeTableModal: false,
         TimeTableDetailModal: false,
-        days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        subjects: ['Eng', 'urdu', 'Math'],
-        teachers: ['ijaz', 'usman'],
-        classRooms: ['cr2', 'cr3'],
+        AddProgramModal: false,
+        AddCourseModal: false,
+
+        days: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ],
+        subjects: ["Eng", "urdu", "Math"],
+        teachers: ["ijaz", "usman"],
+        classRooms: ["cr2", "cr3"]
     },
     //  *** Mutations Function
     mutations: {
@@ -48,34 +57,47 @@ const store = new Vuex.Store({
         },
         CreateTimeTableModal(state) {
             state.CreateTimeTableModal = !state.CreateTimeTableModal;
+        },
+        AddProgramModalToggle(state) {
+            state.AddProgramModal = !state.AddProgramModal;
+        },
+        AddCourseModalToggle(state) {
+            state.AddCourseModal = !state.AddCourseModal;
         }
-
     },
     // *** Action Functions
     actions: {
         TimeTableDetailModal(context) {
-            context.commit('TimeTableDetailModal');
+            context.commit("TimeTableDetailModal");
         },
         CreateTimeTableModal(context) {
-            context.commit('CreateTimeTableModal')
+            context.commit("CreateTimeTableModal");
         },
         BadWordModalToggle(context) {
-            context.commit('BadWordModalToggle');
+            context.commit("BadWordModalToggle");
         },
         SubmitAssignmentModalToggle(context) {
-            context.commit('SubmitAssignmentModalToggle');
+            context.commit("SubmitAssignmentModalToggle");
         },
         ApplicationRequestTimeModalToggle(context) {
-            context.commit('ApplicationRequestTimeModalToggle');
+            context.commit("ApplicationRequestTimeModalToggle");
         },
         AssignmentDetailPageModalToggle(context) {
-            context.commit('AssignmentDetailPageModalToggle');
+            context.commit("AssignmentDetailPageModalToggle");
         },
         CourseOutlinePageModalToggle(context) {
-            context.commit('CourseOutlinePageModalToggle');
+            context.commit("CourseOutlinePageModalToggle");
+        },
+        AddProgramModalToggle(context) {
+            context.commit("AddProgramModalToggle");
+        },
+        AddCourseModalToggle(context) {
+            context.commit("AddCourseModalToggle");
         }
+
+
     }
-})
+});
 
 
 // *** Export Store Variable -- Store Object
