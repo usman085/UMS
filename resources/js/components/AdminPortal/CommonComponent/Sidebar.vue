@@ -140,7 +140,12 @@ export default {
           {
             text: "Manage Programs",
             icon: "mdi-book-open",
-            url: "/"
+            url: "/admin-portal/manage-program"
+          },
+          {
+            text: "Manage Courses",
+            icon: "mdi-clipboard-text",
+            url: "/admin-portal/manage-course"
           }
         ]
       },
