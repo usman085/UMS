@@ -3,7 +3,7 @@
     <v-card>
         <v-card-title>
             Notifications
-            <v-btn class="create-btn">Generate New Notification</v-btn>
+            <v-btn class="create-btn" @click="$store.dispatch('NotificationTypeModal')">Generate New Notification</v-btn>
         </v-card-title>
         <v-card-subtitle>All Notifications are here</v-card-subtitle>
         <v-card-title>
@@ -23,15 +23,16 @@
         </v-data-table>
     </v-card>
     <NotificationTypeModal/>
+    <NotificationEditorModal/>
 </div>
 </template>
 
 <script>
 import NotificationTypeModal from './NotificationTypeModal';
-
+import NotificationEditorModal from './NotificationEditorModal'
 export default {
     name: 'NotificationBlock',
-    components:{NotificationTypeModal},
+    components:{NotificationTypeModal,NotificationEditorModal},
     data() {
         return {
             search: '',

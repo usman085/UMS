@@ -13,6 +13,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     // *** State Variables
     state: {
+        NotificationTypeModal: false,
         SubmitAssignmentModal: false,
         ApplicationRequestTimeModal: false,
         AssignmentDetailPageModal: false,
@@ -22,7 +23,8 @@ const store = new Vuex.Store({
         TimeTableDetailModal: false,
         AddProgramModal: false,
         AddCourseModal: false,
-
+        NotificationEditorModal: false,
+        senderSelect: '',
         days: [
             "Monday",
             "Tuesday",
@@ -37,6 +39,12 @@ const store = new Vuex.Store({
     },
     //  *** Mutations Function
     mutations: {
+        senderSelect(state, senderSelect) {
+            state.senderSelect = senderSelect;
+        },
+        NotificationTypeModal(state) {
+            state.NotificationTypeModal = !state.NotificationTypeModal;
+        },
         TimeTableDetailModal(state) {
             state.TimeTableDetailModal = !state.TimeTableDetailModal;
         },
@@ -63,10 +71,22 @@ const store = new Vuex.Store({
         },
         AddCourseModalToggle(state) {
             state.AddCourseModal = !state.AddCourseModal;
+        },
+        NotificationEditorModal(state) {
+            state.NotificationEditorModal = !state.NotificationEditorModal;
         }
     },
     // *** Action Functions
     actions: {
+        senderSelect(context, senderSelect) {
+            context.commit('senderSelect', senderSelect);
+        },
+        NotificationEditorModal(context) {
+            context.commit('NotificationEditorModal');
+        },
+        NotificationTypeModal(context) {
+            context.commit('NotificationTypeModal');
+        },
         TimeTableDetailModal(context) {
             context.commit("TimeTableDetailModal");
         },
