@@ -1,6 +1,7 @@
 // *** Import Admin Portal Component 
 import AdminPortal from '../components/AdminPortal/AppAdminPortalComponent';
 import AdminDashboard from '../components/AdminPortal/Pages/AdminDashboard';
+import ExamRoutine from '../components/AdminPortal/Pages/ExamRoutine';
 import ManageCourse from '../components/AdminPortal/Pages/ManageCourse';
 import ManageProgram from '../components/AdminPortal/Pages/ManageProgram';
 import feedback from '../components/CommonGobalComponent/feedbackComponent';
@@ -39,6 +40,12 @@ const AdminRoutes = [{
             path: 'register-new-student',
             component: registerStudent
 
+        },
+        {
+            // *** ManageProgram Route
+            path: 'exam-routine',
+            component: ExamRoutine,
+            name: 'ExamRoutine'
         },
         {
             // *** ManageProgram Route

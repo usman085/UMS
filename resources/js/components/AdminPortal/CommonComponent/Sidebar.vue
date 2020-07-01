@@ -150,6 +150,11 @@ export default {
         ]
       },
       {
+        icon: "mdi-view-dashboard",
+        text: "Manage Exam Routine",
+        url: "/admin-portal/exam-routine"
+      },
+      {
         icon: "mdi-chevron-up",
         "icon-alt": "mdi-chevron-down",
         text: "Manage Student",
