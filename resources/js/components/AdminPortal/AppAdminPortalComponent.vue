@@ -1,18 +1,18 @@
 <template>
 <div class="wrapper">
     <v-app id="inspire">
-    <!-- Side Bar Component Render -->
-       <SideBar></SideBar>
-    <!-- Side Bar Component Render -->
+        <!-- Side Bar Component Render -->
+        <SideBar></SideBar>
+        <!-- Side Bar Component Render -->
         <v-content>
-       <v-container>
-            <!-- Dynamic Router Render -->
+            <v-container>
+                <!-- Dynamic Router Render -->
 
-               <router-view></router-view>
+                <router-view></router-view>
 
-            <!-- Dynamic Router Render -->
-       </v-container>
-    </v-content>
+                <!-- Dynamic Router Render -->
+            </v-container>
+        </v-content>
     </v-app>
 </div>
 </template>
@@ -22,9 +22,11 @@ import SideBar from './CommonComponent/Sidebar';
 
 export default {
 
-    name:"AdminPortal",
+    name: "AdminPortal",
 
-    components:{SideBar}
+    components: {
+        SideBar
+    }
 
 }
 </script>

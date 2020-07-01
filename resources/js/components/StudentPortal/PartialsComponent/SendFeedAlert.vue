@@ -1,40 +1,43 @@
 <template>
-  <v-dialog v-model="dialog" max-width="590" persistent>
+<v-dialog v-model="dialog" max-width="590" persistent>
     <v-card>
-      <v-card-title class="headline">Thank You For Visiting Our Student Portal</v-card-title>
+        <v-card-title class="headline">Thank You For Visiting Our Student Portal</v-card-title>
 
-      <v-card-text>Kindly Give Us Your Valuable Feedback . It Will Helps Us To Improve Your Experience Thank You!!</v-card-text>
+        <v-card-text>Kindly Give Us Your Valuable Feedback . It Will Helps Us To Improve Your Experience Thank You!!</v-card-text>
 
-      <v-card-actions>
-        <v-spacer></v-spacer>
+        <v-card-actions>
+            <v-spacer></v-spacer>
 
-        <v-btn color="green darken-1" text @click="dialog = false">OK!</v-btn>
-      </v-card-actions>
+            <v-btn color="green darken-1" text @click="dialog = false">OK!</v-btn>
+        </v-card-actions>
     </v-card>
-  </v-dialog>
+</v-dialog>
 </template>
+
 <script>
 export default {
-  name: "sendFeedbackAlert",
-  data: function() {
-    return {
-      dialog: false
-    };
-  },
-  mounted() {
-    setTimeout(() => {
-      this.dialog = true;
-    }, 120000);
-  }
+    name: "sendFeedbackAlert",
+    data: function () {
+        return {
+            dialog: false
+        };
+    },
+    mounted() {
+        setTimeout(() => {
+            this.dialog = true;
+        }, 120000);
+    }
 };
 </script>
+
 <style scoped>
-.headline{
-      word-break: break-word;
+.headline {
+    word-break: break-word;
 }
+
 @media screen and (max-width: 566px) {
-  .headline {
-    font-size: 21px !important;
-  }
+    .headline {
+        font-size: 21px !important;
+    }
 }
 </style>

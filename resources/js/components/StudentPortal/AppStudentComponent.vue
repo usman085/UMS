@@ -1,21 +1,21 @@
 <template>
 <div class="wrapper">
     <v-app id="inspire">
-    <!-- Side Bar Component Render -->
-       <SideBar></SideBar>
-    <!-- Side Bar Component Render -->
+        <!-- Side Bar Component Render -->
+        <SideBar></SideBar>
+        <!-- Side Bar Component Render -->
         <v-content>
-       <v-container>
-            <!-- Dynamic Router Render -->
+            <v-container>
+                <!-- Dynamic Router Render -->
 
-               <router-view></router-view>
+                <router-view></router-view>
 
-            <!-- Dynamic Router Render -->
-       </v-container>
-    </v-content>
+                <!-- Dynamic Router Render -->
+            </v-container>
+        </v-content>
     </v-app>
-    
-    <sendFeedbackAlert/>
+
+    <sendFeedbackAlert />
 </div>
 </template>
 
@@ -24,9 +24,12 @@ import SideBar from './CommonComponent/Sidebar';
 import sendFeedbackAlert from './PartialsComponent/SendFeedAlert';
 export default {
 
-    name:"AppStudent",
+    name: "AppStudent",
 
-    components:{SideBar,sendFeedbackAlert}
+    components: {
+        SideBar,
+        sendFeedbackAlert
+    }
 
 }
 </script>

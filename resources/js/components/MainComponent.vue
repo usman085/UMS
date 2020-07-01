@@ -1,18 +1,13 @@
 <template>
+<!-- Different Component Render -->
 
-     <!-- Different Component Render -->
+<router-view />
 
-       <router-view/>
-
-     <!-- Different Component Render -->
-
+<!-- Different Component Render -->
 </template>
 
-
 <script>
-
-
-    export default {
-         name:'MainAppComponent',
-    }
+export default {
+    name: 'MainAppComponent',
+}
 </script>

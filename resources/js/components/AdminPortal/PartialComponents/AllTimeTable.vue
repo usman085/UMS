@@ -25,7 +25,7 @@
                             <td>BSSE</td>
                             <td>6th</td>
                             <td>Moring</td>
-                            
+
                             <td>
                                 <v-chip color="green" class="status-chip">Public</v-chip>
                             </td>

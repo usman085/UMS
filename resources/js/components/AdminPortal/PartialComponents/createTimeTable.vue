@@ -221,7 +221,7 @@ export default {
             EditTimeTableData: [{
                 id: '',
                 day: '',
-                teacher: '', 
+                teacher: '',
                 subject: '',
                 startingtime: '',
                 endingTime: '',

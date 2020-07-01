@@ -1,15 +1,14 @@
 <template>
 <div>
- <ManageCoursesBlock></ManageCoursesBlock>
+    <ManageCoursesBlock></ManageCoursesBlock>
 </div>
 </template>
 
 <script>
-
 import ManageCoursesBlock from '../PartialComponents/ManageCoursesBlock';
 export default {
-    name:'ManageCourse',
-    components:{
+    name: 'ManageCourse',
+    components: {
         ManageCoursesBlock
     }
 }
