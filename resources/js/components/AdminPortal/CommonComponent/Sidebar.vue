@@ -138,6 +138,16 @@ export default {
                 ]
             },
             {
+                icon: "mdi-bell",
+                text: "Notifications",
+                url: "/admin-portal/notification"
+            },
+            {
+                icon: " mdi-email",
+                text: "Application",
+                url: "/admin-portal/application"
+            },
+            {
                 icon: "mdi-chevron-up",
                 "icon-alt": "mdi-chevron-down",
                 text: "Manage Student",

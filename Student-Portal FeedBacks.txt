@@ -1,0 +1,19 @@
+     ***** Bugs *****
+
+1. Account profile is not set properly. Moving  vertical on swipe.
+2. Font size is large for exam routine.
+3. Exam Schedule Font size large 
+4. Spell Mistake in Final Exam Head
+5. Experience Spell Mistake 
+6. Final Exam & Sectional Exam terminology used expect Mid term etc
+7. submit Assignment page when I try to edit my text in description box the editor bar hide
+
+
+
+   ****  Modifications ****
+
+1. How to get full view of next or previous semesters  courses.
+2. Add a summery of all month
+3. Leaves allowed and how many remaining.
+4. Apply filter on Assignment Collector 
+5. Course Materials

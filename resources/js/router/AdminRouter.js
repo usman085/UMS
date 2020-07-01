@@ -11,6 +11,7 @@ import AllTimeTable from '../components/AdminPortal/PartialComponents/AllTimeTab
 import createTimeTable from '../components/AdminPortal/PartialComponents/createTimeTable';
 import PreviewTimeTable from '../components/AdminPortal/PartialComponents/PreviewTimeTable';
 import EditTimeTable from '../components/AdminPortal/PartialComponents/EditTimeTable';
+import notificationPage from '../components/AdminPortal/Pages/Notification';
 //**** ****  Import Guard Router 
 import {
     guardRouteAdmin
@@ -46,6 +47,11 @@ const AdminRoutes = [{
             path: 'manage-program',
             component: ManageProgram,
             name: 'ManageProgram'
+        },
+        {
+            path: 'notification',
+            component: notificationPage,
+            name: "AdminNotification"
         },
         {
             // *** ManageProgram Route
