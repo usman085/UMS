@@ -2,12 +2,10 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 // **** ****  Login Component Import **** **** ****
-
 import login from '../components/LoginComponent/LoginComponent';
 
 
 // **** ****  Portal Router Import **** **** **** ****
-
 import AdminRoutes from './AdminRouter';
 import StudentRoutes from './StudentRouter';
 import TeacherRoutes from './TeacherRouter';
@@ -60,7 +58,7 @@ Array.prototype.push.apply(routes, TeacherRoutes);
 
 
 //****  Pass routes to Vue Router  ****/
-// **** Use History Mode
+// **** Use History Mode 
 const router = new VueRouter({
     mode: 'history',
     routes

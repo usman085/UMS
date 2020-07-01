@@ -1,17 +1,17 @@
 <template>
-
-   <div class="title-wrapper" color="light-blue">
+<div class="title-wrapper" color="light-blue">
     <v-card max-width="100%" class="mx-auto">
 
-      <v-card-title >Submitted Assignments</v-card-title>
-      <v-card-subtitle>Submitted Assignments of All Courses</v-card-subtitle>
+        <v-card-title>Submitted Assignments</v-card-title>
+        <v-card-subtitle>Submitted Assignments of All Courses</v-card-subtitle>
 
     </v-card>
-  </div>
+</div>
 </template>
+
 <script>
 export default {
-  name: "AssignmentCollectorTitle"
+    name: "AssignmentCollectorTitle"
 };
 </script>
 

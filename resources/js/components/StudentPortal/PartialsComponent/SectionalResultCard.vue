@@ -1,92 +1,97 @@
 <template>
-   <div class="result-car-wrapper">
+<div class="result-car-wrapper">
 
-<v-card class="mt-4">
-  <div class="pa-3 text-center">1st Semester</div>
-    <v-simple-table >
-      <template v-slot:default>
-        <thead>
-          <tr>
-            <th class="text-left">Code</th>
-            <th class="text-left">Course Tilte</th>
-            <th class="text-left">Credit Hours </th>
-            <th class="text-left">Marks </th>
-            <th class="text-left">Grade</th>
-          </tr>
+    <v-card class="mt-4">
+        <div class="pa-3 text-center">1st Semester</div>
+        <v-simple-table>
+            <template v-slot:default>
+                <thead>
+                    <tr>
+                        <th class="text-left">Code</th>
+                        <th class="text-left">Course Tilte</th>
+                        <th class="text-left">Credit Hours </th>
+                        <th class="text-left">Marks </th>
+                        <th class="text-left">Grade</th>
+                    </tr>
 
-        </thead>
-        <tbody>
-          <tr>
-            <td>CSI-405</td>
-            <td>Object Oriented</td>
-            <td>3(1-2)</td>
-            <td>56</td>
-            <td>A</td>
-          </tr>
-           <tr>
-            <td>CSI-405</td>
-            <td>Object Oriented</td>
-            <td>3(1-2)</td>
-            <td>56</td>
-            <td>A</td>
-          </tr>
-           <tr>
-            <td>CSI-405</td>
-            <td>Object Oriented</td>
-            <td>3(1-2)</td>
-            <td>56</td>
-            <td>A</td>
-          </tr>
-           <tr>
-            <td>CSI-405</td>
-            <td>Object Oriented</td>
-            <td>3(1-2)</td>
-            <td>56</td>
-            <td>A</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td><b>18</b></td>
-            <td><b>450</b></td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CSI-405</td>
+                        <td>Object Oriented</td>
+                        <td>3(1-2)</td>
+                        <td>56</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>CSI-405</td>
+                        <td>Object Oriented</td>
+                        <td>3(1-2)</td>
+                        <td>56</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>CSI-405</td>
+                        <td>Object Oriented</td>
+                        <td>3(1-2)</td>
+                        <td>56</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>CSI-405</td>
+                        <td>Object Oriented</td>
+                        <td>3(1-2)</td>
+                        <td>56</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><b>18</b></td>
+                        <td><b>450</b></td>
+                    </tr>
+                </tbody>
+            </template>
+        </v-simple-table>
 
-</v-card>
+    </v-card>
 </div>
-
 </template>
+
 <script>
 export default {
-  name: "SectionalResultCardBlock",
+    name: "SectionalResultCardBlock",
 
 }
 </script>
+
 <style scoped>
-.footer-semester{
-  float: left;
-  padding: 10px;
+.footer-semester {
+    float: left;
+    padding: 10px;
 }
-.cgpa-footer{
-  float: right;
-  padding: 10px;
+
+.cgpa-footer {
+    float: right;
+    padding: 10px;
 }
-.indigo{
-  width: 100%;
+
+.indigo {
+    width: 100%;
 }
-.form-field-sets{
-  margin: 15px 0;
+
+.form-field-sets {
+    margin: 15px 0;
     padding: 10px;
     border-radius: 6px;
-    border-color:rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 0, 0, 0.12);
     margin-bottom: 10px;
 
 }
-.form-field-set-name{
+
+.form-field-set-name {
     font-weight: bold;
-    color:rgba(0, 0, 0, 0.45);
+    color: rgba(0, 0, 0, 0.45);
     padding: 0 10px;
 }
 </style>

@@ -8,7 +8,7 @@ Vue.filter('capitalize', function(value) {
         value = value.toString()
         return value.charAt(0).toUpperCase() + value.slice(1)
     })
-    //*** *** F */
+    //*** *** To Convert Number to Roman  */
 Vue.filter('numberToNth', function(value) {
     if (!value) return ''
     if (value == '1')
@@ -20,4 +20,10 @@ Vue.filter('numberToNth', function(value) {
     else
         return value + 'th';
 
+})
+
+//*** *** To Reduce the String lenght */
+
+Vue.filter('trimString', function(text, stop, clamp) {
+    return text.slice(0, stop) + (stop < text.length ? clamp || '...' : '')
 })
