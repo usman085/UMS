@@ -200,17 +200,17 @@ export default {
     data: function () {
         return {
             timeTableData: [{
-                    id: 4,
-                    day: "monday",
+                    id: 1,
+                    day: "Monday",
                     teacher: "usman",
-                    subject: "English",
+                    subject: "Eng",
                     startingtime: "10:00",
                     endingTime: "11:00",
                     classRoom: "cr3"
                 },
                 {
-                    id: 4,
-                    day: "monday",
+                    id: 2,
+                    day: "Monday",
                     teacher: "mehreen",
                     subject: "Math",
                     startingtime: "10:00",
@@ -218,8 +218,8 @@ export default {
                     classRoom: "cr3"
                 },
                 {
-                    id: 4,
-                    day: "monday",
+                    id: 3,
+                    day: "Monday",
                     teacher: "Ijaz",
                     subject: "OOP",
                     startingtime: "10:00",
@@ -227,8 +227,8 @@ export default {
                     classRoom: "cr4"
                 },
                 {
-                    id: 32,
-                    day: "tuesday",
+                    id: 4,
+                    day: "Tuesday",
                     teacher: "usman",
                     subject: "English",
                     startingtime: "10:00",
@@ -236,8 +236,8 @@ export default {
                     classRoom: "cr3"
                 },
                 {
-                    id: 32,
-                    day: "tuesday",
+                    id: 5,
+                    day: "Tuesday",
                     teacher: "test",
                     subject: "English",
                     startingtime: "10:00",
@@ -245,8 +245,8 @@ export default {
                     classRoom: "cr3"
                 },
                 {
-                    id: 32,
-                    day: "tuesday",
+                    id: 6,
+                    day: "Tuesday",
                     teacher: "usman",
                     subject: "urdu",
                     startingtime: "10:00",
@@ -254,8 +254,8 @@ export default {
                     classRoom: "cr3"
                 },
                 {
-                    id: 32,
-                    day: "saturday",
+                    id: 7,
+                    day: "Saturday",
                     teacher: "test",
                     subject: "English",
                     startingtime: "10:00",
@@ -263,8 +263,8 @@ export default {
                     classRoom: "cr3"
                 },
                 {
-                    id: 32,
-                    day: "saturday",
+                    id: 8,
+                    day: "Saturday",
                     teacher: "test",
                     subject: "Letrature",
                     startingtime: "10:00",
@@ -272,8 +272,8 @@ export default {
                     classRoom: "cr8"
                 },
                 {
-                    id: 32,
-                    day: "saturday",
+                    id: 8,
+                    day: "Saturday",
                     teacher: "Aslam",
                     subject: "English",
                     startingtime: "10:00",
@@ -281,7 +281,7 @@ export default {
                     classRoom: "cr3"
                 },
                 {
-                    id: 43,
+                    id: 10,
                     day: "Wednesday",
                     teacher: "usman",
                     subject: "English",
@@ -290,7 +290,7 @@ export default {
                     classRoom: "cr3"
                 },
                 {
-                    id: 43,
+                    id: 11,
                     day: "Wednesday",
                     teacher: "Amjad",
                     subject: "Islamiyat",
@@ -299,7 +299,7 @@ export default {
                     classRoom: "cr2"
                 },
                 {
-                    id: 43,
+                    id: 12,
                     day: "Wednesday",
                     teacher: "Amjad",
                     subject: "Islamiyat",
@@ -308,8 +308,8 @@ export default {
                     classRoom: "cr2"
                 },
                 {
-                    id: 334,
-                    day: "thrusday",
+                    id: 13,
+                    day: "Thrusday",
                     teacher: "usman",
                     subject: "English",
                     startingtime: "10:00",
@@ -317,8 +317,8 @@ export default {
                     classRoom: "cr3"
                 },
                 {
-                    id: 544,
-                    day: "friday",
+                    id: 14,
+                    day: "Friday",
                     teacher: "usman",
                     subject: "English",
                     startingtime: "10:00",
@@ -327,8 +327,8 @@ export default {
                 },
 
                 {
-                    id: 644,
-                    day: "sunday",
+                    id: 15,
+                    day: "Sunday",
                     teacher: "usman",
                     subject: "English",
                     startingtime: "10:00",
@@ -387,31 +387,31 @@ export default {
     computed: {
         // *** Filter Monday Data in Root Array
         mondaySchedule: function () {
-            return this.timeTableData.filter(data => data.day == "monday");
+            return this.timeTableData.filter(data => data.day == "Monday");
         },
         // *** Filter Tuesday Data in Root Array
         tuesdaySchedule: function () {
-            return this.timeTableData.filter(data => data.day == 'tuesday');
+            return this.timeTableData.filter(data => data.day == 'Tuesday');
         },
         // *** Filter Wednesday Data in Root Array
         wednesdaySchedule: function () {
-            return this.timeTableData.filter(data => data.day == 'wednesday');
+            return this.timeTableData.filter(data => data.day == 'Wednesday');
         },
         // *** Filter Thursday Data in Root Array
         thursdaySchedule: function () {
-            return this.timeTableData.filter(data => data.day == 'thursday');
+            return this.timeTableData.filter(data => data.day == 'Thursday');
         },
         // *** Filter Friday Data in Root Array
         fridaySchedule: function () {
-            return this.timeTableData.filter(data => data.day == 'friday');
+            return this.timeTableData.filter(data => data.day == 'Friday');
         },
         // *** Filter Saturday Data in Root Array
         saturdaySchedule: function () {
-            return this.timeTableData.filter(data => data.day == 'saturday');
+            return this.timeTableData.filter(data => data.day == 'Saturday');
         },
         // *** Filter Sunday Data in Root Array
         sundaySchedule: function () {
-            return this.timeTableData.filter(data => data.day == 'sunday');
+            return this.timeTableData.filter(data => data.day == 'Sunday');
         }
     },
 }
