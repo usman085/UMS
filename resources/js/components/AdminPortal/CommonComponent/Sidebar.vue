@@ -145,7 +145,7 @@ export default {
             {
                 icon: " mdi-email",
                 text: "Application",
-                url: "/admin-portal/application"
+                url: "/admin-portal/Manage-Application"
             },
             {
                 icon: "mdi-chevron-up",

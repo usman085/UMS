@@ -12,6 +12,9 @@ import createTimeTable from '../components/AdminPortal/PartialComponents/createT
 import PreviewTimeTable from '../components/AdminPortal/PartialComponents/PreviewTimeTable';
 import EditTimeTable from '../components/AdminPortal/PartialComponents/EditTimeTable';
 import notificationPage from '../components/AdminPortal/Pages/Notification';
+import ManageApplication from '../components/AdminPortal/Pages/ManageApplication';
+import ManageApplicationBlock from '../components/AdminPortal/PartialComponents/ManageApplicationBlock';
+import ApplicationDetailView from '../components/AdminPortal/PartialComponents/ApplicationDetailView';
 //**** ****  Import Guard Router 
 import {
     guardRouteAdmin
@@ -47,6 +50,30 @@ const AdminRoutes = [{
             path: 'manage-program',
             component: ManageProgram,
             name: 'ManageProgram'
+        },
+        {
+            path: 'Manage-Application',
+            component: ManageApplication,
+            name: 'ManageApplication',
+            children: [{
+                    path: 'Application-inbox',
+                    component: ManageApplicationBlock,
+                    name: 'AdminApplicationInbox'
+                },
+                {
+                    path: 'application-detail-view/:id/:slug',
+                    component: ApplicationDetailView,
+                    name: 'ViewApplication'
+                },
+                {
+                    path: '',
+                    redirect: 'Application-inbox'
+                },
+                {
+                    path: '*',
+                    redirect: 'Application-inbox'
+                }
+            ]
         },
         {
             path: 'notification',
