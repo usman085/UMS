@@ -2,12 +2,12 @@
 <div class="notification-block">
     <v-card>
         <v-card-title>
-            Notifications
-            <v-btn class="create-btn" @click="$store.dispatch('NotificationTypeModal')">Generate New Notification</v-btn>
+            <v-icon>mdi-bell</v-icon> Notifications
+            <v-btn class="create-btn" @click="$store.dispatch('NotificationEditorModal')">Generate New Notification</v-btn>
         </v-card-title>
         <v-card-subtitle>All Notifications are here</v-card-subtitle>
         <v-card-title>
-                test
+            test
             <v-spacer></v-spacer>
             <v-text-field v-model="search" append-icon="mdi-magnify" label="Search Notifications" single-line hide-details></v-text-field>
         </v-card-title>
@@ -17,22 +17,45 @@
                     <td>{{row.item.notificationTitle}}</td>
                     <td>{{row.item.notificationMessage | trimString(60)}}</td>
                     <td>{{row.item.sendedTo}}</td>
-                    <td>del</td>
+                    <td>
+                        <v-menu offset-y>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn v-bind="attrs" v-on="on">
+                                    <v-icon>mdi-dots-vertical</v-icon>
+                                </v-btn>
+                            </template>
+                            <v-list>
+                                <v-list-item @click="$store.dispatch('NotificationPreviewModal')">
+                                    <v-list-item-title>Preview</v-list-item-title>
+                                </v-list-item>
+                                <v-list-item>
+                                    <v-list-item-title>Edit</v-list-item-title>
+                                </v-list-item>
+                                <v-list-item>
+                                    <v-list-item-title>Delete</v-list-item-title>
+                                </v-list-item>
+                            </v-list>
+                        </v-menu>
+                    </td>
                 </tr>
             </template>
         </v-data-table>
     </v-card>
-    <NotificationTypeModal/>
-    <NotificationEditorModal/>
+
+    <NotificationEditorModal />
+    <NotificationPreviewModal />
 </div>
 </template>
 
 <script>
-import NotificationTypeModal from './NotificationTypeModal';
 import NotificationEditorModal from './NotificationEditorModal'
+import NotificationPreviewModal from './NotificationPreviewModal';
 export default {
     name: 'NotificationBlock',
-    components:{NotificationTypeModal,NotificationEditorModal},
+    components: {
+        NotificationEditorModal,
+        NotificationPreviewModal
+    },
     data() {
         return {
             search: '',
@@ -53,6 +76,7 @@ export default {
                 },
                 {
                     text: 'Options',
+                    sortable: false,
 
                 },
             ],

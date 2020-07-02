@@ -13,7 +13,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     // *** State Variables
     state: {
-        NotificationTypeModal: false,
+        NotificationPreviewModal: false,
         SubmitAssignmentModal: false,
         ApplicationRequestTimeModal: false,
         AssignmentDetailPageModal: false,
@@ -39,11 +39,8 @@ const store = new Vuex.Store({
     },
     //  *** Mutations Function
     mutations: {
-        senderSelect(state, senderSelect) {
-            state.senderSelect = senderSelect;
-        },
-        NotificationTypeModal(state) {
-            state.NotificationTypeModal = !state.NotificationTypeModal;
+        NotificationPreviewModal(state) {
+            state.NotificationPreviewModal = !state.NotificationPreviewModal;
         },
         TimeTableDetailModal(state) {
             state.TimeTableDetailModal = !state.TimeTableDetailModal;
@@ -78,14 +75,11 @@ const store = new Vuex.Store({
     },
     // *** Action Functions
     actions: {
-        senderSelect(context, senderSelect) {
-            context.commit('senderSelect', senderSelect);
+        NotificationPreviewModal(context) {
+            context.commit('NotificationPreviewModal');
         },
         NotificationEditorModal(context) {
             context.commit('NotificationEditorModal');
-        },
-        NotificationTypeModal(context) {
-            context.commit('NotificationTypeModal');
         },
         TimeTableDetailModal(context) {
             context.commit("TimeTableDetailModal");
