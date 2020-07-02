@@ -125,11 +125,23 @@ const AdminRoutes = [{
                 {
                     path: '/',
                     redirect: 'all-time-table'
+                },
+                {
+                    path: '*',
+                    redirect: 'all-time-table'
                 }
             ]
 
-        }
+        },
         // children Route End
+        {
+            path: '/',
+            redirect: 'dash-board'
+        },
+        {
+            path: '*',
+            redirect: 'dash-board'
+        }
     ]
 
 }];
