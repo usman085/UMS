@@ -13,9 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/login', 'ApiController\AuthApi\AuthApiController@login')->name('login.api');
+Route::post('/register','ApiController\AuthApi\AuthApiController@register')->name('register.api');
+Route::post('/logout', 'Auth\ApiAuthController@logout')->name('logout.api');
 
-Route::Post('/feedback','FeedbackController@store');
-Route::Get('/feedbackView','FeedbackController@view');
+Route::post('/check',function(){
+    return "fd";
+})->middleware('auth:api');
