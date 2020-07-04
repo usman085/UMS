@@ -21,7 +21,18 @@ import Chart from './chart/chart';
 import MainAppComponent from './components/MainComponent';
 
 import './filters/filters';
+import axios from 'axios';
 
+axios.interceptors.response.use(
+    response => response,
+    (error) => {
+        if (error.response.status === 401) {
+            localStorage.removeItem('adminLogin');
+            this.$router.push('/login');
+        }
+        return Promise.reject(error);
+    },
+);
 
 
 
