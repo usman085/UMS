@@ -14,8 +14,8 @@
 
 // *** Index Route Render Vue App
 
-Route::get('/login', 'ApiController\AuthApi\AuthController@login');
 
-// Route::get('/{any}', function(){
-//     return view('index');
-// })->where('any', '.*');
+
+Route::get('/{any}', function(){
+    return view('index');
+})->where('any', '.*');
