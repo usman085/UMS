@@ -25,6 +25,7 @@ const store = new Vuex.Store({
         AddCourseModal: false,
         NotificationEditorModal: false,
         senderSelect: '',
+        overlay: false,
         days: [
             "Monday",
             "Tuesday",
@@ -39,6 +40,9 @@ const store = new Vuex.Store({
     },
     //  *** Mutations Function
     mutations: {
+        overlay(state) {
+            state.overlay = !state.overlay;
+        },
         NotificationPreviewModal(state) {
             state.NotificationPreviewModal = !state.NotificationPreviewModal;
         },
@@ -75,6 +79,9 @@ const store = new Vuex.Store({
     },
     // *** Action Functions
     actions: {
+        overlay(context) {
+            context.commit('overlay');
+        },
         NotificationPreviewModal(context) {
             context.commit('NotificationPreviewModal');
         },

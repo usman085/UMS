@@ -1,11 +1,6 @@
 <template>
 <v-app id="inspire">
-    <div class="text-center">
-        <v-overlay :value="overlay">
-            <v-progress-circular indeterminate size="64"></v-progress-circular>
-            <p>{{ routeMessage }}</p>
-        </v-overlay>
-    </div>
+   
     <v-content>
         <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
@@ -35,12 +30,15 @@
             </v-row>
         </v-container>
     </v-content>
+    <pacer :message="'Authenticating.....'"></pacer>
 </v-app>
 </template>
 
 <script>
+import pacer from '../CommonGobalComponent/Pacer';
 export default {
     name: "login",
+    components:{pacer},
     data() {
         return {
             routeMessage:'',
@@ -60,8 +58,7 @@ export default {
     },
     methods: {
         loginValidate: function () {
-            this.overlay=true;
-            this.routeMessage='Authenticating......';
+            this.$store.dispatch('overlay');
             axios.post(process.env.MIX_APP_URL + '/login', {
                     'email': this.email,
                     'password': this.password
@@ -83,11 +80,11 @@ export default {
                         });
 
                     }
-                     this.overlay=false;
+                     this.$store.dispatch('overlay');
                 })
                 .catch((err) => {
                     this.error = "User Does Not Exist";
-                    this.overlay=false;
+                    this.$store.dispatch('overlay');
                 });
 
         }
