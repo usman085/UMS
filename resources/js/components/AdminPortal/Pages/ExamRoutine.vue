@@ -1,16 +1,10 @@
 <template>
-
-<div>
-<ExamRoutineBlock></ExamRoutineBlock>
-</div>
-
+  <div>
+    <router-view></router-view>
+  </div>
 </template>
 <script>
-import ExamRoutineBlock from "../PartialComponents/ExamRoutineBlock";
-export default{
-    name :"ExamRoutine",
-    components:{
-        ExamRoutineBlock
-    }
-}
+export default {
+  name: "ExamRoutine"
+};
 </script>

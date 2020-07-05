@@ -22,6 +22,11 @@ const store = new Vuex.Store({
         TimeTableDetailModal: false,
         AddProgramModal: false,
         AddCourseModal: false,
+        AddExamModal: false,
+        AddExamRoutineModal: false,
+        AssignOutlineModal: false,
+        AssignCoursesModal: false,
+
 
         days: [
             "Monday",
@@ -63,6 +68,18 @@ const store = new Vuex.Store({
         },
         AddCourseModalToggle(state) {
             state.AddCourseModal = !state.AddCourseModal;
+        },
+        AssignOutlineModalToggle(state) {
+            state.AssignOutlineModal = !state.AssignOutlineModal;
+        },
+        AssignCoursesModalToggle(state) {
+            state.AssignCoursesModal = !state.AssignCoursesModal;
+        },
+        AddExamModalToggle(state) {
+            state.AddExamModal = !state.AddExamModal;
+        },
+        AddExamRoutineModalToggle(state) {
+            state.AddExamRoutineModal = !state.AddExamRoutineModal;
         }
     },
     // *** Action Functions
@@ -93,7 +110,20 @@ const store = new Vuex.Store({
         },
         AddCourseModalToggle(context) {
             context.commit("AddCourseModalToggle");
-        }
+        },
+        AddExamModalToggle(context) {
+            context.commit("AddExamModalToggle");
+        },
+        AddExamRoutineModalToggle(context) {
+            context.commit("AddExamRoutineModalToggle");
+        },
+        AssignOutlineModalToggle(context) {
+            context.commit("AssignOutlineModalToggle");
+        },
+        AssignCoursesModalToggle(context) {
+            context.commit("AssignCoursesModalToggle");
+        },
+
 
 
     }

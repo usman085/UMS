@@ -1,12 +1,15 @@
 // *** Import Admin Portal Component 
 import AdminPortal from '../components/AdminPortal/AppAdminPortalComponent';
 import AdminDashboard from '../components/AdminPortal/Pages/AdminDashboard';
-import ExamRoutine from '../components/AdminPortal/Pages/ExamRoutine';
 import ManageCourse from '../components/AdminPortal/Pages/ManageCourse';
 import ManageProgram from '../components/AdminPortal/Pages/ManageProgram';
 import feedback from '../components/CommonGobalComponent/feedbackComponent';
 import customSupport from '../components/CommonGobalComponent/customSupport';
 import registerStudent from '../components/AdminPortal/Pages/RegisterStudent';
+import ExamRoutine from '../components/AdminPortal/Pages/ExamRoutine';
+import ExamRoutineBlock from '../components/AdminPortal/PartialComponents/ExamRoutineBlock';
+import examRoutinePreview from '../components/AdminPortal/PartialComponents/ExamRoutinePreview';
+import AddExamRoutine from '../components/AdminPortal/PartialComponents/AddExamRoutine';
 import MangeTimeTable from '../components/AdminPortal/Pages/MangeTimeTable';
 import AllTimeTable from '../components/AdminPortal/PartialComponents/AllTimeTable';
 import createTimeTable from '../components/AdminPortal/PartialComponents/createTimeTable';
@@ -47,36 +50,26 @@ const AdminRoutes = [{
             // *** ManageProgram Route
             path: 'exam-routine',
             component: ExamRoutine,
-            name: 'ExamRoutine'
-        },
-        {
-            // *** ManageProgram Route
-            path: 'manage-program',
-            component: ManageProgram,
-            name: 'ManageProgram'
-        },
-        {
-            path: 'notification',
-            component: notificationPage,
-            name: "AdminNotification"
-        },
-        {
-            // *** ManageProgram Route
-            path: 'manage-course',
-            component: ManageCourse,
-            name: 'ManageCourse'
-        },
-        {
-            // *** Customer Support Route
-            path: 'customer-support',
-            component: customSupport,
-            name: 'customerSupport'
-        },
-        {
-            // *** Feedback Route
-            path: 'feedback',
-            component: feedback,
-            name: 'feedback'
+            children: [{
+                    path: 'exam-routine-block',
+                    component: ExamRoutineBlock,
+                    name: 'ExamRoutineBlock'
+                },
+                {
+                    path: 'add-exam-routine',
+                    component: AddExamRoutine,
+                    name: 'AddExamRoutine'
+                },
+                {
+                    path: 'exam-routine-preview',
+                    component: examRoutinePreview,
+                    name: 'ExamRoutinePreview'
+                },
+                {
+                    path: '/',
+                    redirect: 'exam-routine-block'
+                }
+            ]
         },
         {
             //***  Manage Time Table
@@ -108,7 +101,37 @@ const AdminRoutes = [{
                 }
             ]
 
-        }
+        },
+        {
+            // *** ManageProgram Route
+            path: 'manage-program',
+            component: ManageProgram,
+            name: 'ManageProgram'
+        },
+        {
+            path: 'notification',
+            component: notificationPage,
+            name: "AdminNotification"
+        },
+        {
+            // *** ManageProgram Route
+            path: 'manage-course',
+            component: ManageCourse,
+            name: 'ManageCourse'
+        },
+        {
+            // *** Customer Support Route
+            path: 'customer-support',
+            component: customSupport,
+            name: 'customerSupport'
+        },
+        {
+            // *** Feedback Route
+            path: 'feedback',
+            component: feedback,
+            name: 'feedback'
+        },
+
         // children Route End
     ]
 

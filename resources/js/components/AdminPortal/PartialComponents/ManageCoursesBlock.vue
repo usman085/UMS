@@ -38,7 +38,7 @@
                                             <v-list-item-title>Delete</v-list-item-title>
                                         </v-list-item>
                                         <v-list-item>
-                                            <v-list-item-title>Assign Outline</v-list-item-title>
+                                            <v-list-item-title><v-btn  @click="$store.dispatch('AssignOutlineModalToggle')">Assign Outline</v-btn></v-list-item-title>
                                         </v-list-item>
                                     </v-list>
                                 </v-menu>
@@ -50,15 +50,18 @@
         </v-card-text>
     </v-card>
     <AddCoursesModal></AddCoursesModal>
+    <AssignOutlineModal></AssignOutlineModal>
 </div>
 </template>
 
 <script>
+import AssignOutlineModal from './AssignOutlineModal';
 import AddCoursesModal from './AddCourseModal';
 export default {
     name: "ManageCoursesBlock",
     components: {
-        AddCoursesModal
+        AddCoursesModal,
+        AssignOutlineModal
     }
 };
 </script>
