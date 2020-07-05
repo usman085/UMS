@@ -11,13 +11,16 @@
 |
 */
 
-Route::post('/login', 'ApiController\Auth\AuthController@login')->name('login.api');
-Route::post('/register','ApiController\Auth\AuthController@register')->name('register.api');
-// Route::post('/logout', 'Auth\ApiAuthController@logout')->name('logout.api');
+
+Route::post('/login', 'ApiController\Auth\AuthController@login');
+Route::post('/register','ApiController\Auth\AuthController@register');
+
+
 
 Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () {
-    Route::post('/check',function(){
-        return 'hi';
-    });
+  
+    Route::post('/insert-course','ApiController\Course\CourseController@insertCourse');
+    Route::post('/get-all-course','ApiController\Course\CourseController@getCourse');
+    // *** Route Group End ***//
 });
 
