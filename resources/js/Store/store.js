@@ -13,6 +13,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     // *** State Variables
     state: {
+        allCourses: [],
         NotificationPreviewModal: false,
         SubmitAssignmentModal: false,
         ApplicationRequestTimeModal: false,
@@ -46,6 +47,9 @@ const store = new Vuex.Store({
     },
     //  *** Mutations Function
     mutations: {
+        allCourses(state, data) {
+            state.allCourses = data;
+        },
         overlay(state) {
             state.overlay = !state.overlay;
         },
@@ -98,6 +102,9 @@ const store = new Vuex.Store({
     },
     // *** Action Functions
     actions: {
+        allCourses(context, data) {
+            context.commit('allCourses', data);
+        },
         overlay(context) {
             context.commit('overlay');
         },

@@ -13,18 +13,17 @@
                 <template v-slot:default>
                     <thead>
                         <tr>
-                            <th class="text-left">Course Title</th>
                             <th class="text-left">Course Code</th>
-                            <th class="text-left">CreditHours</th>
+                            <th class="text-left">Course Title</th>
+                            <th class="text-left">Credit Hour</th>
                             <th class="text-left">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Web Engineering</td>
-                            <td>SEW-402</td>
-                            <td>4(3-1)</td>
-
+                        <tr v-for="item in $store.state.allCourses" :key="item.id">
+                            <td>{{item.course_code}}</td>
+                            <td>{{item.course_title}}</td>
+                            <td>{{item.credit_hours}}</td>
                             <td>
                                 <v-menu offset-y>
                                     <template v-slot:activator="{ on, attrs }">
@@ -42,6 +41,11 @@
                                         </v-list-item>
                                     </v-list>
                                 </v-menu>
+                                <!-- <span class="text-right outline-status">
+                                    <v-chip>
+                                        <v-icon>mdi-information-variant</v-icon>
+                                    </v-chip>
+                                </span> -->
                             </td>
                         </tr>
                     </tbody>
@@ -55,13 +59,47 @@
 </template>
 
 <script>
-import AssignOutlineModal from './AssignOutlineModal';
+import EventBus from '../../../EventBus/eventBus';
 import AddCoursesModal from './AddCourseModal';
+
 export default {
     name: "ManageCoursesBlock",
     components: {
-        AddCoursesModal,
-        AssignOutlineModal
+        AddCoursesModal
+    },
+    data() {
+        return {
+            allCourses: []
+        };
+    },
+    methods: {
+        getCourse: function () {
+            let data = cryptoJSON.decrypt(JSON.parse(localStorage.getItem('adminLogin')), 'ums');
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer  ' + data.token
+            }
+            console.log(headers);
+            axios.post(process.env.MIX_APP_URL + '/get-all-course', '', {
+                    headers: headers
+                })
+                .then((res) => {
+                    this.$store.dispatch('allCourses', res.data.courses);
+                })
+                .catch((err) => {
+                    if (error.response.status === 401) {
+                        this.$router.push({
+                            name: 'login'
+                        })
+                    }
+                })
+        },
+    },
+    created() {
+        EventBus.$on('courseEdited', () => this.getCourse());
+        this.$store.dispatch('overlay');
+        this.getCourse();
+
     }
 };
 </script>
@@ -75,5 +113,8 @@ export default {
 
 .status-chip {
     color: white;
+}
+.outline-status{
+    float: right;
 }
 </style>
