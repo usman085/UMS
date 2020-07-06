@@ -18,9 +18,11 @@ Route::post('/register','ApiController\Auth\AuthController@register');
 
 
 Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () {
-  
+     
     Route::post('/insert-course','ApiController\Course\CourseController@insertCourse');
     Route::post('/get-all-course','ApiController\Course\CourseController@getCourse');
+    Route::post('/del-course','ApiController\Course\CourseController@delCourse');
+    Route::post('/edit-course','ApiController\Course\CourseController@editCourse');
     // *** Route Group End ***//
 });
 

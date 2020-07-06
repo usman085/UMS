@@ -4,7 +4,7 @@
         <v-dialog scrollable="" v-model="dialog" persistent max-width="600px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Add a New Course</span>
+                    <span class="headline">{{ editRowMessage ? 'Update Course' :' Add A New' }} Course</span>
                 </v-card-title>
                 <v-card-text>
                     <v-container>
@@ -28,14 +28,15 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn small color="error" @click="$store.dispatch('AddCourseModalToggle')">Close</v-btn>
-                    <v-btn small :disabled="!valid" color="primary" @click="insertCourse()">Add</v-btn>
+                    <v-btn small color="error" @click="$store.dispatch('AddCourseModalToggle');$refs.form.reset();">Close</v-btn>
+                    <v-btn small :disabled="!valid" v-if="!editRowMessage" color="primary" @click="insertCourse()">Add</v-btn>
+                    <v-btn small :disabled="!valid" v-else color="primary" @click="editCourse()">Update</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
     </v-row>
     <v-snackbar top right v-model="snackbar" color="success">
-        Course is Added successfully!
+        {{succesMessage}}
 
         <template v-slot:action="{ attrs }">
             <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
@@ -48,15 +49,11 @@
 import EventBus from '../../../EventBus/eventBus';
 export default {
     name: "AddCourseModel",
+    props: ['editData', 'editRowMessage'],
     data() {
         return {
             valid: true,
             snackbar: false,
-            courseDetail: {
-                course_title: '',
-                course_code: "",
-                credit_hours: ''
-            },
             FieldRules: [
                 v => !!v || 'This Field is required'
             ],
@@ -64,39 +61,72 @@ export default {
         };
     },
     methods: {
-       
-        insertCourse: function () {
-            let data = cryptoJSON.decrypt(JSON.parse(localStorage.getItem('adminLogin')), 'ums');
-            const headers = {
+        succesCall: function () {
+            this.$refs.form.reset();
+            this.$store.dispatch('AddCourseModalToggle');
+            this.snackbar = true;
+            EventBus.$emit('courseEdited');
+        },
+        editCourse: function () {
+            console.log(this.editData);
+            let headers = {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer  ' + data.token
+                'Authorization': 'Bearer  ' + this.userAuth.token
             }
-            console.log(headers);
+            axios.post(process.env.MIX_APP_URL + '/edit-course', this.courseDetail, {
+                    headers: headers
+                })
+                .then((res) => {
+                    this.succesMessage = 'Course was Update Successfully'
+                    this.succesCall()
+                })
+                .catch((err) => {
+                    if (error.response.status === 401) {
+                        this.$router.push({
+                            name: 'login'
+                        })
+                    }
+                })
+        },
+        insertCourse: function () {
+            let headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer  ' + this.userAuth.token
+            }
             axios.post(process.env.MIX_APP_URL + '/insert-course', this.courseDetail, {
                     headers: headers
                 })
                 .then((res) => {
-                    console.log(res);
-                    this.$refs.form.reset();
-                    this.$store.dispatch('AddCourseModalToggle');
-                    this.snackbar = true;
-                    EventBus.$emit('courseEdited');
+                    this.succesMessage = 'Course was Add Successfully';
+                    this.succesCall()
                 })
                 .catch((err) => {
-                     if (error.response.status === 401) {
-                        this.$router.push({name: 'login'})
+                    if (error.response.status === 401) {
+                        this.$router.push({
+                            name: 'login'
+                        })
                     }
                 })
-            
 
         }
     },
     computed: {
+        userAuth: function () {
+            return cryptoJSON.decrypt(JSON.parse(localStorage.getItem('adminLogin')), 'ums');
+        },
         dialog: function () {
             return this.$store.state.AddCourseModal;
-        }
+        },
+        courseDetail: function () {
+            return {
+                id: this.editData.id,
+                course_title: this.editData.course_title,
+                course_code: this.editData.course_code,
+                credit_hours: this.editData.credit_hours
+            }
+        },
     },
-    
+
 };
 </script>
 

@@ -28,7 +28,7 @@ axios.interceptors.response.use(
     (error) => {
         if (error.response.status === 401) {
             localStorage.removeItem('adminLogin');
-            this.$router.push('/login');
+            $router.push('/login');
         }
         return Promise.reject(error);
     },
