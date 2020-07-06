@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,9 +11,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/login', 'ApiController\Auth\AuthController@login')->name('login.api');
+Route::post('/register','ApiController\Auth\AuthController@register')->name('register.api');
+// Route::post('/logout', 'Auth\ApiAuthController@logout')->name('logout.api');
+
+Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () {
+    Route::post('/check',function(){
+        return 'hi';
+    });
 });
 
-Route::Post('/feedback','FeedbackController@store');
-Route::Get('/feedbackView','FeedbackController@view');

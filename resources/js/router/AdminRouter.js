@@ -16,6 +16,9 @@ import createTimeTable from '../components/AdminPortal/PartialComponents/createT
 import PreviewTimeTable from '../components/AdminPortal/PartialComponents/PreviewTimeTable';
 import EditTimeTable from '../components/AdminPortal/PartialComponents/EditTimeTable';
 import notificationPage from '../components/AdminPortal/Pages/Notification';
+import ManageApplication from '../components/AdminPortal/Pages/ManageApplication';
+import ManageApplicationBlock from '../components/AdminPortal/PartialComponents/ManageApplicationBlock';
+import ApplicationDetailView from '../components/AdminPortal/PartialComponents/ApplicationDetailView';
 //**** ****  Import Guard Router 
 import {
     guardRouteAdmin
@@ -48,6 +51,7 @@ const AdminRoutes = [{
         },
         {
             // *** ManageProgram Route
+
             path: 'exam-routine',
             component: ExamRoutine,
             children: [{
@@ -70,6 +74,58 @@ const AdminRoutes = [{
                     redirect: 'exam-routine-block'
                 }
             ]
+        },
+        {
+            path: 'manage-program',
+            component: ManageProgram,
+            name: 'ManageProgram'
+        }, {
+            path: 'Manage-Application',
+            component: ManageApplication,
+            name: 'ManageApplication',
+            children: [{
+                    path: 'Application-inbox',
+                    component: ManageApplicationBlock,
+                    name: 'AdminApplicationInbox'
+                },
+                {
+                    path: 'application-detail-view/:id/:slug',
+                    component: ApplicationDetailView,
+                    name: 'ViewApplication'
+                },
+                {
+                    path: '',
+                    redirect: 'Application-inbox'
+                },
+                {
+                    path: '*',
+                    redirect: 'Application-inbox'
+                }
+            ]
+        },
+        {
+            path: 'notification',
+            component: notificationPage,
+            name: "AdminNotification"
+        },
+        {
+            // *** ManageProgram Route
+            path: 'manage-course',
+            component: ManageCourse,
+            name: 'ManageCourse'
+        },
+        {
+            // *** Customer Support Route
+            path: 'customer-support',
+            component: customSupport,
+            name: 'customerSupport'
+        },
+        {
+            // *** Feedback Route
+            path: 'feedback',
+            component: feedback,
+            name: 'feedback'
+
         },
         {
             //***  Manage Time Table
@@ -98,11 +154,14 @@ const AdminRoutes = [{
                 {
                     path: '/',
                     redirect: 'all-time-table'
+                },
+                {
+                    path: '*',
+                    redirect: 'all-time-table'
                 }
             ]
 
-        },
-        {
+        }, {
             // *** ManageProgram Route
             path: 'manage-program',
             component: ManageProgram,
@@ -132,7 +191,16 @@ const AdminRoutes = [{
             name: 'feedback'
         },
 
+
         // children Route End
+        {
+            path: '/',
+            redirect: 'dash-board'
+        },
+        {
+            path: '*',
+            redirect: 'dash-board'
+        }
     ]
 
 }];

@@ -13,6 +13,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     // *** State Variables
     state: {
+        NotificationPreviewModal: false,
         SubmitAssignmentModal: false,
         ApplicationRequestTimeModal: false,
         AssignmentDetailPageModal: false,
@@ -22,11 +23,14 @@ const store = new Vuex.Store({
         TimeTableDetailModal: false,
         AddProgramModal: false,
         AddCourseModal: false,
+
         AddExamModal: false,
         AddExamRoutineModal: false,
         AssignOutlineModal: false,
         AssignCoursesModal: false,
-
+        NotificationEditorModal: false,
+        senderSelect: '',
+        overlay: false,
 
         days: [
             "Monday",
@@ -42,6 +46,12 @@ const store = new Vuex.Store({
     },
     //  *** Mutations Function
     mutations: {
+        overlay(state) {
+            state.overlay = !state.overlay;
+        },
+        NotificationPreviewModal(state) {
+            state.NotificationPreviewModal = !state.NotificationPreviewModal;
+        },
         TimeTableDetailModal(state) {
             state.TimeTableDetailModal = !state.TimeTableDetailModal;
         },
@@ -69,6 +79,7 @@ const store = new Vuex.Store({
         AddCourseModalToggle(state) {
             state.AddCourseModal = !state.AddCourseModal;
         },
+
         AssignOutlineModalToggle(state) {
             state.AssignOutlineModal = !state.AssignOutlineModal;
         },
@@ -80,10 +91,22 @@ const store = new Vuex.Store({
         },
         AddExamRoutineModalToggle(state) {
             state.AddExamRoutineModal = !state.AddExamRoutineModal;
-        }
+        },
+        NotificationEditorModal(state) {
+            state.NotificationEditorModal = !state.NotificationEditorModal;
+        },
     },
     // *** Action Functions
     actions: {
+        overlay(context) {
+            context.commit('overlay');
+        },
+        NotificationPreviewModal(context) {
+            context.commit('NotificationPreviewModal');
+        },
+        NotificationEditorModal(context) {
+            context.commit('NotificationEditorModal');
+        },
         TimeTableDetailModal(context) {
             context.commit("TimeTableDetailModal");
         },
