@@ -13,6 +13,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     // *** State Variables
     state: {
+        allProgram: [],
         allCourses: [],
         NotificationPreviewModal: false,
         SubmitAssignmentModal: false,
@@ -47,6 +48,9 @@ const store = new Vuex.Store({
     },
     //  *** Mutations Function
     mutations: {
+        allProgram(state, data) {
+            state.allProgram = data;
+        },
         allCourses(state, data) {
             state.allCourses = data;
         },
@@ -102,6 +106,9 @@ const store = new Vuex.Store({
     },
     // *** Action Functions
     actions: {
+        allProgram(context, data) {
+            context.commit('allProgram', data);
+        },
         allCourses(context, data) {
             context.commit('allCourses', data);
         },

@@ -61,11 +61,15 @@
 <script>
 import EventBus from '../../../EventBus/eventBus';
 import AddCoursesModal from './AddCourseModal';
+import  AssignOutlineModal from './AddCourseModal'
 
 export default {
     name: "ManageCoursesBlock",
     components: {
-        AddCoursesModal
+        AddCoursesModal,
+    AssignOutlineModal
+
+        
     },
     data() {
         return {

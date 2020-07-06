@@ -70,7 +70,6 @@ export default {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer  ' + data.token
             }
-            console.log(headers);
             axios.post(process.env.MIX_APP_URL + '/insert-course', this.courseDetail, {
                     headers: headers
                 })

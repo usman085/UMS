@@ -3,10 +3,10 @@ namespace App\Repositories\Interfaces;
 
 interface CourseInterface{
  /**
-  * Inster Course
+  * Insert Course
   *
   * @param request
-  * @return Response Insteed Data
+  * @return Response Insert Data
   */
     public function insertCourse($request);
   /**

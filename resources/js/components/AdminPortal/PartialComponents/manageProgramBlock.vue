@@ -21,11 +21,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Bachelor of Software Engineering</td>
-                <td>BSSE</td>
-                <td>4 year</td>
-                <td>8</td>
+              <tr v-for="item in $store.state.allProgram " :key="item.id">
+                <td>{{ item.program_title }}</td>
+                <td>{{ item.program_short_title }}</td>
+                <td>{{ item.no_of_semester }}</td>
+                <td>{{ item.program_duration }}</td>
 
                 <td>
                   <v-menu offset-y>
@@ -37,7 +37,7 @@
                         <v-list-item-title>Modify</v-list-item-title>
                       </v-list-item>
                       <v-list-item>
-                        <v-list-item-title>Delete</v-list-item-title>
+                        <v-btn small color="primary"   @click="deleteItem(item.id)" class="create-btn pa-1">Delete</v-btn>
                       </v-list-item>
                       <v-list-item>
                         <v-list-item-title>Assign Courses</v-list-item-title>
@@ -65,13 +65,55 @@
 </template>
 
 <script>
+import EventBus from "../../../EventBus/eventBus";
 import AssignCoursesModal from "./AssignCoursesModal";
 import AddProgramModal from "./AddProgramModal";
 export default {
   name: "manageProgramblock",
+  data() {
+    return {
+      allProgram: []
+    };
+  },
   components: {
     AddProgramModal,
     AssignCoursesModal
+  },
+  methods: {
+    deleteItem:function(id){
+      alert(id);
+    },
+    getProgram: function() {
+      let data = cryptoJSON.decrypt(
+        JSON.parse(localStorage.getItem("adminLogin")),
+        "ums"
+      );
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer  " + data.token
+      };
+      console.log(headers);
+      axios
+        .post(process.env.MIX_APP_URL + "/get-program", "", {
+          headers: headers
+        })
+        .then(res => {
+          console.log(res);
+          this.$store.dispatch("allProgram", res.data.allProgram);
+        })
+        .catch(err => {
+          if (error.response.status === 401) {
+            this.$router.push({
+              name: "login"
+            });
+          }
+        });
+    }
+  },
+  created() {
+    EventBus.$on("programEdited", () => this.getProgram());
+    this.$store.dispatch("overlay");
+    this.getProgram();
   }
 };
 </script>
