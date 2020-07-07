@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ApiController\Program;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Repositories\Interfaces\ProgramInterface;
 
 class ProgramController extends Controller
@@ -37,8 +38,32 @@ class ProgramController extends Controller
      * 
      * @return Response  All program
      */
-    public function getProgram(){
+    public function getProgram()
+    {
         return $this->programRepository->getProgram();
     }
 
+    public function deleteProgram( Request $request ) 
+    {
+        $validator = Validator::make( $request->all(), 
+        [
+            'id' => 'required',
+        ]);
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
+        return   $this->programRepository->deleteProgram( $request );
+    }
+      public function editProgram( Request $request ) {
+        $validator = Validator::make( $request->all(), [
+            'program_title'=> 'required',
+            'program_short_title'=>'required',
+            'program_duration'=>'required',
+            'no_of_semester'=>'required',
+        ] );
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
+        return $this->programRepository->editProgram( $request );
+    }
 }

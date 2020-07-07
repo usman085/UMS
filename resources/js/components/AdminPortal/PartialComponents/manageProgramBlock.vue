@@ -33,14 +33,14 @@
                       <v-icon color="primary" v-bind="attrs" v-on="on">mdi-dots-vertical</v-icon>
                     </template>
                     <v-list>
-                      <v-list-item>
+                      <v-list-item @click="editProgram(item.id)">
                         <v-list-item-title>Modify</v-list-item-title>
                       </v-list-item>
-                      <v-list-item>
-                        <v-btn small color="primary"   @click="deleteItem(item.id)" class="create-btn pa-1">Delete</v-btn>
+                      <v-list-item @click="deleteItem(item.id)">
+                        <v-list-item-title>Delete</v-list-item-title>
                       </v-list-item>
                       <v-list-item>
-                        <v-list-item-title>Assign Courses</v-list-item-title>
+                        <v-list-item-title>Asssssign Courses</v-list-item-title>
                       </v-list-item>
                       <v-list-item>
                         <v-btn
@@ -58,9 +58,15 @@
           </template>
         </v-simple-table>
       </v-card-text>
+      <v-snackbar top right v-model="snackbar" color="success">
+        {{succesMessage}}
+        <template v-slot:action="{ attrs }">
+          <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+        </template>
+      </v-snackbar>
     </v-card>
     <AssignCoursesModal></AssignCoursesModal>
-    <AddProgramModal></AddProgramModal>
+    <AddProgramModal :editData="editRow" :editRowMessage="editRowMessage"></AddProgramModal>
   </div>
 </template>
 
@@ -70,18 +76,66 @@ import AssignCoursesModal from "./AssignCoursesModal";
 import AddProgramModal from "./AddProgramModal";
 export default {
   name: "manageProgramblock",
+
   data() {
     return {
-      allProgram: []
+      succesMessage: "",
+      snackbar: false,
+      editRowMessage: false,
+      allProgram: [],
+      editRow: {
+        id: "",
+        program_title: "",
+        program_short_title: "",
+        program_duration: "",
+        no_of_semester: ""
+      }
     };
   },
   components: {
     AddProgramModal,
     AssignCoursesModal
   },
+  computed: {
+    userAuth: function() {
+      return cryptoJSON.decrypt(
+        JSON.parse(localStorage.getItem("adminLogin")),
+        "ums"
+      );
+    }
+  },
   methods: {
-    deleteItem:function(id){
-      alert(id);
+    editProgram: function(id) {
+      let editData = this.$store.state.allProgram.filter(item => item.id == id);  
+      this.editRow.id = editData[0].id;
+      this.editRow.program_title = editData[0].program_title;
+      this.editRow.program_short_title = editData[0].program_short_title;
+      this.editRow.program_duration= editData [0].program_duration;
+      this.editRow.no_of_semester = editData[0].no_of_semester;
+      this.editRowMessage = true;
+      this.$store.dispatch("AddProgramModalToggle");
+    },
+    deleteItem: function(id) {
+      let headers = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer  " + this.userAuth.token
+      };
+      axios
+        .post(
+          process.env.MIX_APP_URL + "/del-program",
+          {
+            id: id
+          },
+          {
+            headers: headers
+          }
+        )
+        .then(res => {
+          this.snackbar = true;
+          this.succesMessage = "Program Delete Successfully!";
+          this.getProgram();
+        })
+        .catch(err => alert(err));
     },
     getProgram: function() {
       let data = cryptoJSON.decrypt(
@@ -98,7 +152,6 @@ export default {
           headers: headers
         })
         .then(res => {
-          console.log(res);
           this.$store.dispatch("allProgram", res.data.allProgram);
         })
         .catch(err => {
@@ -111,7 +164,10 @@ export default {
     }
   },
   created() {
-    EventBus.$on("programEdited", () => this.getProgram());
+    EventBus.$on("EditProgram", () => {
+      this.getProgram();
+      this.editRowMessage = false;
+    });
     this.$store.dispatch("overlay");
     this.getProgram();
   }

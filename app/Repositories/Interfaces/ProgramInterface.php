@@ -16,4 +16,8 @@ interface ProgramInterface{
   * @return Response All program
   */
     public function getProgram();
+
+    public function deleteProgram( $request );
+
+    public function editProgram( $request );
 }
