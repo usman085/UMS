@@ -1,15 +1,17 @@
 <?php
 namespace App\Repositories\Interfaces;
 
-interface CourseInterface {
+interface CourseInterface 
+{
     /**
-    * Inster Course
+    * Insert Course
     *
     * @param request
-    * @return Response Insteed Data
+    * @return Response Insert Data
     */
 
     public function insertCourse( $request );
+
     /**
     * Get All Course
     *
@@ -19,7 +21,21 @@ interface CourseInterface {
 
     public function getCourse();
 
+    /**
+    * Delete Course
+    *
+    * @param request
+    * @return Response Delete Data
+    */
+
     public function delCourse( $request );
+
+    /**
+    * Edit Course
+    *
+    * @param request
+    * @return Response Edit Data
+    */
 
     public function editCourse( $request );
 }

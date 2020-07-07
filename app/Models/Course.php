@@ -7,17 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
      /**
-     * The attributes that are mass assignable.
+     *  All attributes  must  have value 
      *
      * @var array
      */
-    protected $fillable = [
+
+    protected $fillable = 
+    [
         'course_code', 'course_title', 'credit_hours','course_outline'
     ];
+
     /**
-     * RelationShip
+     * RelationShip Course Has Many Programs 
      */
-    public function AssignToProgram(){
+
+    public function AssignToProgram()
+    {
         
         return $this->belongsToMany('App\Models\Program');
     }

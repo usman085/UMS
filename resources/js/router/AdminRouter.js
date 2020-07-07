@@ -31,7 +31,7 @@ const AdminRoutes = [{
     /* *** Admin Portal Router With Guard Function  *** */
     path: '/admin-portal',
     component: AdminPortal,
-    name: 'adminPortal',
+    // name: 'adminPortal',
     beforeEnter: guardRouteAdmin,
     // **** Root Router End
 
@@ -82,7 +82,7 @@ const AdminRoutes = [{
         }, {
             path: 'Manage-Application',
             component: ManageApplication,
-            name: 'ManageApplication',
+            // name: 'ManageApplication',
             children: [{
                     path: 'Application-inbox',
                     component: ManageApplicationBlock,
@@ -103,30 +103,30 @@ const AdminRoutes = [{
                 }
             ]
         },
-        {
-            path: 'notification',
-            component: notificationPage,
-            name: "AdminNotification"
-        },
-        {
-            // *** ManageProgram Route
-            path: 'manage-course',
-            component: ManageCourse,
-            name: 'ManageCourse'
-        },
-        {
-            // *** Customer Support Route
-            path: 'customer-support',
-            component: customSupport,
-            name: 'customerSupport'
-        },
-        {
-            // *** Feedback Route
-            path: 'feedback',
-            component: feedback,
-            name: 'feedback'
+        // {
+        //     path: 'notification',
+        //     component: notificationPage,
+        //     name: "AdminNotification"
+        // },
+        // {
+        //     // *** ManageProgram Route
+        //     path: 'manage-course',
+        //     component: ManageCourse,
+        //     name: 'ManageCourse'
+        // },
+        // {
+        //     // *** Customer Support Route
+        //     path: 'customer-support',
+        //     component: customSupport,
+        //     name: 'customerSupport'
+        // },
+        // {
+        //     // *** Feedback Route
+        //     path: 'feedback',
+        //     component: feedback,
+        //     name: 'feedback'
 
-        },
+        // },
         {
             //***  Manage Time Table
             path: 'Mange-Time-Table',
@@ -162,12 +162,6 @@ const AdminRoutes = [{
             ]
 
         }, {
-            // *** ManageProgram Route
-            path: 'manage-program',
-            component: ManageProgram,
-            name: 'ManageProgram'
-        },
-        {
             path: 'notification',
             component: notificationPage,
             name: "AdminNotification"
@@ -178,19 +172,6 @@ const AdminRoutes = [{
             component: ManageCourse,
             name: 'ManageCourse'
         },
-        {
-            // *** Customer Support Route
-            path: 'customer-support',
-            component: customSupport,
-            name: 'customerSupport'
-        },
-        {
-            // *** Feedback Route
-            path: 'feedback',
-            component: feedback,
-            name: 'feedback'
-        },
-
 
         // children Route End
         {

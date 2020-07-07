@@ -1,15 +1,16 @@
 <template>
-<div>
+  <div>
     <manageProgramblock></manageProgramblock>
-</div>
+  </div>
 </template>
 
 <script>
-import manageProgramblock from '../PartialComponents/manageProgramblock';
+// Import Manage Program Block From Partial Component
+import manageProgramblock from "../PartialComponents/manageProgramblock";
 export default {
-    name: 'ManageProgram',
-    components: {
-        manageProgramblock
-    }
-}
+  name: "ManageProgram",
+  components: {
+    manageProgramblock
+  }
+};
 </script>

@@ -4,7 +4,7 @@
       <v-card-title class="text-center time-header">
         <b class="tmeTableHead">Add Exam Routine</b>
       </v-card-title>
-      <!-- Card Sub title On Inserted Object -->
+      <!--Change  Card Sub title On Inserted Object -->
       <v-card-subtitle>
         <span v-if="!scheduleHead.program == ''">Program : {{ scheduleHead.program | capitalize }}</span>
         <span v-if="!scheduleHead.semester == ''">
@@ -17,6 +17,7 @@
         </span>
         <!-- Edit Icon Base on condition -->
         <span v-if="!scheduleHead.program == '' && !$store.state.TimeTableDetailModal">
+        <!-- Open Add Exam Model To Edit Details -->
           <v-icon @click.stop="$store.dispatch('AddExamModalToggle')">mdi-pencil</v-icon>
         </span>
       </v-card-subtitle>
@@ -63,6 +64,7 @@
       </div>
     </div>
     <div class="addition-card text-center" v-else>
+    <!-- Open Model To Edit Exam Routin -->
       <v-icon class="add-table" @click.stop="$store.dispatch('AddExamModalToggle')">mdi-table-edit</v-icon>
     </div>
     <!-- Conditional Rendering  -->
@@ -74,11 +76,15 @@
 </template>
 
 <script>
-// *** Import Modal
+// *** Import Model From Partial Components
 import AddExamModal from "../PartialComponents/AddExamModal";
-// *** Event Bus
+
+// *** Event Bus Use to Communicate Data Between Two Components
 import EventBus from "../../../EventBus/eventBus";
+
+// *** Import Model From Partial Components
 import AddExamRoutineModal from "../PartialComponents/AddExamRoutineModal";
+
 export default {
   name: "AddExamRoutine",
   components: {
@@ -103,25 +109,27 @@ export default {
         endingTime: "",
         classRoom: ""
       }
-
-      //props for modal buttons
-      // ***Edit Time Array use as a props
     };
   },
   methods: {
-    deleteItem(index) {
-      this.insertExamData.splice(index, 1);
-      // delete last
+    // Open The Model To Add Data
+    AddExamModalToggle: function() {
+      this.$store.dispatch("AddExamModalToggle");
     },
+    // Edit Data Function Is use to Edit Row Data
     editData(index) {
       this.EditExamData = this.insertExamData[index];
       this.updateBtn = true;
       this.$store.dispatch("AddExamRoutineModalToggle");
     },
-    AddExamModalToggle: function() {
-      this.$store.dispatch("AddExamModalToggle");
+    
+    // Delete item Function Delete The Desired Row
+    deleteItem(index) {
+      this.insertExamData.splice(index, 1);
+    
     },
-
+    
+    // randStr function Is Use To Generate Random String For Id 
     randStr(len) {
       let text = "";
       let chars = "abcdefghijklmnopqrstuvwxyz";
@@ -132,19 +140,8 @@ export default {
     }
   },
   mounted() {
-    EventBus.$on("updateExamData", data => {
-      this.insertExamData.filter(item => {
-        this.updateBtn = false;
-        if (item.id == data.id) {
-          item.day = data.day;
-          item.date = data.date;
-          item.classRoom = data.classRoom;
-          item.startingtime = data.startingtime;
-          item.endingTime = data.endingTime;
-          item.subject = data.subject;
-        }
-      });
-    });
+    
+    // Listen The data Recieve From  insertExamData To insert Data
     EventBus.$on("insertExamData", data => {
       let id = this.randStr(6); //Genrate Random String
       // *** Push in array
@@ -158,6 +155,22 @@ export default {
         endingTime: data.endingTime
       });
     });
+
+    // Listen The data Recieve From  updateExamData To update Data
+    EventBus.$on("updateExamData", data => {
+      this.insertExamData.filter(item => {
+        this.updateBtn = false;
+        if (item.id == data.id) {
+          item.day = data.day;
+          item.date = data.date;
+          item.classRoom = data.classRoom;
+          item.startingtime = data.startingtime;
+          item.endingTime = data.endingTime;
+          item.subject = data.subject;
+        }
+      });
+    });
+    
     // *** Add Time Table Detail in array
     EventBus.$on("ExamRoutineDetail", data => {
       this.scheduleHead.program = data.program;

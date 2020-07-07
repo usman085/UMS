@@ -64,7 +64,9 @@
 </template>
 
 <script>
+// *** Importing Event Bus
 import EventBus from "../../../EventBus/eventBus";
+
 export default {
   name: "timeTableDetail",
   data: function() {
@@ -82,6 +84,7 @@ export default {
     };
   },
   methods: {
+    // AddTimeTableModel  Use to open Dilog Box 
     AddTimeTableModel() {
       EventBus.$emit("timeTableDetail", this.scheduleHead);
       this.$store.dispatch("TimeTableDetailModal");
