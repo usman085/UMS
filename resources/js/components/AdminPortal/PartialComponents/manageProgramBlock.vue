@@ -39,15 +39,17 @@
                       <v-list-item @click="deleteItem(item.id)">
                         <v-list-item-title>Delete</v-list-item-title>
                       </v-list-item>
-                      <v-list-item>
-                        <v-list-item-title>Asssssign Courses</v-list-item-title>
+                       <v-list-item>
+                        <v-list-item-title @click="addCourseModal(item)">
+                        <v-icon color="primary">mdi-plus</v-icon>Add Course
+                        </v-list-item-title>
                       </v-list-item>
                       <v-list-item>
                         <v-btn
                           small
                           color="primary"
                           class="create-btn pa-1"
-                          @click="$store.dispatch('AssignCoursesModalToggle')"
+                          @click="assigedCourses(item.id)"
                         >Assigned Course</v-btn>
                       </v-list-item>
                     </v-list>
@@ -65,7 +67,8 @@
         </template>
       </v-snackbar>
     </v-card>
-    <AssignCoursesModal></AssignCoursesModal>
+    <AssignCoursesModal :AssignCourseData="AssignCourseData"></AssignCoursesModal>
+  <CourseAssignModal></CourseAssignModal>
     <AddProgramModal :editData="editRow" :editRowMessage="editRowMessage"></AddProgramModal>
   </div>
 </template>
@@ -74,11 +77,13 @@
 import EventBus from "../../../EventBus/eventBus";
 import AssignCoursesModal from "./AssignCoursesModal";
 import AddProgramModal from "./AddProgramModal";
+import CourseAssignModal from './CourseAssignModal';
 export default {
   name: "manageProgramblock",
 
   data() {
     return {
+      AssignCourseData:[],
       succesMessage: "",
       snackbar: false,
       editRowMessage: false,
@@ -94,7 +99,8 @@ export default {
   },
   components: {
     AddProgramModal,
-    AssignCoursesModal
+    AssignCoursesModal,
+    CourseAssignModal
   },
   computed: {
     userAuth: function() {
@@ -105,6 +111,22 @@ export default {
     }
   },
   methods: {
+    assigedCourses:function(id){
+      let headers={
+        'Content-type':'application/json',
+         'Authorization': "Bearer  " + this.userAuth.token
+      }
+        axios.post(process.env.MIX_APP_URL+'/assign-courses',{'id':id},{headers:headers})
+        .then(res=>{
+            this.AssignCourseData=res.data;
+            this.$store.dispatch('AssignCoursesModalToggle');
+        })
+        .catch(err=>console.log('eer'));
+        
+    },
+    addCourseModal:function(program){
+        console.log(program);
+    },
     editProgram: function(id) {
       let editData = this.$store.state.allProgram.filter(item => item.id == id);  
       this.editRow.id = editData[0].id;
@@ -118,7 +140,7 @@ export default {
     deleteItem: function(id) {
       let headers = {
         "Content-Type": "application/json",
-        Authorization: "Bearer  " + this.userAuth.token
+         'Authorization': "Bearer  " + this.userAuth.token
       };
       axios
         .post(

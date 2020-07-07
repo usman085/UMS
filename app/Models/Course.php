@@ -14,4 +14,11 @@ class Course extends Model
     protected $fillable = [
         'course_code', 'course_title', 'credit_hours','course_outline'
     ];
+    /**
+     * RelationShip
+     */
+    public function AssignToProgram(){
+        
+        return $this->belongsToMany('App\Models\Program');
+    }
 }

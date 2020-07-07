@@ -24,6 +24,9 @@ class ProgramRepository implements ProgramInterface{
             return response( ['Server Error'=>$deleteProgram], 402 );
         }
     }
+    public function AssignCourses($request){
+        return Program::find($request->id)->AssignedCourses()->get();
+    }
     public function editProgram( $request ) {
       
         $editProgram = Program::where( 'id', $request->id )->update( [

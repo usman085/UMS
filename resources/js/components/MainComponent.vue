@@ -7,7 +7,10 @@
 </template>
 
 <script>
+
 export default {
     name: 'MainAppComponent',
 }
-</script>
+
+</script> 
+

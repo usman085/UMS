@@ -9,12 +9,15 @@ interface ProgramInterface{
   * @return Response 
   */
     public function insertProgram($request);
+
    /**
   * Get All program
   *
   * 
   * @return Response All program
   */
+  
+  public function AssignCourses($request);
     public function getProgram();
 
     public function deleteProgram( $request );

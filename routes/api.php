@@ -23,7 +23,7 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/get-all-course','ApiController\Course\CourseController@getCourse');
     Route::post('/del-course','ApiController\Course\CourseController@delCourse');
     Route::post('/edit-course','ApiController\Course\CourseController@editCourse');
-
+    Route::post('/assign-courses','ApiController\Program\ProgramController@AssignCourses');
 
     //  program routes start
     Route::post('/insert-program','ApiController\Program\ProgramController@insertProgram');
@@ -32,8 +32,6 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/edit-program','ApiController\Program\ProgramController@editProgram');
     //  program routes end
 
-
-    
 
     // *** Route Group End ***//
 });
