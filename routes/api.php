@@ -12,7 +12,8 @@
 */
 
 // Auth login Start
-Route::post('/login', 'ApiController\Auth\AuthController@login');
+Route::get('/login', 'ApiController\Auth\AuthController@login')->name('login');
+Route::post('/login', 'ApiController\Auth\AuthController@login')->name('login');
 Route::post('/register','ApiController\Auth\AuthController@register');
 // Auth login end
 
