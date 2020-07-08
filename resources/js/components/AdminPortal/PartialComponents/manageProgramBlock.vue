@@ -1,76 +1,78 @@
 <template>
 <div class="time-table-wrapper">
     <v-card max-width="96%">
-        <v-card-title>
-            Manage Programs
-            <!-- Close The Model -->
-            <v-btn class="create-btn" @click="$store.dispatch('AddProgramModalToggle')">
-                <v-icon>mdi-plus-circle</v-icon>Add New Program
-            </v-btn>
-            <!-- Close The Model -->
-        </v-card-title>
-        <v-card-subtitle>All Programs are manage here.</v-card-subtitle>
-        <v-card-text>
-            <v-simple-table>
-                <template v-slot:default>
-                    <thead>
-                        <tr>
-                            <th class="text-left">Program Title</th>
-                            <th class="text-left">Short Name</th>
-                            <th class="text-left">Duration</th>
-                            <th class="text-left">No of Semesters</th>
-                            <th class="text-left">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+      <v-card-title>
+        Manage Programs
+        <v-btn class="create-btn" @click="$store.dispatch('AddProgramModalToggle')">
+          <v-icon>mdi-plus-circle</v-icon>Add New Program
+        </v-btn>
+      </v-card-title>
+      <v-card-subtitle>All Programs are manage here.</v-card-subtitle>
+      <v-card-text>
+        <v-simple-table>
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th class="text-left">Program Title</th>
+                <th class="text-left">Short Name</th>
+                <th class="text-left">Duration</th>
+                <th class="text-left">No of Semesters</th>
+                <th class="text-left">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in $store.state.allProgram " :key="item.id">
+                <td>{{ item.program_title | capitalize }}</td>
+                <td>{{ item.program_short_title.toUpperCase()}}</td>
+                <td>{{ item.no_of_semester }}</td>
+                <td>{{ item.program_duration + 'Year' }}</td>
 
-                        <tr v-for="item in $store.state.allProgram " :key="item.id">
-                            <td>{{ item.program_title }}</td>
-                            <td>{{ item.program_short_title }}</td>
-                            <td>{{ item.program_duration }}</td>
-                             <td>{{ item.no_of_semester }}</td>
-
-                            <td>
-                                <v-menu offset-y>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="primary" v-bind="attrs" v-on="on">mdi-dots-vertical</v-icon>
-                                    </template>
-                                    <v-list>
-                                        <v-list-item @click="editProgram(item.id)">
-                                            <v-list-item-title>Modify</v-list-item-title>
-                                        </v-list-item>
-                                        <v-list-item @click="deleteItem(item.id)">
-                                            <v-list-item-title>Delete</v-list-item-title>
-                                        </v-list-item>
-                                        <v-list-item>
-                                            <v-list-item-title @click="addCourseModal(item)">
-                                                <v-icon color="primary">mdi-plus</v-icon>Add Course
-                                            </v-list-item-title>
-                                        </v-list-item>
-                                        <v-list-item>
-                                            <v-btn small color="primary" class="create-btn pa-1" @click="assigedCourses(item.id)">Assigned Course</v-btn>
-                                        </v-list-item>
-                                    </v-list>
-                                </v-menu>
-                            </td>
-                        </tr>
-                    </tbody>
-                </template>
-            </v-simple-table>
-        </v-card-text>
-        <v-snackbar top right v-model="snackbar" color="success">
-            {{succesMessage}}
-            <template v-slot:action="{ attrs }">
-                <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
-            </template>
-        </v-snackbar>
+                <td>
+                  <v-menu offset-y>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon color="primary" v-bind="attrs" v-on="on">mdi-dots-vertical</v-icon>
+                    </template>
+                    <v-list>
+                      <v-list-item @click="editProgram(item.id)">
+                        <v-list-item-title>Modify</v-list-item-title>
+                      </v-list-item>
+                      <v-list-item @click="deleteItem(item.id)">
+                        <v-list-item-title>Delete</v-list-item-title>
+                      </v-list-item>
+                       <v-list-item  @click="addCourseModal(item)">
+                        <v-list-item-title>
+                        <v-icon color="primary">mdi-plus</v-icon>Add Course
+                        </v-list-item-title>
+                      </v-list-item>
+                      <v-list-item>
+                        <v-btn
+                          small
+                          color="primary"
+                          class="create-btn pa-1"
+                          @click="assigedCourses(item.id)"
+                        >Assigned Course</v-btn>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
+                </td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+      </v-card-text>
+      <v-snackbar top right v-model="snackbar" color="success">
+        {{succesMessage}}
+        <template v-slot:action="{ attrs }">
+          <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+        </template>
+      </v-snackbar>
     </v-card>
 
     <!-- Assign Courses Model -->
     <AssignCoursesModal :AssignCourseData="AssignCourseData"></AssignCoursesModal>
 
     <!-- Course Assign Model  -->
-    <CourseAssignModal></CourseAssignModal>
+    <CourseAssignModal  :programDetail="programDetail"></CourseAssignModal>
 
     <!-- Add Program Model -->
     <AddProgramModal :editData="editRow" :editRowMessage="editRowMessage"></AddProgramModal>
@@ -106,6 +108,12 @@ export default {
                 program_short_title: "",
                 program_duration: "",
                 no_of_semester: ""
+            },
+            programDetail:{
+              program_title:'',
+              program_duration:'',
+              no_of_semester:'',
+              program_short_title:''
             }
         };
     },
@@ -135,7 +143,8 @@ export default {
 
         },
         addCourseModal: function (program) {
-         console.log(program);
+          this.programDetail=program;
+           this.$store.dispatch('CourseAssignModal');
         },
 
         // **editProgram Function Is use to edit the Desired Program

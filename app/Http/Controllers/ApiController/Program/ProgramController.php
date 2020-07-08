@@ -6,7 +6,7 @@ use App\Repositories\Interfaces\ProgramInterface;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Program;
+
 
 class ProgramController extends Controller
 {
@@ -32,8 +32,18 @@ class ProgramController extends Controller
     * @return Response 
     */
     public function insertProgram(Request $request)
-   
     {
+        $validator = Validator::make( $request->all(), 
+        [
+            'program_title'=> 'required',
+            'program_short_title'=>'required',
+            'program_duration'=>'required',
+            'no_of_semester'=>'required',
+        ]);
+
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
         return $this->programRepository->insertProgram($request);
     }  
     

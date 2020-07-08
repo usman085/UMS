@@ -31,7 +31,7 @@
                                 <v-list-item-title class="text">
                                     <v-item-group>
                                         <v-item>
-                                            <p>{{ child.text }}</p>
+                                            <p class="childP">{{ child.text }}</p>
                                         </v-item>
                                     </v-item-group>
                                 </v-list-item-title>
@@ -198,7 +198,9 @@ export default {
     text-decoration: none;
     /* color: inherit; */
 }
-
+.childP{
+    margin-bottom:0px;
+}
 .child-list-text {
     font-size: 15px;
     /* text-align: right; */
