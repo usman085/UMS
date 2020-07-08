@@ -22,10 +22,10 @@
             </thead>
             <tbody>
               <tr v-for="item in $store.state.allProgram " :key="item.id">
-                <td>{{ item.program_title }}</td>
-                <td>{{ item.program_short_title }}</td>
+                <td>{{ item.program_title | capitalize }}</td>
+                <td>{{ item.program_short_title.toUpperCase()}}</td>
                 <td>{{ item.no_of_semester }}</td>
-                <td>{{ item.program_duration }}</td>
+                <td>{{ item.program_duration + 'Year' }}</td>
 
                 <td>
                   <v-menu offset-y>
@@ -39,8 +39,8 @@
                       <v-list-item @click="deleteItem(item.id)">
                         <v-list-item-title>Delete</v-list-item-title>
                       </v-list-item>
-                       <v-list-item>
-                        <v-list-item-title @click="addCourseModal(item)">
+                       <v-list-item  @click="addCourseModal(item)">
+                        <v-list-item-title>
                         <v-icon color="primary">mdi-plus</v-icon>Add Course
                         </v-list-item-title>
                       </v-list-item>
@@ -68,7 +68,7 @@
       </v-snackbar>
     </v-card>
     <AssignCoursesModal :AssignCourseData="AssignCourseData"></AssignCoursesModal>
-  <CourseAssignModal></CourseAssignModal>
+  <CourseAssignModal :programDetail="programDetail"></CourseAssignModal>
     <AddProgramModal :editData="editRow" :editRowMessage="editRowMessage"></AddProgramModal>
   </div>
 </template>
@@ -85,6 +85,12 @@ export default {
     return {
       AssignCourseData:[],
       succesMessage: "",
+      programDetail:{
+        program_title:'',
+        program_short_title:"",
+        program_duration:'',
+        no_of_semester:''
+      },
       snackbar: false,
       editRowMessage: false,
       allProgram: [],
@@ -125,7 +131,8 @@ export default {
         
     },
     addCourseModal:function(program){
-        console.log(program);
+        this.programDetail=program;
+        this.$store.dispatch('CourseAssignModal');
     },
     editProgram: function(id) {
       let editData = this.$store.state.allProgram.filter(item => item.id == id);  
@@ -168,7 +175,7 @@ export default {
         "Content-Type": "application/json",
         Authorization: "Bearer  " + data.token
       };
-      console.log(headers);
+     
       axios
         .post(process.env.MIX_APP_URL + "/get-program", "", {
           headers: headers

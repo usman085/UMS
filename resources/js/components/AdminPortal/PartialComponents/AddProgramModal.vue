@@ -35,7 +35,7 @@
                       v-model="programDetail.program_duration"
                       :rules="FieldRules"
                       required
-                      item-text="state"
+                     
                       label="Select Duration*"
                       persistent-hint
                       return-object
