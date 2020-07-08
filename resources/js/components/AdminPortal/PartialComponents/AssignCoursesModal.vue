@@ -4,6 +4,7 @@
       <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
         <v-card>
           <v-toolbar dark color="primary">
+          <!-- Close Model of Assign Course -->
             <v-btn icon dark @click="$store.dispatch('AssignCoursesModalToggle')">
               <v-icon>mdi-close</v-icon>
             </v-btn>
@@ -57,6 +58,7 @@ export default {
   };
   },
   computed: {
+    // AssignCourses Function use to Get Data of Program and Course 
     AssignCourses:function(){
       return{
        semester1:this.AssignCourseData.filter(item=> '1' ==item.pivot.semester),

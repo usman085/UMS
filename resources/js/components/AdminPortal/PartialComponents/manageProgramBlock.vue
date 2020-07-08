@@ -1,5 +1,5 @@
 <template>
-  <div class="time-table-wrapper">
+<div class="time-table-wrapper">
     <v-card max-width="96%">
       <v-card-title>
         Manage Programs
@@ -67,150 +67,179 @@
         </template>
       </v-snackbar>
     </v-card>
+
+    <!-- Assign Courses Model -->
     <AssignCoursesModal :AssignCourseData="AssignCourseData"></AssignCoursesModal>
-  <CourseAssignModal :programDetail="programDetail"></CourseAssignModal>
+
+    <!-- Course Assign Model  -->
+    <CourseAssignModal  :programDetail="programDetail"></CourseAssignModal>
+
+    <!-- Add Program Model -->
     <AddProgramModal :editData="editRow" :editRowMessage="editRowMessage"></AddProgramModal>
-  </div>
+</div>
 </template>
 
 <script>
+// *** Importing Event Bus
 import EventBus from "../../../EventBus/eventBus";
-import AssignCoursesModal from "./AssignCoursesModal";
-import AddProgramModal from "./AddProgramModal";
-import CourseAssignModal from './CourseAssignModal';
-export default {
-  name: "manageProgramblock",
 
-  data() {
-    return {
-      AssignCourseData:[],
-      succesMessage: "",
-      programDetail:{
-        program_title:'',
-        program_short_title:"",
-        program_duration:'',
-        no_of_semester:''
-      },
-      snackbar: false,
-      editRowMessage: false,
-      allProgram: [],
-      editRow: {
-        id: "",
-        program_title: "",
-        program_short_title: "",
-        program_duration: "",
-        no_of_semester: ""
-      }
-    };
-  },
-  components: {
-    AddProgramModal,
-    AssignCoursesModal,
-    CourseAssignModal
-  },
-  computed: {
-    userAuth: function() {
-      return cryptoJSON.decrypt(
-        JSON.parse(localStorage.getItem("adminLogin")),
-        "ums"
-      );
-    }
-  },
-  methods: {
-    assigedCourses:function(id){
-      let headers={
-        'Content-type':'application/json',
-         'Authorization': "Bearer  " + this.userAuth.token
-      }
-        axios.post(process.env.MIX_APP_URL+'/assign-courses',{'id':id},{headers:headers})
-        .then(res=>{
-            this.AssignCourseData=res.data;
-            this.$store.dispatch('AssignCoursesModalToggle');
-        })
-        .catch(err=>console.log('eer'));
-        
+// *** Importing AssignCoursesModel
+import AssignCoursesModal from "./AssignCoursesModal";
+
+// *** Importing AddProgramModel
+import AddProgramModal from "./AddProgramModal";
+
+// *** Importing CourseAssignModel
+import CourseAssignModal from './CourseAssignModal';
+
+export default {
+    name: "manageProgramblock",
+
+    data() {
+        return {
+            AssignCourseData: [],
+            succesMessage: "",
+            snackbar: false,
+            editRowMessage: false,
+            allProgram: [],
+            editRow: {
+                id: "",
+                program_title: "",
+                program_short_title: "",
+                program_duration: "",
+                no_of_semester: ""
+            },
+            programDetail:{
+              program_title:'',
+              program_duration:'',
+              no_of_semester:'',
+              program_short_title:''
+            }
+        };
     },
-    addCourseModal:function(program){
-        this.programDetail=program;
-        this.$store.dispatch('CourseAssignModal');
+    components: {
+        AddProgramModal,
+        AssignCoursesModal,
+        CourseAssignModal
     },
-    editProgram: function(id) {
-      let editData = this.$store.state.allProgram.filter(item => item.id == id);  
-      this.editRow.id = editData[0].id;
-      this.editRow.program_title = editData[0].program_title;
-      this.editRow.program_short_title = editData[0].program_short_title;
-      this.editRow.program_duration= editData [0].program_duration;
-      this.editRow.no_of_semester = editData[0].no_of_semester;
-      this.editRowMessage = true;
-      this.$store.dispatch("AddProgramModalToggle");
+
+    methods: {
+        // assigedCourses function use to assign course to program
+        assigedCourses: function (id) {
+            let headers = {
+                'Content-type': 'application/json',
+                'Authorization': "Bearer  " + this.userAuth.token
+            }
+            axios.post(process.env.MIX_APP_URL + '/assign-courses', {
+                    'id': id
+                }, {
+                    headers: headers
+                })
+                .then(res => {
+                    this.AssignCourseData = res.data;
+                    this.$store.dispatch('AssignCoursesModalToggle');
+                })
+                .catch(err => console.log('eer'));
+
+        },
+        addCourseModal: function (program) {
+          this.programDetail=program;
+           this.$store.dispatch('CourseAssignModal');
+        },
+
+        // **editProgram Function Is use to edit the Desired Program
+        editProgram: function (id) {
+            let editData = this.$store.state.allProgram.filter(item => item.id == id);
+            this.editRow.id = editData[0].id;
+            this.editRow.program_title = editData[0].program_title;
+            this.editRow.program_short_title = editData[0].program_short_title;
+            this.editRow.program_duration = editData[0].program_duration;
+            this.editRow.no_of_semester = editData[0].no_of_semester;
+            this.editRowMessage = true;
+            this.$store.dispatch("AddProgramModalToggle");
+        },
+
+        //** deleteItem Function is use to delete the desired data
+        deleteItem: function (id) {
+            // Headers are defined for authentication
+            let headers = {
+                "Content-Type": "application/json",
+                'Authorization': "Bearer  " + this.userAuth.token
+            };
+            // send request to Api Route
+            axios
+                .post(
+                    process.env.MIX_APP_URL + "/del-program", {
+                        id: id
+                    }, {
+                        headers: headers
+                    }
+                )
+                .then(res => {
+                    this.snackbar = true;
+                    this.succesMessage = "Program Delete Successfully!";
+                    this.getProgram();
+                })
+                .catch(err => alert(err));
+        },
+
+        // **getProgram Function is Use to get all Program Data
+        getProgram: function () {
+            // Headers are defined for authentication
+            let data = cryptoJSON.decrypt(
+                JSON.parse(localStorage.getItem("adminLogin")),
+                "ums"
+            );
+            const headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + data.token
+            };
+            // send request to Api Route
+            axios
+                .post(process.env.MIX_APP_URL + "/get-program", "", {
+                    headers: headers
+                })
+                .then(res => {
+                    this.$store.dispatch("allProgram", res.data.allProgram);
+                })
+                .catch(err => {
+                    if (error.response.status === 401) {
+                        this.$router.push({
+                            name: "login"
+                        });
+                    }
+                });
+        }
     },
-    deleteItem: function(id) {
-      let headers = {
-        "Content-Type": "application/json",
-         'Authorization': "Bearer  " + this.userAuth.token
-      };
-      axios
-        .post(
-          process.env.MIX_APP_URL + "/del-program",
-          {
-            id: id
-          },
-          {
-            headers: headers
-          }
-        )
-        .then(res => {
-          this.snackbar = true;
-          this.succesMessage = "Program Delete Successfully!";
-          this.getProgram();
-        })
-        .catch(err => alert(err));
+    computed: {
+        //User Auth function authorizing Admin & use in Header  
+        userAuth: function () {
+            return cryptoJSON.decrypt(
+                JSON.parse(localStorage.getItem("adminLogin")),
+                "ums"
+            );
+        }
     },
-    getProgram: function() {
-      let data = cryptoJSON.decrypt(
-        JSON.parse(localStorage.getItem("adminLogin")),
-        "ums"
-      );
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: "Bearer  " + data.token
-      };
-     
-      axios
-        .post(process.env.MIX_APP_URL + "/get-program", "", {
-          headers: headers
-        })
-        .then(res => {
-          this.$store.dispatch("allProgram", res.data.allProgram);
-        })
-        .catch(err => {
-          if (error.response.status === 401) {
-            this.$router.push({
-              name: "login"
-            });
-          }
+    // use as a constructor 
+    created() {
+        EventBus.$on("EditProgram", () => {
+            this.getProgram();
+            this.editRowMessage = false;
         });
+        this.$store.dispatch("overlay");
+        this.getProgram();
     }
-  },
-  created() {
-    EventBus.$on("EditProgram", () => {
-      this.getProgram();
-      this.editRowMessage = false;
-    });
-    this.$store.dispatch("overlay");
-    this.getProgram();
-  }
 };
 </script>
 
 <style scoped>
 .create-btn {
-  position: absolute;
-  float: right;
-  right: 10px;
+    position: absolute;
+    float: right;
+    right: 10px;
 }
 
 .status-chip {
-  color: white;
+    color: white;
 }
 </style>

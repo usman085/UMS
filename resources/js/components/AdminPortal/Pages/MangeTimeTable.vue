@@ -1,11 +1,13 @@
 <template>
-<div>
+  <div>
+    <!-- All Manage Time Table Routes are Render Here -->
     <router-view></router-view>
-</div>
+    <!-- All Manage Time Table Routes are Render Here -->
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'MangeTimeTable'
-}
+  name: "MangeTimeTable"
+};
 </script>

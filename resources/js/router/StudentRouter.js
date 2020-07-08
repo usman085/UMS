@@ -32,7 +32,7 @@ const StudentRoutes = [{
     /* *** Admin Portal Router With Guard Function  *** */
     path: '/student-portal',
     component: AppStudent,
-    name: 'studentPortal',
+
     beforeEnter: guardRouteStudent,
 
     // ***Children Routes
