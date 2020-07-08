@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Repositories\Interfaces\ProgramInterface;
 use App\Models\Program;
+use DB;
 
 class ProgramRepository implements ProgramInterface{
     
@@ -94,6 +95,22 @@ class ProgramRepository implements ProgramInterface{
             return response( ['Server Error'=>$editProgram], 402 );
         }
         
+    }
+
+    public function AssignCourseToProgram($request)
+    {
+        foreach($request->selected as $course_id){
+            if(!DB::table('course_program')->where('program_id', $request->program_id)->where('semester',$request->semester)->where( 'course_id',$course_id)->first())
+            {
+           $insert= DB::table('course_program')->insert([
+                    'program_id'=>$request->program_id,
+                    'course_id'=>$course_id,
+                    'semester'=>$request->semester
+                ]);
+        }
+    }
+        
+        return response(['message'=>'Insert successfully'],200);
     }
     
 }

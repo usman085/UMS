@@ -25,7 +25,7 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/del-course','ApiController\Course\CourseController@delCourse');
     Route::post('/edit-course','ApiController\Course\CourseController@editCourse');
     Route::post('/assign-courses','ApiController\Program\ProgramController@AssignCourses');
-
+    Route::post('/assign-course-to-program','ApiController\Program\ProgramController@AssignCourseToProgram');
     //  program routes start
     Route::post('/insert-program','ApiController\Program\ProgramController@insertProgram');
     Route::post('/get-program','ApiController\Program\ProgramController@getProgram');

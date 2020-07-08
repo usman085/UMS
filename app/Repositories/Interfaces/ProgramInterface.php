@@ -45,4 +45,7 @@ interface ProgramInterface
     */
 
      public function editProgram( $request );
+
+
+     public function AssignCourseToProgram($request);
 }
