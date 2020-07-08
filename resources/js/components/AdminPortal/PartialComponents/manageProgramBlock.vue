@@ -27,8 +27,8 @@
                         <tr v-for="item in $store.state.allProgram " :key="item.id">
                             <td>{{ item.program_title }}</td>
                             <td>{{ item.program_short_title }}</td>
-                            <td>{{ item.no_of_semester }}</td>
                             <td>{{ item.program_duration }}</td>
+                             <td>{{ item.no_of_semester }}</td>
 
                             <td>
                                 <v-menu offset-y>
@@ -135,7 +135,7 @@ export default {
 
         },
         addCourseModal: function (program) {
-            // console.log(program);
+         console.log(program);
         },
 
         // **editProgram Function Is use to edit the Desired Program
