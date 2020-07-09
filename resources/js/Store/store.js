@@ -33,7 +33,7 @@ const store = new Vuex.Store({
         AssignCoursesModal: false,
         NotificationEditorModal: false,
         senderSelect: '',
-        overlay: false,
+        overlay: true,
 
         days: [
             "Monday",

@@ -120,4 +120,7 @@ class ProgramController extends Controller
 
             return $this->programRepository->AssignCourses($request);
     }
+    public function AssignCourseToProgram(Request $request){
+        return $this->programRepository->AssignCourseToProgram($request);
+    }
 }

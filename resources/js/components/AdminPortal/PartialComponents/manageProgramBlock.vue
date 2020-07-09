@@ -72,7 +72,7 @@
     <AssignCoursesModal :AssignCourseData="AssignCourseData"></AssignCoursesModal>
 
     <!-- Course Assign Model  -->
-    <CourseAssignModal  :programDetail="programDetail"></CourseAssignModal>
+    <CourseAssignToProgramModal  :programDetail="programDetail"></CourseAssignToProgramModal>
 
     <!-- Add Program Model -->
     <AddProgramModal :editData="editRow" :editRowMessage="editRowMessage"></AddProgramModal>
@@ -90,7 +90,7 @@ import AssignCoursesModal from "./AssignCoursesModal";
 import AddProgramModal from "./AddProgramModal";
 
 // *** Importing CourseAssignModel
-import CourseAssignModal from './CourseAssignModal';
+import CourseAssignToProgramModal from './CourseAssignToProgramModal';
 
 export default {
     name: "manageProgramblock",
@@ -110,6 +110,7 @@ export default {
                 no_of_semester: ""
             },
             programDetail:{
+              id:'',
               program_title:'',
               program_duration:'',
               no_of_semester:'',
@@ -120,7 +121,7 @@ export default {
     components: {
         AddProgramModal,
         AssignCoursesModal,
-        CourseAssignModal
+        CourseAssignToProgramModal
     },
 
     methods: {
@@ -144,6 +145,7 @@ export default {
         },
         addCourseModal: function (program) {
           this.programDetail=program;
+          console.log(program);
            this.$store.dispatch('CourseAssignModal');
         },
 

@@ -31,7 +31,6 @@ const AdminRoutes = [{
     /* *** Admin Portal Router With Guard Function  *** */
     path: '/admin-portal',
     component: AdminPortal,
-    // name: 'adminPortal',
     beforeEnter: guardRouteAdmin,
     // **** Root Router End
 
@@ -40,7 +39,8 @@ const AdminRoutes = [{
 
         {
             path: 'dash-board',
-            component: AdminDashboard
+            component: AdminDashboard,
+            name: 'AdminDashboard'
 
         },
 

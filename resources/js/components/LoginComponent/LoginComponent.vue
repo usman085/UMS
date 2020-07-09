@@ -76,7 +76,7 @@ export default {
                        
                         localStorage.setItem('adminLogin', cryptAuth);
                         this.$router.push({
-                            name: 'adminPortal'
+                            name: 'AdminDashboard'
                         });
 
                     }
