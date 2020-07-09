@@ -23,6 +23,15 @@ class User extends Authenticatable
     ];
 
     /**
+    *   User Has Many relationship with Student Detail .
+    */
+    public function studentDetail()
+    {
+        return $this->hasOne('App\Models\StudentDetail');
+    }
+
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array

@@ -82,39 +82,6 @@
         </fieldset>
 
         <!-- Personal Info field set  -->
- <fieldset class="form-field-sets">
-            <legend class="text-center form-field-set-name">Official Information</legend>
-            <v-container>
-                <v-row>
-                    <v-col cols="6">
-                        <v-select :items="program" label="Program" required></v-select>
-                    </v-col>
-
-                    <v-col cols="6">
-                        <v-select :items="semester" label="Current Semester"></v-select>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-select :items="shifts" label="Shift" required></v-select>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field label="Session Year" required :rules="sessionRules"></v-text-field>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field label="Roll Number" required :rules="rollnoRules"></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field label="Registration No." required :rules="regnoRules"></v-text-field>
-                    </v-col>
-                </v-row>
-            </v-container>
-        </fieldset>
-        <!-- Official Info field set  -->
         <fieldset class="form-field-sets">
             <legend class="text-center form-field-set-name">Official Information</legend>
             <v-container>
@@ -147,14 +114,47 @@
                 </v-row>
             </v-container>
         </fieldset>
-<!-- Officail Information  -->
+        <!-- Educational Info field set  -->
+        <fieldset class="form-field-sets">
+            <legend class="text-center form-field-set-name">Educational History</legend>
+            <v-container>
+                <v-row>
+                    <v-col cols="6">
+                        <v-text-field type="number" label="Matriculation Marks" required></v-text-field>
+                    </v-col>
+
+                    <v-col cols="6">
+                        <v-text-field type="number" label="FA\FSC\ICS Marks" required></v-text-field>
+                    </v-col>
+                </v-row>
+
+                <v-row>
+                    <v-col cols="6">
+                        <v-text-field type="text" label="School Name " required></v-text-field>
+                    </v-col>
+                    <v-col cols="6">
+                        <v-text-field type="text" label="Passing Year" required></v-text-field>
+                    </v-col>
+                </v-row>
+
+                <v-row>
+                    <v-col cols="6">
+                        <v-text-field type="text" label="College Name " required></v-text-field>
+                    </v-col>
+                    <v-col cols="6">
+                        <v-text-field type="text" label="Passing Year" required></v-text-field>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </fieldset>
+        <!-- Officail Information  -->
         <v-container>
             <p class="fee-addition">Do You want to {{ feeAdd ? 'Modify ' : 'Add' }} Fee Structure?</p>
             <p class="fee-addition">
                 <v-btn color="primary" small @click="dialog =true">{{ feeAdd ? 'Modify ' : 'Add' }} Fee Structure</v-btn>
             </p>
         </v-container>
-        
+
         <fieldset class="form-field-sets">
             <legend class="text-center form-field-set-name">Login Credentials</legend>
             <v-container>

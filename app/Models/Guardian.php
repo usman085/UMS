@@ -9,10 +9,10 @@ class Guardian extends Model
      protected $fillable =[ 'id','guardian_name'];
 
        /**
-     * Get the Student that has the Guardian.
+     *  Guardian relationship with student.
      */
-    // public function studentRegistration()
-    // {
-    //     return $this->belongsTo('App\Models\StudentRegistration');
-    // }
+    public function studentPersonalDetail()
+    {
+        return $this->hasMany('App\Models\StudentPersonalDetail');
+    }
 }
