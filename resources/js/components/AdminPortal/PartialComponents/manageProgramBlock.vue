@@ -1,89 +1,85 @@
 <template>
 <div class="time-table-wrapper">
     <v-card max-width="96%">
-      <v-card-title>
-        Manage Programs
-        <v-btn class="create-btn" @click="$store.dispatch('AddProgramModalToggle')">
-          <v-icon>mdi-plus-circle</v-icon>Add New Program
-        </v-btn>
-      </v-card-title>
-      <v-card-subtitle>All Programs are manage here.</v-card-subtitle>
-      <v-card-text>
-        <v-simple-table>
-          <template v-slot:default>
-            <thead>
-              <tr>
-                <th class="text-left">Program Title</th>
-                <th class="text-left">Short Name</th>
-                <th class="text-left">Duration</th>
-                <th class="text-left">No of Semesters</th>
-                <th class="text-left">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <template v-if="$store.state.allProgram.length > 0">
-              <tr v-for="item in $store.state.allProgram " :key="item.id">
-                <td>{{ item.program_title | capitalize }}</td>
-                <td>{{ item.program_short_title.toUpperCase()}}</td>
-                <td>{{ item.no_of_semester }}</td>
-                <td>{{ item.program_duration + 'Year' }}</td>
-                <td>
-                  <v-menu offset-y>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-icon color="primary" v-bind="attrs" v-on="on">mdi-dots-vertical</v-icon>
-                    </template>
-                    <v-list>
-                      <v-list-item @click="editProgram(item.id)">
-                        <v-list-item-title>Modify</v-list-item-title>
-                      </v-list-item>
-                      <v-list-item @click="deleteItem(item.id)">
-                        <v-list-item-title>Delete</v-list-item-title>
-                      </v-list-item>
-                       <v-list-item  @click="addCourseModal(item)">
-                        <v-list-item-title>
-                        <v-icon color="primary">mdi-plus</v-icon>Add Course
-                        </v-list-item-title>
-                      </v-list-item>
-                      <v-list-item>
-                        <v-btn
-                          small
-                          color="primary"
-                          class="create-btn pa-1"
-                          @click="assigedCourses(item.id)"
-                        >Assigned Course</v-btn>
-                      </v-list-item>
-                    </v-list>
-                  </v-menu>
-                </td>
-              </tr>
-              </template>
-              <template v-else>
-                 <tr >
-                            <td colspan="4" class="text-center">
-                                <template v-if="message">
-                                    <v-progress-circular indeterminate color="primary"></v-progress-circular>
-                                </template>
-                                <template v-else>No Data Found!</template>
-                            </td>
+        <v-card-title>
+            Manage Programs
+            <v-btn class="create-btn" @click="$store.dispatch('AddProgramModalToggle')">
+                <v-icon>mdi-plus-circle</v-icon>Add New Program
+            </v-btn>
+        </v-card-title>
+        <v-card-subtitle>All Programs are manage here.</v-card-subtitle>
+        <v-card-text>
+            <v-simple-table>
+                <template v-slot:default>
+                    <thead>
+                        <tr>
+                            <th class="text-left">Program Title</th>
+                            <th class="text-left">Short Name</th>
+                            <th class="text-left">Duration</th>
+                            <th class="text-left">No of Semesters</th>
+                            <th class="text-left">Action</th>
                         </tr>
+                    </thead>
+                    <tbody>
+                        <template v-if="$store.state.allProgram.length > 0">
+                            <tr v-for="item in $store.state.allProgram " :key="item.id">
+                                <td>{{ item.program_title | capitalize }}</td>
+                                <td>{{ item.program_short_title.toUpperCase()}}</td>
+                                <td>{{ item.no_of_semester }}</td>
+
+                                <td>{{ item.program_duration + 'Year' }}</td>
+                                <td>
+                                    <v-menu offset-y>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon color="primary" v-bind="attrs" v-on="on">mdi-dots-vertical</v-icon>
+                                        </template>
+                                        <v-list>
+                                            <v-list-item @click="editProgram(item.id)">
+                                                <v-list-item-title>Modify</v-list-item-title>
+                                            </v-list-item>
+                                            <v-list-item @click="deleteItem(item.id)">
+                                                <v-list-item-title>Delete</v-list-item-title>
+                                            </v-list-item>
+                                            <v-list-item @click="addCourseModal(item)">
+                                                <v-list-item-title>
+                                                    <v-icon color="primary">mdi-plus</v-icon>Add Course
+                                                </v-list-item-title>
+                                            </v-list-item>
+                                            <v-list-item>
+                                                <v-btn small color="primary" class="create-btn pa-1" @click="assigedCourses(item.id)">Assigned Course</v-btn>
+                                            </v-list-item>
+                                        </v-list>
+                                    </v-menu>
+                                </td>
+                            </tr>
+                        </template>
+                        <template v-else>
+                            <tr>
+                                <td colspan="4" class="text-center">
+                                    <template v-if="message">
+                                        <v-progress-circular indeterminate color="primary"></v-progress-circular>
+                                    </template>
+                                    <template v-else>No Data Found!</template>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
                 </template>
-            </tbody>
-          </template>
-        </v-simple-table>
-      </v-card-text>
-      <v-snackbar top right v-model="snackbar" color="success">
-        {{succesMessage}}
-        <template v-slot:action="{ attrs }">
-          <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
-        </template>
-      </v-snackbar>
+            </v-simple-table>
+        </v-card-text>
+        <v-snackbar top right v-model="snackbar" color="success">
+            {{succesMessage}}
+            <template v-slot:action="{ attrs }">
+                <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+            </template>
+        </v-snackbar>
     </v-card>
 
     <!-- Assign Courses Model -->
     <AssignCoursesModal :AssignCourseData="AssignCourseData"></AssignCoursesModal>
 
     <!-- Course Assign Model  -->
-    <CourseAssignToProgramModal  :programDetail="programDetail"></CourseAssignToProgramModal>
+    <CourseAssignToProgramModal :programDetail="programDetail"></CourseAssignToProgramModal>
 
     <!-- Add Program Model -->
     <AddProgramModal :editData="editRow" :editRowMessage="editRowMessage"></AddProgramModal>
@@ -108,7 +104,7 @@ export default {
 
     data() {
         return {
-          message:true,
+            message: true,
             AssignCourseData: [],
             succesMessage: "",
             snackbar: false,
@@ -121,18 +117,18 @@ export default {
                 program_duration: "",
                 no_of_semester: ""
             },
-            programDetail:{
-              id:'',
-              program_title:'',
-              program_duration:'',
-              no_of_semester:'',
-              program_short_title:''
+            programDetail: {
+                id: '',
+                program_title: '',
+                program_duration: '',
+                no_of_semester: '',
+                program_short_title: ''
             }
         };
     },
     components: {
         AddProgramModal,
-        AssignCoursesModal, 
+        AssignCoursesModal,
         CourseAssignToProgramModal
     },
 
@@ -152,15 +148,15 @@ export default {
                     this.AssignCourseData = res.data;
                     this.$store.dispatch('AssignCoursesModalToggle');
                 })
-                .catch(error =>{
-                   
+                .catch(error => {
+
                 });
 
-        }, 
+        },
         addCourseModal: function (program) {
-          this.programDetail=program;
-          
-           this.$store.dispatch('CourseAssignModal');
+            this.programDetail = program;
+
+            this.$store.dispatch('CourseAssignModal');
         },
 
         // **editProgram Function Is use to edit the Desired Program
@@ -197,7 +193,7 @@ export default {
                     this.getProgram();
                 })
                 .catch(error => {
-                
+
                 });
         },
 
@@ -218,12 +214,12 @@ export default {
                     headers: headers
                 })
                 .then(res => {
-                  
+
                     this.$store.dispatch("allProgram", res.data.allProgram);
-                     this.message = false;
+                    this.message = false;
                 })
                 .catch(error => {
-        
+
                 });
         }
     },
