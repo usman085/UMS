@@ -14,7 +14,11 @@
 
 // *** Index Route Render Vue App
 
-
+route::get('/get-data',function(){
+    $data = App\Models\Gender::with('studentRegistration')->get();
+//    $data= DB::table('student_registrations')->with('guardians')->get();
+   dd($data);
+});
 
 Route::get('/{any}', function(){
     return view('index');

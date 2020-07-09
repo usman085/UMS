@@ -25,7 +25,7 @@
                 <td>{{ item.program_title | capitalize }}</td>
                 <td>{{ item.program_short_title.toUpperCase()}}</td>
                 <td>{{ item.no_of_semester }}</td>
-                <td>{{ item.program_duration + 'Year' }}</td>
+                <td>{{ item.program_duration + ' years ' }}</td>
 
                 <td>
                   <v-menu offset-y>
