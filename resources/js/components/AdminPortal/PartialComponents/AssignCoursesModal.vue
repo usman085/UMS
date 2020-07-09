@@ -8,7 +8,7 @@
                     <v-btn icon dark @click="$store.dispatch('AssignCoursesModalToggle')">
                         <v-icon>mdi-close</v-icon>
                     </v-btn>
-                    <v-toolbar-title>{{program_title_props}}</v-toolbar-title>
+                    <v-toolbar-title>{{program.program_title}}</v-toolbar-title>
                     <v-spacer></v-spacer>
 
                 </v-toolbar>
@@ -89,6 +89,9 @@
                                                             <v-chip v-else color="primary" text-color="white">
                                                                 <span>Avaiable</span>
                                                             </v-chip>
+                                                            <span class="delete-row-icon">
+                                                                <v-icon @click="delAssignCourse(item.pivot.id)">mdi-delete</v-icon>
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                 </template>
@@ -129,6 +132,9 @@
                                                             <v-chip v-else color="primary" text-color="white">
                                                                 <span>Avaiable</span>
                                                             </v-chip>
+                                                            <span class="delete-row-icon">
+                                                                <v-icon @click="delAssignCourse(item.pivot.id)">mdi-delete</v-icon>
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                 </template>
@@ -169,6 +175,9 @@
                                                             <v-chip v-else color="primary" text-color="white">
                                                                 <span>Avaiable</span>
                                                             </v-chip>
+                                                            <span class="delete-row-icon">
+                                                                <v-icon @click="delAssignCourse(item.pivot.id)">mdi-delete</v-icon>
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                 </template>
@@ -209,6 +218,9 @@
                                                             <v-chip v-else color="primary" text-color="white">
                                                                 <span>Avaiable</span>
                                                             </v-chip>
+                                                            <span class="delete-row-icon">
+                                                                <v-icon @click="delAssignCourse(item.pivot.id)">mdi-delete</v-icon>
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                 </template>
@@ -249,6 +261,9 @@
                                                             <v-chip v-else color="primary" text-color="white">
                                                                 <span>Avaiable</span>
                                                             </v-chip>
+                                                            <span class="delete-row-icon">
+                                                                <v-icon @click="delAssignCourse(item.pivot.id)">mdi-delete</v-icon>
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                 </template>
@@ -289,6 +304,9 @@
                                                             <v-chip v-else color="primary" text-color="white">
                                                                 <span>Avaiable</span>
                                                             </v-chip>
+                                                            <span class="delete-row-icon">
+                                                                <v-icon @click="delAssignCourse(item.pivot.id)">mdi-delete</v-icon>
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                 </template>
@@ -329,6 +347,9 @@
                                                             <v-chip v-else color="primary" text-color="white">
                                                                 <span>Avaiable</span>
                                                             </v-chip>
+                                                            <span class="delete-row-icon">
+                                                                <v-icon @click="delAssignCourse(item.pivot.id)">mdi-delete</v-icon>
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                 </template>
@@ -361,9 +382,10 @@
 
 <script>
 import pacer from '../../CommonGobalComponent/Pacer';
+import EventBus from '../../../EventBus/eventBus';
 export default {
     name: "AssignCoursesModal",
-    props: ['AssignCourseData', 'program_title_props'],
+    props: ['AssignCourseData', 'program'],
     data() {
         return {
           snackbar:false
@@ -409,6 +431,7 @@ export default {
                 })
                 .then((res) => {console.log(res);
                 this.snackbar=true;
+                EventBus.$emit('loadAssignCourse',this.program.id);
                 })
                 .catch((err) => console.log(err))
         }

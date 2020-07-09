@@ -107,6 +107,15 @@ class ProgramController extends Controller
         }
             return $this->programRepository->editProgram( $request );
     }
+    
+    /**
+    * Assigned Courses To Program
+    *
+    *
+    *
+    * @return Response  Assign Course
+    */
+
     public function AssignCourses(Request $request)
     {
         $validator = Validator::make( $request->all(), 
@@ -120,13 +129,46 @@ class ProgramController extends Controller
 
             return $this->programRepository->AssignCourses($request);
     }
+
+    /**
+    * Assign Course To Program
+    *
+    *
+    *
+    * @return Response  Assign Course
+    */
+    
     public function AssignCourseToProgram(Request $request){
-        
+        $validator = Validator::make( $request->all(), 
+        [
+            'program_id'=>'required',
+            'course_id'=>'required',
+            'semester'=>'required'
+        ]);
+
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
         return $this->programRepository->AssignCourseToProgram($request);
     }
 
-    public function delAssignCourse(Request $request){
+    /**
+    * Delete Course To Program
+    *
+    *
+    *
+    * @return Response  Assign Course
+    */
 
+    public function delAssignCourse(Request $request){
+        $validator = Validator::make( $request->all(), 
+        [
+            'id' => 'required',
+        ]);
+
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
         return $this->programRepository->delAssignCourse($request);
     }
 }
