@@ -26,10 +26,10 @@ import axios from 'axios';
 axios.interceptors.response.use(
     response => response,
     (error) => {
-        if (error.response.status === 401) {
+        if (error.response.status == 401) {
             localStorage.removeItem('adminLogin');
-            $router.push('/login');
-        }
+            router.push({name:'login'}).catch(()=>{});
+        } 
         return Promise.reject(error);
     },
 );

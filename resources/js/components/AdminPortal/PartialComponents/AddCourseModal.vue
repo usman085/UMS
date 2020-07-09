@@ -87,7 +87,7 @@ export default {
                     this.successCall();
                 })
                 .catch(err => {
-                    if (error.response.status === 401) {
+                    if (error.response.status == 401) {
                         this.$router.push({
                             name: "login"
                         });
@@ -111,7 +111,7 @@ export default {
                     this.successCall();
                 })
                 .catch(err => {
-                    if (error.response.status === 401) {
+                    if (error.response.status == 401) {
                         this.$router.push({
                             name: "login"
                         });

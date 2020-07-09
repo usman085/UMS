@@ -21,12 +21,12 @@
               </tr>
             </thead>
             <tbody>
+              <template v-if="$store.state.allProgram.length > 0">
               <tr v-for="item in $store.state.allProgram " :key="item.id">
                 <td>{{ item.program_title | capitalize }}</td>
                 <td>{{ item.program_short_title.toUpperCase()}}</td>
                 <td>{{ item.no_of_semester }}</td>
                 <td>{{ item.program_duration + 'Year' }}</td>
-
                 <td>
                   <v-menu offset-y>
                     <template v-slot:activator="{ on, attrs }">
@@ -56,6 +56,17 @@
                   </v-menu>
                 </td>
               </tr>
+              </template>
+              <template v-else>
+                 <tr >
+                            <td colspan="4" class="text-center">
+                                <template v-if="message">
+                                    <v-progress-circular indeterminate color="primary"></v-progress-circular>
+                                </template>
+                                <template v-else>No Data Found!</template>
+                            </td>
+                        </tr>
+                </template>
             </tbody>
           </template>
         </v-simple-table>
@@ -97,6 +108,7 @@ export default {
 
     data() {
         return {
+          message:true,
             AssignCourseData: [],
             succesMessage: "",
             snackbar: false,
@@ -120,7 +132,7 @@ export default {
     },
     components: {
         AddProgramModal,
-        AssignCoursesModal,
+        AssignCoursesModal, 
         CourseAssignToProgramModal
     },
 
@@ -140,12 +152,14 @@ export default {
                     this.AssignCourseData = res.data;
                     this.$store.dispatch('AssignCoursesModalToggle');
                 })
-                .catch(err => console.log('eer'));
+                .catch(error =>{
+                   
+                });
 
-        },
+        }, 
         addCourseModal: function (program) {
           this.programDetail=program;
-          console.log(program);
+          
            this.$store.dispatch('CourseAssignModal');
         },
 
@@ -182,7 +196,9 @@ export default {
                     this.succesMessage = "Program Delete Successfully!";
                     this.getProgram();
                 })
-                .catch(err => alert(err));
+                .catch(error => {
+                
+                });
         },
 
         // **getProgram Function is Use to get all Program Data
@@ -202,14 +218,12 @@ export default {
                     headers: headers
                 })
                 .then(res => {
+                  
                     this.$store.dispatch("allProgram", res.data.allProgram);
+                     this.message = false;
                 })
-                .catch(err => {
-                    if (error.response.status === 401) {
-                        this.$router.push({
-                            name: "login"
-                        });
-                    }
+                .catch(error => {
+        
                 });
         }
     },

@@ -123,12 +123,8 @@ export default {
                     this.$store.dispatch("allCourses", res.data.courses);
                     this.message = false;
                 })
-                .catch(err => {
-                    if (error.response.status === 401) {
-                        this.$router.push({
-                            name: "login"
-                        });
-                    }
+                .catch(error => {
+                    
                 });
         },
         // **EditCourse Function Is use to edit the Desired Course
@@ -163,7 +159,9 @@ export default {
                     this.succesMessage = "Course Delete Successfully!";
                     this.getCourse();
                 })
-                .catch(err => alert(err));
+                .catch(error =>{
+                    
+                });
         },
 
     },
@@ -182,7 +180,6 @@ export default {
             this.getCourse();
             this.editRowMessage = false;
         });
-        this.$store.dispatch("overlay");
         this.getCourse();
     }
 };
