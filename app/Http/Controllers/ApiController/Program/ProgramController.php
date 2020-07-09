@@ -99,7 +99,7 @@ class ProgramController extends Controller
             'program_title'=> 'required',
             'program_short_title'=>'required',
             'program_duration'=>'required',
-            'no_of_semester'=>'required',
+            'no_of_semester'=>'required | number',
         ]);
 
         if ( $validator->fails() ) {
@@ -121,6 +121,12 @@ class ProgramController extends Controller
             return $this->programRepository->AssignCourses($request);
     }
     public function AssignCourseToProgram(Request $request){
+        
         return $this->programRepository->AssignCourseToProgram($request);
+    }
+
+    public function delAssignCourse(Request $request){
+
+        return $this->programRepository->delAssignCourse($request);
     }
 }

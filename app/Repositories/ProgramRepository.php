@@ -112,5 +112,14 @@ class ProgramRepository implements ProgramInterface{
         
         return response(['message'=>'Insert successfully'],200);
     }
+
+    public function delAssignCourse($request){
+        $del=DB::table('course_program')->where('id',$request->id)->delete();
+        if($del){
+            return response(['message','Delete SucessFully'],200);
+        }else{
+            return response(['message','Error'],422);
+        }
+    }
     
 }

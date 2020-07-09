@@ -15,8 +15,9 @@
                         <tr>
                             <th class="text-left">Program Title</th>
                             <th class="text-left">Short Name</th>
-                            <th class="text-left">Duration</th>
                             <th class="text-left">No of Semesters</th>
+                            <th class="text-left">Duration</th>
+                            
                             <th class="text-left">Action</th>
                         </tr>
                     </thead>
@@ -46,7 +47,7 @@
                                                 </v-list-item-title>
                                             </v-list-item>
                                             <v-list-item>
-                                                <v-btn small color="primary" class="create-btn pa-1" @click="assigedCourses(item.id)">Assigned Course</v-btn>
+                                                <v-btn small color="primary" class="create-btn pa-1" @click="assigedCourses(item.id,item.program_title)">Assigned Course</v-btn>
                                             </v-list-item>
                                         </v-list>
                                     </v-menu>
@@ -76,7 +77,7 @@
     </v-card>
 
     <!-- Assign Courses Model -->
-    <AssignCoursesModal :AssignCourseData="AssignCourseData"></AssignCoursesModal>
+    <AssignCoursesModal :program_title_props="program_title_props" :AssignCourseData="AssignCourseData"></AssignCoursesModal>
 
     <!-- Course Assign Model  -->
     <CourseAssignToProgramModal :programDetail="programDetail"></CourseAssignToProgramModal>
@@ -109,6 +110,7 @@ export default {
             succesMessage: "",
             snackbar: false,
             editRowMessage: false,
+            program_title_props:'',
             allProgram: [],
             editRow: {
                 id: "",
@@ -134,7 +136,11 @@ export default {
 
     methods: {
         // assigedCourses function use to assign course to program
-        assigedCourses: function (id) {
+        assigedCourses: function (id,name) {
+            this.program_title_props=name;
+            this.$store.dispatch('overlay');
+
+            this.$store.dispatch('AssignCoursesModalToggle');
             let headers = {
                 'Content-type': 'application/json',
                 'Authorization': "Bearer  " + this.userAuth.token
@@ -146,7 +152,8 @@ export default {
                 })
                 .then(res => {
                     this.AssignCourseData = res.data;
-                    this.$store.dispatch('AssignCoursesModalToggle');
+                     this.$store.dispatch('overlay');
+                   
                 })
                 .catch(error => {
 
@@ -155,7 +162,7 @@ export default {
         },
         addCourseModal: function (program) {
             this.programDetail = program;
-
+ 
             this.$store.dispatch('CourseAssignModal');
         },
 
