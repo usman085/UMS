@@ -27,7 +27,7 @@
                                 <td>{{ item.program_short_title.toUpperCase()}}</td>
                                 <td>{{ item.no_of_semester }}</td>
 
-                                <td>{{ item.program_duration + 'Year' }}</td>
+                                <td>{{ item.program_duration + ' Year' }}</td>
                                 <td>
                                     <v-menu offset-y>
                                         <template v-slot:activator="{ on, attrs }">
@@ -238,7 +238,7 @@ export default {
             this.getProgram();
             this.editRowMessage = false;
         });
-        this.$store.dispatch("overlay");
+        
         this.getProgram();
     }
 };

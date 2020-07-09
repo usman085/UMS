@@ -80,7 +80,7 @@ export default {
                         });
 
                     }
-                     this.$store.dispatch('overlay');
+                     
                 })
                 .catch((err) => {
                     this.error = "User Does Not Exist";
