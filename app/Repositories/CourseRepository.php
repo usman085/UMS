@@ -51,24 +51,27 @@ class CourseRepository implements CourseInterface
             'credit_hours' => $request->credit_hours
         ]);
 
-        if ( $editCourse ) 
-        {
+        if ( $editCourse ) {
             return response( ['editCourse'=>$editCourse], 200 );
         } 
-        else 
-        {
+        else {
             return response( ['Server Error'=>$editCourse], 402 );
         }
     }
+    /**
+    * Del Course
+    *
+    * @param request
+    * @return Response Del Course Program Data
+    */
 
     public function delCourse( $request ) {
         $delCourse = Course::find( $request->id )->delete();
-        if ( $delCourse ) 
-        {
-            return response( ['delCourse'=>$delCourse], 200 );
+        if ( $delCourse ) {
+            return response( ['message'=>$delCourse], 200 );
         } else 
         {
-            return response( ['Server Error'=>$delCourse], 402 );
+            return response( ['message'=>$delCourse], 402 );
         }
     }
 }

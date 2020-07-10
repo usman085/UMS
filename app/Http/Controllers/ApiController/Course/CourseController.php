@@ -36,25 +36,19 @@ class CourseController extends Controller
     public function insertCourse( Request $request ) 
     {
         $validator = Validator::make( $request->all(), [
-         
             'course_title' => 'required',
             'course_code'=>'required',
             'credit_hours'=>'required'
-        
         ]);
         
-        if ( $validator->fails() ) 
-        {
+        if ( $validator->fails() ) {
             return response( ['errors'=>$validator->errors()->all()], 422 );
         }
-        
             return $this->courseRepository->insertCourse( $request );
     }
 
     /**
     * Get Course
-    *
-    *
     *
     * @return Response  All Course
     */
@@ -77,12 +71,12 @@ class CourseController extends Controller
         [
             'id' => 'required',
         ]);
-        if ( $validator->fails() ) 
-        {
+        if ( $validator->fails() ) {
             return response( ['errors'=>$validator->errors()->all()], 422 );
         }
             return   $this->courseRepository->delCourse( $request );
     }
+    
     /**
     * Edit Course
     *
@@ -100,8 +94,7 @@ class CourseController extends Controller
             'credit_hours'=>'required'
         ]);
         
-        if ( $validator->fails() ) 
-        {
+        if ( $validator->fails() ) {
             return response( ['errors'=>$validator->errors()->all()], 422 );
         }
         

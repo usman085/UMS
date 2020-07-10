@@ -24,7 +24,7 @@ class Program extends Model
     */
     public function AssignedCourses()
     {
-        return $this->belongsToMany('App\Models\Course')->withPivot('semester');
+        return $this->belongsToMany('App\Models\Course')->withPivot('semester')->withPivot('id');
     }
 
     /**

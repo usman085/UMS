@@ -3,32 +3,34 @@ namespace App\Repositories\Interfaces;
 
 interface ProgramInterface
 {
-  /**
+    /**
     * Insert program
     *
     * @param request
-    * @return Response 
+    * @return Response
     */
-    public function insertProgram($request);
+
+    public function insertProgram( $request );
 
     /**
     * Get All program
     *
-    * 
+    *
     * @return Response All program
     */
+
     public function getProgram();
 
-     /**
+    /**
     * Assign Courses to Program
     *
     * @param request
     * @return Response  Assigned Program
     */
 
-    public function AssignCourses($request);
-    
-     /**
+    public function AssignCourses( $request );
+
+    /**
     * Delete Program
     *
     * @param request
@@ -36,16 +38,29 @@ interface ProgramInterface
     */
 
     public function deleteProgram( $request );
-    
-     /**
-    * Edit Program 
+
+    /**
+    * Edit Program
     *
     * @param request
     * @return Response  Edit Program  Data
     */
 
-     public function editProgram( $request );
+    /**
+    * Edit Program
+    *
+    * @param request
+    * @return Response Edit Program Data
+    */
 
+    public function editProgram( $request );
 
-     public function AssignCourseToProgram($request);
+    /**
+    * Assign Course To Program Program
+    *
+    * @param request
+    * @return Response  Program Data
+    */
+
+    public function AssignCourseToProgram( $request );
 }

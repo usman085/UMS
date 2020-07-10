@@ -8,7 +8,7 @@
             <v-icon @click="close()">mdi-close</v-icon>
         </v-card-title>
         <v-card-subtitle>
-            {{programDetail.program_short_title.toUpperCase()}} | Total Semester : {{programDetail.no_of_semester}} | Program Duration {{programDetail.program_duration}}
+            {{programDetail.program_short_title.toUpperCase()}} | Total Semester : {{programDetail.no_of_semester}} | Program Duration {{programDetail.program_duration}} Year
             <v-divider></v-divider>
         </v-card-subtitle> 
         <v-card-text>
@@ -55,7 +55,12 @@
             <v-btn color="primary" @click="insertAssignCourse()" :disabled="!valid || (selected =='')">Assign Course</v-btn>
             <v-btn color="danger" @click="close()">Cancel</v-btn>
         </v-card-actions>
-         <pacer :message="'Saving....'" ></pacer>
+          <div class="text-center">
+        <v-overlay :value="saving" >
+            <v-progress-circular indeterminate size="64"></v-progress-circular>
+            <p>Asigning....</p>
+        </v-overlay>
+    </div>
     </v-card>
    
 </v-dialog>
@@ -70,6 +75,7 @@ export default {
         return {
             semesterRules: [v => !!v || "This Field is required"],
             valid: true,
+            saving:false,
             selected: [],
             semester: ""
         }
@@ -93,7 +99,7 @@ export default {
             this.$refs.form.reset();
         },
         insertAssignCourse: function () {
-            this.$store.dispatch('overlay');
+            this.saving=true;
             let headers = {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token
@@ -108,13 +114,13 @@ export default {
                     headers: headers
                 })
                 .then(res => {
-                    console.log(res);
-                     this.$store.dispatch('overlay');
+                    
+                    this.saving=false;
                      this.$refs.form.reset();
                     //this.$store.dispatch("allCourses", res.data.courses);
                 })
                 .catch(err => {
-                    if (error.response.status === 401) {
+                    if (error.response.status == 401) {
                         this.$router.push({
                             name: "login"
                         });
@@ -135,7 +141,7 @@ export default {
                     this.$store.dispatch("allCourses", res.data.courses);
                 })
                 .catch(err => {
-                    if (error.response.status === 401) {
+                    if (error.response.status == 401) {
                         this.$router.push({
                             name: "login"
                         });
@@ -166,12 +172,15 @@ export default {
     margin: 0 31px;
 }
 
-.v-input--selection-controls .v-input__slot>.v-label,
-.v-input--selection-controls .v-radio>.v-label {
+.v-input--selection-controls .v-radio > .v-label  {
     font-size: 12px !important;
 }
 
 .v-application--is-ltr .v-messages {
     display: none;
+}
+.v-input--selection-controls{
+    margin-top: 0;
+    padding-top:0 ;
 }
 </style>

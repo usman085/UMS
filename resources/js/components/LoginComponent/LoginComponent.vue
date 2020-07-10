@@ -73,14 +73,14 @@ export default {
                     let cryptAuth = JSON.stringify(cryptoJSON.encrypt(userAuth, 'ums'))
 
                     if (res.data.success.user.role == '5') {
-                       
+                         this.$store.dispatch('overlay');
                         localStorage.setItem('adminLogin', cryptAuth);
                         this.$router.push({
                             name: 'AdminDashboard'
                         });
 
                     }
-                     this.$store.dispatch('overlay');
+                     
                 })
                 .catch((err) => {
                     this.error = "User Does Not Exist";

@@ -15,10 +15,17 @@ class CreateCourseProgramTable extends Migration
     {
         Schema::create('course_program', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('program_id');
-            $table->integer('course_id');
+            $table->unsignedBigInteger('program_id');
+            $table->unsignedBigInteger('course_id');
             $table->tinyInteger('semester');
             $table->timestamps();
+
+            /**
+             * Foreign Key Constraints
+             */
+            $table->foreign('program_id')->references('id')->on('programs') ->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses') ->onDelete('cascade');
+            
         });
     }
 
