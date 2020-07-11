@@ -8,11 +8,11 @@ class Gender extends Model
 {
     protected $fillable =['gender'];
 
-       /**
-     * Get the Student that has the Guardian.
-     */
-    // public function studentRegistration()
-    // {
-    //     return $this->belongsTo('App\Models\StudentRegistration');
-    // }
+    /**
+    *  Guardian relationship with Student Personal Detail .
+    */
+    public function studentPersonalDetail()
+    {
+        return $this->hasMany('App\Models\StudentPersonalDetail');
+    }
 }

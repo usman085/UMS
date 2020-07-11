@@ -27,6 +27,8 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/add-course-outline','ApiController\Course\CourseController@addCourseOutline');
     Route::post('/assign-courses','ApiController\Program\ProgramController@AssignCourses');
     Route::post('/assign-course-to-program','ApiController\Program\ProgramController@AssignCourseToProgram');
+   
+   
     //  program routes start
     Route::post('/insert-program','ApiController\Program\ProgramController@insertProgram');
     Route::post('/get-program','ApiController\Program\ProgramController@getProgram');
@@ -34,7 +36,20 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/edit-program','ApiController\Program\ProgramController@editProgram');
     Route::post('/del-assign-course','ApiController\Program\ProgramController@delAssignCourse');
     //  program routes end
+
+    // register student start
+    Route::post('/get-gender','ApiController\StudentRegistration\RegistrationController@getGender');
+    Route::post('/get-guardian','ApiController\StudentRegistration\RegistrationController@getGuardian');
+    Route::post('/get-shift','ApiController\StudentRegistration\RegistrationController@getShift');
+    Route::post('/get-program','ApiController\StudentRegistration\RegistrationController@getProgram');
+    Route::post('/get-blood-group','ApiController\StudentRegistration\RegistrationController@getBloodGroup');
+
+    Route::post('/register-student','ApiController\StudentRegistration\RegistrationController@registerStudent');
     
+    
+    
+    // register student End
+
 
     // *** Route Group End ***//
 });

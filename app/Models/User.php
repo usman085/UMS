@@ -19,8 +19,17 @@ class User extends Authenticatable
      */
     protected $fillable = 
     [
-        'name', 'email', 'password',
+        'name', 'email', 'password','role'
     ];
+
+    /**
+    *   User Has Many relationship with Student Detail .
+    */
+    public function studentDetail()
+    {
+        return $this->hasOne('App\Models\StudentDetail');
+    }
+
 
     /**
      * The attributes that should be hidden for arrays.

@@ -84,8 +84,6 @@
 import EventBus from "../../../EventBus/eventBus";
 // *** AddCoursesModal 
 import AddCoursesModal from "./AddCourseModal";
-
-
 import CourseOutlineViewModal from './CourseOutlineViewModal';
 export default {
     name: "ManageCoursesBlock",

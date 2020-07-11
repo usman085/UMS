@@ -1,360 +1,709 @@
 <template>
-<v-container>
-    <v-form v-model="valid">
-        <fieldset class="form-field-sets">
-            <legend class="text-center form-field-set-name">Personal Information</legend>
-            <v-container>
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field label="Student Name*" required :rules="nameRules"></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field label="Father Name*" required :rules="fatherRules"></v-text-field>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-select :items="items" label="Guardian*" required :rules="guardianRules"></v-select>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y max-width="290px" min-width="290px">
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-text-field v-model="dateFormatted" label="Birthday*" hint="MM/DD/YYYY" persistent-hint v-bind="attrs" @blur="date = parseDate(dateFormatted)" v-on="on"></v-text-field>
-                            </template>
-                            <v-date-picker required :rules="dobRules" v-model="date" no-title @input="menu1 = false"></v-date-picker>
-                        </v-menu>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-select :items="genders" label="Gender*" required></v-select>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-select :items="bloodGroup" label="Blood Group (optional)"></v-select>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field text-field label="Religion" required :rules="religionRules"></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field label="Phone Number*" required :rules="phoneRules"></v-text-field>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field label="Guardian Phone Number" required :rules="phoneRules"></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field label="Landline Number"></v-text-field>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field label="CNIC NO*" required :rules="cnicRules"></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field label="Contact Email Account*" required :rules="emailRules"></v-text-field>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field label="Country*" required :rules="reqiredRule"></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field label="City*" required :rules="reqiredRule"></v-text-field>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="12">
-                        <v-text-field label="Address*" required :rules="addressRules"></v-text-field>
-                    </v-col>
-                </v-row>
-                <p class="alert-indicate">* indicate that this Fields is Must</p>
-            </v-container>
-        </fieldset>
-
-        <!-- Personal Info field set  -->
- <fieldset class="form-field-sets">
-            <legend class="text-center form-field-set-name">Official Information</legend>
-            <v-container>
-                <v-row>
-                    <v-col cols="6">
-                        <v-select :items="program" label="Program" required></v-select>
-                    </v-col>
-
-                    <v-col cols="6">
-                        <v-select :items="semester" label="Current Semester"></v-select>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-select :items="shifts" label="Shift" required></v-select>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field label="Session Year" required :rules="sessionRules"></v-text-field>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field label="Roll Number" required :rules="rollnoRules"></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field label="Registration No." required :rules="regnoRules"></v-text-field>
-                    </v-col>
-                </v-row>
-            </v-container>
-        </fieldset>
-        <!-- Official Info field set  -->
-        <fieldset class="form-field-sets">
-            <legend class="text-center form-field-set-name">Official Information</legend>
-            <v-container>
-                <v-row>
-                    <v-col cols="6">
-                        <v-select :items="program" label="Program" required></v-select>
-                    </v-col>
-
-                    <v-col cols="6">
-                        <v-select :items="semester" label="Current Semester"></v-select>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-select :items="shifts" label="Shift" required></v-select>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field label="Session Year" required :rules="sessionRules"></v-text-field>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field label="Roll Number" required :rules="rollnoRules"></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field label="Registration No." required :rules="regnoRules"></v-text-field>
-                    </v-col>
-                </v-row>
-            </v-container>
-        </fieldset>
-<!-- Officail Information  -->
+  <v-form v-model="valid" ref="form">
+    <v-container>
+      <fieldset class="form-field-sets">
+        <legend class="text-center form-field-set-name">Personal Information</legend>
         <v-container>
-            <p class="fee-addition">Do You want to {{ feeAdd ? 'Modify ' : 'Add' }} Fee Structure?</p>
-            <p class="fee-addition">
-                <v-btn color="primary" small @click="dialog =true">{{ feeAdd ? 'Modify ' : 'Add' }} Fee Structure</v-btn>
-            </p>
-        </v-container>
-        
-        <fieldset class="form-field-sets">
-            <legend class="text-center form-field-set-name">Login Credentials</legend>
-            <v-container>
-                <v-row>
-                    <v-col cols="12">
-                        <v-text-field label="User Name"></v-text-field>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field label="Password" type="password" v-model="password"></v-text-field>
-                        <password v-model="password" :strength-meter-only="true" />
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field label="Confirm Password" type="password" autocomplete="false"></v-text-field>
-                    </v-col>
-                </v-row>
-            </v-container>
-        </fieldset>
-        <!-- Login Information End -->
+          <v-row>
+            <v-col cols="6">
+              <v-text-field
+                v-model="studentdetail.student_name"
+                label="Student Name*"
+                required
+                :rules="nameRules"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="6">
+              <v-text-field
+                v-model="studentdetail.father_name"
+                label="Father Name*"
+                required
+                :rules="fatherRules"
+              ></v-text-field>
+            </v-col>
+          </v-row>
 
-        <v-container class="text-center">
-            <v-btn color="primary">Register Student</v-btn>
+          <v-row>
+            <v-col cols="6">
+              <v-select
+                v-model="studentdetail.guardian"
+                :items="guardians"
+                item-text="guardian"
+                item-value="id"
+                label="Guardian*"
+                required
+                :rules="guardianRules"
+              ></v-select>
+            </v-col>
+            <v-col cols="6">
+              <v-menu
+                ref="menu1"
+                v-model="menu1"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                max-width="290px"
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="studentdetail.dateFormatted"
+                    label="Date of Birth*"
+                    hint="MM/DD/YYYY"
+                    persistent-hint
+                    v-bind="attrs"
+                    @blur="date = parseDate(dateFormatted)"
+                    v-on="on"
+                    required
+                    :rules="requiredRules"
+                  ></v-text-field>
+                </template>
+                <v-date-picker required v-model="date" no-title @input="menu1 = false"></v-date-picker>
+              </v-menu>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="6">
+              <v-select
+                v-model="studentdetail.gender"
+                :items="genders"
+                item-text="gender"
+                item-value="id"
+                label="Gender*"
+                required
+                :rules="genderRules"
+              ></v-select>
+            </v-col>
+            <v-col cols="6">
+              <v-select
+                v-model="studentdetail.bloodGroup"
+                :items="bloodGroups"
+                item-text="blood_group"
+                item-value="id"
+                label="Blood Group (optional)"
+              ></v-select>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="6">
+              <v-text-field
+                v-model="studentdetail.religion"
+                text-field
+                label="Religion"
+                required
+                :rules="religionRules"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="6">
+              <v-text-field
+                v-model="studentdetail.phone_number"
+                label="Phone Number*"
+                type="number"
+                step="1"
+                onkeypress="return event.charCode >= 8 && event.charCode <= 57"
+                min="1"
+                max="1000"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                maxlength="13"
+                :rules="phoneRules"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="6">
+              <v-text-field
+                v-model="studentdetail.guardian_phone_number"
+                label="Guardian Phone Number"
+                required
+                :rules="phoneRules"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="6">
+              <v-text-field v-model="studentdetail.land_line_number" label="Landline Number"></v-text-field>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="6">
+              <v-text-field
+                v-model="studentdetail.cnic"
+                label="CNIC NO*"
+                required
+                :rules="cnicRules"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="6">
+              <v-text-field
+                v-model="studentdetail.email"
+                label="Contact Email Account*"
+                required
+                :rules="emailRules"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="6">
+              <v-text-field
+                v-model="studentdetail.country"
+                label="Country*"
+                required
+                :rules="requiredRules"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="6">
+              <v-text-field
+                v-model="studentdetail.city"
+                label="City*"
+                required
+                :rules="requiredRules"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="12">
+              <v-text-field
+                v-model="studentdetail.address"
+                label="Address*"
+                required
+                :rules="addressRules"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <p class="alert-indicate">* indicate that this Fields is Must</p>
         </v-container>
-    </v-form>
-    <!-- Fee Structure Modal -->
-    <v-row justify="center">
+      </fieldset>
+
+      <!-- Personal Info field set  -->
+      <fieldset class="form-field-sets">
+        <legend class="text-center form-field-set-name">Official Information</legend>
+        <v-container>
+          <v-row>
+            <v-col cols="6">
+              <v-select
+                v-model="studentdetail.program"
+                :items="programs"
+                item-text="program_title"
+                item-value="id"
+                label="Program"
+                required
+                :rules="programRules"
+              ></v-select>
+            </v-col>
+
+            <v-col cols="6">
+              <v-select
+                v-model="studentdetail.semester"
+                required
+                :rules="semesterRules"
+                :items="semester"
+                label="Current Semester"
+              ></v-select>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="6">
+              <v-select
+                v-model="studentdetail.shift"
+                :items="shifts"
+                item-text="Shift"
+                item-value="id"
+                label="Shift"
+                required
+                :rules="shiftRules"
+              ></v-select>
+            </v-col>
+            <v-col cols="6">
+              <v-text-field
+                v-model="studentdetail.session_year"
+                label="Session Year"
+                required
+                :rules="sessionRules"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="6">
+              <v-text-field
+                v-model="studentdetail.roll_no"
+                label="Roll Number"
+                required
+                :rules="rollnoRules"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="6">
+              <v-text-field
+                v-model="studentdetail.reg_no"
+                label="Registration No."
+                required
+                :rules="regnoRules"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-container>
+      </fieldset>
+      <!-- Educational Info field set  -->
+      <fieldset class="form-field-sets">
+        <legend class="text-center form-field-set-name">Educational History</legend>
+        <v-container>
+          <v-row>
+            <v-col cols="6">
+              <v-text-field
+                v-model="studentdetail.matric_marks"
+                type="number"
+                label="Matriculation Marks"
+                required
+                :rules="matricRules"
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="6">
+              <v-text-field
+                v-model="studentdetail.secondYear_marks"
+                type="number"
+                label="FA\FSC\ICS Marks"
+                required
+                :rules="faRules"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="6">
+              <v-text-field v-model="studentdetail.school" type="text" label="School Name "></v-text-field>
+            </v-col>
+            <v-col cols="6">
+              <v-text-field
+                v-model="studentdetail.school_passing_year"
+                type="text"
+                label="Passing Year"
+                required
+                :rules="schoolPassRules"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col cols="6">
+              <v-text-field v-model="studentdetail.college" type="text" label="College Name "></v-text-field>
+            </v-col>
+            <v-col cols="6">
+              <v-text-field
+                v-model="studentdetail.college_passing_year"
+                type="text"
+                label="Passing Year"
+                required
+                :rules="collegePassRules"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-container>
+      </fieldset>
+      <!-- Officail Information  -->
+      <v-container>
+        <p class="fee-addition">Do You want to {{ feeAdd ? 'Modify ' : 'Add' }} Fee Structure?</p>
+        <p class="fee-addition">
+          <v-btn
+            color="primary"
+            small
+            @click="dialog =true"
+          >{{ feeAdd ? 'Modify ' : 'Add' }} Fee Structure</v-btn>
+        </p>
+      </v-container>
+
+      <fieldset class="form-field-sets">
+        <legend class="text-center form-field-set-name">Login Credentials</legend>
+        <v-container>
+          <v-row>
+            <v-col cols="12">
+              <v-text-field
+                v-model="studentdetail.user_name"
+                label="User Name"
+                required
+                :rules="usernameRules"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="6">
+              <v-text-field
+                label="Password"
+                type="password"
+                v-model="password"
+                required
+                :rules="passwordRules"
+              ></v-text-field>
+              <password v-model="studentdetail.password" :strength-meter-only="true" />
+            </v-col>
+            <v-col cols="6">
+              <v-text-field
+                label="Confirm Password"
+                type="password"
+                autocomplete="false"
+                required
+                :rules="cpasswordRules"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-container>
+      </fieldset>
+      <!-- Login Information End -->
+
+      <v-container class="text-center">
+        <v-btn color="primary" :disabled="!valid" @click="registerStudent()">Register Student</v-btn>
+      </v-container>
+
+      <!-- Fee Structure Modal -->
+      <v-row justify="center">
         <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-            <v-card>
-                <v-toolbar dark color="primary">
-                    <v-btn icon dark @click="dialog=false">
-                        <v-icon>mdi-close</v-icon>
-                    </v-btn>
-                    <v-toolbar-title>Fee Sturcture</v-toolbar-title>
-                    <v-spacer></v-spacer>
-                </v-toolbar>
+          <v-card>
+            <v-toolbar dark color="primary">
+              <v-btn icon dark @click="dialog=false">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+              <v-toolbar-title>Fee Sturcture</v-toolbar-title>
+              <v-spacer></v-spacer>
+            </v-toolbar>
+            <v-container>
+              <fieldset class="form-field-sets">
+                <legend class="form-field-set-name">Fee Structure Particulars</legend>
                 <v-container>
-                    <fieldset class="form-field-sets">
-                        <legend class="form-field-set-name">Fee Structure Particulars</legend>
-                        <v-container>
-                            <h3 class="text-center">Complete Package of Semester</h3>
-                            <v-divider></v-divider>
+                  <h3 class="text-center">Complete Package of Semester</h3>
+                  <v-divider></v-divider>
 
-                            <v-row>
-                                <v-col cols="12">
-                                    <v-text-field label="Admission Fee"></v-text-field>
-                                </v-col>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-text-field label="Admission Fee"></v-text-field>
+                    </v-col>
 
-                                <v-col cols="12">
-                                    <v-text-field label="Tution Fee Per Semester"></v-text-field>
-                                </v-col>
+                    <v-col cols="12">
+                      <v-text-field label="Tution Fee Per Semester"></v-text-field>
+                    </v-col>
 
-                                <v-col cols="12">
-                                    <v-text-field label="Scholarship %"></v-text-field>
-                                </v-col>
+                    <v-col cols="12">
+                      <v-text-field label="Scholarship %"></v-text-field>
+                    </v-col>
 
-                                <v-col cols="12">
-                                    <v-text-field label="Amount of Scholarship"></v-text-field>
-                                </v-col>
+                    <v-col cols="12">
+                      <v-text-field label="Amount of Scholarship"></v-text-field>
+                    </v-col>
 
-                                <v-col cols="6">
-                                    <v-text-field label="Fee After  Scholarship"></v-text-field>
-                                </v-col>
+                    <v-col cols="6">
+                      <v-text-field label="Fee After  Scholarship"></v-text-field>
+                    </v-col>
 
-                                <v-col cols="6">
-                                    <v-text-field label="Library Fee"></v-text-field>
-                                </v-col>
+                    <v-col cols="6">
+                      <v-text-field label="Library Fee"></v-text-field>
+                    </v-col>
 
-                                <v-col cols="6">
-                                    <v-text-field label="Exam Fee"></v-text-field>
-                                </v-col>
+                    <v-col cols="6">
+                      <v-text-field label="Exam Fee"></v-text-field>
+                    </v-col>
 
-                                <v-col cols="6">
-                                    <v-text-field label="Sport Fee"></v-text-field>
-                                </v-col>
+                    <v-col cols="6">
+                      <v-text-field label="Sport Fee"></v-text-field>
+                    </v-col>
 
-                                <v-col>
-                                    <h5>Total Amount 45000</h5>
-                                </v-col>
+                    <v-col>
+                      <h5>Total Amount 45000</h5>
+                    </v-col>
 
-                                <v-col>
-                                    <v-btn color="primary" @click="addFee()">Submit Fee</v-btn>
-                                </v-col>
-                            </v-row>
-                        </v-container>
-                    </fieldset>
+                    <v-col>
+                      <v-btn color="primary" @click="addFee()">Submit Fee</v-btn>
+                    </v-col>
+                  </v-row>
                 </v-container>
+              </fieldset>
+            </v-container>
 
-                <v-divider></v-divider>
-            </v-card>
+            <v-divider></v-divider>
+          </v-card>
         </v-dialog>
-    </v-row>
-    <!-- Add Fee structure -->
-</v-container>
+      </v-row>
+      <!-- Add Fee structure -->
+    </v-container>
+    <v-snackbar top right v-model="snackbar" color="success">
+      {{succesMessage}}
+      <template v-slot:action="{ attrs }">
+        <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+      </template>
+    </v-snackbar>
+  </v-form>
 </template>
 
 <script>
 import Password from "vue-password-strength-meter";
 export default {
-    valid: false,
-    name: "StudentRegistratonForm",
+  name: "StudentRegistratonForm",
 
-    components: {
-        Password
+  components: {
+    Password
+  },
+
+  data: vm => ({
+    valid: true,
+    //   rules for validating  data
+    requiredRules: [v => !!v || "This field is required"],
+    nameRules: [v => !!v || "Student Name is required"],
+    fatherRules: [v => !!v || "Father Name is required"],
+    guardianRules: [v => !!v || "Guardian Name is required"],
+    fatherRules: [v => !!v || "Father Name is required"],
+    religionRules: [v => !!v || "Religion is required"],
+    phoneRules: [v => !!v || "Phone Number is required"],
+    cnicRules: [v => !!v || "CNIC Number is required"],
+    emailRules: [
+      v => !!v || "E-mail is required",
+      v => /.+@.+/.test(v) || "E-mail must be valid"
+    ],
+    genderRules: [v => !!v || "Gender is required"],
+    addressRules: [v => !!v || "Address is required"],
+    programRules: [v => !!v || "Program is required"],
+    semesterRules: [v => !!v || "Semester is required"],
+    shiftRules: [v => !!v || "Shift is required"],
+    sessionRules: [v => !!v || "Session Years are required"],
+    rollnoRules: [v => !!v || "Roll No is required"],
+    regnoRules: [v => !!v || "Registeration Number is required"],
+    matricRules: [v => !!v || "Marks are required"],
+    faRules: [v => !!v || "Marks are required"],
+    schoolPassRules: [v => !!v || "Passing Year is required"],
+    collegePassRules: [v => !!v || "Passing Year is required"],
+    usernameRules: [v => !!v || "Username is required"],
+    passwordRules: [v => !!v || "Password is required"],
+    cpasswordRules: [v => !!v || "Confirm Password is required"],
+    //  rules for validating entered data
+
+    succesMessage: "",
+    snackbar: false,
+    dialog: false,
+    studentdetail: {
+      student_name: "",
+      father_name: "",
+      dateformate: "",
+      bloodGroup: "",
+      gender: "",
+      religion: "",
+      phone_number: "",
+      land_line_number: "",
+      country: "",
+      city: "",
+      email: "",
+      cnic: "",
+      address: "",
+      program: "",
+      semester: "",
+      shift: "",
+      session_year: "",
+      roll_no: "",
+      reg_no: "",
+      matric_marks: "",
+      secondYear_marks: "",
+      school: "",
+      school_passing_year: "",
+      college: "",
+      college_passing_year: ""
     },
+    TotalSemester: ["1", "2", "3", "4", "5", "6", "7", "8"],
+    genders: [],
+    guardians: [],
+    bloodGroups: [],
+    shifts: [],
+    programs: [],
+    semester: ["1", "2", "3", "4", "5", "6", "7", "8"],
 
-    data: vm => ({
-        //   rules for validating  data
-        reqiredRule: [v => !!v || "This field is required"],
-        nameRules: [v => !!v || "Student Name is required"],
-        fatherRules: [v => !!v || "Father Name is required"],
-        guardianRules: [v => !!v || "Guardian Name is required"],
-        fatherRules: [v => !!v || "Father Name is required"],
-        religionRules: [v => !!v || "Religion is required"],
-        phoneRules: [v => !!v || "Phone Number is required"],
-        cnicRules: [v => !!v || "CNIC Number is required"],
-        emailRules: [
-            v => !!v || "E-mail is required",
-            v => /.+@.+/.test(v) || "E-mail must be valid"
-        ],
-        addressRules: [v => !!v || "CNIC Number is required"],
-        sessionRules: [v => !!v || "Session Years are required"],
-        rollnoRules: [v => !!v || "Roll No is required"],
-        regnoRules: [v => !!v || "Registeration Number is required"],
+    date: new Date().toISOString().substr(0, 10),
+    dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
+    menu1: false,
+    menu2: false,
+    password: "",
+    feeAdd: false
+  }),
 
-        //  rules for validating entered data
-
-        dialog: false,
-        TotalSemester: ["1", "2", "3", "4", "5", "6", "7", "8"],
-        genders: ["Male", "female", "others"],
-        date: new Date().toISOString().substr(0, 10),
-        dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
-        menu1: false,
-        semester: ["1", "2", "3", "4", "5", "6", "7", "8"],
-        menu2: false,
-        shifts: ["Morning", "Evening"],
-        password: "",
-        bloodGroup: ["N/A", "A+", "A-", "B+", "B-", "AB-", "AB+", "O+", "O-"],
-        items: ["Parents", "etc"],
-        program: ["BSCS", "BSSE", "BSIT"],
-        sections: ["A", "B"],
-        feeAdd: false
-    }),
-
-    computed: {
-        computedDateFormatted() {
-            return this.formatDate(this.date);
-        }
-        //   feeAdd:function(){
-        //       return false;
-        //   }
+  computed: {
+    computedDateFormatted() {
+      return this.formatDate(this.date);
     },
-
-    watch: {
-        date(val) {
-            this.dateFormatted = this.formatDate(this.date);
-        }
-    },
-
-    methods: {
-        addFee: function () {
-            this.feeAdd = true;
-            this.dialog = !this.dialog;
-        },
-        formatDate(date) {
-            if (!date) return null;
-
-            const [year, month, day] = date.split("-");
-            return `${month}/${day}/${year}`;
-        },
-        parseDate(date) {
-            if (!date) return null;
-
-            const [month, day, year] = date.split("/");
-            return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
-        }
+    //User Auth function authorizing Admin & use in Header
+    userAuth: function() {
+      return cryptoJSON.decrypt(
+        JSON.parse(localStorage.getItem("adminLogin")),
+        "ums"
+      );
     }
+  },
+
+  watch: {
+    date(val) {
+      this.dateFormatted = this.formatDate(this.date);
+    }
+  },
+
+  methods: {
+    registerStudent: function() {
+      // Headers are defined for authentication
+      let headers = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer  " + this.userAuth.token
+      };
+      // send request to Api Route
+      axios
+        .post(
+          process.env.MIX_APP_URL + "/register-student",
+          this.studentdetail,
+          {
+            headers: headers
+          }
+        )
+        .then(response => {
+          this.succesMessage = "Student Register Successfully";
+          this.$refs.form.reset();
+
+          this.snackbar = true;
+        })
+        .catch(error => {});
+    },
+    // getting gender from Database
+    getGender: function() {
+      // Headers are defined for authentication
+      let headers = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer  " + this.userAuth.token
+      };
+      // send request to Api Route
+      axios
+        .post(process.env.MIX_APP_URL + "/get-gender", "", {
+          headers: headers
+        })
+        .then(response => {
+          this.genders = response.data.data;
+        })
+        .catch(error => {});
+    },
+
+    // getting guardian from Database
+    getGuardian: function() {
+      // Headers are defined for authentication
+      let headers = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer  " + this.userAuth.token
+      };
+      // send request to Api Route
+      axios
+        .post(process.env.MIX_APP_URL + "/get-guardian", "", {
+          headers: headers
+        })
+        .then(response => {
+          this.guardians = response.data.data;
+        })
+        .catch(error => {});
+    },
+
+    // getting shift from Database
+    getShift: function() {
+      // Headers are defined for authentication
+      let headers = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer  " + this.userAuth.token
+      };
+      // send request to Api Route
+      axios
+        .post(process.env.MIX_APP_URL + "/get-shift", "", {
+          headers: headers
+        })
+        .then(response => {
+          this.shifts = response.data.data;
+        })
+        .catch(error => {});
+    },
+
+    // getting program from Database
+    getProgram: function() {
+      // Headers are defined for authentication
+      let headers = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer  " + this.userAuth.token
+      };
+      // send request to Api Route
+      axios
+        .post(process.env.MIX_APP_URL + "/get-program", "", {
+          headers: headers
+        })
+        .then(response => {
+          this.programs = response.data.data;
+        })
+        .catch(error => {});
+    },
+
+    // getting blood group from Database
+    getBloodGroup: function() {
+      // Headers are defined for authentication
+      let headers = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer  " + this.userAuth.token
+      };
+      // send request to Api Route
+      axios
+        .post(process.env.MIX_APP_URL + "/get-blood-group", "", {
+          headers: headers
+        })
+        .then(response => {
+          this.bloodGroups = response.data.data;
+        })
+        .catch(error => {});
+    },
+
+    addFee: function() {
+      this.feeAdd = true;
+      this.dialog = !this.dialog;
+    },
+    formatDate(date) {
+      if (!date) return null;
+
+      const [year, month, day] = date.split("-");
+      return `${month}/${day}/${year}`;
+    },
+    parseDate(date) {
+      if (!date) return null;
+
+      const [month, day, year] = date.split("/");
+      return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+    }
+  },
+  created() {
+    this.getGender();
+    this.getGuardian();
+    this.getShift();
+    this.getProgram();
+    this.getBloodGroup();
+  }
 };
 </script>
 
 <style scoped>
 .alert-indicate {
-    font-size: 11px;
-    text-align: right;
+  font-size: 11px;
+  text-align: right;
 }
 
 .form-field-sets {
-    padding: 10px;
-    border-radius: 6px;
-    border-color: rgba(0, 0, 0, 0.12);
-    margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  border-color: rgba(0, 0, 0, 0.12);
+  margin-bottom: 10px;
 }
 
 .form-field-set-name {
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.45);
-    padding: 0 10px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.45);
+  padding: 0 10px;
 }
 
 .fee-addition {
-    font-size: 12px;
+  font-size: 12px;
 }
 </style>
