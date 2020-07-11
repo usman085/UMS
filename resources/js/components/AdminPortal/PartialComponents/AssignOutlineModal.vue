@@ -44,7 +44,7 @@
                             </v-col>
                         </v-row>
                         <small class="text-right">*indicates required field</small>
-                        <v-row>
+                        <v-row> 
                             <v-col cols="11" sm="12" md="12">
                                 <div class="my-2">
                                     <v-btn color="primary" @click="Submit()" :disabled="submitBtn">Submit</v-btn>

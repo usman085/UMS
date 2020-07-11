@@ -17,7 +17,7 @@ class CreateStudentPersonalDetailsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('student_detail_id')->unsigned()->index();
             $table->integer('guardian_id')->unsigned()->index();
-            $table->integer('blood_id')->unsigned()->index();
+            $table->integer('blood_id')->unsigned()->index()->nullable();
             $table->integer('gender_id')->unsigned()->index();
             $table->integer('country_id')->unsigned()->index();
             $table->integer('city_id')->unsigned()->index();
