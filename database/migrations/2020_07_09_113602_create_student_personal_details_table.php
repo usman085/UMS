@@ -26,7 +26,7 @@ class CreateStudentPersonalDetailsTable extends Migration
             $table->year('date_of_birth');
             $table->string('religion');
             $table->string('phone_number');
-            $table->string('land_line_number');    
+            $table->string('land_line_number')->nullable();    
             $table->string('email')->unique();     
             $table->integer('cnic')->unique(); 
             $table->string('address'); 

@@ -40,7 +40,7 @@
                                             <v-list-item @click="delCourse(item.id)">
                                                 <v-list-item-title>Delete</v-list-item-title>
                                             </v-list-item>
-                                            <v-list-item>
+                                            <v-list-item @click="$store.dispatch('AssignOutlineModalToggle');">
                                                 <v-list-item-title>Assign Outline</v-list-item-title>
                                             </v-list-item>
                                         </v-list>
@@ -75,6 +75,7 @@
         </template>
     </v-snackbar>
     <AddCoursesModal :editData="editRow" :editRowMessage="editRowMessage"></AddCoursesModal>
+    <AssignOutlineModal></AssignOutlineModal>
 </div>
 </template>
 
@@ -83,8 +84,9 @@
 import EventBus from "../../../EventBus/eventBus";
 // *** AddCoursesModal 
 import AddCoursesModal from "./AddCourseModal";
+
 // *** AssignOutlineModal
-import AssignOutlineModal from "./AddCourseModal";
+import AssignOutlineModal from "./AssignOutlineModal";
 
 export default {
     name: "ManageCoursesBlock",

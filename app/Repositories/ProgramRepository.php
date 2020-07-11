@@ -117,7 +117,7 @@ class ProgramRepository implements ProgramInterface {
     }
 
     /**
-    *  Delete Assign Course rogram
+    *  Delete Assign Course program
     *
     * @param request
     * @return Response Message with Code 
@@ -126,7 +126,7 @@ class ProgramRepository implements ProgramInterface {
     public function delAssignCourse( $request ) {
         $del = DB::table( 'course_program' )->where( 'id', $request->id )->delete();
             if ( $del ) {
-                return response( ['message'=>'Delete SucessFully'], 200 );
+                return response( ['message'=>'Delete SuccessFully'], 200 );
             } else {
                 return response( ['message'=>'Error'], 422 );
             }

@@ -15,7 +15,7 @@ class CreateGuardiansTable extends Migration
     {
         Schema::create('guardians', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('guardian_name');
+            $table->string('guardian');
         
             $table->timestamps();
         });

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Guardian extends Model
 {
-     protected $fillable =[ 'id','guardian_name'];
+     protected $fillable =[ 'id','guardian'];
 
        /**
      *  Guardian relationship with student.
