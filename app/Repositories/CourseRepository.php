@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Repositories\Interfaces\CourseInterface;
 use App\Models\Course;
+use App\Models\CourseOutline;
 
 class CourseRepository implements CourseInterface 
 {
@@ -30,7 +31,7 @@ class CourseRepository implements CourseInterface
 
     public function getCourse() 
     {
-        $allCourse = Course::all();
+        $allCourse = Course::with('coursesOutline')->get();
     
         return response( ['courses'=>$allCourse], 200 );
     }
@@ -72,6 +73,25 @@ class CourseRepository implements CourseInterface
         } else 
         {
             return response( ['message'=>$delCourse], 402 );
+        }
+    }
+
+    public function addCourseOutline($request){
+        $addCourseOutline=CourseOutline::create([
+            'prerequisite'=>$request->prerequisite,
+            'labs'=>$request->labs,
+            'lectures'=>$request->lectures,
+            'course_outline'=>$request->course_outline,
+            'course_id'=>$request->course_id
+        ]);
+        $courseUpdate=Course::where('id',$request->course_id)->update([
+            'course_outline'=>1
+           ]);
+        if($addCourseOutline && $courseUpdate){
+           return response(['message'=>'Add Successfuly'],200);
+        }
+        else{
+            return response(['message'=>'error'],200);
         }
     }
 }

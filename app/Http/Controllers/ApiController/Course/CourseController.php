@@ -100,4 +100,7 @@ class CourseController extends Controller
         
             return $this->courseRepository->editCourse( $request );
     }
+    public function addCourseOutline(Request $request){
+       return $this->courseRepository->addCourseOutline($request);
+    }
 }
