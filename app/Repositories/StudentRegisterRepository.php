@@ -13,7 +13,7 @@ use App\Models\Program;
 use App\Models\Gender;
 use App\Models\Shift;
 use App\Models\User;
-
+use Carbon\Carbon;
 use Hash;
 use DB;
 
@@ -28,7 +28,7 @@ class StudentRegisterRepository implements StudentRegisterInterface {
 
     public function registerStudent( $request )
     {
-    
+     
      /**
     *  DB::beginTransaction() prevents to add record if exception occur 
     * 
@@ -56,7 +56,7 @@ class StudentRegisterRepository implements StudentRegisterInterface {
         'city_id' =>'4',
         'student_name' =>$request->student_name,
         'father_name' =>$request->father_name,
-        'date_of_birth' =>'',
+        'date_of_birth' => Carbon::parse($request->dateofBirth)->format('Y-m-d'),
         'religion' =>$request->religion,
         'phone_number' =>$request->phone_number,
         'land_line_number' =>$request->land_line_number,
@@ -148,9 +148,7 @@ class StudentRegisterRepository implements StudentRegisterInterface {
     * @param request
     * @return Response Get program 
     */
- 
-    public function getProgram()
-    {
+     public function getAllProgram()  {
            $data = Program::select('program_title','id')->get();
 
             return  response( ['data'=> $data], 200 );
@@ -165,7 +163,7 @@ class StudentRegisterRepository implements StudentRegisterInterface {
 
     public function getGuardian()
     {
-           $data = Guardian::select('guardian','id')->get()->toArray();
+           $data = Guardian::all();
 
             return  response( ['data'=> $data], 200 );
     }
