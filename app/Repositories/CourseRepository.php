@@ -36,6 +36,13 @@ class CourseRepository implements CourseInterface
         return response( ['courses'=>$allCourse], 200 );
     }
 
+    //  public function getCourseOutline(Request $request) 
+    // {
+    //     return $request->all();
+
+    //     return response( ['courseDetail'=>$allCourse], 200 );
+    // }
+
     /**
     * Edit Course
     *
@@ -76,19 +83,35 @@ class CourseRepository implements CourseInterface
         }
     }
 
+    public function updateCourseOutline($request){
+        $updateCourseOutline=CourseOutline::where('id',$request->id)->update(
+        [
+            'prerequisite'=>$request->prerequisite,
+            'labs'=>$request->labs,
+            'lectures'=>$request->lectures,
+            'course_outline'=>$request->course_outline,
+        ]);
+        if($updateCourseOutline){
+           return response(['message'=>'Update Successfully'],200);
+        }
+        else{
+            return response(['message'=>'error'],200);
+        }
+    }
     public function addCourseOutline($request){
+    
         $addCourseOutline=CourseOutline::create([
             'prerequisite'=>$request->prerequisite,
             'labs'=>$request->labs,
             'lectures'=>$request->lectures,
             'course_outline'=>$request->course_outline,
-            'course_id'=>$request->course_id
+            'course_id'=>$request->id
         ]);
-        $courseUpdate=Course::where('id',$request->course_id)->update([
+        $courseUpdate=Course::where('id',$request->id)->update([
             'course_outline'=>1
            ]);
         if($addCourseOutline && $courseUpdate){
-           return response(['message'=>'Add Successfuly'],200);
+           return response(['message'=>'Add Successfully'],200);
         }
         else{
             return response(['message'=>'error'],200);

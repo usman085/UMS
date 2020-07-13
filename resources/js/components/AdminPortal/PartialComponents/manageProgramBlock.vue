@@ -22,7 +22,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <template v-if="$store.state.allProgram.length > 0">
+                        <template v-if=" $store.state.allProgram.length > 0">
                             <tr v-for="item in $store.state.allProgram " :key="item.id">
                                 <td>{{ item.program_title | capitalize }}</td>
                                 <td>{{ item.program_short_title.toUpperCase()}}</td>
@@ -105,6 +105,7 @@ export default {
 
     data() {
         return {
+            allProgram:null,
             message: true,
             AssignCourseData: [],
             succesMessage: "",
@@ -207,10 +208,13 @@ export default {
         // **getProgram Function is Use to get all Program Data
         getProgram: function () {
             // Headers are defined for authentication
-        
+            let data = cryptoJSON.decrypt(
+                JSON.parse(localStorage.getItem("adminLogin")),
+                "ums"
+            );
             const headers = {
                 "Content-Type": "application/json",
-                Authorization: "Bearer  " + this.userAuth.token
+                Authorization: "Bearer  " + data.token
             };
             // send request to Api Route
             axios
@@ -218,7 +222,7 @@ export default {
                     headers: headers
                 })
                 .then(res => {
-
+                        console.log(res);
                     this.$store.dispatch("allProgram", res.data.allProgram);
                     this.message = false;
                 })
@@ -238,7 +242,6 @@ export default {
     },
     // use as a constructor 
     created() {
-      
         EventBus.$on("EditProgram", () => {
             this.getProgram();
             this.editRowMessage = false;

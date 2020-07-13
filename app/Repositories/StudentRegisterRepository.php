@@ -148,9 +148,7 @@ class StudentRegisterRepository implements StudentRegisterInterface {
     * @param request
     * @return Response Get program 
     */
- 
-    public function getAllProgram()
-    {
+     public function getAllProgram()  {
            $data = Program::select('program_title','id')->get();
 
             return  response( ['data'=> $data], 200 );

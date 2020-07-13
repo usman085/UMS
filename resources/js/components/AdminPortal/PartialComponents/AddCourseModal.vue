@@ -57,7 +57,7 @@ export default {
 
     data() {
         return {
-           
+
             succesMessage: "",
             valid: true,
             snackbar: false,
@@ -74,7 +74,7 @@ export default {
         //Insert Course Function use to Add Cousre
         insertCourse: function () {
             // Headers are required for authentication
-            alert(this.courseDetail.course_code);
+
             let headers = {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token

@@ -14,8 +14,9 @@ const store = new Vuex.Store({
     // *** State Variables
     state: {
         CourseAssignModal: false,
-        allProgram: [],
         allCourses: [],
+        allProgram: [],
+
         NotificationPreviewModal: false,
         SubmitAssignmentModal: false,
         ApplicationRequestTimeModal: false,
@@ -27,6 +28,7 @@ const store = new Vuex.Store({
         AddProgramModal: false,
         AddCourseModal: false,
         CourseOutlineView: false,
+        EditCourseOutlineModal: false,
         AddExamModal: false,
         AddExamRoutineModal: false,
         AssignOutlineModal: false,
@@ -49,6 +51,7 @@ const store = new Vuex.Store({
     },
     //  *** Mutations Function
     mutations: {
+
         CourseOutlineView(state) {
             state.CourseOutlineView = !state.CourseOutlineView;
         },
@@ -110,9 +113,13 @@ const store = new Vuex.Store({
         NotificationEditorModal(state) {
             state.NotificationEditorModal = !state.NotificationEditorModal;
         },
+        EditCourseOutlineModalToggle(state) {
+            state.EditCourseOutlineModal = !state.EditCourseOutlineModal;
+        },
     },
     // *** Action Functions
     actions: {
+
         CourseOutlineView(context) {
             context.commit('CourseOutlineView');
         },
@@ -172,6 +179,9 @@ const store = new Vuex.Store({
         },
         AssignCoursesModalToggle(context) {
             context.commit("AssignCoursesModalToggle");
+        },
+        EditCourseOutlineModalToggle(context) {
+            context.commit('EditCourseOutlineModalToggle');
         },
 
 

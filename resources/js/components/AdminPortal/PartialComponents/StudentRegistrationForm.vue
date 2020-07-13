@@ -373,7 +373,7 @@ export default {
         },
         acceptCNIC() {
             var x = this.studentdetail.cnic.replace(/\D/g, '').match(/(\d{0,5})(\d{0,7})(\d{0,1})/);
-            this.studentdetail.cnic = !x[2] ? x[1] :  x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
+            this.studentdetail.cnic = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
         },
         registerStudent: function () {
             this.studentdetail.dateofBirth = this.dateOfBrth;
