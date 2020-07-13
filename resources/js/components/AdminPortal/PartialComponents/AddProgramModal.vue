@@ -23,7 +23,7 @@
                                     <v-select :items="items" v-model="programDetail.program_duration" :rules="FieldRules" required item-text="state" label="Select Duration*" persistent-hint return-object></v-select>
                                 </v-col>
                                 <v-col cols="12">
-                                    <v-text-field v-model="programDetail.no_of_semester" :rules="FieldRules" label="No Of Semesters*" type="number" step="1" onkeypress="return event.charCode > 48" min="1" max="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2" required></v-text-field>
+                                    <v-text-field v-model="programDetail.no_of_semester" :rules="FieldRules" label="No Of Semesters*" type="number" step="1" onkeypress="return event.charCode > 57" min="1" max="10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2" required></v-text-field>
                                 </v-col>
                             </v-row>
                         </v-form>
