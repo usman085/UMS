@@ -39,7 +39,12 @@ interface CourseInterface
 
     public function editCourse( $request );
 
+    
+
+    // public function getCourseOutline($request);
 
 
     public function addCourseOutline($request);
+
+    public function updateCourseOutline($request);
 }

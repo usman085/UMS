@@ -14,14 +14,15 @@
                         <v-form v-model="valid" ref="form">
                             <v-row>
                                 <v-col cols="12">
-                                    <v-text-field v-mask="'AAA-###'" v-model="courseDetail.course_code" :rules="FieldRules" required label="Course Code" hint="SWE-403"></v-text-field>
+                                    <v-text-field v-model="courseDetail.course_code" :rules="FieldRules" required label="Course Code" hint="SWE-403"></v-text-field>
                                 </v-col>
                                 <v-col cols="12">
                                     <v-text-field v-model="courseDetail.course_title" :rules="FieldRules" label="Course Title*" hint="Web Engineering" required></v-text-field>
                                 </v-col>
 
                                 <v-col cols="12">
-                                    <v-text-field v-mask="'#(#-#)'" v-model="courseDetail.credit_hours" :rules="FieldRules" required label="Credit Hours" hint="4(3-1)"></v-text-field>
+                                
+                                    <v-text-field v-model="courseDetail.credit_hours" :rules="FieldRules" required label="Credit Hours" hint="4(3-1)"></v-text-field>
                                 </v-col>
                             </v-row>
                         </v-form>
@@ -50,16 +51,16 @@
 <script>
 // Event Bus is Use to communicate  Between Two Components
 import EventBus from "../../../EventBus/eventBus";
-import Vue from 'vue';
-import VueMask from 'v-mask'
-Vue.use(VueMask);
+
+
+
 export default {
     name: "AddCourseModel",
     props: ["editData", "editRowMessage"],
 
     data() {
         return {
-            courseCodeMask:'###-###',
+         
             succesMessage: "",
             valid: true,
             snackbar: false,
@@ -76,7 +77,7 @@ export default {
         //Insert Course Function use to Add Cousre
         insertCourse: function () {
             // Headers are required for authentication
-            alert(this.courseDetail.course_code);
+       
             let headers = {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token

@@ -208,14 +208,17 @@ export default {
         // **getProgram Function is Use to get all Program Data
         getProgram: function () {
             // Headers are defined for authentication
-        
+            let data = cryptoJSON.decrypt(
+                JSON.parse(localStorage.getItem("adminLogin")),
+                "ums"
+            );
             const headers = {
                 "Content-Type": "application/json",
-                Authorization: "Bearer  " + this.userAuth.token
+                Authorization: "Bearer  " + data.token
             };
             // send request to Api Route
             axios
-                .post(process.env.MIX_APP_URL + "/get-all-program", "", {
+                .post(process.env.MIX_APP_URL + "/get-program", "", {
                     headers: headers
                 })
                 .then(res => {
@@ -239,7 +242,6 @@ export default {
     },
     // use as a constructor 
     created() {
-      
         EventBus.$on("EditProgram", () => {
             this.getProgram();
             this.editRowMessage = false;

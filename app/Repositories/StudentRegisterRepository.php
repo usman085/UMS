@@ -149,12 +149,12 @@ class StudentRegisterRepository implements StudentRegisterInterface {
     * @return Response Get program 
     */
  
-    // public function getProgram()
-    // {
-    //        $data = Program::select('program_title','id')->get();
+    public function getProgram()
+    {
+           $data = Program::select('program_title','id')->get();
 
-    //         return  response( ['data'=> $data], 200 );
-    // }
+            return  response( ['data'=> $data], 200 );
+    }
 
     /**
     * Get Guardian 
