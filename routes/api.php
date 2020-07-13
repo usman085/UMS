@@ -41,7 +41,7 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/get-gender','ApiController\StudentRegistration\RegistrationController@getGender');
     Route::post('/get-guardian','ApiController\StudentRegistration\RegistrationController@getGuardian');
     Route::post('/get-shift','ApiController\StudentRegistration\RegistrationController@getShift');
-    Route::post('/get-all-program','ApiController\StudentRegistration\RegistrationController@getProgram');
+    Route::post('/get-all-program','ApiController\StudentRegistration\RegistrationController@getAllProgram');
     Route::post('/get-blood-group','ApiController\StudentRegistration\RegistrationController@getBloodGroup');
 
     Route::post('/register-student','ApiController\StudentRegistration\RegistrationController@registerStudent');

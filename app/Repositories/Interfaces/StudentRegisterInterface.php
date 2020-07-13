@@ -39,7 +39,7 @@ interface StudentRegisterInterface
     * @return Response
     */
 
-    public function getProgram();
+    public function getAllProgram();
 
 
            /**

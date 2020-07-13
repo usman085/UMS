@@ -74,9 +74,9 @@ class RegistrationController extends Controller
     * @return Response Get Program 
     */
     
-    public function getProgram()
+    public function getAllProgram()
     {
-        return $this->StudentRegisterRepository->getProgram();
+        return $this->StudentRegisterRepository->getAllProgram();
     }
     
 
@@ -103,6 +103,7 @@ class RegistrationController extends Controller
     
     public function registerStudent(Request $request)
     {
+       
          $validator = Validator::make( $request->all(), 
         [
             'student_name'=> 'required',
