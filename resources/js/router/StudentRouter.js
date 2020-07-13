@@ -39,7 +39,8 @@ const StudentRoutes = [{
     children: [{
             // *** Dash Board Route
             path: 'dash-board',
-            component: StudentDashboard
+            component: StudentDashboard,
+            name: 'studentDashboard'
         },
         {
             path: 'FeedBackDescriptionView',

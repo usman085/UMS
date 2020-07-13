@@ -38,4 +38,8 @@ interface CourseInterface
     */
 
     public function editCourse( $request );
+
+
+
+    public function addCourseOutline($request);
 }

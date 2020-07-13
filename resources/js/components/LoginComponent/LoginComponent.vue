@@ -80,6 +80,14 @@ export default {
                         });
 
                     }
+                    if (res.data.success.user.role == '0') {
+                         this.$store.dispatch('overlay');
+                        localStorage.setItem('studentLogin', cryptAuth);
+                        this.$router.push({
+                            name: 'studentDashboard'
+                        });
+
+                    }
                      
                 })
                 .catch((err) => {

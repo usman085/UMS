@@ -26,6 +26,7 @@ class Course extends Model
         
         return $this->belongsToMany('App\Models\Program');
     }
-
-    
+    public function coursesOutline(){
+        return $this->hasOne('App\Models\CourseOutline');
+    }
 }

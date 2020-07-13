@@ -40,7 +40,7 @@
                                             <v-list-item @click="delCourse(item.id)">
                                                 <v-list-item-title>Delete</v-list-item-title>
                                             </v-list-item>
-                                            <v-list-item @click="$store.dispatch('AssignOutlineModalToggle');">
+                                            <v-list-item @click="courseOutlineModal(item)">
                                                 <v-list-item-title>Assign Outline</v-list-item-title>
                                             </v-list-item>
                                         </v-list>
@@ -75,7 +75,7 @@
         </template>
     </v-snackbar>
     <AddCoursesModal :editData="editRow" :editRowMessage="editRowMessage"></AddCoursesModal>
-    <AssignOutlineModal></AssignOutlineModal>
+    <CourseOutlineViewModal :course="courseDetail" :courseDetailToOutline="courseDetailToOutline"></CourseOutlineViewModal>
 </div>
 </template>
 
@@ -84,18 +84,17 @@
 import EventBus from "../../../EventBus/eventBus";
 // *** AddCoursesModal 
 import AddCoursesModal from "./AddCourseModal";
-
-// *** AssignOutlineModal
-import AssignOutlineModal from "./AssignOutlineModal";
-
+import CourseOutlineViewModal from './CourseOutlineViewModal';
 export default {
     name: "ManageCoursesBlock",
     components: {
         AddCoursesModal,
-        AssignOutlineModal
+        CourseOutlineViewModal
     },
     data() {
         return {
+            courseDetailToOutline:'',
+            courseDetail:'',
             succesMessage: "",
             snackbar: false,
             editRowMessage: false,
@@ -109,6 +108,11 @@ export default {
         };
     },
     methods: {
+        courseOutlineModal:function(data){
+            this.courseDetailToOutline=data.courses_outline;
+             this.courseDetail=data;
+              this.$store.dispatch('CourseOutlineView')
+        },
         // **geCourse Function is Use to get all Course Data
         getCourse: function () {
             // Headers are defined for authentication

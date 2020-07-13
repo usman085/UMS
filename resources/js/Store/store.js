@@ -27,7 +27,7 @@ const store = new Vuex.Store({
         TimeTableDetailModal: false,
         AddProgramModal: false,
         AddCourseModal: false,
-
+        CourseOutlineView: false,
         AddExamModal: false,
         AddExamRoutineModal: false,
         AssignOutlineModal: false,
@@ -50,6 +50,9 @@ const store = new Vuex.Store({
     },
     //  *** Mutations Function
     mutations: {
+        CourseOutlineView(state) {
+            state.CourseOutlineView = !state.CourseOutlineView;
+        },
         CourseAssignModal(state) {
             state.CourseAssignModal = !state.CourseAssignModal;
         },
@@ -111,6 +114,9 @@ const store = new Vuex.Store({
     },
     // *** Action Functions
     actions: {
+        CourseOutlineView(context) {
+            context.commit('CourseOutlineView');
+        },
         CourseAssignModal(context) {
             context.commit('CourseAssignModal');
         },
