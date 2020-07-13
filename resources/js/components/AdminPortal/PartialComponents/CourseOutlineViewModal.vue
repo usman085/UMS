@@ -10,7 +10,7 @@
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
                     <template v-if="course.course_outline">
-                        <v-btn dark text @click="$store.dispatch('AssignOutlineModalToggle'),snackbar = true">Edit</v-btn>
+                        <v-btn dark text @click="editCourseOutline()">Edit</v-btn>
                     </template>
                     <template v-else>
                         <v-btn dark text @click="$store.dispatch('AssignOutlineModalToggle'),snackbar = true">Add</v-btn>
@@ -36,15 +36,15 @@
                 <v-divider></v-divider>
                 <div class="outline-wraper" v-html="courseDetailToOutline.course_outline"></div>
             </template>
+
             <template v-else>
                 <div class="add-outline-block">
-                    <h4 class="text-center">Still No any</h4>
+                    <h4 class="text-center">Still No any </h4>
                 </div>
-
             </template>
         </v-card>
+        <AssignOutlineModal :course="course" :courseDetail="courseDetailToOutline" />
     </v-dialog>
-    <AssignOutlineModal :course='course' :courseDetails="courseDetail" />
 </v-row>
 </template>
 
@@ -57,16 +57,30 @@ export default {
     components: {
         AssignOutlineModal
     },
-    computed: {
-        courseDetail: function () {
-            return {
-
+    methods:{
+        editCourseOutline:function(){
+            this.courseDetail.prerequisite=this.courseDetailToOutline.prerequisite;
+            this.courseDetail.lectures=this.courseDetailToOutline.lectures;
+                 this.courseDetail.labs=this.courseDetailToOutline.labs,
+                this.courseDetail.course_outline=this.courseDetailToOutline.course_outline,
+                this.courseDetail.id=this.courseDetailToOutline.id;
+            $store.dispatch('AssignOutlineModalToggle');
+            
             }
-        }
     },
     data() {
-        return {};
-    },
+        return {
+            courseDetail: {
+                prerequisite: '',
+                lectures: '',
+                labs: '',
+                course_outline: '',
+                //   course_id:this.course.id,
+                id: ''
+            },
+        }
+    }
+
 };
 </script>
 

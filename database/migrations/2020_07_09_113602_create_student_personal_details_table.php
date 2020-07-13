@@ -23,7 +23,7 @@ class CreateStudentPersonalDetailsTable extends Migration
             $table->integer('city_id')->unsigned()->index();
             $table->string('student_name');
             $table->string('father_name');
-            $table->year('date_of_birth');
+            $table->year('date_of_birth')->nullable();
             $table->string('religion');
             $table->string('phone_number');
             $table->string('land_line_number')->nullable();    

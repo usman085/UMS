@@ -8,19 +8,10 @@
                         <v-icon>mdi-close</v-icon>
                     </v-btn>
                     <v-toolbar-title></v-toolbar-title>
-                    <v-spacer></v-spacer>
-                    <!-- <v-toolbar-items>
-              <v-btn
-                dark
-                text
-                @click="$store.dispatch('AssignOutlineModalToggle'),snackbar = true"
-              >Save</v-btn>
-            </v-toolbar-items> -->
                 </v-toolbar>
                 <v-card-text>
                     <v-container>
-                        <h3 class="text-center">{{ courseDetails.course_title }}</h3>
-                        <p class="text-center">{{courseDetails.course_code}}</p>
+                   
                         <v-row>
                             <v-col cols="12" sm="12" md="12">
                                 <v-text-field label="Prerequisite*" v-model="courseOutline.prerequisite"></v-text-field>
@@ -44,10 +35,13 @@
                             </v-col>
                         </v-row>
                         <small class="text-right">*indicates required field</small>
-                        <v-row> 
+                        <v-row>
                             <v-col cols="11" sm="12" md="12">
-                                <div class="my-2">
-                                    <v-btn color="primary" @click="Submit()" :disabled="submitBtn">Submit</v-btn>
+                                <div class="my-2" v-if="course.course_outline">
+                                    <v-btn color="primary" @click="UpdateOutline()" :disabled="submitBtn">Update</v-btn>
+                                </div>
+                                <div class="my-2" v-else>
+                                    <v-btn color="primary" @click="InsertOutline()" :disabled="submitBtn">Submit</v-btn>
                                 </div>
                             </v-col>
                         </v-row>
@@ -71,7 +65,7 @@ import CKEditor from "@ckeditor/ckeditor5-vue";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 Vue.use(CKEditor);
 export default {
-    props: ['courseDetails'],
+    props: ['courseDetail', 'course'],
     name: "AssignOutlineModal",
     data() {
         return {
@@ -94,35 +88,36 @@ export default {
         },
         courseOutline: function () {
             return {
-              prerequisite:this.courseDetails.prerequisite,
-              lectures:this.courseDetails.lectures,
-              labs:this.courseDetails.labs,
-              course_outline:this.courseDetails.course_outline,
-            //   course_id:this.course.id,
-              id:this.courseDetails.id
-            }
+                    prerequisite: this.courseDetail.prerequisite,
+                    lectures: this.courseDetail.lectures,
+                    labs: this.courseDetail.labs,
+                    course_outline: this.courseDetail.course_outline,
+                    //   course_id:this.course.id,
+                    id: this.courseDetail.id
+                };
+                
         },
-         userAuth: function () {
+        userAuth: function () {
             return cryptoJSON.decrypt(
                 JSON.parse(localStorage.getItem("adminLogin")),
                 "ums"
             );
         }
     },
-    methods:{
-      Submit:function(){
-         // Headers are defined for authentication
+    methods: {
+        Submit: function () {
+            // Headers are defined for authentication
             let headers = {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token
             };
-        console.log(this.courseOutline);
-        axios.post(process.env.MIX_APP_URL+'/add-course-outline',this.courseOutline,{
-          headers:headers
-        })
-        .then((res)=>console.log(res))
-        .catch(()=>{})
-      }
+            console.log(this.courseOutline);
+            axios.post(process.env.MIX_APP_URL + '/add-course-outline', this.courseOutline, {
+                    headers: headers
+                })
+                .then((res) => console.log(res))
+                .catch(() => {})
+        }
     }
 };
 </script>
