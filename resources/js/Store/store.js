@@ -14,8 +14,9 @@ const store = new Vuex.Store({
     // *** State Variables
     state: {
         CourseAssignModal: false,
-        allProgram: [],
         allCourses: [],
+        allProgram: [],
+
         NotificationPreviewModal: false,
         SubmitAssignmentModal: false,
         ApplicationRequestTimeModal: false,

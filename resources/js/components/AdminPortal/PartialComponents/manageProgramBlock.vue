@@ -22,7 +22,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <template v-if="$store.state.allProgram.length > 0">
+                        <template v-if=" $store.state.allProgram.length > 0">
                             <tr v-for="item in $store.state.allProgram " :key="item.id">
                                 <td>{{ item.program_title | capitalize }}</td>
                                 <td>{{ item.program_short_title.toUpperCase()}}</td>
@@ -105,6 +105,7 @@ export default {
 
     data() {
         return {
+            allProgram:null,
             message: true,
             AssignCourseData: [],
             succesMessage: "",
@@ -217,11 +218,11 @@ export default {
             };
             // send request to Api Route
             axios
-                .post(process.env.MIX_APP_URL + "/get-program", "", {
+                .post(process.env.MIX_APP_URL + "/get-all-program", "", {
                     headers: headers
                 })
                 .then(res => {
-
+                        console.log(res);
                     this.$store.dispatch("allProgram", res.data.allProgram);
                     this.message = false;
                 })
