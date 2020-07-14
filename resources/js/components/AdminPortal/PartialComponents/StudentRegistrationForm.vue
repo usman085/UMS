@@ -26,11 +26,11 @@
                     <v-col cols="6">
                         <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y max-width="290px" min-width="290px">
                             <template v-slot:activator="{ on, attrs }">
-                                <v-text-field v-model="dateOfBrth" label="Date of Birth*" hint="MM/DD/YYYY"  persistent-hint v-bind="attrs" @blur="date = parseDate(dateFormatted)" v-on="on" required :rules="requiredRules"></v-text-field>
+                                <v-text-field v-model="dateOfBrth" label="Date of Birth*" hint="MM/DD/YYYY" persistent-hint v-bind="attrs" @blur="date = parseDate(dateFormatted)" v-on="on" required :rules="requiredRules"></v-text-field>
                             </template>
                             <v-date-picker required v-model="date" no-title @input="menu1 = false"></v-date-picker>
                         </v-menu>
-                        
+
                     </v-col>
                 </v-row>
 
@@ -48,7 +48,7 @@
                         <v-text-field v-model="studentdetail.religion" text-field label="Religion" required :rules="religionRules"></v-text-field>
                     </v-col>
                     <v-col cols="6">
-                        <v-text-field v-model="studentdetail.phone_number" label="Phone Number*" type="number" step="1" onkeypress="return event.charCode >= 8 && event.charCode <= 57" min="1" max="1000" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="13" :rules="phoneRules"></v-text-field>
+                        <v-text-field @input="acceptNumber" v-model="studentdetail.phone_number" label="Phone Number*" :rules="phoneRules"></v-text-field>
                     </v-col>
                 </v-row>
 
@@ -64,9 +64,10 @@
                 <v-row>
                     <v-col cols="6">
                     <ValidationProvider name="CNIC" rules="digits:13" v-slot="{ errors }">
-                        <v-text-field v-model="studentdetail.cnic" label="CNIC NO*" required :rules="cnicRules"></v-text-field>
+                        <v-text-field @input="acceptCNIC()" v-model="studentdetail.cnic" label="CNIC NO*" required :rules="cnicRules"></v-text-field>
                      <span text-color="error"  >{{ errors[0] }}</span>                    
                     </ValidationProvider>
+
                     </v-col>
                     <v-col cols="6">
                         <v-text-field v-model="studentdetail.email" label="Contact Email Account*" required :rules="emailRules"></v-text-field>
@@ -175,7 +176,7 @@
                 </v-row>
                 <v-row>
                     <v-col cols="6">
-                        <v-text-field label="Password" type="password" v-model="password" required :rules="passwordRules"></v-text-field>
+                        <v-text-field label="Password" type="password" v-model="studentdetail.password" required :rules="passwordRules"></v-text-field>
                         <password v-model="studentdetail.password" :strength-meter-only="true" />
                     </v-col>
                     <v-col cols="6">
@@ -389,8 +390,16 @@ export default {
     },
 
     methods: {
+        acceptNumber() {
+            var x = this.studentdetail.phone_number.replace(/\D/g, '').match(/(\d{0,4})(\d{0,7})/);
+            this.studentdetail.phone_number = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2];
+        },
+        acceptCNIC() {
+            var x = this.studentdetail.cnic.replace(/\D/g, '').match(/(\d{0,5})(\d{0,7})(\d{0,1})/);
+            this.studentdetail.cnic = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
+        },
         registerStudent: function () {
-            this.studentdetail.dateofBirth=this.dateOfBrth;
+            this.studentdetail.dateofBirth = this.dateOfBrth;
             // Headers are defined for authentication
             let headers = {
                 "Content-Type": "application/json",
@@ -399,7 +408,7 @@ export default {
             // send request to Api Route
             axios
                 .post(
-                    process.env.MIX_APP_URL + "/register-student",this.studentdetail,{
+                    process.env.MIX_APP_URL + "/register-student", this.studentdetail, {
                         headers: headers
                     }
                 )
@@ -519,12 +528,12 @@ export default {
         }
     },
     created() {
-          this.getGuardian();
+        this.getGuardian();
         this.getGender();
-       this.getBloodGroup();
+        this.getBloodGroup();
         this.getShift();
         this.getProgram();
-       
+
     }
 };
 </script>

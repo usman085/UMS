@@ -21,7 +21,6 @@
                                 </v-col>
 
                                 <v-col cols="12">
-                                
                                     <v-text-field v-model="courseDetail.credit_hours" :rules="FieldRules" required label="Credit Hours" hint="4(3-1)"></v-text-field>
                                 </v-col>
                             </v-row>
@@ -52,15 +51,13 @@
 // Event Bus is Use to communicate  Between Two Components
 import EventBus from "../../../EventBus/eventBus";
 
-
-
 export default {
     name: "AddCourseModel",
     props: ["editData", "editRowMessage"],
 
     data() {
         return {
-         
+
             succesMessage: "",
             valid: true,
             snackbar: false,
@@ -77,7 +74,7 @@ export default {
         //Insert Course Function use to Add Cousre
         insertCourse: function () {
             // Headers are required for authentication
-       
+
             let headers = {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token
