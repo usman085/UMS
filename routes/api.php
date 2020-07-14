@@ -40,7 +40,8 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/edit-program','ApiController\Program\ProgramController@editProgram');
     Route::post('/del-assign-course','ApiController\Program\ProgramController@delAssignCourse');
     //  program routes end
-
+  Route::post('/all-country','ApiController\StudentRegistration\RegistrationController@allCountry');
+  Route::post('/all-cities','ApiController\StudentRegistration\RegistrationController@allCity');
     // register student start
     Route::post('/get-gender','ApiController\StudentRegistration\RegistrationController@getGender');
     Route::post('/get-guardian','ApiController\StudentRegistration\RegistrationController@getGuardian');

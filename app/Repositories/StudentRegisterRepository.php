@@ -7,6 +7,7 @@ use App\Models\StudentEducationalDetail;
 use App\Models\StudentPersonalDetail;
 use App\Models\StudentOfficialDetail;
 use App\Models\StudentDetail;
+use App\Models\City;
 use App\Models\BloodGroup;
 use App\Models\Guardian;
 use App\Models\Program;
@@ -15,6 +16,7 @@ use App\Models\Shift;
 use App\Models\User;
 use Carbon\Carbon;
 use Hash;
+use App\Models\Country;
 use DB;
 
 class StudentRegisterRepository implements StudentRegisterInterface {
@@ -153,7 +155,14 @@ class StudentRegisterRepository implements StudentRegisterInterface {
 
             return  response( ['data'=> $data], 200 );
     }
-
+    public function allCountry(){
+      $data=Country::all();
+      return response(['counties'=>$data],200);
+    }
+    public function allCity(){
+      $data=City::all();
+      return response(['cities'=>$data],200);
+    }
     /**
     * Get Guardian 
     *

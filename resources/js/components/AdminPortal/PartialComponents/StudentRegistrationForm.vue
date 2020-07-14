@@ -66,10 +66,10 @@
 
                 <v-row>
                     <v-col cols="6">
-                        <v-text-field v-model="studentdetail.country" label="Country*" required :rules="requiredRules"></v-text-field>
+                        <v-select @input='countryEnter(studentdetail.country)' item-text="name" item-value="id" :items="allCountry" v-model="studentdetail.country" label="Country*" required ></v-select>
                     </v-col>
                     <v-col cols="6">
-                        <v-text-field v-model="studentdetail.city" label="City*" required :rules="requiredRules"></v-text-field>
+                        <v-select item-text="name" item-value="id" :items="allCity" v-model="studentdetail.city" label="City*"></v-select>
                     </v-col>
                 </v-row>
 
@@ -300,10 +300,11 @@ export default {
         passwordRules: [v => !!v || "Password is required"],
         cpasswordRules: [v => !!v || "Confirm Password is required"],
         //  rules for validating entered data
-
+        allCity:[],
         succesMessage: "",
         snackbar: false,
         dialog: false,
+        allCountry:[],
         studentdetail: {
             student_name: "",
             father_name: "",
@@ -432,7 +433,9 @@ export default {
                 })
                 .catch(error => {});
         },
-
+        countryEnter(id){
+            alert(id);
+        },
         // getting shift from Database
         getShift: function () {
             // Headers are defined for authentication
@@ -450,7 +453,43 @@ export default {
                 })
                 .catch(error => {});
         },
-
+        getLocationApi(){
+            axios.get('http://ip-api.com/json').then(res=>{
+            let x=this.allCountry.filter(item=>item.name == res.data.country);
+            this.studentdetail.country=x[0].id;
+                })
+        },
+        getAllCountry:function(){
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            axios.post(process.env.MIX_APP_URL+'/all-country','',{
+                headers:headers
+            })
+            .then((res)=>{
+                this.allCountry=res.data.counties;
+                this.getLocationApi();
+                
+            })
+            .catch((err)=>{})
+        },
+        getAllCities(){
+             let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            axios.post(process.env.MIX_APP_URL+'/all-cities','',{
+                headers:headers
+            })
+            .then((res)=>{
+                console.log(res);
+                this.allCity=res.data.cities;
+              
+                
+            })
+            .catch((err)=>{})
+        },
         // getting program from Database
         getProgram: function () {
             // Headers are defined for authentication
@@ -505,12 +544,15 @@ export default {
         }
     },
     created() {
+        this.getAllCountry();
+        this.getAllCities();
         this.getGuardian();
         this.getGender();
         this.getBloodGroup();
         this.getShift();
         this.getProgram();
-
+        
+        
     }
 };
 </script>

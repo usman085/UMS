@@ -41,14 +41,14 @@ interface StudentRegisterInterface
 
     public function getAllProgram();
 
-
+    public function allCountry();
            /**
     * get program
     *
     * @param request
     * @return Response
     */
-
+     public function allCity();
     public function getBloodGroup();
 
 
