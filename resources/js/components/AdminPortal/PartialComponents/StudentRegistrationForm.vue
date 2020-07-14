@@ -6,6 +6,12 @@
             <v-container>
                 <v-row>
                     <v-col cols="6">
+                    <ValidationProvider name="email" rules="required|email">
+  <div slot-scope="{ errors }">
+    <v-text-field  v-model="email"></v-text-field>
+    <p>{{ errors[0] }}</p>
+  </div>
+</ValidationProvider>
                         <v-text-field v-model="studentdetail.student_name" label="Student Name*" required :rules="nameRules"></v-text-field>
                     </v-col>
                     <v-col cols="6">
@@ -57,7 +63,10 @@
 
                 <v-row>
                     <v-col cols="6">
+                    <ValidationProvider name="CNIC" rules="digits:13" v-slot="{ errors }">
                         <v-text-field v-model="studentdetail.cnic" label="CNIC NO*" required :rules="cnicRules"></v-text-field>
+                     <span text-color="error"  >{{ errors[0] }}</span>                    
+                    </ValidationProvider>
                     </v-col>
                     <v-col cols="6">
                         <v-text-field v-model="studentdetail.email" label="Contact Email Account*" required :rules="emailRules"></v-text-field>
@@ -260,15 +269,29 @@
 </template>
 
 <script>
-import Password from "vue-password-strength-meter";
+import { extend } from 'vee-validate';
+
+import { ValidationProvider } from 'vee-validate';
+import Password from "vue-password-strength-meter"
+import * as rules from 'vee-validate/dist/rules';
+
+
+// with typescript
+for (let [rule, validation] of Object.entries(rules)) {
+  extend(rule, {
+    ...validation
+  });
+}
 export default {
     name: "StudentRegistratonForm",
 
     components: {
-        Password
+        Password,
+          ValidationProvider
     },
 
     data: vm => ({
+        email:"", 
         valid: true,
         //   rules for validating  data
         requiredRules: [v => !!v || "This field is required"],

@@ -99,7 +99,7 @@ class ProgramController extends Controller
             'program_title'=> 'required',
             'program_short_title'=>'required',
             'program_duration'=>'required',
-            'no_of_semester'=>'required | number',
+            'no_of_semester'=>'required',
         ]);
 
         if ( $validator->fails() ) {
