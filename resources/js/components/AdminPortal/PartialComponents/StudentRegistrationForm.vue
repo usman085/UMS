@@ -57,7 +57,7 @@
 
                 <v-row>
                     <v-col cols="6">
-                        <v-text-field @input="acceptCNIC" v-model="studentdetail.cnic" label="CNIC NO*" required :rules="cnicRules"></v-text-field>
+                        <v-text-field @input="acceptCNIC()" v-model="studentdetail.cnic" label="CNIC NO*" required :rules="cnicRules"></v-text-field>
                     </v-col>
                     <v-col cols="6">
                         <v-text-field v-model="studentdetail.email" label="Contact Email Account*" required :rules="emailRules"></v-text-field>
