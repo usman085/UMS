@@ -142,8 +142,9 @@ class ProgramController extends Controller
         $validator = Validator::make( $request->all(), 
         [
             'program_id'=>'required',
-            'course_id'=>'required',
-            'semester'=>'required'
+            'selected'=>'required',
+            'semester'=>'required',
+
         ]);
 
         if ( $validator->fails() ) {
