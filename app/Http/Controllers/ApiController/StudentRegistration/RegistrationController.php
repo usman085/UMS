@@ -71,6 +71,10 @@ class RegistrationController extends Controller
         return $this->StudentRegisterRepository->allCity();
     }
 
+    public function getStates(){
+        return $this->StudentRegisterRepository->getStates();
+    }
+
      /**
     * Get Program 
     * 
@@ -115,6 +119,7 @@ class RegistrationController extends Controller
             'father_name'=>'required',
             'gender'=>'required',
             'guardian'=>'required',
+            'state'=>'required',
             'religion'=>'required',
             'phone_number'=>'required', 'regex:/^((\+)|(0))(?:[0-9] ?){6,14}[0-9]$/',
             'country'=>'required',

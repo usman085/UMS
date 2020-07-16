@@ -51,7 +51,7 @@ interface StudentRegisterInterface
      public function allCity();
     public function getBloodGroup();
 
-
+     public function getStates();
     /**
     * Register Student
     *
