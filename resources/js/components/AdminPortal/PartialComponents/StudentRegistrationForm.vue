@@ -1,5 +1,5 @@
 <template>
-<ValidationObserver ref="observer" v-slot="{ invalid }" >
+<ValidationObserver ref="observer" v-slot="{ invalid }">
     <v-form v-model="valid" ref="form">
         <v-container>
             <fieldset class="form-field-sets">
@@ -12,35 +12,35 @@
                             </ValidationProvider>
                         </v-col>
                         <v-col cols="6">
-                         <ValidationProvider name="Father Name" rules="required|alpha_spaces" v-slot="{ errors }">
-                            <v-text-field v-model="studentdetail.father_name" label="Father Name*" required :error-messages="errors"></v-text-field>
-                         </ValidationProvider>
+                            <ValidationProvider name="Father Name" rules="required|alpha_spaces" v-slot="{ errors }">
+                                <v-text-field v-model="studentdetail.father_name" label="Father Name*" required :error-messages="errors"></v-text-field>
+                            </ValidationProvider>
                         </v-col>
                     </v-row>
 
                     <v-row>
                         <v-col cols="6">
-                        <ValidationProvider name="Guardian Name" rules="required|" v-slot="{ errors }">
-                            <v-select v-model="studentdetail.guardian" :items="guardians" item-text="guardian" item-value="id" label="Guardian*" required  :error-messages="errors"></v-select>
-                        </ValidationProvider>
+                            <ValidationProvider name="Guardian Name" rules="required|" v-slot="{ errors }">
+                                <v-select v-model="studentdetail.guardian" :items="guardians" item-text="guardian" item-value="id" label="Guardian*" required :error-messages="errors"></v-select>
+                            </ValidationProvider>
                         </v-col>
                         <v-col cols="6">
-                        <ValidationProvider name="Date Of Birth" rules="required" v-slot="{ errors }">
-                            <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y max-width="290px" min-width="290px">
-                                <template v-slot:activator="{ on, attrs }">
-                                    <v-text-field :error-messages="errors" v-model="dateOfBrth" label="Date of Birth*" hint="MM/DD/YYYY" persistent-hint v-bind="attrs" @blur="date = parseDate(dateFormatted)" v-on="on" required ></v-text-field>
-                                </template>
-                                <v-date-picker required   v-model="date" no-title @input="menu1 = false"></v-date-picker>
-                            </v-menu>
-                        </ValidationProvider>
+                            <ValidationProvider name="Date Of Birth" rules="required" v-slot="{ errors }">
+                                <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-text-field :error-messages="errors" v-model="dateOfBrth" label="Date of Birth*" hint="MM/DD/YYYY" persistent-hint v-bind="attrs" @blur="date = parseDate(dateFormatted)" v-on="on" required></v-text-field>
+                                    </template>
+                                    <v-date-picker required v-model="date" no-title @input="menu1 = false"></v-date-picker>
+                                </v-menu>
+                            </ValidationProvider>
                         </v-col>
                     </v-row>
 
                     <v-row>
                         <v-col cols="6">
-                        <ValidationProvider name="Gender" rules="required" v-slot="{ errors }">
-                            <v-select :error-messages="errors" v-model="studentdetail.gender" :items="genders" item-text="gender" item-value="id" label="Gender*" required ></v-select>
-                        </validationProvider>
+                            <ValidationProvider name="Gender" rules="required" v-slot="{ errors }">
+                                <v-select :error-messages="errors" v-model="studentdetail.gender" :items="genders" item-text="gender" item-value="id" label="Gender*" required></v-select>
+                            </validationProvider>
                         </v-col>
                         <v-col cols="6">
                             <v-select v-model="studentdetail.bloodGroup" :items="bloodGroups" item-text="blood_group" item-value="id" label="Blood Group (optional)"></v-select>
@@ -49,72 +49,70 @@
 
                     <v-row>
                         <v-col cols="6">
-                        <ValidationProvider name="Religion" rules="required|alpha_spaces" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors" v-model="studentdetail.religion" text-field label="Religion" required ></v-text-field>
-                        </ValidationProvider>
+                            <ValidationProvider name="Religion" rules="required|alpha_spaces" v-slot="{ errors }">
+                                <v-text-field :error-messages="errors" v-model="studentdetail.religion" text-field label="Religion" required></v-text-field>
+                            </ValidationProvider>
                         </v-col>
                         <v-col cols="6">
-                        <ValidationProvider name="Phone Number" rules="required" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors" @input="acceptNumber" v-model="studentdetail.phone_number" label="Phone Number*" ></v-text-field>
-                        </ValidationProvider>
+                            <ValidationProvider name="Phone Number" rules="required" v-slot="{ errors }">
+                                <v-text-field :error-messages="errors" @blur="acceptNumber" v-model="studentdetail.phone_number" label="Phone Number*"></v-text-field>
+                            </ValidationProvider>
                         </v-col>
                     </v-row>
 
                     <v-row>
                         <v-col cols="6">
-                             <ValidationProvider name="Guardian Phone Number" rules="required" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors" v-model="studentdetail.guardian_phone_number" label="Guardian Phone Number" required ></v-text-field>
-                             </ValidationProvider>
+                            <ValidationProvider name="Guardian Phone Number" rules="required" v-slot="{ errors }">
+                                <v-text-field :error-messages="errors" @blur="guardianNumber" v-model="studentdetail.guardian_phone_number" label="Guardian Phone Number" required></v-text-field>
+                            </ValidationProvider>
                         </v-col>
-                        <v-col cols="6">   
+                        <v-col cols="6">
                             <v-text-field v-model="studentdetail.land_line_number" label="Landline Number"></v-text-field>
                         </v-col>
                     </v-row>
 
                     <v-row>
                         <v-col cols="6">
-                            <ValidationProvider name="CNIC" rules="required"  v-slot="{ errors }">
-                                <v-text-field  :error-messages="errors" @input="acceptCNIC()" v-model="studentdetail.cnic" label="CNIC NO*" required ></v-text-field>
-                               
+                            <ValidationProvider name="CNIC" rules="required" v-slot="{ errors }">
+                                <v-text-field :error-messages="errors" @blur="acceptCNIC()" v-model="studentdetail.cnic" label="CNIC NO*" required></v-text-field>
+
                             </ValidationProvider>
                         </v-col>
                         <v-col cols="6">
-                         <ValidationProvider name="Email" rules="required|email" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors"  v-model="studentdetail.email" label="Contact Email Account*" required ></v-text-field>
-                        </ValidationProvider>
+                            <ValidationProvider name="Email" rules="required|email" v-slot="{ errors }">
+                                <v-text-field :error-messages="errors" v-model="studentdetail.email" label="Contact Email Account*" required></v-text-field>
+                            </ValidationProvider>
                         </v-col>
                     </v-row>
 
                     <v-row>
                         <v-col cols="6">
-                         <ValidationProvider name="Country" rules="required" v-slot="{ errors }">
-                            
-                        <v-select :error-messages="errors"   item-text="name" item-value="id" :items="allCountry" v-model="studentdetail.country" label="Country*" required></v-select>
-                         </ValidationProvider>
-                        </v-col>
-                        
+                            <ValidationProvider name="Country" rules="required" v-slot="{ errors }">
 
-                         <v-col cols="6">
-                         <ValidationProvider name="State" rules="required" v-slot="{ errors }">
-                            
-                        <v-select  :error-messages="errors" item-text="name" item-value="id" :items="allState" v-model="studentdetail.state" label="State*"></v-select>
-                         </ValidationProvider>
+                                <v-select :error-messages="errors" item-text="name" item-value="id" :items="allCountry" v-model="studentdetail.country" label="Country*" required></v-select>
+                            </ValidationProvider>
+                        </v-col>
+
+                        <v-col cols="6">
+                            <ValidationProvider name="State" rules="required" v-slot="{ errors }">
+
+                                <v-select :error-messages="errors" item-text="name" item-value="id" :items="allState" v-model="studentdetail.state" label="State*"></v-select>
+                            </ValidationProvider>
                         </v-col>
                     </v-row>
 
                     <v-row>
-                     <v-col cols="6">
-                         <ValidationProvider name="City" rules="required" v-slot="{ errors }">
-                     
-                            <v-select :error-messages="errors"  item-text="name" item-value="id" :items="allCity" required v-model="studentdetail.city" label="City*"></v-select>
-                         </ValidationProvider>
+                        <v-col cols="6">
+                            <ValidationProvider name="City" rules="required" v-slot="{ errors }">
+
+                                <v-select :error-messages="errors" item-text="name" item-value="id" :items="allCity" required v-model="studentdetail.city" label="City*"></v-select>
+                            </ValidationProvider>
                         </v-col>
                         <v-col cols="6">
-                        <ValidationProvider name="Address" rules="required" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors"  v-model="studentdetail.address" label="Address*" required ></v-text-field>
-                      
-                    
-                        </ValidationProvider>
+                            <ValidationProvider name="Address" rules="required" v-slot="{ errors }">
+                                <v-text-field :error-messages="errors" v-model="studentdetail.address" label="Address*" required></v-text-field>
+
+                            </ValidationProvider>
                         </v-col>
                     </v-row>
                     <p class="alert-indicate">* indicate that this Fields is Must</p>
@@ -127,41 +125,41 @@
                 <v-container>
                     <v-row>
                         <v-col cols="6">
-                           <ValidationProvider name="Program" rules="required" v-slot="{ errors }">
-                            <v-select :error-messages="errors" v-model="studentdetail.program" :items="programs" item-text="program_title" item-value="id" label="Program" required></v-select>
-                           </ValidationProvider>
+                            <ValidationProvider name="Program" rules="required" v-slot="{ errors }">
+                                <v-select :error-messages="errors" v-model="studentdetail.program" :items="programs" item-text="program_title" item-value="id" label="Program" required></v-select>
+                            </ValidationProvider>
                         </v-col>
 
                         <v-col cols="6">
                             <ValidationProvider name="Semester" rules="required" v-slot="{ errors }">
-                            <v-select :error-messages="errors" v-model="studentdetail.semester" required  :items="semester" label="Current Semester"></v-select>
+                                <v-select :error-messages="errors" v-model="studentdetail.semester" required :items="semester" label="Current Semester"></v-select>
                             </ValidationProvider>
                         </v-col>
                     </v-row>
 
                     <v-row>
                         <v-col cols="6">
-                         <ValidationProvider name="Shift" rules="required" v-slot="{ errors }">
-                            <v-select :error-messages="errors" v-model="studentdetail.shift" :items="shifts" item-text="Shift" item-value="id" label="Shift" required ></v-select>
-                         </ValidationProvider>
+                            <ValidationProvider name="Shift" rules="required" v-slot="{ errors }">
+                                <v-select :error-messages="errors" v-model="studentdetail.shift" :items="shifts" item-text="Shift" item-value="id" label="Shift" required></v-select>
+                            </ValidationProvider>
                         </v-col>
                         <v-col cols="6">
-                        <ValidationProvider name="Session Year" rules="required" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors" v-model="studentdetail.session_year" label="Session Year" required ></v-text-field>
-                        </ValidationProvider>
+                            <ValidationProvider name="Session Year" rules="required" v-slot="{ errors }">
+                                <v-text-field :error-messages="errors" v-model="studentdetail.session_year" label="Session Year" required></v-text-field>
+                            </ValidationProvider>
                         </v-col>
                     </v-row>
 
                     <v-row>
                         <v-col cols="6">
-                         <ValidationProvider name="Roll no" rules="required" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors"  v-model="studentdetail.roll_no" label="Roll Number" required ></v-text-field>
-                         </ValidationProvider>
+                            <ValidationProvider name="Roll no" rules="required" v-slot="{ errors }">
+                                <v-text-field :error-messages="errors" v-model="studentdetail.roll_no" label="Roll Number" required></v-text-field>
+                            </ValidationProvider>
                         </v-col>
                         <v-col cols="6">
-                        <ValidationProvider name="Registration no" rules="required" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors" v-model="studentdetail.reg_no" label="Registration No." required ></v-text-field>
-                        </ValidationProvider>
+                            <ValidationProvider name="Registration no" rules="required" v-slot="{ errors }">
+                                <v-text-field :error-messages="errors" v-model="studentdetail.reg_no" label="Registration No." required></v-text-field>
+                            </ValidationProvider>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -172,15 +170,15 @@
                 <v-container>
                     <v-row>
                         <v-col cols="6">
-                        <ValidationProvider name="Marks" rules="required|numeric" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors"  v-model="studentdetail.matric_marks"  label="Matriculation Marks" required ></v-text-field>
-                        </ValidationProvider>
+                            <ValidationProvider name="Marks" rules="required|numeric" v-slot="{ errors }">
+                                <v-text-field :error-messages="errors" v-model="studentdetail.matric_marks" label="Matriculation Marks" required></v-text-field>
+                            </ValidationProvider>
                         </v-col>
 
                         <v-col cols="6">
-                         <ValidationProvider name="Marks" rules="required|numeric" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors"  v-model="studentdetail.secondYear_marks"  label="FA\FSC\ICS Marks" required ></v-text-field>
-                         </ValidationProvider>
+                            <ValidationProvider name="Marks" rules="required|numeric" v-slot="{ errors }">
+                                <v-text-field :error-messages="errors" v-model="studentdetail.secondYear_marks" label="FA\FSC\ICS Marks" required></v-text-field>
+                            </ValidationProvider>
                         </v-col>
                     </v-row>
 
@@ -189,9 +187,9 @@
                             <v-text-field v-model="studentdetail.school" type="text" label="School Name "></v-text-field>
                         </v-col>
                         <v-col cols="6">
-                         <ValidationProvider name="Passing Year" rules="required|numeric" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors" v-model="studentdetail.school_passing_year" type="text" label="Passing Year" required ></v-text-field>
-                         </ValidationProvider>
+                            <ValidationProvider name="Passing Year" rules="required|numeric|max:4|min:4" v-slot="{ errors }">
+                                <v-text-field :error-messages="errors" v-model="studentdetail.school_passing_year" type="text" label="Passing Year" required></v-text-field>
+                            </ValidationProvider>
                         </v-col>
                     </v-row>
 
@@ -200,9 +198,9 @@
                             <v-text-field v-model="studentdetail.college" type="text" label="College Name "></v-text-field>
                         </v-col>
                         <v-col cols="6">
-                         <ValidationProvider name="Passing Year" rules="required|numeric" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors" v-model="studentdetail.college_passing_year" type="text" label="Passing Year" required ></v-text-field>
-                          </ValidationProvider>
+                            <ValidationProvider name="Passing Year" rules="required|numeric|min:4|max:4" v-slot="{ errors }">
+                                <v-text-field :error-messages="errors" v-model="studentdetail.college_passing_year" type="text" label="Passing Year" required></v-text-field>
+                            </ValidationProvider>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -220,23 +218,23 @@
                 <v-container>
                     <v-row>
                         <v-col cols="12">
-                        <ValidationProvider name="User Name" rules="required|email" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors"  v-model="studentdetail.user_name" label="User Name" required ></v-text-field>
-                        </ValidationProvider>
+                            <ValidationProvider name="User Name" rules="required|email" v-slot="{ errors }">
+                                <v-text-field :error-messages="errors" v-model="studentdetail.user_name" label="User Name" required></v-text-field>
+                            </ValidationProvider>
                         </v-col>
                     </v-row>
                     <v-row>
-                  
+
                         <v-col cols="6">
-                       <ValidationProvider name="Password" rules="required|password:@confirm|min:8" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors" label="Password" type="password"  v-model="studentdetail.password" required></v-text-field>
-                            <password v-model="studentdetail.password" :strength-meter-only="true" />
-                         </ValidationProvider>
+                            <ValidationProvider name="Password" rules="required|password:@confirm|min:8" v-slot="{ errors }">
+                                <v-text-field :error-messages="errors" label="Password" type="password" v-model="studentdetail.password" required></v-text-field>
+                             
+                            </ValidationProvider>
                         </v-col>
                         <v-col cols="6">
-                        <ValidationProvider name="confirm" rules="required" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors" v-model="confirmation" label="Confirm Password" type="password" autocomplete="false" required ></v-text-field>
-                        </ValidationProvider>
+                            <ValidationProvider name="confirm" rules="required" v-slot="{ errors }">
+                                <v-text-field :error-messages="errors" v-model="confirmation" label="Confirm Password" type="password" autocomplete="false" required></v-text-field>
+                            </ValidationProvider>
                         </v-col>
 
                     </v-row>
@@ -245,7 +243,7 @@
             <!-- Login Information End -->
 
             <v-container class="text-center">
-                <v-btn color="primary" @click="registerStudent()" :disabled="invalid" >Register Student</v-btn>
+                <v-btn color="primary" @click="registerStudent()" :disabled="invalid">Register Student</v-btn>
             </v-container>
 
             <!-- Fee Structure Modal -->
@@ -328,15 +326,16 @@
 </template>
 
 <script>
-import Password from "vue-password-strength-meter";
+
 
 import {
     required,
     alpha_spaces,
-     alpha_num,
+    alpha_num,
     numeric,
     email,
     min,
+    max,
     password
 
 } from 'vee-validate/dist/rules';
@@ -346,21 +345,30 @@ import {
     ValidationObserver,
     ValidationProvider,
     setInteractionMode,
-    
+
 } from "vee-validate";
 
 setInteractionMode("eager");
 
 extend('min', {
+
     ...min,
-    message: '{_field_} minimum 8 characters'
+    message: '{_field_} is less then minimum characters required'
 });
+
+extend('max', {
+    ...max,
+    message: '{_field_} maximum 4 numbers'
+});
+
 extend('password', {
-  params: ['target'],
-  validate(value, { target }) {
-    return value === target;
-  },
-  message: 'Password confirmation does not match'
+    params: ['target'],
+    validate(value, {
+        target
+    }) {
+        return value === target;
+    },
+    message: 'Password confirmation does not match'
 });
 extend('alpha_spaces', {
     ...alpha_spaces,
@@ -387,7 +395,6 @@ export default {
     name: "StudentRegistratonForm",
 
     components: {
-        Password,
         ValidationProvider,
         ValidationObserver
     },
@@ -395,7 +402,7 @@ export default {
     data: vm => ({
         email: "",
         valid: true,
-        confirmation:"",
+        confirmation: "",
         succesMessage: "",
         snackbar: false,
         dialog: false,
@@ -434,9 +441,9 @@ export default {
         guardians: [],
         bloodGroups: [],
         shifts: [],
+        allCity: [],
         programs: [],
         semester: ["1", "2", "3", "4", "5", "6", "7", "8"],
-
         date: new Date().toISOString().substr(0, 10),
         dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
         menu1: false,
@@ -446,8 +453,16 @@ export default {
     }),
 
     computed: {
-        dateOfBrth() {
-            return this.formatDate(this.date);
+        dateOfBrth:{
+            // getter
+            get: function () {
+                return this.formatDate(this.date);
+            },
+            // setter
+            set: function () {
+               return this.formatDate("20/20/2020");
+            }
+
         },
         //User Auth function authorizing Admin & use in Header
         userAuth: function () {
@@ -455,30 +470,47 @@ export default {
                 JSON.parse(localStorage.getItem("adminLogin")),
                 "ums"
             );
-        }
+        },
+
     },
 
     watch: {
         date(val) {
             this.dateFormatted = this.formatDate(this.date);
-        }
+        },
+     
     },
 
     methods: {
-      
+
+        guardianNumber() {
+            if (this.studentdetail.guardian_phone_number != null) {
+                var x = this.studentdetail.guardian_phone_number
+                    .replace(/\D/g, "")
+                    .match(/(\d{0,4})(\d{0,7})/);
+                this.studentdetail.guardian_phone_number = !x[2] ? x[1] : "(" + x[1] + ") " + x[2];
+            }
+
+        },
         acceptNumber() {
-            var x = this.studentdetail.phone_number
-                .replace(/\D/g, "")
-                .match(/(\d{0,4})(\d{0,7})/);
-            this.studentdetail.phone_number = !x[2] ? x[1] : "(" + x[1] + ") " + x[2];
+            if (this.studentdetail.phone_number != null) {
+                var x = this.studentdetail.phone_number
+                    .replace(/\D/g, "")
+                    .match(/(\d{0,4})(\d{0,7})/);
+                this.studentdetail.phone_number = !x[2] ? x[1] : "(" + x[1] + ") " + x[2];
+            }
+
         },
         acceptCNIC() {
-            var x = this.studentdetail.cnic
-                .replace(/\D/g, "")
-                .match(/(\d{0,5})(\d{0,7})(\d{0,1})/);
-            this.studentdetail.cnic = !x[2] ?
-                x[1] :
-                x[1] + "-" + x[2] + (x[3] ? "-" + x[3] : "");
+            if (this.studentdetail.cnic != null) {
+                var x = this.studentdetail.cnic
+                    .replace(/\D/g, "")
+                    .match(/(\d{0,5})(\d{0,7})(\d{0,1})/);
+                this.studentdetail.cnic = !x[2] ?
+                    x[1] :
+                    x[1] + "-" + x[2] + (x[3] ? "-" + x[3] : "");
+            }
+
         },
         registerStudent: function () {
             this.studentdetail.dateofBirth = this.dateOfBrth;
@@ -566,8 +598,8 @@ export default {
                 .then((res) => {
                     this.allCountry = res.data.counties;
                     axios.get('http://ip-api.com/json').then(res => {
-                    let x = this.allCountry.filter(item => item.name == res.data.country);
-                    this.studentdetail.country = x[0].id;
+                        let x = this.allCountry.filter(item => item.name == res.data.country);
+                        this.studentdetail.country = x[0].id;
                     })
 
                 })
@@ -585,8 +617,8 @@ export default {
                     console.log(res);
                     this.allCity = res.data.cities;
                     axios.get('http://ip-api.com/json').then(res => {
-                    let x = this.allCity.filter(item => item.name == res.data.city);
-                    this.studentdetail.city = x[0].id;
+                        let x = this.allCity.filter(item => item.name == res.data.city);
+                        this.studentdetail.city = x[0].id;
                     })
 
                 })
@@ -604,8 +636,8 @@ export default {
                     console.log(res);
                     this.allState = res.data.states;
                     axios.get('http://ip-api.com/json').then(res => {
-                    let x = this.allState.filter(item => item.name == res.data.regionName);
-                    this.studentdetail.state = x[0].id;
+                        let x = this.allState.filter(item => item.name == res.data.regionName);
+                        this.studentdetail.state = x[0].id;
                     })
 
                 })
@@ -668,7 +700,7 @@ export default {
         this.getAllCountry();
         this.getAllState();
         this.getAllCities();
-        
+
         this.getGuardian();
         this.getGender();
         this.getBloodGroup();
