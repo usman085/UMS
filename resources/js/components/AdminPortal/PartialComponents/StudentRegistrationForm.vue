@@ -88,20 +88,32 @@
                     <v-row>
                         <v-col cols="6">
                          <ValidationProvider name="Country" rules="required" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors"  v-model="studentdetail.country" label="Country*" required ></v-text-field>
+                            
+                        <v-select :error-messages="errors"   item-text="name" item-value="id" :items="allCountry" v-model="studentdetail.country" label="Country*" required></v-select>
                          </ValidationProvider>
                         </v-col>
-                        <v-col cols="6">
-                         <ValidationProvider name="City" rules="required" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors" v-model="studentdetail.city" label="City*" required ></v-text-field>
+                        
+
+                         <v-col cols="6">
+                         <ValidationProvider name="State" rules="required" v-slot="{ errors }">
+                            
+                        <v-select  :error-messages="errors" item-text="name" item-value="id" :items="allState" v-model="studentdetail.state" label="State*"></v-select>
                          </ValidationProvider>
                         </v-col>
                     </v-row>
 
                     <v-row>
-                        <v-col cols="12">
+                     <v-col cols="6">
+                         <ValidationProvider name="City" rules="required" v-slot="{ errors }">
+                     
+                            <v-select :error-messages="errors"  item-text="name" item-value="id" :items="allCity" required v-model="studentdetail.city" label="City*"></v-select>
+                         </ValidationProvider>
+                        </v-col>
+                        <v-col cols="6">
                         <ValidationProvider name="Address" rules="required" v-slot="{ errors }">
-                            <v-text-field :error-messages="errors" v-model="studentdetail.address" label="Address*" required ></v-text-field>
+                            <v-text-field :error-messages="errors"  v-model="studentdetail.address" label="Address*" required ></v-text-field>
+                      
+                    
                         </ValidationProvider>
                         </v-col>
                     </v-row>
@@ -387,7 +399,9 @@ export default {
         succesMessage: "",
         snackbar: false,
         dialog: false,
+        allCountry: [],
         studentdetail: {
+            state: '',
             student_name: "",
             father_name: "",
             dateofBirth: "",
@@ -414,6 +428,7 @@ export default {
             college: "",
             college_passing_year: ""
         },
+        allState: [],
         TotalSemester: ["1", "2", "3", "4", "5", "6", "7", "8"],
         genders: [],
         guardians: [],
@@ -523,7 +538,6 @@ export default {
                 })
                 .catch(error => {});
         },
-
         // getting shift from Database
         getShift: function () {
             // Headers are defined for authentication
@@ -541,7 +555,62 @@ export default {
                 })
                 .catch(error => {});
         },
+        getAllCountry: function () {
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            axios.post(process.env.MIX_APP_URL + '/all-country', '', {
+                    headers: headers
+                })
+                .then((res) => {
+                    this.allCountry = res.data.counties;
+                    axios.get('http://ip-api.com/json').then(res => {
+                    let x = this.allCountry.filter(item => item.name == res.data.country);
+                    this.studentdetail.country = x[0].id;
+                    })
 
+                })
+                .catch((err) => {})
+        },
+        getAllCities() {
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            axios.post(process.env.MIX_APP_URL + '/all-cities', '', {
+                    headers: headers
+                })
+                .then((res) => {
+                    console.log(res);
+                    this.allCity = res.data.cities;
+                    axios.get('http://ip-api.com/json').then(res => {
+                    let x = this.allCity.filter(item => item.name == res.data.city);
+                    this.studentdetail.city = x[0].id;
+                    })
+
+                })
+                .catch((err) => {})
+        },
+        getAllState() {
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            axios.post(process.env.MIX_APP_URL + '/all-states', '', {
+                    headers: headers
+                })
+                .then((res) => {
+                    console.log(res);
+                    this.allState = res.data.states;
+                    axios.get('http://ip-api.com/json').then(res => {
+                    let x = this.allState.filter(item => item.name == res.data.regionName);
+                    this.studentdetail.state = x[0].id;
+                    })
+
+                })
+                .catch((err) => {})
+        },
         // getting program from Database
         getProgram: function () {
             // Headers are defined for authentication
@@ -596,6 +665,10 @@ export default {
         }
     },
     created() {
+        this.getAllCountry();
+        this.getAllState();
+        this.getAllCities();
+        
         this.getGuardian();
         this.getGender();
         this.getBloodGroup();

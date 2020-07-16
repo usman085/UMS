@@ -20,6 +20,7 @@ class CreateStudentPersonalDetailsTable extends Migration
             $table->integer('blood_id')->unsigned()->index()->nullable();
             $table->integer('gender_id')->unsigned()->index();
             $table->integer('country_id')->unsigned()->index();
+            $table->integer('state_id')->unsigned()->index();
             $table->integer('city_id')->unsigned()->index();
             $table->string('student_name');
             $table->string('father_name');
