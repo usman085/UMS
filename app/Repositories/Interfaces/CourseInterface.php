@@ -41,7 +41,14 @@ interface CourseInterface
 
     
 
-    // public function getCourseOutline($request);
+       /**
+    * Delete Course Outline
+    *
+    * @param request
+    * @return Response Delete Data 
+    */
+
+    public function delCourseOutline( $request );
 
 
     public function addCourseOutline($request);

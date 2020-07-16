@@ -14,23 +14,45 @@
             </v-btn>
             <v-toolbar-title>Scheme Of Studies</v-toolbar-title>
             <v-spacer></v-spacer>
+            <div class="mr-5">
+              <v-btn  color="primary" @click="editCourseOutline()">
+               <v-icon  class="mr-2">mdi-tooltip-edit</v-icon>Edit
+               </v-btn>
+            </div>
             <div>
-              <v-btn @click="editCourseOutline()">Edit Course Outline</v-btn>
+             <v-btn  color="primary" @click="deleteCourseOutline(courseDetailOutline.id)">
+              <v-icon class="mr-2">mdi-delete</v-icon>Delete
+              </v-btn>
             </div>
           </v-toolbar>
           <template v-if="course.course_outline">
             <v-list>
               <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-title>
-                    <span>Course Name</span>
-                    : {{course.course_title}}
+                  <v-list-item-title class=" mb-3">
+                    <span class="mr-2">Course Name :</span>
+                    {{course.course_title}}
                   </v-list-item-title>
-                  <v-list-item-title>
-                    <span>Structure: Lectures: {{ courseDetailOutline.lectures }}, Labs: {{ courseDetailOutline.labs }} Credit Hours: {{course.credit_hours}}</span>
+                    <v-list-item-title  class=" mb-3">   
+                    <span class="mr-2">Prerequisites: </span>
+                    {{ courseDetailOutline.prerequisite }}
+                    </v-list-item-title>  
+                  <v-list-item-title class=" mb-3">
+                    <span class="mr-2">Credit Hours: </span>
+                    {{course.credit_hours}}
+                  </v-list-item-title>
+                  <v-list-item-title class=" mb-3">
+                    <span class="mr-2 ">Lectures:</span>
+                    {{ courseDetailOutline.lectures }}
                   </v-list-item-title>
 
-                  <v-list-item-title>Prerequisites: {{ courseDetailOutline.prerequisite }}</v-list-item-title>
+                   <v-list-item-title class=" mb-3">
+                    <span class="mr-2 "> Labs:</span>
+                    {{ courseDetailOutline.labs }} 
+                  </v-list-item-title>
+ 
+
+                
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -49,26 +71,75 @@
     </v-row>
 
     <EditCourseOutlineModal :courseDetailOutline="courseDetailOutline" :course="course"></EditCourseOutlineModal>
+  
+    <!-- SnakeBar To display Success Message -->
+    <v-snackbar top right v-model="snackbar" color="success">
+      {{ succesMessage }}
+      <template v-slot:action="{ attrs }">
+        <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
 <script>
+import EventBus from "../../../EventBus/eventBus";
 import EditCourseOutlineModal from "./EditCourseOutlineModal";
 
 export default {
   props: ["course", "courseDetailOutline"],
   name: "CourseOutlineViewModal",
+   data() {
+    return {
+      succesMessage: "",
+      snackbar: false,
+    };
+  },
+  
   components: {
     EditCourseOutlineModal
   },
   methods: {
+    deleteCourseOutline(id){      
+      // Headers are defined for authentication
+      let headers = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer  " + this.userAuth.token
+      };
+      // send request to Api Route
+      axios
+        .post(
+          process.env.MIX_APP_URL + "/del-course-outline",
+          {
+            id: id
+          },
+          {
+            headers: headers
+          }
+        )
+        .then(res => {
+          this.snackbar = true;
+          this.succesMessage = "Course Outline Delete Successfully!";
+          this.$store.dispatch("CourseOutlineView");
+           EventBus.$emit("courseEdited");
+        })
+        .catch(error => {});
+    
+    },
     editCourseOutline() {
       this.$store.dispatch("EditCourseOutlineModalToggle");
     }
   },
-  data() {
-    return {};
-  }
+   computed: {
+    //User Auth function authorizing Admin & use in Header
+    userAuth: function() {
+      return cryptoJSON.decrypt(
+        JSON.parse(localStorage.getItem("adminLogin")),
+        "ums"
+      );
+    }
+  },
+ 
 };
 </script>
 

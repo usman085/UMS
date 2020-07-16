@@ -12,12 +12,12 @@
             <v-btn icon dark @click="$store.dispatch('AssignOutlineModalToggle')">
               <v-icon>mdi-close</v-icon>
             </v-btn>
-            <v-toolbar-title></v-toolbar-title>
+            <v-toolbar-title>{{ course.course_title }}</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
             <v-container>
               <v-row>
-                {{ course.course_title }}
+
                 <v-col cols="12" sm="12" md="12">
                   <v-text-field label="Prerequisite*" v-model="courseOutline.prerequisite"></v-text-field>
                 </v-col>

@@ -10,22 +10,30 @@
                 </v-card-title>
                 <v-card-text>
                     <v-container>
+                    <ValidationObserver ref="observer">
                         <!-- form for adding course  -->
                         <v-form v-model="valid" ref="form">
                             <v-row>
                                 <v-col cols="12">
-                                    <v-text-field v-model="courseDetail.course_code" :rules="FieldRules" required label="Course Code" hint="SWE-403"></v-text-field>
+                                   <ValidationProvider name="Course Code" rules="required" v-slot="{ errors }">
+                                    <v-text-field :error-messages="errors" v-model="courseDetail.course_code"  required label="Course Code" hint="SWE-403"></v-text-field>
+                                   </ValidationProvider>
                                 </v-col>
                                 <v-col cols="12">
-                                    <v-text-field v-model="courseDetail.course_title" :rules="FieldRules" label="Course Title*" hint="Web Engineering" required></v-text-field>
+                                    <ValidationProvider name="Course Title" rules="required|alpha_spaces" v-slot="{ errors }">
+                                    <v-text-field  :error-messages="errors" v-model="courseDetail.course_title"  label="Course Title*" hint="Web Engineering" required></v-text-field>
+                                    </ValidationProvider>
                                 </v-col>
 
                                 <v-col cols="12">
-                                    <v-text-field v-model="courseDetail.credit_hours" :rules="FieldRules" required label="Credit Hours" hint="4(3-1)"></v-text-field>
+                                    <ValidationProvider name="Credit Hours" rules="required" v-slot="{ errors }">
+                                    <v-text-field  :error-messages="errors" v-model="courseDetail.credit_hours"  required label="Credit Hours" hint="4(3-1)"></v-text-field>
+                                    </ValidationProvider>
                                 </v-col>
                             </v-row>
                         </v-form>
                         <!-- form for adding course  -->
+                    </ValidationObserver>
                     </v-container>
                     <small>*indicates required field</small>
                 </v-card-text>
@@ -51,10 +59,35 @@
 // Event Bus is Use to communicate  Between Two Components
 import EventBus from "../../../EventBus/eventBus";
 
+
+import { required,alpha_spaces,} from 'vee-validate/dist/rules';
+import {  extend,
+    ValidationObserver,
+    ValidationProvider,
+    setInteractionMode,
+    
+} from "vee-validate";
+
+setInteractionMode("eager");
+
+extend('alpha_spaces', {
+    ...alpha_spaces,
+    message: '{_field_} contains only alphabets '
+});
+
+extend('required', {
+    ...required,
+    message: '{_field_} can not be empty',
+});
+
 export default {
     name: "AddCourseModel",
     props: ["editData", "editRowMessage"],
+    components: {
 
+        ValidationProvider,
+        ValidationObserver
+    },
     data() {
         return {
 
@@ -65,6 +98,7 @@ export default {
         };
     },
     methods: {
+  
         successCall: function () {
             this.$refs.form.reset();
             this.$store.dispatch("AddCourseModalToggle");

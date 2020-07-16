@@ -34,20 +34,20 @@
                                         <template v-slot:activator="{ on, attrs }">
                                             <v-icon color="primary" v-bind="attrs" v-on="on">mdi-dots-vertical</v-icon>
                                         </template>
-                                        <v-list>
+                                        <v-list >
                                             <v-list-item @click="editProgram(item.id)">
-                                                <v-list-item-title>Modify</v-list-item-title>
+                                                <v-list-item-title> <v-icon color="primary" class="mr-4">mdi-tooltip-edit</v-icon>Modify</v-list-item-title>
                                             </v-list-item>
                                             <v-list-item @click="deleteItem(item.id)">
-                                                <v-list-item-title>Delete</v-list-item-title>
+                                                <v-list-item-title> <v-icon color="primary" class="mr-4">mdi-delete</v-icon>Delete</v-list-item-title>
                                             </v-list-item>
                                             <v-list-item @click="addCourseModal(item)">
                                                 <v-list-item-title>
-                                                    <v-icon color="primary">mdi-plus</v-icon>Add Course
+                                                    <v-icon color="primary" class="mr-4">mdi-file-plus</v-icon>Add Course
                                                 </v-list-item-title>
                                             </v-list-item>
-                                            <v-list-item>
-                                                <v-btn small color="primary" class="create-btn pa-1" @click="assigedCourses(item)">Assigned Course</v-btn>
+                                            <v-list-item @click="assigedCourses(item)">
+                                                Assigned Course
                                             </v-list-item>
                                         </v-list>
                                     </v-menu>

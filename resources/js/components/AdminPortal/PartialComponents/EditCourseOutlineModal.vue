@@ -14,9 +14,6 @@
             </v-btn>
             <v-toolbar-title></v-toolbar-title>
             <v-spacer></v-spacer>
-            <div>
-              <v-btn @click="$store.dispatch('EditCourseOutlineModalToggle')">Edit Course Outline</v-btn>
-            </div>
           </v-toolbar>
           <v-card-text>
             <v-container>

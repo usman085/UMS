@@ -1,329 +1,389 @@
 <template>
-<v-form v-model="valid" ref="form">
-    <v-container>
-        <fieldset class="form-field-sets">
-            <legend class="text-center form-field-set-name">Personal Information</legend>
-            <v-container>
-                <v-row>
-                    <v-col cols="6">
-                    <ValidationProvider name="email" rules="required|email">
-  <div slot-scope="{ errors }">
-    <v-text-field  v-model="email"></v-text-field>
-    <p>{{ errors[0] }}</p>
-  </div>
-</ValidationProvider>
-                        <v-text-field v-model="studentdetail.student_name" label="Student Name*" required :rules="nameRules"></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field v-model="studentdetail.father_name" label="Father Name*" required :rules="fatherRules"></v-text-field>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-select v-model="studentdetail.guardian" :items="guardians" item-text="guardian_name" item-value="id" label="Guardian*" required :rules="guardianRules"></v-select>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y max-width="290px" min-width="290px">
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-text-field v-model="dateOfBrth" label="Date of Birth*" hint="MM/DD/YYYY" persistent-hint v-bind="attrs" @blur="date = parseDate(dateFormatted)" v-on="on" required :rules="requiredRules"></v-text-field>
-                            </template>
-                            <v-date-picker required v-model="date" no-title @input="menu1 = false"></v-date-picker>
-                        </v-menu>
-
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-select v-model="studentdetail.gender" :items="genders" item-text="gender" item-value="id" label="Gender*" required :rules="genderRules"></v-select>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-select v-model="studentdetail.bloodGroup" :items="bloodGroups" item-text="blood_group" item-value="id" label="Blood Group (optional)"></v-select>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field v-model="studentdetail.religion" text-field label="Religion" required :rules="religionRules"></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field @input="acceptNumber" v-model="studentdetail.phone_number" label="Phone Number*" :rules="phoneRules"></v-text-field>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field v-model="studentdetail.guardian_phone_number" label="Guardian Phone Number" required :rules="phoneRules"></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field v-model="studentdetail.land_line_number" label="Landline Number"></v-text-field>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                    <ValidationProvider name="CNIC" rules="digits:13" v-slot="{ errors }">
-                        <v-text-field @input="acceptCNIC()" v-model="studentdetail.cnic" label="CNIC NO*" required :rules="cnicRules"></v-text-field>
-                     <span text-color="error"  >{{ errors[0] }}</span>                    
-                    </ValidationProvider>
-
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field v-model="studentdetail.email" label="Contact Email Account*" required :rules="emailRules"></v-text-field>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field v-model="studentdetail.country" label="Country*" required :rules="requiredRules"></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field v-model="studentdetail.city" label="City*" required :rules="requiredRules"></v-text-field>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="12">
-                        <v-text-field v-model="studentdetail.address" label="Address*" required :rules="addressRules"></v-text-field>
-                    </v-col>
-                </v-row>
-                <p class="alert-indicate">* indicate that this Fields is Must</p>
-            </v-container>
-        </fieldset>
-
-        <!-- Personal Info field set  -->
-        <fieldset class="form-field-sets">
-            <legend class="text-center form-field-set-name">Official Information</legend>
-            <v-container>
-                <v-row>
-                    <v-col cols="6">
-                        <v-select v-model="studentdetail.program" :items="programs" item-text="program_title" item-value="id" label="Program" required :rules="programRules"></v-select>
-                    </v-col>
-
-                    <v-col cols="6">
-                        <v-select v-model="studentdetail.semester" required :rules="semesterRules" :items="semester" label="Current Semester"></v-select>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-select v-model="studentdetail.shift" :items="shifts" item-text="Shift" item-value="id" label="Shift" required :rules="shiftRules"></v-select>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field v-model="studentdetail.session_year" label="Session Year" required :rules="sessionRules"></v-text-field>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field v-model="studentdetail.roll_no" label="Roll Number" required :rules="rollnoRules"></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field v-model="studentdetail.reg_no" label="Registration No." required :rules="regnoRules"></v-text-field>
-                    </v-col>
-                </v-row>
-            </v-container>
-        </fieldset>
-        <!-- Educational Info field set  -->
-        <fieldset class="form-field-sets">
-            <legend class="text-center form-field-set-name">Educational History</legend>
-            <v-container>
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field v-model="studentdetail.matric_marks" type="number" label="Matriculation Marks" required :rules="matricRules"></v-text-field>
-                    </v-col>
-
-                    <v-col cols="6">
-                        <v-text-field v-model="studentdetail.secondYear_marks" type="number" label="FA\FSC\ICS Marks" required :rules="faRules"></v-text-field>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field v-model="studentdetail.school" type="text" label="School Name "></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field v-model="studentdetail.school_passing_year" type="text" label="Passing Year" required :rules="schoolPassRules"></v-text-field>
-                    </v-col>
-                </v-row>
-
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field v-model="studentdetail.college" type="text" label="College Name "></v-text-field>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field v-model="studentdetail.college_passing_year" type="text" label="Passing Year" required :rules="collegePassRules"></v-text-field>
-                    </v-col>
-                </v-row>
-            </v-container>
-        </fieldset>
-        <!-- Officail Information  -->
+<ValidationObserver ref="observer" v-slot="{ invalid }" >
+    <v-form v-model="valid" ref="form">
         <v-container>
-            <p class="fee-addition">Do You want to {{ feeAdd ? 'Modify ' : 'Add' }} Fee Structure?</p>
-            <p class="fee-addition">
-                <v-btn color="primary" small @click="dialog =true">{{ feeAdd ? 'Modify ' : 'Add' }} Fee Structure</v-btn>
-            </p>
-        </v-container>
+            <fieldset class="form-field-sets">
+                <legend class="text-center form-field-set-name">Personal Information</legend>
+                <v-container>
+                    <v-row>
+                        <v-col cols="6">
+                            <ValidationProvider name="Student Name" rules="required|alpha_spaces" v-slot="{ errors }">
+                                <v-text-field v-model="studentdetail.student_name" :error-messages="errors" label="Student Name*" required></v-text-field>
+                            </ValidationProvider>
+                        </v-col>
+                        <v-col cols="6">
+                         <ValidationProvider name="Father Name" rules="required|alpha_spaces" v-slot="{ errors }">
+                            <v-text-field v-model="studentdetail.father_name" label="Father Name*" required :error-messages="errors"></v-text-field>
+                         </ValidationProvider>
+                        </v-col>
+                    </v-row>
 
-        <fieldset class="form-field-sets">
-            <legend class="text-center form-field-set-name">Login Credentials</legend>
+                    <v-row>
+                        <v-col cols="6">
+                        <ValidationProvider name="Guardian Name" rules="required|" v-slot="{ errors }">
+                            <v-select v-model="studentdetail.guardian" :items="guardians" item-text="guardian" item-value="id" label="Guardian*" required  :error-messages="errors"></v-select>
+                        </ValidationProvider>
+                        </v-col>
+                        <v-col cols="6">
+                        <ValidationProvider name="Date Of Birth" rules="required" v-slot="{ errors }">
+                            <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-text-field :error-messages="errors" v-model="dateOfBrth" label="Date of Birth*" hint="MM/DD/YYYY" persistent-hint v-bind="attrs" @blur="date = parseDate(dateFormatted)" v-on="on" required ></v-text-field>
+                                </template>
+                                <v-date-picker required   v-model="date" no-title @input="menu1 = false"></v-date-picker>
+                            </v-menu>
+                        </ValidationProvider>
+                        </v-col>
+                    </v-row>
+
+                    <v-row>
+                        <v-col cols="6">
+                        <ValidationProvider name="Gender" rules="required" v-slot="{ errors }">
+                            <v-select :error-messages="errors" v-model="studentdetail.gender" :items="genders" item-text="gender" item-value="id" label="Gender*" required ></v-select>
+                        </validationProvider>
+                        </v-col>
+                        <v-col cols="6">
+                            <v-select v-model="studentdetail.bloodGroup" :items="bloodGroups" item-text="blood_group" item-value="id" label="Blood Group (optional)"></v-select>
+                        </v-col>
+                    </v-row>
+
+                    <v-row>
+                        <v-col cols="6">
+                        <ValidationProvider name="Religion" rules="required|alpha_spaces" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors" v-model="studentdetail.religion" text-field label="Religion" required ></v-text-field>
+                        </ValidationProvider>
+                        </v-col>
+                        <v-col cols="6">
+                        <ValidationProvider name="Phone Number" rules="required" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors" @input="acceptNumber" v-model="studentdetail.phone_number" label="Phone Number*" ></v-text-field>
+                        </ValidationProvider>
+                        </v-col>
+                    </v-row>
+
+                    <v-row>
+                        <v-col cols="6">
+                             <ValidationProvider name="Guardian Phone Number" rules="required" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors" v-model="studentdetail.guardian_phone_number" label="Guardian Phone Number" required ></v-text-field>
+                             </ValidationProvider>
+                        </v-col>
+                        <v-col cols="6">   
+                            <v-text-field v-model="studentdetail.land_line_number" label="Landline Number"></v-text-field>
+                        </v-col>
+                    </v-row>
+
+                    <v-row>
+                        <v-col cols="6">
+                            <ValidationProvider name="CNIC" rules="required"  v-slot="{ errors }">
+                                <v-text-field  :error-messages="errors" @input="acceptCNIC()" v-model="studentdetail.cnic" label="CNIC NO*" required ></v-text-field>
+                               
+                            </ValidationProvider>
+                        </v-col>
+                        <v-col cols="6">
+                         <ValidationProvider name="Email" rules="required|email" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors"  v-model="studentdetail.email" label="Contact Email Account*" required ></v-text-field>
+                        </ValidationProvider>
+                        </v-col>
+                    </v-row>
+
+                    <v-row>
+                        <v-col cols="6">
+                         <ValidationProvider name="Country" rules="required" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors"  v-model="studentdetail.country" label="Country*" required ></v-text-field>
+                         </ValidationProvider>
+                        </v-col>
+                        <v-col cols="6">
+                         <ValidationProvider name="City" rules="required" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors" v-model="studentdetail.city" label="City*" required ></v-text-field>
+                         </ValidationProvider>
+                        </v-col>
+                    </v-row>
+
+                    <v-row>
+                        <v-col cols="12">
+                        <ValidationProvider name="Address" rules="required" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors" v-model="studentdetail.address" label="Address*" required ></v-text-field>
+                        </ValidationProvider>
+                        </v-col>
+                    </v-row>
+                    <p class="alert-indicate">* indicate that this Fields is Must</p>
+                </v-container>
+            </fieldset>
+
+            <!-- Personal Info field set  -->
+            <fieldset class="form-field-sets">
+                <legend class="text-center form-field-set-name">Official Information</legend>
+                <v-container>
+                    <v-row>
+                        <v-col cols="6">
+                           <ValidationProvider name="Program" rules="required" v-slot="{ errors }">
+                            <v-select :error-messages="errors" v-model="studentdetail.program" :items="programs" item-text="program_title" item-value="id" label="Program" required></v-select>
+                           </ValidationProvider>
+                        </v-col>
+
+                        <v-col cols="6">
+                            <ValidationProvider name="Semester" rules="required" v-slot="{ errors }">
+                            <v-select :error-messages="errors" v-model="studentdetail.semester" required  :items="semester" label="Current Semester"></v-select>
+                            </ValidationProvider>
+                        </v-col>
+                    </v-row>
+
+                    <v-row>
+                        <v-col cols="6">
+                         <ValidationProvider name="Shift" rules="required" v-slot="{ errors }">
+                            <v-select :error-messages="errors" v-model="studentdetail.shift" :items="shifts" item-text="Shift" item-value="id" label="Shift" required ></v-select>
+                         </ValidationProvider>
+                        </v-col>
+                        <v-col cols="6">
+                        <ValidationProvider name="Session Year" rules="required" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors" v-model="studentdetail.session_year" label="Session Year" required ></v-text-field>
+                        </ValidationProvider>
+                        </v-col>
+                    </v-row>
+
+                    <v-row>
+                        <v-col cols="6">
+                         <ValidationProvider name="Roll no" rules="required" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors"  v-model="studentdetail.roll_no" label="Roll Number" required ></v-text-field>
+                         </ValidationProvider>
+                        </v-col>
+                        <v-col cols="6">
+                        <ValidationProvider name="Registration no" rules="required" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors" v-model="studentdetail.reg_no" label="Registration No." required ></v-text-field>
+                        </ValidationProvider>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </fieldset>
+            <!-- Educational Info field set  -->
+            <fieldset class="form-field-sets">
+                <legend class="text-center form-field-set-name">Educational History</legend>
+                <v-container>
+                    <v-row>
+                        <v-col cols="6">
+                        <ValidationProvider name="Marks" rules="required|numeric" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors"  v-model="studentdetail.matric_marks"  label="Matriculation Marks" required ></v-text-field>
+                        </ValidationProvider>
+                        </v-col>
+
+                        <v-col cols="6">
+                         <ValidationProvider name="Marks" rules="required|numeric" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors"  v-model="studentdetail.secondYear_marks"  label="FA\FSC\ICS Marks" required ></v-text-field>
+                         </ValidationProvider>
+                        </v-col>
+                    </v-row>
+
+                    <v-row>
+                        <v-col cols="6">
+                            <v-text-field v-model="studentdetail.school" type="text" label="School Name "></v-text-field>
+                        </v-col>
+                        <v-col cols="6">
+                         <ValidationProvider name="Passing Year" rules="required|numeric" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors" v-model="studentdetail.school_passing_year" type="text" label="Passing Year" required ></v-text-field>
+                         </ValidationProvider>
+                        </v-col>
+                    </v-row>
+
+                    <v-row>
+                        <v-col cols="6">
+                            <v-text-field v-model="studentdetail.college" type="text" label="College Name "></v-text-field>
+                        </v-col>
+                        <v-col cols="6">
+                         <ValidationProvider name="Passing Year" rules="required|numeric" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors" v-model="studentdetail.college_passing_year" type="text" label="Passing Year" required ></v-text-field>
+                          </ValidationProvider>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </fieldset>
+            <!-- Officail Information  -->
             <v-container>
-                <v-row>
-                    <v-col cols="12">
-                        <v-text-field v-model="studentdetail.user_name" label="User Name" required :rules="usernameRules"></v-text-field>
-                    </v-col>
-                </v-row>
-                <v-row>
-                    <v-col cols="6">
-                        <v-text-field label="Password" type="password" v-model="studentdetail.password" required :rules="passwordRules"></v-text-field>
-                        <password v-model="studentdetail.password" :strength-meter-only="true" />
-                    </v-col>
-                    <v-col cols="6">
-                        <v-text-field label="Confirm Password" type="password" autocomplete="false" required :rules="cpasswordRules"></v-text-field>
-                    </v-col>
-                </v-row>
+                <p class="fee-addition">Do You want to {{ feeAdd ? 'Modify ' : 'Add' }} Fee Structure?</p>
+                <p class="fee-addition">
+                    <v-btn color="primary" small @click="dialog =true">{{ feeAdd ? 'Modify ' : 'Add' }} Fee Structure</v-btn>
+                </p>
             </v-container>
-        </fieldset>
-        <!-- Login Information End -->
 
-        <v-container class="text-center">
-            <v-btn color="primary" :disabled="!valid" @click="registerStudent()">Register Student</v-btn>
+            <fieldset class="form-field-sets">
+                <legend class="text-center form-field-set-name">Login Credentials</legend>
+                <v-container>
+                    <v-row>
+                        <v-col cols="12">
+                        <ValidationProvider name="User Name" rules="required|email" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors"  v-model="studentdetail.user_name" label="User Name" required ></v-text-field>
+                        </ValidationProvider>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                  
+                        <v-col cols="6">
+                       <ValidationProvider name="Password" rules="required|password:@confirm|min:8" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors" label="Password" type="password"  v-model="studentdetail.password" required></v-text-field>
+                            <password v-model="studentdetail.password" :strength-meter-only="true" />
+                         </ValidationProvider>
+                        </v-col>
+                        <v-col cols="6">
+                        <ValidationProvider name="confirm" rules="required" v-slot="{ errors }">
+                            <v-text-field :error-messages="errors" v-model="confirmation" label="Confirm Password" type="password" autocomplete="false" required ></v-text-field>
+                        </ValidationProvider>
+                        </v-col>
+
+                    </v-row>
+                </v-container>
+            </fieldset>
+            <!-- Login Information End -->
+
+            <v-container class="text-center">
+                <v-btn color="primary" @click="registerStudent()" :disabled="invalid" >Register Student</v-btn>
+            </v-container>
+
+            <!-- Fee Structure Modal -->
+            <v-row justify="center">
+                <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+                    <v-card>
+                        <v-toolbar dark color="primary">
+                            <v-btn icon dark @click="dialog=false">
+                                <v-icon>mdi-close</v-icon>
+                            </v-btn>
+                            <v-toolbar-title>Fee Sturcture</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                        </v-toolbar>
+                        <v-container>
+                            <fieldset class="form-field-sets">
+                                <legend class="form-field-set-name">Fee Structure Particulars</legend>
+                                <v-container>
+                                    <h3 class="text-center">Complete Package of Semester</h3>
+                                    <v-divider></v-divider>
+
+                                    <v-row>
+                                        <v-col cols="12">
+                                            <v-text-field label="Admission Fee"></v-text-field>
+                                        </v-col>
+
+                                        <v-col cols="12">
+                                            <v-text-field label="Tution Fee Per Semester"></v-text-field>
+                                        </v-col>
+
+                                        <v-col cols="12">
+                                            <v-text-field label="Scholarship %"></v-text-field>
+                                        </v-col>
+
+                                        <v-col cols="12">
+                                            <v-text-field label="Amount of Scholarship"></v-text-field>
+                                        </v-col>
+
+                                        <v-col cols="6">
+                                            <v-text-field label="Fee After  Scholarship"></v-text-field>
+                                        </v-col>
+
+                                        <v-col cols="6">
+                                            <v-text-field label="Library Fee"></v-text-field>
+                                        </v-col>
+
+                                        <v-col cols="6">
+                                            <v-text-field label="Exam Fee"></v-text-field>
+                                        </v-col>
+
+                                        <v-col cols="6">
+                                            <v-text-field label="Sport Fee"></v-text-field>
+                                        </v-col>
+
+                                        <v-col>
+                                            <h5>Total Amount 45000</h5>
+                                        </v-col>
+
+                                        <v-col>
+                                            <v-btn color="primary" @click="addFee()">Submit Fee</v-btn>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </fieldset>
+                        </v-container>
+
+                        <v-divider></v-divider>
+                    </v-card>
+                </v-dialog>
+            </v-row>
+            <!-- Add Fee structure -->
         </v-container>
-
-        <!-- Fee Structure Modal -->
-        <v-row justify="center">
-            <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-                <v-card>
-                    <v-toolbar dark color="primary">
-                        <v-btn icon dark @click="dialog=false">
-                            <v-icon>mdi-close</v-icon>
-                        </v-btn>
-                        <v-toolbar-title>Fee Sturcture</v-toolbar-title>
-                        <v-spacer></v-spacer>
-                    </v-toolbar>
-                    <v-container>
-                        <fieldset class="form-field-sets">
-                            <legend class="form-field-set-name">Fee Structure Particulars</legend>
-                            <v-container>
-                                <h3 class="text-center">Complete Package of Semester</h3>
-                                <v-divider></v-divider>
-
-                                <v-row>
-                                    <v-col cols="12">
-                                        <v-text-field label="Admission Fee"></v-text-field>
-                                    </v-col>
-
-                                    <v-col cols="12">
-                                        <v-text-field label="Tution Fee Per Semester"></v-text-field>
-                                    </v-col>
-
-                                    <v-col cols="12">
-                                        <v-text-field label="Scholarship %"></v-text-field>
-                                    </v-col>
-
-                                    <v-col cols="12">
-                                        <v-text-field label="Amount of Scholarship"></v-text-field>
-                                    </v-col>
-
-                                    <v-col cols="6">
-                                        <v-text-field label="Fee After  Scholarship"></v-text-field>
-                                    </v-col>
-
-                                    <v-col cols="6">
-                                        <v-text-field label="Library Fee"></v-text-field>
-                                    </v-col>
-
-                                    <v-col cols="6">
-                                        <v-text-field label="Exam Fee"></v-text-field>
-                                    </v-col>
-
-                                    <v-col cols="6">
-                                        <v-text-field label="Sport Fee"></v-text-field>
-                                    </v-col>
-
-                                    <v-col>
-                                        <h5>Total Amount 45000</h5>
-                                    </v-col>
-
-                                    <v-col>
-                                        <v-btn color="primary" @click="addFee()">Submit Fee</v-btn>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
-                        </fieldset>
-                    </v-container>
-
-                    <v-divider></v-divider>
-                </v-card>
-            </v-dialog>
-        </v-row>
-        <!-- Add Fee structure -->
-    </v-container>
-    <v-snackbar top right v-model="snackbar" color="success">
-        {{succesMessage}}
-        <template v-slot:action="{ attrs }">
-            <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
-        </template>
-    </v-snackbar>
-</v-form>
+        <v-snackbar top right v-model="snackbar" color="success">
+            {{succesMessage}}
+            <template v-slot:action="{ attrs }">
+                <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+            </template>
+        </v-snackbar>
+    </v-form>
+</ValidationObserver>
 </template>
 
 <script>
-import { extend } from 'vee-validate';
+import Password from "vue-password-strength-meter";
 
-import { ValidationProvider } from 'vee-validate';
-import Password from "vue-password-strength-meter"
-import * as rules from 'vee-validate/dist/rules';
+import {
+    required,
+    alpha_spaces,
+     alpha_num,
+    numeric,
+    email,
+    min,
+    password
 
+} from 'vee-validate/dist/rules';
+import {
 
-// with typescript
-for (let [rule, validation] of Object.entries(rules)) {
-  extend(rule, {
-    ...validation
-  });
-}
+    extend,
+    ValidationObserver,
+    ValidationProvider,
+    setInteractionMode,
+    
+} from "vee-validate";
+
+setInteractionMode("eager");
+
+extend('min', {
+    ...min,
+    message: '{_field_} minimum 8 characters'
+});
+extend('password', {
+  params: ['target'],
+  validate(value, { target }) {
+    return value === target;
+  },
+  message: 'Password confirmation does not match'
+});
+extend('alpha_spaces', {
+    ...alpha_spaces,
+    message: '{_field_} contains only alphabets '
+});
+extend('alpha_num', {
+    ...alpha_num,
+    message: '{_field_} contains only alphabets and numbers '
+});
+
+extend('required', {
+    ...required,
+    message: '{_field_} can not be empty',
+});
+extend('email', {
+    ...email,
+    message: '{_field_} must be valid',
+});
+extend('numeric', {
+    ...numeric,
+    message: '{_field_} can only contain numbers',
+})
 export default {
     name: "StudentRegistratonForm",
 
     components: {
         Password,
-          ValidationProvider
+        ValidationProvider,
+        ValidationObserver
     },
 
     data: vm => ({
-        email:"", 
+        email: "",
         valid: true,
-        //   rules for validating  data
-        requiredRules: [v => !!v || "This field is required"],
-        nameRules: [v => !!v || "Student Name is required"],
-        fatherRules: [v => !!v || "Father Name is required"],
-        guardianRules: [v => !!v || "Guardian Name is required"],
-        fatherRules: [v => !!v || "Father Name is required"],
-        religionRules: [v => !!v || "Religion is required"],
-        phoneRules: [v => !!v || "Phone Number is required"],
-        cnicRules: [v => !!v || "CNIC Number is required"],
-        emailRules: [
-            v => !!v || "E-mail is required",
-            v => /.+@.+/.test(v) || "E-mail must be valid"
-        ],
-        genderRules: [v => !!v || "Gender is required"],
-        addressRules: [v => !!v || "Address is required"],
-        programRules: [v => !!v || "Program is required"],
-        semesterRules: [v => !!v || "Semester is required"],
-        shiftRules: [v => !!v || "Shift is required"],
-        sessionRules: [v => !!v || "Session Years are required"],
-        rollnoRules: [v => !!v || "Roll No is required"],
-        regnoRules: [v => !!v || "Registeration Number is required"],
-        matricRules: [v => !!v || "Marks are required"],
-        faRules: [v => !!v || "Marks are required"],
-        schoolPassRules: [v => !!v || "Passing Year is required"],
-        collegePassRules: [v => !!v || "Passing Year is required"],
-        usernameRules: [v => !!v || "Username is required"],
-        passwordRules: [v => !!v || "Password is required"],
-        cpasswordRules: [v => !!v || "Confirm Password is required"],
-        //  rules for validating entered data
-
+        confirmation:"",
         succesMessage: "",
         snackbar: false,
         dialog: false,
@@ -390,13 +450,20 @@ export default {
     },
 
     methods: {
+      
         acceptNumber() {
-            var x = this.studentdetail.phone_number.replace(/\D/g, '').match(/(\d{0,4})(\d{0,7})/);
-            this.studentdetail.phone_number = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2];
+            var x = this.studentdetail.phone_number
+                .replace(/\D/g, "")
+                .match(/(\d{0,4})(\d{0,7})/);
+            this.studentdetail.phone_number = !x[2] ? x[1] : "(" + x[1] + ") " + x[2];
         },
         acceptCNIC() {
-            var x = this.studentdetail.cnic.replace(/\D/g, '').match(/(\d{0,5})(\d{0,7})(\d{0,1})/);
-            this.studentdetail.cnic = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
+            var x = this.studentdetail.cnic
+                .replace(/\D/g, "")
+                .match(/(\d{0,5})(\d{0,7})(\d{0,1})/);
+            this.studentdetail.cnic = !x[2] ?
+                x[1] :
+                x[1] + "-" + x[2] + (x[3] ? "-" + x[3] : "");
         },
         registerStudent: function () {
             this.studentdetail.dateofBirth = this.dateOfBrth;
@@ -408,15 +475,16 @@ export default {
             // send request to Api Route
             axios
                 .post(
-                    process.env.MIX_APP_URL + "/register-student", this.studentdetail, {
+                    process.env.MIX_APP_URL + "/register-student",
+                    this.studentdetail, {
                         headers: headers
                     }
                 )
                 .then(response => {
                     this.succesMessage = "Student Register Successfully";
-                    this.$refs.form.reset();
-
                     this.snackbar = true;
+                    this.$refs.form.reset();
+                    this.$refs.observer.reset();
                 })
                 .catch(error => {});
         },
@@ -533,7 +601,6 @@ export default {
         this.getBloodGroup();
         this.getShift();
         this.getProgram();
-
     }
 };
 </script>

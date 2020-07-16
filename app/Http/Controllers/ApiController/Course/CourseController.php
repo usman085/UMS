@@ -57,6 +57,7 @@ class CourseController extends Controller
     {
         return $this->courseRepository->getCourse();
     }
+  
     /**
     * Delete Course
     *
@@ -76,7 +77,26 @@ class CourseController extends Controller
         }
             return   $this->courseRepository->delCourse( $request );
     }
-    
+  
+      /**
+    * Delete Course
+    *
+    *
+    *
+    * @return Response  Delete Course by ID
+    */
+
+    public function delCourseOutline( Request $request ) 
+    {
+        $validator = Validator::make( $request->all(), 
+        [
+            'id' => 'required',
+        ]);
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
+        return   $this->courseRepository->delCourseOutline( $request );
+    }
     /**
     * Edit Course
     *

@@ -83,6 +83,32 @@ class CourseRepository implements CourseInterface
         }
     }
 
+     /**
+    * Del Course Outline
+    *
+    * @param request
+    * @return Response Del Course Program Data
+    */
+
+    public function delCourseOutline( $request ) {
+        
+        $delCourseOutline = CourseOutline::find($request->id );
+        
+        $delCourseId = Course::where('id', $delCourseOutline->course_id )->update([
+            'course_outline'=>0
+
+         ]);
+         $delCourseOutline =  $delCourseOutline->delete();            
+        if ( $delCourseOutline && $delCourseId) 
+        {
+        return response( ['message'=>'success'], 200 ); 
+        } 
+        else 
+        {
+        return response( ['message'=>'error'], 402 );
+        }
+    }
+
     public function updateCourseOutline($request){
         $updateCourseOutline=CourseOutline::where('id',$request->id)->update(
         [

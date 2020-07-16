@@ -35,19 +35,19 @@
                       </template>
                       <v-list>
                         <v-list-item @click="editCourse(item.id)">
-                          <v-list-item-title>Modify</v-list-item-title>
+                          <v-list-item-title> <v-icon color="primary" class="mr-4">mdi-tooltip-edit</v-icon>Modify</v-list-item-title>
                         </v-list-item>
                         <v-list-item @click="delCourse(item.id)">
-                          <v-list-item-title>Delete</v-list-item-title>
+                          <v-list-item-title><v-icon color="primary" class="mr-4">mdi-delete</v-icon>Delete</v-list-item-title>
                         </v-list-item>
-                        <div v-if="item.course_outline != null">
+                        <div v-if="item.course_outline">
                           <v-list-item @click="courseOutlineModal(item)">
-                            <v-list-item-title>View Outline</v-list-item-title>
+                            <v-list-item-title>  <v-icon color="primary" class="mr-4">mdi-eye</v-icon>View Outline</v-list-item-title>
                           </v-list-item>
                         </div>
                         <div v-else>
-                          <v-list-item @click="addOutline(item)">
-                            <v-list-item-title>Add Outline</v-list-item-title>
+                          <v-list-item  @click="addOutline(item)">
+                            <v-list-item-title>  <v-icon color="primary" class="mr-4">mdi-file-plus</v-icon> Add Outline</v-list-item-title>
                           </v-list-item>
                         </div>
                       </v-list>
