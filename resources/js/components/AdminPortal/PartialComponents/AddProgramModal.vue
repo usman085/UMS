@@ -9,25 +9,37 @@
                 </v-card-title>
                 <v-card-text>
                     <v-container>
-                        <!-- Form To add or Update Data -->
-                        <v-form v-model="valid" ref="form">
-                            <v-row>
-                                <v-col cols="12">
-                                    <v-text-field v-model="programDetail.program_title" :rules="FieldRules" required label="Program Title*" hint="Becholar of Computer Science"></v-text-field>
-                                </v-col>
-                                <v-col cols="12">
-                                    <v-text-field v-model="programDetail.program_short_title" :rules="FieldRules" required label="Short Title" hint="BSCS"></v-text-field>
-                                </v-col>
+                        <ValidationObserver ref="observer">
+                            <!-- Form To add or Update Data -->
+                            <v-form ref="form">
+                                <v-row>
+                                    <v-col cols="12">
+                                        <ValidationProvider name="Program Title" rules="required|alpha_spaces" v-slot="{ errors }">
+                                            <v-text-field :error-messages="errors" v-model="programDetail.program_title" required label="Program Title*" hint="Becholar of Computer Science"></v-text-field>
+                                        </ValidationProvider>
+                                    </v-col>
 
-                                <v-col cols="12">
-                                    <v-select :items="items" v-model="programDetail.program_duration" :rules="FieldRules" required item-text="state" label="Select Duration*" persistent-hint return-object></v-select>
-                                </v-col>
-                                <v-col cols="12">
-                                    <v-text-field v-model="programDetail.no_of_semester" :rules="FieldRules" label="No Of Semesters*" type="number" step="1" onkeypress="return event.charCode > 48" min="1" max="9" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="1" required></v-text-field>
-                                </v-col>
-                            </v-row>
-                        </v-form>
-                        <!-- Form To add or Update Dataa -->
+                                    <v-col cols="12">
+                                        <ValidationProvider name="Program Short Title" rules="required|alpha_spaces" v-slot="{ errors }">
+                                            <v-text-field :error-messages="errors" v-model="programDetail.program_short_title" required label="Short Title" hint="BSCS"></v-text-field>
+                                        </ValidationProvider>
+                                    </v-col>
+
+                                    <v-col cols="12">
+                                        <ValidationProvider name="Program Duration" rules="required" v-slot="{ errors }">
+                                            <v-select :error-messages="errors" :items="items" v-model="programDetail.program_duration" required item-text="state" label="Select Duration*" persistent-hint return-object></v-select>
+                                        </ValidationProvider>
+                                    </v-col>
+
+                                    <v-col cols="12">
+                                        <ValidationProvider name="Program Duration" rules="required|numeric" v-slot="{ errors }">
+                                            <v-text-field :error-messages="errors" v-model="programDetail.no_of_semester" label="No Of Semesters*" type="number" step="1" onkeypress="return event.charCode > 48" min="1" max="9" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="1" required></v-text-field>
+                                        </ValidationProvider>
+                                    </v-col>
+                                </v-row>
+                            </v-form>
+                            <!-- Form To add or Update Dataa -->
+                        </ValidationObserver>
                     </v-container>
                     <small>*indicates required field</small>
                 </v-card-text>
@@ -35,8 +47,8 @@
                     <v-spacer></v-spacer>
                     <v-btn small color="error" @click="$store.dispatch('AddProgramModalToggle')">Close</v-btn>
 
-                    <v-btn small :disabled="!valid" v-if="!editRowMessage" color="primary" @click="addProgram()">Add</v-btn>
-                    <v-btn small :disabled="!valid" v-else color="primary" @click="editProgram()">Update</v-btn>
+                    <v-btn small :disabled="invalid" v-if="!editRowMessage" color="primary" @click="addProgram()">Add</v-btn>
+                    <v-btn small :disabled="invalid" v-else color="primary" @click="editProgram()">Update</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -54,11 +66,43 @@
 <script>
 // *** Event Bus Use to Communicate Data Between Two Components
 import EventBus from "../../../EventBus/eventBus";
+import {
+    required,
+    alpha_spaces,
+    numeric
+} from 'vee-validate/dist/rules';
+import {
+    extend,
+    ValidationObserver,
+    ValidationProvider,
+    setInteractionMode,
+
+} from "vee-validate";
+
+setInteractionMode("eager");
+
+extend('alpha_spaces', {
+    ...alpha_spaces,
+    message: '{_field_} contains only alphabets '
+});
+
+extend('required', {
+    ...required,
+    message: '{_field_} can not be empty',
+});
+extend('numeric', {
+    ...numeric,
+    message: '{_field_} can only contain numbers',
+})
 
 export default {
     name: "AddProgramModel",
     props: ["editData", "editRowMessage"],
+    components: {
 
+        ValidationProvider,
+        ValidationObserver
+    },
     data() {
         return {
             amount: 7,
@@ -66,8 +110,7 @@ export default {
             valid: true,
             snackbar: false,
             items: [1, 2, 3, 4],
-            // field Validation
-            FieldRules: [v => !!v || "This Field is required"]
+
         };
     },
     methods: {
