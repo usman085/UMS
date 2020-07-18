@@ -398,6 +398,7 @@ export default {
         confirmation:"",
         succesMessage: "",
         snackbar: false,
+        allCity:[],
         dialog: false,
         allCountry: [],
         studentdetail: {
