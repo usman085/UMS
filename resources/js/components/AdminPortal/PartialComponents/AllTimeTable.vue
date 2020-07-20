@@ -21,36 +21,47 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>BSSE</td>
-                            <td>6th</td>
-                            <td>Moring</td>
+                        <template v-if="$store.state.allTimeTable.length > 0">
+                            <tr>
+                                <td>BSSE</td>
+                                <td>6th</td>
+                                <td>Moring</td>
 
-                            <td>
-                                <v-chip color="green" class="status-chip">Public</v-chip>
-                            </td>
-                            <td>Monday 20,2020</td>
-                            <td>Monday 22,202</td>
-                            <td>
-                                <v-menu offset-y>
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-icon color="primary" v-bind="attrs" v-on="on">mdi-dots-vertical</v-icon>
-                                    </template>
-                                    <v-list>
-                                        <v-list-item :to="{name :'PreviewTimeTable'}">
-                                            <v-list-item-title>Preview</v-list-item-title>
-                                        </v-list-item>
-                                        <v-list-item :to="{name:'EditTimeTable'}">
-                                            <v-list-item-title>Modify</v-list-item-title>
-                                        </v-list-item>
-                                        <v-list-item>
-                                            <v-list-item-title>Change Status</v-list-item-title>
-                                        </v-list-item>
-                                        <v-list-item>
-                                            <v-list-item-title>Delete</v-list-item-title>
-                                        </v-list-item>
-                                    </v-list>
-                                </v-menu>
+                                <td>
+                                    <v-chip color="green" class="status-chip">Public</v-chip>
+                                </td>
+                                <td>Monday 20,2020</td>
+                                <td>Monday 22,202</td>
+                                <td>
+                                    <v-menu offset-y>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon color="primary" v-bind="attrs" v-on="on">mdi-dots-vertical</v-icon>
+                                        </template>
+                                        <v-list>
+                                            <v-list-item :to="{name :'PreviewTimeTable'}">
+                                                <v-list-item-title>Preview</v-list-item-title>
+                                            </v-list-item>
+                                            <v-list-item :to="{name:'EditTimeTable'}">
+                                                <v-list-item-title>Modify</v-list-item-title>
+                                            </v-list-item>
+                                            <v-list-item>
+                                                <v-list-item-title>Change Status</v-list-item-title>
+                                            </v-list-item>
+                                            <v-list-item>
+                                                <v-list-item-title>Delete</v-list-item-title>
+                                            </v-list-item>
+                                        </v-list>
+                                    </v-menu>
+                                </td>
+                            </tr>
+                        </template>
+                        <tr v-else>
+                            <td colspan="7" class="text-center">
+                                <template v-if="message">
+
+                                    <v-progress-circular indeterminate color="primary"></v-progress-circular>
+                                </template>
+                                <template v-else>No Data Found!</template>
                             </td>
                         </tr>
                     </tbody>
@@ -64,12 +75,41 @@
 <script>
 export default {
     name: "AllTimeTable",
+    data() {
+        return {
+            message: true
+        }
+    },
+    computed: {
+        userAuth: function () {
+            return cryptoJSON.decrypt(JSON.parse(localStorage.getItem("adminLogin")), "ums");
+        },
+    },
     methods: {
         createTimeTable: function () {
             this.$router.push({
                 name: "createTimeTable"
             });
+        },
+        getAllTimeTable: function () {
+            // Headers are required for authentication
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            // sending request to Api Route
+            axios.post(process.env.MIX_APP_URL + '/get-all-time-table', "", {
+                    headers: headers
+                })
+                .then((res) => {
+                    this.$store.dispatch("timeTable", res.data.timeTables);
+                    this.message = false;
+                })
+                .catch(err => {});
         }
+    },
+    mounted() {
+        this.getAllTimeTable();
     }
 };
 </script>

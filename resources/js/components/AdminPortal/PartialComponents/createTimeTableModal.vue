@@ -16,10 +16,11 @@
                                 <!-- hidden field for updating -->
                                 <input type="hidden" v-model="detailSchedule.id" />
                                 <v-col cols="12">
+
                                     <v-select :items="$store.state.days" v-model="detailSchedule.day" label="Select Day"></v-select>
                                 </v-col>
                                 <v-col cols="12">
-                                    <v-select :items="$store.state.subjects" v-model="detailSchedule.subject" label="Select Subject"></v-select>
+                                    <v-select :items="$store.state.allCourses" item-text="course_title" item-value="id" v-model="detailSchedule.subject_id" label="Select Subject"></v-select>
                                 </v-col>
 
                                 <v-col cols="6">
@@ -27,7 +28,7 @@
                                 </v-col>
 
                                 <v-col cols="6">
-                                    <v-select :items="$store.state.classRooms" v-model="detailSchedule.classRoom" label="Select Class"></v-select>
+                                    <v-select :items="classRooms" item-value="id" item-text="class_room" v-model="detailSchedule.classRoom_id" label="Select Class"></v-select>
                                 </v-col>
                                 <v-col cols="6">
                                     <!-- time picker -->
@@ -76,12 +77,48 @@ export default {
     props: ["editData", "updateBtn"], //props 'editData' for Updating & 'updateBtn' for Btn & title
     data: function () {
         return {
+            classRooms: [],
             startingTimeModal: false, //Time picker modal For Starting time
-            endingTimeModal: false // Time Picker modl for Ending Time
+            endingTimeModal: false, // Time Picker modl for Ending Time
+            courses: [],
         };
+    },
+    mounted() {
+        this.getCourse();
+        this.getClassRoom();
     },
     // *** Data Object
     methods: {
+        getCourse: function () {
+            // Headers are defined for authentication
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            // send request to Api Route
+            axios
+                .post(process.env.MIX_APP_URL + "/get-all-course", "", {
+                    headers: headers
+                })
+                .then(res => {
+                    this.$store.dispatch("allCourses", res.data.courses);
+
+                })
+                .catch(error => {});
+        },
+        getClassRoom() {
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            axios.post(process.env.MIX_APP_URL + '/get-class-room-detail', '', {
+                    headers: headers
+                })
+                .then((res) => {
+                    this.classRooms = res.data.rooms;
+                })
+                .catch(err => {})
+        },
         //*** Fun for Close Modal
         cancel: function () {
             this.$store.dispatch("CreateTimeTableModal");
@@ -95,6 +132,10 @@ export default {
         },
         //*** Insert Data In Table
         insertTimeTable: function () {
+            let subject = this.$store.state.allCourses.filter(item => item.id == this.detailSchedule.subject_id);
+            let ClassRoom = this.classRooms.filter(item => item.id == this.detailSchedule.classRoom_id);
+            this.detailSchedule.subject_name = subject[0].course_title;
+            this.detailSchedule.classRoom_name=ClassRoom[0].class_room;
             EventBus.$emit("timeTableData", this.detailSchedule);
             this.$store.dispatch("CreateTimeTableModal");
             this.$refs.form.reset();
@@ -102,16 +143,24 @@ export default {
     },
     // *** Reactive Property
     computed: {
+        userAuth: function () {
+            return cryptoJSON.decrypt(
+                JSON.parse(localStorage.getItem("adminLogin")),
+                "ums"
+            );
+        },
         // *** Time Table Modal Object if update data get then put in object
         detailSchedule: function () {
             return {
                 id: this.editData[0].id,
                 day: this.editData[0].day,
                 teacher: this.editData[0].teacher,
-                subject: this.editData[0].subject,
+                subject_id: this.editData[0].subject_id,
+                subject_name: this.editData[0].subject_name,
                 startingtime: this.editData[0].startingtime,
                 endingTime: this.editData[0].endingTime,
-                classRoom: this.editData[0].classRoom
+                classRoom_id: this.editData[0].classRoom_id,
+                classRoom_name: this.editData[0].classRoom_name
             };
         },
         // *** Toggle Schedule Modal

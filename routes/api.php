@@ -30,10 +30,7 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/update-course-outline','ApiController\Course\CourseController@updateCourseOutline');
     Route::post('/assign-courses','ApiController\Program\ProgramController@AssignCourses');
     Route::post('/assign-course-to-program','ApiController\Program\ProgramController@AssignCourseToProgram');
-   
 
-  
-   
     //  program routes start
     Route::post('/insert-program','ApiController\Program\ProgramController@insertProgram');
     Route::post('/get-program','ApiController\Program\ProgramController@getProgram');
@@ -51,12 +48,11 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/get-blood-group','ApiController\StudentRegistration\RegistrationController@getBloodGroup');
   Route::post('/all-states','ApiController\StudentRegistration\RegistrationController@getStates');
     Route::post('/register-student','ApiController\StudentRegistration\RegistrationController@registerStudent');
-    
-    
-    
+    Route::post('/get-all-time-table','ApiController\TimeTable\TimeTableController@getAllTimeTable');
+    Route::post('/check-time-table','ApiController\TimeTable\TimeTableController@checkTimeTable');
     // register student End
-
-
+    Route::post('/get-class-room-detail','ApiController\ClassRoom\ClassRoomController@getAllClassRoom');
+    Route::post('/insert-time-table','ApiController\TimeTable\TimeTableController@InserTimeTable');
     // *** Route Group End ***//
 });
 

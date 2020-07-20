@@ -39,11 +39,11 @@
                     <tr>
                         <td class="day">Monday</td>
                         <td v-for="(timeTable,index) in mondaySchedule" :key="index">
-                            <span class="class-room">{{ timeTable.classRoom | capitalize }}</span>
+                            <span class="class-room">{{ timeTable.classRoom_name | capitalize }}</span>
                             <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime | capitalize }}</span>
                             <br />
                             <span class="teacher-name text-center">
-                                {{ timeTable.subject | capitalize }}
+                                {{ timeTable.subject_name | capitalize }}
                                 <br />
                             </span>
                             <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
@@ -59,11 +59,11 @@
                     <tr>
                         <td class="day">Tuesday</td>
                         <td v-for="(timeTable,index) in tuesdaySchedule" :key="index">
-                            <span class="class-room">{{ timeTable.classRoom | capitalize }}</span>
+                            <span class="class-room">{{ timeTable.classRoom_name | capitalize }}</span>
                             <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime | capitalize }}</span>
                             <br />
                             <span class="teacher-name text-center">
-                                {{ timeTable.subject | capitalize }}
+                                {{ timeTable.subject_name | capitalize }}
                                 <br />
                             </span>
                             <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
@@ -79,11 +79,11 @@
                     <tr>
                         <td class="day">Wednesday</td>
                         <td v-for="(timeTable,index) in wednesdaySchedule" :key="index">
-                            <span class="class-room">{{ timeTable.classRoom | capitalize }}</span>
+                            <span class="class-room">{{ timeTable.classRoom_name | capitalize }}</span>
                             <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime | capitalize }}</span>
                             <br />
                             <span class="teacher-name text-center">
-                                {{ timeTable.subject | capitalize }}
+                                {{ timeTable.subject_name | capitalize }}
                                 <br />
                             </span>
                             <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
@@ -99,11 +99,11 @@
                     <tr>
                         <td class="day">Thursday</td>
                         <td v-for="(timeTable,index) in thursdaySchedule" :key="index">
-                            <span class="class-room">{{ timeTable.classRoom | capitalize }}</span>
+                            <span class="class-room">{{ timeTable.classRoom_name | capitalize }}</span>
                             <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime | capitalize }}</span>
                             <br />
                             <span class="teacher-name text-center">
-                                {{ timeTable.subject | capitalize }}
+                                {{ timeTable.subject_name | capitalize }}
                                 <br />
                             </span>
                             <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
@@ -119,11 +119,11 @@
                     <tr>
                         <td class="day">Friday</td>
                         <td v-for="(timeTable,index) in fridaySchedule" :key="index">
-                            <span class="class-room">{{ timeTable.classRoom | capitalize }}</span>
+                            <span class="class-room">{{ timeTable.classRoom_name | capitalize }}</span>
                             <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime | capitalize }}</span>
                             <br />
                             <span class="teacher-name text-center">
-                                {{ timeTable.subject | capitalize }}
+                                {{ timeTable.subject_name | capitalize }}
                                 <br />
                             </span>
                             <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
@@ -140,11 +140,11 @@
                     <tr>
                         <td class="day">Saturday</td>
                         <td v-for="(timeTable,index) in saturdaySchedule" :key="index">
-                            <span class="class-room">{{ timeTable.classRoom | capitalize }}</span>
+                            <span class="class-room">{{ timeTable.classRoom_name | capitalize }}</span>
                             <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime }}</span>
                             <br />
                             <span class="teacher-name text-center">
-                                {{ timeTable.subject | capitalize }}
+                                {{ timeTable.subject_name | capitalize }}
                                 <br />
                             </span>
                             <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
@@ -161,7 +161,7 @@
         </v-simple-table>
         <!-- Time Table -->
         <div>
-            <v-btn class="text-center save-btn" color="primary">Save Time Table</v-btn>
+            <v-btn @click="insertFinalTimeTable()" class="text-center save-btn" color="primary">Save Time Table</v-btn>
         </div>
     </div>
 
@@ -174,7 +174,7 @@
     <timeTableDetail />
 
     <!-- Time Table detail Modal & 2 props-->
-    <TimeTableModal :editData="EditTimeTableData" :updateBtn="updateBtn" />
+    <TimeTableModal :editData="EditTimeTableData" :scheduleHead="scheduleHead" :updateBtn="updateBtn" />
 </div>
 </template>
 
@@ -216,16 +216,19 @@ export default {
         });
         // *** Add time table Schedule in array
         EventBus.$on("timeTableData", data => {
+
             let id = this.randStr(6); //Genrate Random String
             // *** Push in array
             this.timeTableData.push({
                 id: id,
                 day: data.day,
                 teacher: data.teacher,
-                subject: data.subject,
+                subject_id: data.subject_id,
+                subject_name: data.subject_name,
                 startingtime: data.startingtime,
                 endingTime: data.endingTime,
-                classRoom: data.classRoom
+                classRoom_name: data.classRoom_name,
+                classRoom_id: data.classRoom_id,
             });
         });
     },
@@ -255,6 +258,17 @@ export default {
     },
     // Methods Object
     methods: {
+        insertFinalTimeTable: function () {
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            axios.post(process.env.MIX_APP_URL+'/insert-time-table',this.timeTableData,{
+                headers:headers
+            })
+            .then(res=>console.log(res.data))
+            .catch(err =>{})
+        },
         // *** Delete Entry In array
         delEntry: function (id) {
             this.timeTableData = this.timeTableData.filter(data => data.id != id);
@@ -277,6 +291,12 @@ export default {
     },
     // Reactive Property
     computed: {
+        userAuth: function () {
+            return cryptoJSON.decrypt(
+                JSON.parse(localStorage.getItem("adminLogin")),
+                "ums"
+            );
+        },
         // *** Filter Monday Data in Root Array
         mondaySchedule: function () {
             return this.timeTableData.filter(data => data.day == "Monday");

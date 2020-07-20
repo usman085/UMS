@@ -7,11 +7,12 @@
                     <!-- If editRowMessage is tru then update else Add A New   -->
                     <span class="headline">{{ editRowMessage ? 'Update ' :' Add A New' }} Program</span>
                 </v-card-title>
-                <v-card-text>
-                    <v-container>
-                        <ValidationObserver ref="observer">
+                <ValidationObserver ref="observer" v-slot="{invalid}">
                             <!-- Form To add or Update Data -->
                             <v-form ref="form">
+                <v-card-text>
+                    <v-container>
+                        
                                 <v-row>
                                     <v-col cols="12">
                                         <ValidationProvider name="Program Title" rules="required|alpha_spaces" v-slot="{ errors }">
@@ -37,9 +38,7 @@
                                         </ValidationProvider>
                                     </v-col>
                                 </v-row>
-                            </v-form>
-                            <!-- Form To add or Update Dataa -->
-                        </ValidationObserver>
+
                     </v-container>
                     <small>*indicates required field</small>
                 </v-card-text>
@@ -50,6 +49,9 @@
                     <v-btn small :disabled="invalid" v-if="!editRowMessage" color="primary" @click="addProgram()">Add</v-btn>
                     <v-btn small :disabled="invalid" v-else color="primary" @click="editProgram()">Update</v-btn>
                 </v-card-actions>
+                </v-form>
+                <!-- Form To add or Update Dataa -->
+                </ValidationObserver>
             </v-card>
         </v-dialog>
     </v-row>
