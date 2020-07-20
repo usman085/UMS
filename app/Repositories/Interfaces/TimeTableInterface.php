@@ -2,8 +2,11 @@
 namespace App\Repositories\Interfaces;
 
 interface TimeTableInterface
- {
+{
 
-    public function getAllTimeTable();
-       public function checkTimeTable($request);
+   public function getAllTimeTable();
+
+   public function checkTimeTable($request);
+
+   public function inserTimeTable($request);
 }

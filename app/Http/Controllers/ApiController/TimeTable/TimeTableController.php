@@ -9,12 +9,12 @@ use App\Repositories\Interfaces\TimeTableInterface;
 
 class TimeTableController extends Controller
 {
-    protected $timeTable;
+    protected $timeTableRepository;
     public function __construct(TimeTableInterface $TimeTableInterface){
-        $this->timeTable=$TimeTableInterface;
+        $this->timeTableRepository=$TimeTableInterface;
     }
     public function getAllTimeTable(){
-        return $this->timeTable->getAllTimeTable();
+        return $this->timeTableRepository->getAllTimeTable();
     }
     public function checkTimeTable(Request $request)
     {
@@ -29,11 +29,11 @@ class TimeTableController extends Controller
         if ( $validator->fails() ) {
             return response( ['errors'=>$validator->errors()->all()], 422 );
         }
-        return $this->timeTable->checkTimeTable($request);
+        return $this->timeTableRepository->checkTimeTable($request);
     }
 
     public function InserTimeTable(Request $request){
-        
+        return $this->timeTableRepository->inserTimeTable($request);   
     }
     
 }

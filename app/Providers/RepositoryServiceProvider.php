@@ -24,6 +24,10 @@ class RepositoryServiceProvider extends ServiceProvider
                 'App\Repositories\Interfaces\TimeTableInterface',
                 'App\Repositories\TimeTableRepository');
 
+                $this->app->bind(
+                    'App\Repositories\Interfaces\TimeTableDetailInterface',
+                    'App\Repositories\TimeTableDetailRepository');
+
         $this->app->bind(
                 'App\Repositories\Interfaces\CourseInterface',
                 'App\Repositories\CourseRepository');
