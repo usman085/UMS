@@ -263,7 +263,12 @@ export default {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token
             };
-            axios.post(process.env.MIX_APP_URL+'/insert-time-table',this.timeTableData,{
+            axios.post(process.env.MIX_APP_URL+'/insert-time-table',{
+                 program: this.scheduleHead.program,
+                semester:  this.scheduleHead.semester,
+                shift: this.scheduleHead.shift,
+                timeTableDetail:JSON.stringify(this.timeTableData)
+            },{
                 headers:headers
             })
             .then(res=>console.log(res.data))

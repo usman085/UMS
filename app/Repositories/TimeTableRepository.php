@@ -5,7 +5,7 @@ namespace  App\Repositories;
 use App\Repositories\Interfaces\TimeTableInterface;
 use App\Models\TimeTable;
 use App\Repositories\Interfaces\TimeTableDetailInterface;
-
+use Auth;
 class TimeTableRepository implements TimeTableInterface {
     protected $timeTableDetail;
 
@@ -31,7 +31,12 @@ class TimeTableRepository implements TimeTableInterface {
     }
 
     public function inserTimeTable( $request ) {
-        $timeTable=1;
+        $timeTable=TimeTable::create([
+            'program_id'=>$request->program,
+            'shift_id'=>$request->shift,
+            'semester'=>$request->semester,
+            'add_by'=>Auth::user()->id
+        ]);
         return $this->timeTableDetail->InsertTimeTableDetail($request,$timeTable);
     }
 }

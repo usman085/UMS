@@ -17,9 +17,10 @@ class CreateTimeTableDetailsTable extends Migration
             $table->bigIncrements('id');
             $table->string('day');
             $table->unsignedBigInteger('course_id');
-            $table->unsignedBigInteger('teacher');
+            $table->string('teacher');
             $table->unsignedBigInteger('class_room_id');
             $table->time('startingTime');
+            $table->unsignedBigInteger('time_table_id');
             $table->time('endingTime');
             $table->timestamps();
         });
