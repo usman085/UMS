@@ -7,9 +7,7 @@
         <v-main>
             <v-container>
                 <!-- Dynamic Router Render -->
-
                 <router-view></router-view>
-
                 <!-- Dynamic Router Render -->
             </v-container>
         </v-main>

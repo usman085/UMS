@@ -24,7 +24,7 @@ class TimeTableRepository implements TimeTableInterface {
     }
 
     public function checkTimeTable( $request ) {
-        $timeTables = TimeTable::where( 'program_id', $request->progam )->where( 'shift_id', $request->shift )
+        $timeTables = TimeTable::where( 'program_id', $request->program )->where( 'shift_id', $request->shift )
         ->where( 'semester', $request->semester )->exists();
         return response( ['timeTables'=>$timeTables], 200 );
 
