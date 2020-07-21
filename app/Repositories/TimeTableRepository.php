@@ -15,7 +15,7 @@ class TimeTableRepository implements TimeTableInterface {
     }
 
     public function getAllTimeTable() {
-        $timeTables = TimeTable::all();
+        $timeTables = TimeTable::with('shift','program')->get();
         if ( $timeTables ) {
             return response( ['timeTables'=>$timeTables], 200 );
         } else {

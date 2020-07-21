@@ -22,16 +22,23 @@
                     </thead>
                     <tbody>
                         <template v-if="$store.state.allTimeTable.length > 0">
-                            <tr>
-                                <td>BSSE</td>
-                                <td>6th</td>
-                                <td>Moring</td>
+                            <tr v-for="timeTable in $store.state.allTimeTable " :key="timeTable.id">
+                                <v-tooltip bottom>
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <td v-bind="attrs" v-on="on">{{ timeTable.program.program_short_title }}</td>
+                                    </template>
+                                    <span>{{timeTable.program.program_title}}</span>
+                                </v-tooltip>
+
+                                <td>{{ timeTable.semester | numberToNth }}</td>
+                                <td>{{ timeTable.shift.shift}}</td>
 
                                 <td>
-                                    <v-chip color="green" class="status-chip">Public</v-chip>
+                                    <v-chip v-if="timeTable.status" color="green" class="status-chip">Public</v-chip>
+                                    <v-chip v-else color="warn" class="status-chip">Private</v-chip>
                                 </td>
-                                <td>Monday 20,2020</td>
-                                <td>Monday 22,202</td>
+                                <td>{{ timeTable.created_at }}</td>
+                                <td>{{ timeTable.updated_at }}</td>
                                 <td>
                                     <v-menu offset-y>
                                         <template v-slot:activator="{ on, attrs }">
@@ -102,6 +109,7 @@ export default {
                     headers: headers
                 })
                 .then((res) => {
+                    console.log(res);
                     this.$store.dispatch("timeTable", res.data.timeTables);
                     this.message = false;
                 })
