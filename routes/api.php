@@ -50,6 +50,8 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/register-student','ApiController\StudentRegistration\RegistrationController@registerStudent');
     Route::post('/get-all-time-table','ApiController\TimeTable\TimeTableController@getAllTimeTable');
     Route::post('/check-time-table','ApiController\TimeTable\TimeTableController@checkTimeTable');
+    Route::post('/time-table-data','ApiController\TimeTable\TimeTableController@TimeTableDataById');
+    Route::post('//time-table-status','ApiController\TimeTable\TimeTableController@changeTimeTableStatus');
     // register student End
     Route::post('/get-class-room-detail','ApiController\ClassRoom\ClassRoomController@getAllClassRoom');
     Route::post('/insert-time-table','ApiController\TimeTable\TimeTableController@InserTimeTable');

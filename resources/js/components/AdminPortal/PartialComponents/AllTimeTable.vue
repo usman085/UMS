@@ -45,13 +45,13 @@
                                             <v-icon color="primary" v-bind="attrs" v-on="on">mdi-dots-vertical</v-icon>
                                         </template>
                                         <v-list>
-                                            <v-list-item :to="{name :'PreviewTimeTable'}">
+                                            <v-list-item :to="{name :'PreviewTimeTable', params: { id:timeTable.id,slug:timeTable.program.program_title } }">
                                                 <v-list-item-title>Preview</v-list-item-title>
                                             </v-list-item>
                                             <v-list-item :to="{name:'EditTimeTable'}">
                                                 <v-list-item-title>Modify</v-list-item-title>
                                             </v-list-item>
-                                            <v-list-item>
+                                            <v-list-item @click="changeStatus(timeTable.id,timeTable.status)">
                                                 <v-list-item-title>Change Status</v-list-item-title>
                                             </v-list-item>
                                             <v-list-item>
@@ -76,15 +76,34 @@
             </v-simple-table>
         </v-card-text>
     </v-card>
+     <v-snackbar
+      v-model="snackbar">
+      {{ text }}
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="primary"
+          text
+          top
+          right
+          text-color="white"
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
 </div>
 </template>
-
+ 
 <script>
 export default {
     name: "AllTimeTable",
     data() {
         return {
-            message: true
+            message: true,
+            snackbar:false,
+            text:''
         }
     },
     computed: {
@@ -97,6 +116,20 @@ export default {
             this.$router.push({
                 name: "createTimeTable"
             });
+        },
+        changeStatus:function(id,status){
+             // Headers are required for authentication
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            axios.post(process.env.MIX_APP_URL+'/time-table-status',{'id':id,'status':status},{headers:headers})
+            .then(res=>{
+                this.snackbar=true;
+                this.text='Time Table Change Successfully'
+                this.getAllTimeTable();
+            })
+            .catch(err=>err);
         },
         getAllTimeTable: function () {
             // Headers are required for authentication

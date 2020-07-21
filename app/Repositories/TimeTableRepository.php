@@ -29,7 +29,19 @@ class TimeTableRepository implements TimeTableInterface {
         return response( ['timeTables'=>$timeTables], 200 );
 
     }
-
+    public function TimeTableDataById($id){
+        $timeTable=TimeTable::with('program','TimeTableDetail','TimeTableDetail.course','TimeTableDetail.classRoom')->where('id',$id)->get();
+        
+        return response( ['timeTable'=>$timeTable], 200 );
+    }
+    public function changeTimeTableStatus($id,$status){
+        $timeTables = TimeTable::where('id',$id)->update(['status'=>!$status]);
+        if ( $timeTables ) {
+            return response( ['message'=>'Status Update'], 200 );
+        } else {
+            return response( ['message'=>'Error'], 422 );
+        }
+    }
     public function inserTimeTable( $request ) {
         $timeTable=TimeTable::create([
             'program_id'=>$request->program,

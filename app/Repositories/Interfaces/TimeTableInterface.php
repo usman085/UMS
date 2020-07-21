@@ -9,4 +9,8 @@ interface TimeTableInterface
    public function checkTimeTable($request);
 
    public function inserTimeTable($request);
+
+   public function TimeTableDataById($id);
+
+   public function changeTimeTableStatus($id,$status);
 }

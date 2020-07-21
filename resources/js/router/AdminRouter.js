@@ -137,7 +137,7 @@ const AdminRoutes = [{
                     name: 'AllTimeTable'
                 },
                 {
-                    path: 'PreviewTimeTable',
+                    path: 'PreviewTimeTable/:id/:slug',
                     component: PreviewTimeTable,
                     name: 'PreviewTimeTable'
                 },

@@ -16,11 +16,13 @@ class TimeTable extends Model
         return $this->belongsTo('App\Models\Shift');
     }
     public function getCreatedAtAttribute($value){
-
       return  \Carbon\Carbon::createFromTimeStamp(strtotime($value))->diffForHumans();
-       
     }
     public function getUpdatedAtAttribute($value){
         return  \Carbon\Carbon::createFromTimeStamp(strtotime($value))->diffForHumans(); 
       }
+      public function TimeTableDetail(){
+        return $this->hasMany('App\Models\TimeTableDetail');
+    }
+    
 }
