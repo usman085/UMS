@@ -4,15 +4,13 @@
         <!-- Side Bar Component Render -->
         <SideBar></SideBar>
         <!-- Side Bar Component Render -->
-        <v-content>
+        <v-main>
             <v-container>
                 <!-- Dynamic Router Render -->
-
                 <router-view></router-view>
-
                 <!-- Dynamic Router Render -->
             </v-container>
-        </v-content>
+        </v-main>
     </v-app>
 </div>
 </template>

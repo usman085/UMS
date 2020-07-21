@@ -39,7 +39,7 @@
                                                         <td>{{item.course_title}}</td>
                                                         <td>{{item.credit_hours}}</td>
                                                         <td>
-                                                            <v-chip v-if="item.course_outline" text-color="white" color="red">
+                                                            <v-chip v-if="!item.course_outline" text-color="white" color="red">
                                                                 <span>No Avaiable</span>
                                                             </v-chip>
                                                             <v-chip v-else color="primary" text-color="white">
@@ -83,7 +83,7 @@
                                                         <td>{{item.course_title}}</td>
                                                         <td>{{item.credit_hours}}</td>
                                                         <td>
-                                                            <v-chip v-if="item.course_outline" text-color="white" color="red">
+                                                            <v-chip v-if="!item.course_outline" text-color="white" color="red">
                                                                 <span>No Avaiable</span>
                                                             </v-chip>
                                                             <v-chip v-else color="primary" text-color="white">
@@ -126,7 +126,7 @@
                                                         <td>{{item.course_title}}</td>
                                                         <td>{{item.credit_hours}}</td>
                                                         <td>
-                                                            <v-chip v-if="item.course_outline" text-color="white" color="red">
+                                                            <v-chip v-if="!item.course_outline" text-color="white" color="red">
                                                                 <span>No Avaiable</span>
                                                             </v-chip>
                                                             <v-chip v-else color="primary" text-color="white">
@@ -162,7 +162,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <template v-if="AssignCourses.semester4.length > 0">
+                                                <template v-if="!AssignCourses.semester4.length > 0">
                                                     <tr v-for="(item,index) in AssignCourses.semester4" :key="item.id">
                                                         <td>{{ index+1 }}</td>
                                                         <td>{{item.course_code}}</td>
@@ -212,7 +212,7 @@
                                                         <td>{{item.course_title}}</td>
                                                         <td>{{item.credit_hours}}</td>
                                                         <td>
-                                                            <v-chip v-if="item.course_outline" text-color="white" color="red">
+                                                            <v-chip v-if="!item.course_outline" text-color="white" color="red">
                                                                 <span>No Avaiable</span>
                                                             </v-chip>
                                                             <v-chip v-else color="primary" text-color="white">
@@ -255,7 +255,7 @@
                                                         <td>{{item.course_title}}</td>
                                                         <td>{{item.credit_hours}}</td>
                                                         <td>
-                                                            <v-chip v-if="item.course_outline" text-color="white" color="red">
+                                                            <v-chip v-if="!item.course_outline" text-color="white" color="red">
                                                                 <span>No Avaiable</span>
                                                             </v-chip>
                                                             <v-chip v-else color="primary" text-color="white">
@@ -298,7 +298,7 @@
                                                         <td>{{item.course_title}}</td>
                                                         <td>{{item.credit_hours}}</td>
                                                         <td>
-                                                            <v-chip v-if="item.course_outline" text-color="white" color="red">
+                                                            <v-chip v-if="!item.course_outline" text-color="white" color="red">
                                                                 <span>No Avaiable</span>
                                                             </v-chip>
                                                             <v-chip v-else color="primary" text-color="white">
@@ -341,7 +341,7 @@
                                                         <td>{{item.course_title}}</td>
                                                         <td>{{item.credit_hours}}</td>
                                                         <td>
-                                                            <v-chip v-if="item.course_outline" text-color="white" color="red">
+                                                            <v-chip v-if="!item.course_outline" text-color="white" color="red">
                                                                 <span>No Avaiable</span>
                                                             </v-chip>
                                                             <v-chip v-else color="primary" text-color="white">

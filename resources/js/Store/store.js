@@ -36,7 +36,7 @@ const store = new Vuex.Store({
         NotificationEditorModal: false,
         senderSelect: '',
         overlay: false,
-
+        allTimeTable: [],
         days: [
             "Monday",
             "Tuesday",
@@ -60,6 +60,9 @@ const store = new Vuex.Store({
         },
         allProgram(state, data) {
             state.allProgram = data;
+        },
+        timeTable(state, data) {
+            state.allTimeTable = data;
         },
         allCourses(state, data) {
             state.allCourses = data;
@@ -128,6 +131,9 @@ const store = new Vuex.Store({
         },
         allProgram(context, data) {
             context.commit('allProgram', data);
+        },
+        timeTable(context, data) {
+            context.commit('timeTable', data);
         },
         allCourses(context, data) {
             context.commit('allCourses', data);
