@@ -114,6 +114,7 @@ export default {
   methods: {
     // Open The Model To Add Data
     AddExamModalToggle: function() {
+      
       this.$store.dispatch("AddExamModalToggle");
     },
     // Edit Data Function Is use to Edit Row Data

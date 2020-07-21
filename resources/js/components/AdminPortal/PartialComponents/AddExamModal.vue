@@ -11,7 +11,7 @@
                 <v-window v-model="step">
                     <v-window-item :value="1">
                         <v-card-text>
-                            <v-select :items="program" v-model="scheduleHead.program" label="Select Program"></v-select>
+                            <v-select :items="program" v-model="scheduleHead.program"  item-text="program_title" item-value="id" label="Select Program"></v-select>
 
                             <v-select :items="semester" v-model="scheduleHead.semester" label="Select Semester"></v-select>
                         </v-card-text>
@@ -19,7 +19,7 @@
 
                     <v-window-item :value="2">
                         <v-card-text>
-                            <v-select :items="shift" v-model="scheduleHead.shift" label="Select Shift"></v-select>
+                            <v-select :items="shift" v-model="scheduleHead.shift" item-text="Shift" item-value="id" label="Select Shift"></v-select>
                         </v-card-text>
                     </v-window-item>
 
@@ -58,10 +58,10 @@ export default {
     data: function () {
         return {
             step: 1,
-            program: ["BSSE", "BSIT"],
-            semester: ["1", "2", "3", "4", "5"],
-            shift: ["Morning", "Evening"],
-            section: ["A", "B"],
+            program: [],
+            semester: ["1", "2", "3", "4", "5","6","7","8" ],
+            shift: [],
+
             //  returning data selected
             scheduleHead: {
                 program: "",
@@ -71,6 +71,42 @@ export default {
         };
     },
     methods: {
+
+        // getting shift from Database
+        getShift: function () {
+            // Headers are defined for authentication
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            // send request to Api Route
+            axios
+                .post(process.env.MIX_APP_URL + "/get-shift", "", {
+                    headers: headers
+                })
+                .then(response => {
+                    this.shift = response.data.data;
+                })
+                .catch(error => {});
+        },
+        // getting program from Database
+        getProgram: function () {
+            // Headers are defined for authentication
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            // send request to Api Route
+            axios
+                .post(process.env.MIX_APP_URL + "/get-all-program", "", {
+                    headers: headers
+                })
+                .then(response => {
+                    this.program = response.data.data;
+                })
+                .catch(error => {});
+        },
+
         // Open The Add Exam Routine Modal
         AddExamRoutineModalToggle: function () {
             // Store Selected Data from Model in Exam Routine Detail   
@@ -82,10 +118,22 @@ export default {
         }
     },
     computed: {
+        //User Auth function authorizing Admin & use in Header
+        userAuth: function () {
+            return cryptoJSON.decrypt(
+                JSON.parse(localStorage.getItem("adminLogin")),
+                "ums"
+            );
+        },
 
         AddExamModal: function () {
             return this.$store.state.AddExamModal;
         }
+    },
+    created() {
+
+        this.getProgram();
+        this.getShift();
     }
 };
 </script>

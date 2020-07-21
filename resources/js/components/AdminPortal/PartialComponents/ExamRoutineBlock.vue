@@ -21,9 +21,9 @@
             </thead>
             <tbody>
               <tr>
-                <td>BSSE</td>
-                <td>4</td>
-                <td>Morning</td>
+                <td>{{ examRoutine }}</td>
+                <td></td>
+                <td></td>
 
                 <td>
                   <v-menu offset-y>
@@ -63,12 +63,48 @@
 <script>
 export default {
   name: "ExamRoutineBlock",
+  data(){
+    return{
+      examRoutine:[],
+    }
+  },
   methods: {
+     // getting program from Database
+        getExamRoutine: function () {
+            // Headers are defined for authentication
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            // send request to Api Route
+            axios
+                .post(process.env.MIX_APP_URL + "/get-exam-routine", "", {
+                    headers: headers
+                })
+                .then(response => {
+                  console.log(response);
+                    this.examRoutine = response.data.data;
+                })
+                .catch(error => {});
+        },
+
     addExamRoutine: function() {
       this.$router.push({
         name: "AddExamRoutine"
       });
     }
+  },
+  computed:{
+     //User Auth function authorizing Admin & use in Header
+        userAuth: function () {
+            return cryptoJSON.decrypt(
+                JSON.parse(localStorage.getItem("adminLogin")),
+                "ums"
+            );
+        },
+  },
+  created(){
+    this.getExamRoutine();
   }
 };
 </script>

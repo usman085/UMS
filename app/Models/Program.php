@@ -36,4 +36,13 @@ class Program extends Model
     {
         return $this->hasMany('App\Models\StudentOfficialDetail');
     }
+
+    /**
+    * Program has Many relationship with  Exam Routine    * 
+    *
+    */
+    public function examRoutine()
+    {
+        return $this->hasMany('App\Models\ExamRoutine');
+    }
 }

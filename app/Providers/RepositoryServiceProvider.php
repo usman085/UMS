@@ -28,6 +28,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
                 'App\Repositories\Interfaces\StudentRegisterInterface',
                 'App\Repositories\StudentRegisterRepository');
+        
+        $this->app->bind(
+                'App\Repositories\Interfaces\ExamRoutineInterface',
+                'App\Repositories\ExamRoutineRepository');
     }
 
     /**

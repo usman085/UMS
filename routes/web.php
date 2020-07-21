@@ -14,11 +14,11 @@
 
 // *** Index Route Render Vue App
 
-route::get('/get-data',function(){
-    $data = App\Models\Guardian::with('studentPersonalDetail')->get();
+// route::get('/get-data',function(){
+//     $data = App\Models\Guardian::with('studentPersonalDetail')->get();
     
-   return $data;
-});
+//    return $data;
+// });
 
 Route::get('/{any}', function(){
     return view('index');
