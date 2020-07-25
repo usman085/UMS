@@ -26,7 +26,8 @@ class TimeTableRepository implements TimeTableInterface {
 
     public function checkTimeTable( $request ) {
         $timeTables = TimeTable::where( 'program_id', $request->program )->where( 'shift_id', $request->shift )
-        ->where( 'semester', $request->semester )->exists();
+        ->where( 'semester', $request->semester )->get();
+
         return response( ['timeTables'=>$timeTables], 200 );
 
     }
@@ -44,21 +45,20 @@ class TimeTableRepository implements TimeTableInterface {
     }
     public function UpdateTimeTable($request){
         $createTimeTable=null;
-        $Remove=null;
-        foreach($request->all() as $data){
+        $Remove=TimeTableDetail::where('time_table_id',$request->time_table_id)->delete();
+        foreach($request->timeTableData as $data){
            
-            $Remove=TimeTableDetail::where('time_table_id',$data['time_table_id'])->delete();
-
             $createTimeTable=TimeTableDetail::create([
                 'day'=>$data['day'],
                 'course_id'=>$data['course_id'],
                 'teacher'=>$data['teacher'],
                 'startingTime'=>$data['startingTime'],
                 'endingTime'=>$data['endingTime'],
-                'class_room_id'=>$data['classRoom_id'],
+                'class_room_id'=>$data['class_room_id'],
                 'time_table_id'=>$data['time_table_id']
             ]);
         }
+       return $request->all();
         if ( $createTimeTable != null ) {
             return response( ['message'=>'Status Update'], 200 );
         } else {

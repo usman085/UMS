@@ -1,16 +1,25 @@
 <template>
 <div class="create-time-table-wrapper">
-    <v-card>
-        <span text-align="left" class="back-btn">
-            <v-icon @click="$router.push({name:'allTimeTable'})">mdi-arrow-left</v-icon>
-        </span>
-        <v-card-title class=" time-header">
-            <b class="tmeTableHead text-center">Daily Time Table</b></v-card-title>
-        <!-- Card Sub title On Inserted Object -->
-        <v-card-subtitle>test</v-card-subtitle>
-    </v-card>
+    <v-card> 
+       <v-card-title>
+            <span class="back-btn">
+                <v-icon @click="$router.push({name:'AllTimeTable'})">mdi-arrow-left</v-icon>
+            </span>
+            Time Table</v-card-title>
+        <v-card-subtitle>
+            <span v-if="program == null">
+                <v-progress-linear indeterminate color="cyan"></v-progress-linear>
+            </span>
+            <span v-else> {{program.program.program_title}} - Semester {{ program.semester | numberToNth }} </span>
+        </v-card-subtitle>
+        <v-divider></v-divider>
     <!-- Conditional Rendering  -->
-    <div>
+    <v-card-text>
+      <div v-if="loading" class="text-center">
+                <v-progress-circular indeterminate :size="50" color="primary"></v-progress-circular>
+            </div>
+            <div v-else>
+                <div v-if="timeTableData.length > 0"> 
         <!-- Time Table Start -->
         <v-simple-table class="mt-5 elevation-2">
             <template>
@@ -145,18 +154,23 @@
                 </tbody>
             </template>
         </v-simple-table>
+        </div>
+         <div v-else>
+                    <p>Noting to Show</p>
+                </div>
         <!-- Time Table -->
         <div>
             <v-btn class="text-center save-btn" color="primary" @click="updateTimeTable()">Update Time Table</v-btn>
         </div>
     </div>
-
+    </v-card-text>
+</v-card>
     <!-- Time Table Steps Modal -->
     <timeTableDetail />
 
     <!-- Time Table detail Modal & 2 props-->
     <TimeTableModal :editData="EditTimeTableData" :updateBtn="updateBtn" />
-
+        <pacer :message="tableMessage"/>
 </div>
 </template>
 
@@ -166,12 +180,13 @@ import TimeTableModal from './createTimeTableModal';
 import timeTableDetail from './TimeTableDetail';
 // *** Event Bus
 import EventBus from '../../../EventBus/eventBus';
-
+import pacer from '../../CommonGobalComponent/Pacer';
 export default {
     name: 'EditTimeTable',
     components: {
         TimeTableModal,
-        timeTableDetail
+        timeTableDetail,
+        pacer
     }, //Register Components
     // Mounted Hook
     mounted() {
@@ -189,7 +204,7 @@ export default {
                     item.startingTime = data.startingTime,
                     item.endingTime = data.endingTime,
                     item.class_room.class_room = data.classRoom_name,
-                    item.classRoom_id = data.classRoom_id,
+                    item.class_room_id = data.class_room_id,
                     item.time_table_id=this.time_table_id
                 }
             });
@@ -215,7 +230,7 @@ export default {
                 startingTime: data.startingTime,
                 endingTime: data.endingTime,
                 class_room:{class_room: data.classRoom_name},
-                classRoom_id: data.classRoom_id,
+                class_room_id: data.class_room_id,
                 time_table_id:this.time_table_id
             });
 
@@ -224,6 +239,7 @@ export default {
     // *** Data Object
     data: function () {
         return {
+            
             loading: true,
             program: null,
             timeTableData: [],
@@ -239,11 +255,11 @@ export default {
                 startingTime: '',
                 endingTime: '',
                 classRoom_name: '',
-                classRoom_id: '',
+                class_room_id: '',
                 time_table_id:''
             },
             // *** Root Time Table Array
-
+        tableMessage:'',
             //*** Time Table Detail
             scheduleHead: {
                 program: '',
@@ -257,13 +273,21 @@ export default {
     // Methods Object
     methods: {
         updateTimeTable:function(){
+            this.tableMessage="Updating Time Table......";
+            this.$store.dispatch('overlay');
              // Headers are required for authentication
             let headers = {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token
             };
-             axios.post(process.env.MIX_APP_URL + '/update-time-table-data',this.timeTableData,{headers: headers})
-            .then(res=>console.log(res))
+             axios.post(process.env.MIX_APP_URL + '/update-time-table-data',{
+                 'timeTableData':this.timeTableData,
+                 'time_table_id':this.time_table_id},{headers: headers})
+            .then(res=>{
+                this.tableMessage="";
+            this.$store.dispatch('overlay');
+             this.$router.push({name :'PreviewTimeTable', params: { id:this.time_table_id,slug:'Updated Time Table' } })
+            })
             .catch(err=>{})
         },
         getTImeTableData: function (id) {
@@ -281,7 +305,7 @@ export default {
                 .then((res) => {
                     this.timeTableData = res.data.timeTable[0].time_table_detail;
                     this.time_table_id=this.$route.params.id;
-                    console.log(this.timeTableData);
+                   
                     this.program = res.data.timeTable[0];
                     this.loading = false;
                 })
@@ -304,7 +328,7 @@ export default {
                 this.EditTimeTableData.startingTime = filterRow[0].startingTime,
                 this.EditTimeTableData.endingTime = filterRow[0].endingTime,
                 this.EditTimeTableData.classRoom_name = filterRow[0].class_room.class_room,
-                this.EditTimeTableData.classRoom_id = filterRow[0].class_room_id,
+                this.EditTimeTableData.class_room_id = filterRow[0].class_room_id,
                 this.EditTimeTableData.time_table_id=this.time_table_id
                 this.updateBtn = true;
             this.$store.dispatch('CreateTimeTableModal')

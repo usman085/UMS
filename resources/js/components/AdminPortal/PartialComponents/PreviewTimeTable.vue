@@ -17,7 +17,10 @@
             <div v-if="loading" class="text-center">
                 <v-progress-circular indeterminate :size="50" color="primary"></v-progress-circular>
             </div>
-            <v-simple-table v-else class="mt-5 elevation-2">
+            <div v-else>
+               
+                <div v-if="items.length > 0">
+                <v-simple-table  class="mt-5 elevation-2">
                 <template>
                     <thead>
                         <tr>
@@ -122,7 +125,13 @@
                         </tr>
                     </tbody>
                 </template>
-            </v-simple-table>
+               </v-simple-table>
+               </div>
+                <div v-else>
+                    <p>Noting to Show</p>
+                </div>
+            </div>
+          
         </v-card-text>
     </v-card>
 </div>
