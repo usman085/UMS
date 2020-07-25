@@ -13,7 +13,7 @@ class TimeTableDetailRepository implements TimeTableDetailInterface
             'day'=>$data['day'],
             'course_id'=>$data['subject_id'],
             'teacher'=>$data['teacher'],
-            'startingTime'=>$data['startingtime'],
+            'startingTime'=>$data['startingTime'],
             'endingTime'=>$data['endingTime'],
             'class_room_id'=>$data['classRoom_id'],
             'time_table_id'=>$timeTable->id

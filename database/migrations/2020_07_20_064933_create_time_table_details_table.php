@@ -23,6 +23,9 @@ class CreateTimeTableDetailsTable extends Migration
             $table->unsignedBigInteger('time_table_id');
             $table->time('endingTime');
             $table->timestamps();
+
+
+            $table->foreign('time_table_id')->references('id')->on('time_tables') ->onDelete('cascade');
         });
     }
 

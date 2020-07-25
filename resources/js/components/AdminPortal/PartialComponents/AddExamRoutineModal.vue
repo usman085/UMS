@@ -36,11 +36,11 @@
                                 </v-col>
                                 <v-col cols="6">
                                     <!-- time picker -->
-                                    <v-menu ref="menu" v-model="startingTimeModal" :close-on-content-click="false" :nudge-right="40" :return-value.sync="ExamRoutineData.startingtime" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+                                    <v-menu ref="menu" v-model="startingTimeModal" :close-on-content-click="false" :nudge-right="40" :return-value.sync="ExamRoutineData.startingTime" transition="scale-transition" offset-y max-width="290px" min-width="290px">
                                         <template v-slot:activator="{ on, attrs }">
-                                            <v-text-field v-model="ExamRoutineData.startingtime" label="Exam Start Time" prepend-icon readonly v-bind="attrs" v-on="on"></v-text-field>
+                                            <v-text-field v-model="ExamRoutineData.startingTime" label="Exam Start Time" prepend-icon readonly v-bind="attrs" v-on="on"></v-text-field>
                                         </template>
-                                        <v-time-picker v-if="startingTimeModal" v-model="ExamRoutineData.startingtime" full-width @click:minute="$refs.menu.save(ExamRoutineData.startingtime)"></v-time-picker>
+                                        <v-time-picker v-if="startingTimeModal" v-model="ExamRoutineData.startingTime" full-width @click:minute="$refs.menu.save(ExamRoutineData.startingTime)"></v-time-picker>
                                     </v-menu>
                                 </v-col>
 
@@ -133,7 +133,7 @@ export default {
                 day: this.editData.day,
                 date: this.editData.date,
                 endingTime: this.editData.endingTime,
-                startingtime: this.editData.startingtime,
+                startingTime: this.editData.startingTime,
                 classRoom: this.editData.classRoom
             };
         },

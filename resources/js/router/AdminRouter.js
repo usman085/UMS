@@ -142,7 +142,7 @@ const AdminRoutes = [{
                     name: 'PreviewTimeTable'
                 },
                 {
-                    path: 'EditTimeTable',
+                    path: 'EditTimeTable/:id/:slug',
                     component: EditTimeTable,
                     name: 'EditTimeTable'
                 },

@@ -40,7 +40,7 @@
                         <td class="day">Monday</td>
                         <td v-for="(timeTable,index) in mondaySchedule" :key="index">
                             <span class="class-room">{{ timeTable.classRoom_name | capitalize }}</span>
-                            <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime | capitalize }}</span>
+                            <span class="class-time">{{ timeTable.startingTime+'-'+timeTable.endingTime | capitalize }}</span>
                             <br />
                             <span class="teacher-name text-center">
                                 {{ timeTable.subject_name | capitalize }}
@@ -60,7 +60,7 @@
                         <td class="day">Tuesday</td>
                         <td v-for="(timeTable,index) in tuesdaySchedule" :key="index">
                             <span class="class-room">{{ timeTable.classRoom_name | capitalize }}</span>
-                            <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime | capitalize }}</span>
+                            <span class="class-time">{{ timeTable.startingTime+'-'+timeTable.endingTime | capitalize }}</span>
                             <br />
                             <span class="teacher-name text-center">
                                 {{ timeTable.subject_name | capitalize }}
@@ -80,7 +80,7 @@
                         <td class="day">Wednesday</td>
                         <td v-for="(timeTable,index) in wednesdaySchedule" :key="index">
                             <span class="class-room">{{ timeTable.classRoom_name | capitalize }}</span>
-                            <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime | capitalize }}</span>
+                            <span class="class-time">{{ timeTable.startingTime+'-'+timeTable.endingTime | capitalize }}</span>
                             <br />
                             <span class="teacher-name text-center">
                                 {{ timeTable.subject_name | capitalize }}
@@ -100,7 +100,7 @@
                         <td class="day">Thursday</td>
                         <td v-for="(timeTable,index) in thursdaySchedule" :key="index">
                             <span class="class-room">{{ timeTable.classRoom_name | capitalize }}</span>
-                            <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime | capitalize }}</span>
+                            <span class="class-time">{{ timeTable.startingTime+'-'+timeTable.endingTime | capitalize }}</span>
                             <br />
                             <span class="teacher-name text-center">
                                 {{ timeTable.subject_name | capitalize }}
@@ -120,7 +120,7 @@
                         <td class="day">Friday</td>
                         <td v-for="(timeTable,index) in fridaySchedule" :key="index">
                             <span class="class-room">{{ timeTable.classRoom_name | capitalize }}</span>
-                            <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime | capitalize }}</span>
+                            <span class="class-time">{{ timeTable.startingTime+'-'+timeTable.endingTime | capitalize }}</span>
                             <br />
                             <span class="teacher-name text-center">
                                 {{ timeTable.subject_name | capitalize }}
@@ -141,7 +141,7 @@
                         <td class="day">Saturday</td>
                         <td v-for="(timeTable,index) in saturdaySchedule" :key="index">
                             <span class="class-room">{{ timeTable.classRoom_name | capitalize }}</span>
-                            <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime }}</span>
+                            <span class="class-time">{{ timeTable.startingTime+'-'+timeTable.endingTime }}</span>
                             <br />
                             <span class="teacher-name text-center">
                                 {{ timeTable.subject_name | capitalize }}
@@ -199,11 +199,13 @@ export default {
                 this.updateBtn = false;
                 if (item.id == data.id) {
                     item.day = data.day;
-                    item.teacher = data.teacher;
-                    item.classRoom = data.classRoom;
-                    item.startingtime = data.startingtime;
-                    item.endingTime = data.endingTime;
-                    item.subject = data.subject;
+                item.teacher=data.teacher,
+                item.subject_id=data.subject_id,
+                item.subject_name=data.subject_name,
+                item.startingTime=data.startingTime,
+                item.endingTime=data.endingTime,
+                item.classRoom_name=data.classRoom_name,
+                item.classRoom_id=data.classRoom_id
                 }
             });
         });
@@ -225,7 +227,7 @@ export default {
                 teacher: data.teacher,
                 subject_id: data.subject_id,
                 subject_name: data.subject_name,
-                startingtime: data.startingtime,
+                startingTime: data.startingTime,
                 endingTime: data.endingTime,
                 classRoom_name: data.classRoom_name,
                 classRoom_id: data.classRoom_id,
@@ -237,15 +239,17 @@ export default {
         return {
             updateBtn: false, //props for modal buttons
             // ***Edit Time Array use as a props
-            EditTimeTableData: [{
-                id: "",
-                day: "",
-                teacher: "",
-                subject: "",
-                startingtime: "",
-                endingTime: "",
-                classRoom: ""
-            }],
+            EditTimeTableData: {
+                id: '',
+                day: '',
+                teacher:'',
+                subject_id: '',
+                subject_name: '',
+                startingTime: '',
+                endingTime: '',
+                classRoom_name: '',
+                classRoom_id: '',
+            },
             // *** Root Time Table Array
             timeTableData: [],
             //*** Time Table Detail
@@ -280,7 +284,17 @@ export default {
         },
         // *** Edit Array
         editEntry: function (id) {
-            this.EditTimeTableData = this.timeTableData.filter(data => data.id == id);
+             let filterRow = this.timeTableData.filter(data => data.id == id);
+
+            this.EditTimeTableData.id = filterRow[0].id,
+                this.EditTimeTableData.day = filterRow[0].day,
+                this.EditTimeTableData.teacher = filterRow[0].teacher,
+                this.EditTimeTableData.subject_id = filterRow[0].subject_id,
+                this.EditTimeTableData.subject_name = filterRow[0].subject_name,
+                this.EditTimeTableData.startingTime = filterRow[0].startingTime,
+                this.EditTimeTableData.endingTime = filterRow[0].endingTime,
+                this.EditTimeTableData.classRoom_name = filterRow[0].classRoom_name,
+                this.EditTimeTableData.classRoom_id = filterRow[0].classRoom_id,
             this.updateBtn = true;
             this.$store.dispatch("CreateTimeTableModal");
         },

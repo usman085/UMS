@@ -34,12 +34,18 @@ class TimeTableController extends Controller
         }
         return $this->timeTableRepository->checkTimeTable($request);
     }
+    public function UpdateTimeTable(Request $request){
+        return $this->timeTableRepository->UpdateTimeTable($request);
+    }
 
     public function InserTimeTable(Request $request){
         return $this->timeTableRepository->inserTimeTable($request);   
     }
     public function changeTimeTableStatus(Request $request){
         return $this->timeTableRepository->changeTimeTableStatus($request->id,$request->status);
+    }
+    public function delTimeTable(Request $request){
+        return $this->timeTableRepository->delTimeTable($request->id);
     }
     
 }

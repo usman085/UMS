@@ -6,22 +6,16 @@
                 <v-icon @click="$router.push({name:'AllTimeTable'})">mdi-arrow-left</v-icon>
             </span>
             Time Table</v-card-title>
-        <v-card-subtitle >
-            <span  v-if="program == null">
-                  <v-progress-linear
-      indeterminate
-      color="cyan"
-    ></v-progress-linear>
+        <v-card-subtitle>
+            <span v-if="program == null">
+                <v-progress-linear indeterminate color="cyan"></v-progress-linear>
             </span>
-           <span v-else> {{program.program.program_title}} - Semester {{ program.semester | numberToNth }} </span>
-             </v-card-subtitle> 
+            <span v-else> {{program.program.program_title}} - Semester {{ program.semester | numberToNth }} </span>
+        </v-card-subtitle>
         <v-divider></v-divider>
         <v-card-text>
             <div v-if="loading" class="text-center">
-                 <v-progress-circular
-            indeterminate  :size="50"
-            color="primary"
-    ></v-progress-circular>
+                <v-progress-circular indeterminate :size="50" color="primary"></v-progress-circular>
             </div>
             <v-simple-table v-else class="mt-5 elevation-2">
                 <template>
@@ -35,7 +29,7 @@
                             <td class="day">Monday</td>
 
                             <td v-for="(timeTable, index) in mondaySchdule" :key="index">
-                                 <span class="class-room">{{
+                                <span class="class-room">{{
                             timeTable.class_room.class_room | capitalize
                         }}</span>
                                 <span class="class-time">{{
@@ -51,7 +45,7 @@
                             <td class="day">Tuesday</td>
 
                             <td v-for="(timeTable, index) in tuesdaySchdule" :key="index">
-                                 <span class="class-room">{{
+                                <span class="class-room">{{
                             timeTable.class_room.class_room | capitalize
                         }}</span>
                                 <span class="class-time">{{
@@ -67,7 +61,7 @@
                             <td class="day">Wednesday</td>
 
                             <td v-for="(timeTable, index) in wednesdaySchdule" :key="index">
-                                 <span class="class-room">{{
+                                <span class="class-room">{{
                             timeTable.class_room.class_room | capitalize
                         }}</span>
                                 <span class="class-time">{{
@@ -83,7 +77,7 @@
                             <td class="day">Thrusday</td>
 
                             <td v-for="(timeTable, index) in thrusdaySchdule" :key="index">
-                               <span class="class-room">{{
+                                <span class="class-room">{{
                             timeTable.class_room.class_room | capitalize
                         }}</span>
                                 <span class="class-time">{{
@@ -137,41 +131,46 @@
 <script>
 export default {
     name: "PreviewTimeTable",
-    created(){
+    created() {
         this.getTImeTableData(this.$route.params.id);
     },
     data() {
         return {
-            loading:true,
-            items:[],
-            program:null
+            loading: true,
+            items: [],
+            program: null
         };
     },
-    methods:{
-        getTImeTableData:function(id){
+    methods: {
+        getTImeTableData: function (id) {
             // Headers are required for authentication
             let headers = {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // sending request to Api Route
-            axios.post(process.env.MIX_APP_URL+'/time-table-data',{'id':id},{headers:headers})
-            .then((res)=>{
-                 this.items=res.data.timeTable[0].time_table_detail;
-                 this.program=res.data.timeTable[0];
-                this.loading=false;
-            })
-            .catch(err=>err) 
+            axios.post(process.env.MIX_APP_URL + '/time-table-data', {
+                    'id': id
+                }, {
+                    headers: headers
+                })
+                .then((res) => {
+                    console.log(res);
+                    this.items = res.data.timeTable[0].time_table_detail;
+                    this.program = res.data.timeTable[0];
+                    this.loading = false;
+                })
+                .catch(err => err)
         }
     },
     computed: {
-         userAuth: function () {
+        userAuth: function () {
             return cryptoJSON.decrypt(JSON.parse(localStorage.getItem("adminLogin")), "ums");
         },
         mondaySchdule: function () {
             return this.items.filter(
-                data =>data.day == "Monday"
-                );
+                data => data.day == "Monday"
+            );
         },
         tuesdaySchdule: function () {
             return this.items.filter(
@@ -200,7 +199,7 @@ export default {
         },
         sundaySchdule: function () {
             return this.items.filter(
-                data => data.day== "Sunday"
+                data => data.day == "Sunday"
             );
         }
     }

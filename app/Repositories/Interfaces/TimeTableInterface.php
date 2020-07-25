@@ -13,4 +13,8 @@ interface TimeTableInterface
    public function TimeTableDataById($id);
 
    public function changeTimeTableStatus($id,$status);
+
+   public function delTimeTable($id);
+
+   public function UpdateTimeTable($request);
 }

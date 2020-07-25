@@ -32,11 +32,11 @@
                                 </v-col>
                                 <v-col cols="6">
                                     <!-- time picker -->
-                                    <v-menu ref="menu" v-model="startingTimeModal" :close-on-content-click="false" :nudge-right="40" :return-value.sync="detailSchedule.startingtime" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+                                    <v-menu ref="menu" v-model="startingTimeModal" :close-on-content-click="false" :nudge-right="40" :return-value.sync="detailSchedule.startingTime" transition="scale-transition" offset-y max-width="290px" min-width="290px">
                                         <template v-slot:activator="{ on, attrs }">
-                                            <v-text-field v-model="detailSchedule.startingtime" label="Pick Starting Time" prepend-icon readonly v-bind="attrs" v-on="on"></v-text-field>
+                                            <v-text-field v-model="detailSchedule.startingTime" label="Pick Starting Time" prepend-icon readonly v-bind="attrs" v-on="on"></v-text-field>
                                         </template>
-                                        <v-time-picker v-if="startingTimeModal" v-model="detailSchedule.startingtime" full-width @click:minute="$refs.menu.save(detailSchedule.startingtime)"></v-time-picker>
+                                        <v-time-picker v-if="startingTimeModal" v-model="detailSchedule.startingTime" full-width @click:minute="$refs.menu.save(detailSchedule.startingTime)"></v-time-picker>
                                     </v-menu>
                                 </v-col>
 
@@ -126,6 +126,12 @@ export default {
         },
         //*** fun for get updated data and send to array
         updateTableData: function () {
+
+            let subject = this.$store.state.allCourses.filter(item => item.id == this.detailSchedule.subject_id);
+            let ClassRoom = this.classRooms.filter(item => item.id == this.detailSchedule.classRoom_id);
+               
+            this.detailSchedule.subject_name = subject[0].course_title;
+            this.detailSchedule.classRoom_name = ClassRoom[0].class_room;
             EventBus.$emit("updateTimeTableData", this.detailSchedule);
             this.$store.dispatch("CreateTimeTableModal");
             this.$refs.form.reset();
@@ -135,7 +141,7 @@ export default {
             let subject = this.$store.state.allCourses.filter(item => item.id == this.detailSchedule.subject_id);
             let ClassRoom = this.classRooms.filter(item => item.id == this.detailSchedule.classRoom_id);
             this.detailSchedule.subject_name = subject[0].course_title;
-            this.detailSchedule.classRoom_name=ClassRoom[0].class_room;
+            // this.detailSchedule.classRoom_name = ClassRoom[0].class_room;
             EventBus.$emit("timeTableData", this.detailSchedule);
             this.$store.dispatch("CreateTimeTableModal");
             this.$refs.form.reset();
@@ -152,15 +158,15 @@ export default {
         // *** Time Table Modal Object if update data get then put in object
         detailSchedule: function () {
             return {
-                id: this.editData[0].id,
-                day: this.editData[0].day,
-                teacher: this.editData[0].teacher,
-                subject_id: this.editData[0].subject_id,
-                subject_name: this.editData[0].subject_name,
-                startingtime: this.editData[0].startingtime,
-                endingTime: this.editData[0].endingTime,
-                classRoom_id: this.editData[0].classRoom_id,
-                classRoom_name: this.editData[0].classRoom_name
+                id: this.editData.id,
+                day: this.editData.day,
+                teacher: this.editData.teacher,
+                subject_id: this.editData.subject_id,
+                subject_name: this.editData.subject_name,
+                startingTime: this.editData.startingTime,
+                endingTime: this.editData.endingTime,
+                classRoom_id: this.editData.classRoom_id,
+                classRoom_name: this.editData.classRoom_name
             };
         },
         // *** Toggle Schedule Modal
