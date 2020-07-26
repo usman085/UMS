@@ -11,6 +11,11 @@ class ClassRoomController extends Controller
     public function __construct(ClassRoomInterface $classRoom){
         $this->classRoom=$classRoom;
     }
+    /**
+     * Get All Class Room 
+     * 
+     * @return response All Class room
+     */
     public function getAllClassRoom(){
         return $this->classRoom->getAllClassRoom();
     }

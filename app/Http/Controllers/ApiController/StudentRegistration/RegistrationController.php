@@ -64,13 +64,32 @@ class RegistrationController extends Controller
     {
         return $this->StudentRegisterRepository->getBloodGroup();
     }
+
+     /**
+    * Get All Country 
+    *
+    * 
+    * @return All-Country
+    */
+
     public function allCountry(){
         return $this->StudentRegisterRepository->allCountry();
     }
+     /**
+    * Get All Country 
+    *
+    * 
+    * @return All-City
+    */
     public function allCity(){
         return $this->StudentRegisterRepository->allCity();
     }
-
+     /**
+    * Get All States 
+    *
+    * 
+    * @return All-States
+    */
     public function getStates(){
         return $this->StudentRegisterRepository->getStates();
     }

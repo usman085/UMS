@@ -120,11 +120,51 @@ class CourseController extends Controller
         
             return $this->courseRepository->editCourse( $request );
     }
+
+    /**
+    * Add Course Oultine
+    *
+    * @param Request $request
+    * @return void
+    */
+
     public function addCourseOutline(Request $request){
+        $validator = Validator::make( $request->all(), 
+        [
+            'prerequisite' => 'required',
+            'labs'=>'required',
+            'lectures'=>'required',
+            'course_id'=>'required',
+            'course_outline'=>'required'
+        ]);
+        
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
        return $this->courseRepository->addCourseOutline($request);
     }
 
+     /**
+    * Update Course Oultine
+    *
+    * @param Request $request
+    * @return void
+    */
+
     public function updateCourseOutline(Request $request){
+        $validator = Validator::make( $request->all(), 
+        [
+            'prerequisite' => 'required',
+            'labs'=>'required',
+            'lectures'=>'required',
+            'course_id'=>'required',
+            'course_outline'=>'required'
+        ]);
+        
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
+
        return $this->courseRepository->updateCourseOutline($request);
     }
 

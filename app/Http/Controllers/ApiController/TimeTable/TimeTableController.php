@@ -10,15 +10,41 @@ use App\Repositories\Interfaces\TimeTableInterface;
 class TimeTableController extends Controller
 {
     protected $timeTableRepository;
+    /**
+     * Class Constructor
+     * @param TimeTableInterface
+     * 
+     */
     public function __construct(TimeTableInterface $TimeTableInterface){
         $this->timeTableRepository=$TimeTableInterface;
     }
+
+    /**
+     * Get All TimeTable
+     * @param Null
+     * 
+     * @return All-TimeTable
+     */
     public function getAllTimeTable(){
         return $this->timeTableRepository->getAllTimeTable();
     }
+     /**
+     * Get All TimeTable
+     * @param Id
+     * 
+     * @return TimeTable-Specfic-ID
+     */
     public function TimeTableDataById(Request $request){
         return $this->timeTableRepository->TimeTableDataById($request->id);
     } 
+
+    /**
+     * Check TimeTable is Exists Or not
+     * @param Program-Shift-Semester
+     * 
+     * @return TimeTable-Specfic-ID
+     */
+
     public function checkTimeTable(Request $request)
     {
         $validator = Validator::make( $request->all(), 
@@ -34,17 +60,89 @@ class TimeTableController extends Controller
         }
         return $this->timeTableRepository->checkTimeTable($request);
     }
+
+     /**
+     * Update TimeTable 
+     * @param Request $request
+     * 
+     * @return Response Success Message or Error
+     */
+
     public function UpdateTimeTable(Request $request){
+        $validator = Validator::make( $request->all(), 
+        [
+            'day'=>'required',
+            'course_id'=>'required',
+            'teacher'=>'required',
+            'startingTime'=>'required',
+            'endingTime'=>'required',
+            'class_room_id'=>'required',
+            'time_table_id'=>'required',
+        ]);
+
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
         return $this->timeTableRepository->UpdateTimeTable($request);
     }
 
+     /**
+     * Insert TimeTable 
+     * @param Request $request
+     * 
+     * @return Response Add Or not
+     */
+
     public function InserTimeTable(Request $request){
+        $validator = Validator::make( $request->all(), 
+        [
+            'day'=>'required',
+            'course_id'=>'required',
+            'teacher'=>'required',
+            'startingTime'=>'required',
+            'endingTime'=>'required',
+            'class_room_id'=>'required',
+        ]);
+
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
+        
         return $this->timeTableRepository->inserTimeTable($request);   
     }
+     /**
+     * Change Status  TimeTable 
+     * @param Request $request
+     * 
+     * @return Response Change Message  Or Error
+     */
     public function changeTimeTableStatus(Request $request){
+        $validator = Validator::make( $request->all(), 
+        [
+            'id'=>'required',
+            'status'=>'required'
+        ]);
+
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
         return $this->timeTableRepository->changeTimeTableStatus($request->id,$request->status);
     }
+     /**
+     * Insert TimeTable 
+     * @param Request $request
+     * 
+     * @return Response Del Or not
+     */
     public function delTimeTable(Request $request){
+        $validator = Validator::make( $request->all(), 
+        [
+            'id'=>'required'
+        ]);
+
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
         return $this->timeTableRepository->delTimeTable($request->id);
     }
     
