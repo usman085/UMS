@@ -64,15 +64,8 @@
 // *** Importing Event Bus
 import EventBus from "../../../EventBus/eventBus";
 
-import {
-    required
-} from 'vee-validate/dist/rules';
-import {
-    extend,
-    ValidationObserver,
-    ValidationProvider,
-    setInteractionMode
-} from "vee-validate";
+import {required} from 'vee-validate/dist/rules';
+import {extend,ValidationObserver,ValidationProvider, setInteractionMode} from "vee-validate";
 extend('required', {
     ...required,
     message: '{_field_} can not be empty',
@@ -88,7 +81,6 @@ export default {
     mounted() {
         this.getProgram();
         this.getShift();
-
     },
     data: function () {
         return {
@@ -114,20 +106,15 @@ export default {
             this.$router.push({name:'EditTimeTable',params: { id:this.avaiable[0].id,slug:'Modifying Time Table' }})
         },
         check: function () {
-
             if (this.step == 2) {
                 let headers = {
                     "Content-Type": "application/json",
                     Authorization: "Bearer  " + this.userAuth.token
                 };
-                axios.post(process.env.MIX_APP_URL + '/check-time-table', this.scheduleHead, {
-                        headers: headers
-                    })
+                axios.post(process.env.MIX_APP_URL + '/check-time-table', this.scheduleHead, {headers: headers})
                     .then(res => {
                         this.avaiable = res.data.timeTables;
-                      
                         this.loading=true;
-                       
                     })
                     .catch((err) => err)
             }
@@ -140,10 +127,7 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // send request to Api Route
-            axios
-                .post(process.env.MIX_APP_URL + "/get-all-program", "", {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + "/get-all-program", "", {headers: headers})
                 .then(response => {
                     this.program = response.data.data;
                 })
@@ -156,13 +140,9 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // send request to Api Route
-            axios
-                .post(process.env.MIX_APP_URL + "/get-shift", "", {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + "/get-shift", "", {headers: headers})
                 .then(response => {
                     this.shift = response.data.data;
-
                 })
                 .catch(error => {});
         },
@@ -179,10 +159,7 @@ export default {
     },
     computed: {
         userAuth: function () {
-            return cryptoJSON.decrypt(
-                JSON.parse(localStorage.getItem("adminLogin")),
-                "ums"
-            );
+            return cryptoJSON.decrypt(JSON.parse(localStorage.getItem("adminLogin")),"ums");
         },
         TimeTableDetailModal: function () {
             return this.$store.state.TimeTableDetailModal;

@@ -23,7 +23,6 @@
         </v-card-title>
         <v-card-text>
             <div>
-
                 <p>
                     From: M Usman Khan | Monday 20,2020
                 </p>

@@ -327,26 +327,8 @@
 
 <script>
 
-
-import {
-    required,
-    alpha_spaces,
-    alpha_num,
-    numeric,
-    email,
-    min,
-    max,
-    password
-
-} from 'vee-validate/dist/rules';
-import {
-
-    extend,
-    ValidationObserver,
-    ValidationProvider,
-    setInteractionMode,
-
-} from "vee-validate";
+import {required,alpha_spaces,alpha_num,numeric,email,min,max,password} from 'vee-validate/dist/rules';
+import {extend,ValidationObserver,ValidationProvider,setInteractionMode,} from "vee-validate";
 
 setInteractionMode("eager");
 
@@ -467,10 +449,7 @@ export default {
         },
         //User Auth function authorizing Admin & use in Header
         userAuth: function () {
-            return cryptoJSON.decrypt(
-                JSON.parse(localStorage.getItem("adminLogin")),
-                "ums"
-            );
+            return cryptoJSON.decrypt( JSON.parse(localStorage.getItem("adminLogin")),"ums");
         },
 
     },
@@ -521,13 +500,7 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // send request to Api Route
-            axios
-                .post(
-                    process.env.MIX_APP_URL + "/register-student",
-                    this.studentdetail, {
-                        headers: headers
-                    }
-                )
+            axios.post(process.env.MIX_APP_URL + "/register-student",this.studentdetail, {headers: headers})
                 .then(response => {
                     this.succesMessage = "Student Register Successfully";
                     this.snackbar = true;
@@ -544,10 +517,7 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // send request to Api Route
-            axios
-                .post(process.env.MIX_APP_URL + "/get-gender", "", {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + "/get-gender", "", {headers: headers})
                 .then(response => {
                     this.genders = response.data.data;
                 })
@@ -562,10 +532,7 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // send request to Api Route
-            axios
-                .post(process.env.MIX_APP_URL + "/get-guardian", "", {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + "/get-guardian", "", {headers: headers})
                 .then(response => {
                     this.guardians = response.data.data;
                 })
@@ -579,10 +546,7 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // send request to Api Route
-            axios
-                .post(process.env.MIX_APP_URL + "/get-shift", "", {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + "/get-shift", "", {headers: headers})
                 .then(response => {
                     this.shifts = response.data.data;
                 })
@@ -593,9 +557,7 @@ export default {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token
             };
-            axios.post(process.env.MIX_APP_URL + '/all-country', '', {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + '/all-country', '', {headers: headers})
                 .then((res) => {
                     this.allCountry = res.data.counties;
                     axios.get('http://ip-api.com/json').then(res => {
@@ -611,11 +573,8 @@ export default {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token
             };
-            axios.post(process.env.MIX_APP_URL + '/all-cities', '', {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + '/all-cities', '', {headers: headers})
                 .then((res) => {
-                    console.log(res);
                     this.allCity = res.data.cities;
                     axios.get('http://ip-api.com/json').then(res => {
                         let x = this.allCity.filter(item => item.name == res.data.city);
@@ -630,17 +589,13 @@ export default {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token
             };
-            axios.post(process.env.MIX_APP_URL + '/all-states', '', {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + '/all-states', '', {headers: headers})
                 .then((res) => {
-                    console.log(res);
                     this.allState = res.data.states;
                     axios.get('http://ip-api.com/json').then(res => {
                         let x = this.allState.filter(item => item.name == res.data.regionName);
                         this.studentdetail.state = x[0].id;
                     })
-
                 })
                 .catch((err) => {})
         },
@@ -652,10 +607,7 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // send request to Api Route
-            axios
-                .post(process.env.MIX_APP_URL + "/get-all-program", "", {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + "/get-all-program", "", {headers: headers})
                 .then(response => {
                     this.programs = response.data.data;
                 })
@@ -670,10 +622,7 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // send request to Api Route
-            axios
-                .post(process.env.MIX_APP_URL + "/get-blood-group", "", {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + "/get-blood-group", "", {headers: headers})
                 .then(response => {
                     this.bloodGroups = response.data.data;
                 })
@@ -686,13 +635,11 @@ export default {
         },
         formatDate(date) {
             if (!date) return null;
-
             const [year, month, day] = date.split("-");
             return `${month}/${day}/${year}`;
         },
         parseDate(date) {
             if (!date) return null;
-
             const [month, day, year] = date.split("/");
             return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
         }

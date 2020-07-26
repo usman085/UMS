@@ -158,18 +158,13 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // sending request to Api Route
-            axios.post(process.env.MIX_APP_URL + '/time-table-data', {
-                    'id': id
-                }, {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + '/time-table-data', {'id': id}, {headers: headers})
                 .then((res) => {
-                    console.log(res);
                     this.items = res.data.timeTable[0].time_table_detail;
                     this.program = res.data.timeTable[0];
                     this.loading = false;
                 })
-                .catch(err => err)
+                .catch(err => {})
         }
     },
     computed: {

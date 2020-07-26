@@ -103,10 +103,7 @@ export default {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token
             };
-            axios
-                .post(process.env.MIX_APP_URL + "/get-class-room-detail", "", {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + "/get-class-room-detail", "", { headers: headers})
                 .then(res => {
                     this.classRooms = res.data.rooms;
                 })
@@ -119,10 +116,7 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // send request to Api Route
-            axios
-                .post(process.env.MIX_APP_URL + "/get-all-course", "", {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + "/get-all-course", "", {headers: headers})
                 .then(res => {
                     this.$store.dispatch("allCourses", res.data.courses);
                 })
@@ -135,12 +129,8 @@ export default {
         },
         //*** fun for get updated data and send to array
         updateExamData: function () {
-              let subject = this.$store.state.allCourses.filter(
-                item => item.id == this.ExamRoutineData.subject_id
-            );
-            let ClassRoom = this.classRooms.filter(
-                item => item.id == this.ExamRoutineData.classRoom_id
-            );
+              let subject = this.$store.state.allCourses.filter(item => item.id == this.ExamRoutineData.subject_id);
+            let ClassRoom = this.classRooms.filter(item => item.id == this.ExamRoutineData.classRoom_id);
             this.ExamRoutineData.subject_name = subject[0].course_title;
             this.ExamRoutineData.classRoom_name = ClassRoom[0].class_room;
             EventBus.$emit("updateExamData", this.ExamRoutineData);
@@ -150,9 +140,9 @@ export default {
         //*** Insert Data In Table
 
         insertExamData: function () {
-          let subject = this.$store.state.allCourses.filter(item => item.id == this.ExamRoutineData.subject_id);
+            let subject = this.$store.state.allCourses.filter(item => item.id == this.ExamRoutineData.subject_id);
             let ClassRoom = this.classRooms.filter(item => item.id == this.ExamRoutineData.classRoom_id);
-             this.ExamRoutineData.subject_name = subject[0].course_title;
+            this.ExamRoutineData.subject_name = subject[0].course_title;
             this.ExamRoutineData.classRoom_name = ClassRoom[0].class_room;
             EventBus.$emit("insertExamData", this.ExamRoutineData);
             this.$refs.form.reset();
@@ -161,13 +151,11 @@ export default {
         },
         formatDate(date) {
             if (!date) return null;
-
             const [year, month, day] = date.split("-");
             return `${month}/${day}/${year}`;
         },
         parseDate(date) {
             if (!date) return null;
-
             const [month, day, year] = date.split("/");
             return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
         }

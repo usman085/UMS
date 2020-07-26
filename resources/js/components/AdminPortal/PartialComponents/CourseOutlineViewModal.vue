@@ -1,12 +1,7 @@
 <template>
   <div>
     <v-row justify="center">
-      <v-dialog
-        v-model="$store.state.CourseOutlineView"
-        fullscreen
-        hide-overlay
-        transition="dialog-bottom-transition"
-      >
+      <v-dialog v-model="$store.state.CourseOutlineView" fullscreen  hide-overlay   transition="dialog-bottom-transition">
         <v-card>
           <v-toolbar dark color="primary">
             <v-btn icon dark @click="$store.dispatch('CourseOutlineView')">
@@ -95,7 +90,6 @@ export default {
       snackbar: false,
     };
   },
-  
   components: {
     EditCourseOutlineModal
   },
@@ -107,24 +101,14 @@ export default {
         Authorization: "Bearer  " + this.userAuth.token
       };
       // send request to Api Route
-      axios
-        .post(
-          process.env.MIX_APP_URL + "/del-course-outline",
-          {
-            id: id
-          },
-          {
-            headers: headers
-          }
-        )
+      axios.post(process.env.MIX_APP_URL + "/del-course-outline",{id: id},{headers: headers})
         .then(res => {
           this.snackbar = true;
           this.succesMessage = "Course Outline Delete Successfully!";
           this.$store.dispatch("CourseOutlineView");
-           EventBus.$emit("courseEdited");
+          EventBus.$emit("courseEdited");
         })
         .catch(error => {});
-    
     },
     editCourseOutline() {
       this.$store.dispatch("EditCourseOutlineModalToggle");
@@ -133,10 +117,7 @@ export default {
    computed: {
     //User Auth function authorizing Admin & use in Header
     userAuth: function() {
-      return cryptoJSON.decrypt(
-        JSON.parse(localStorage.getItem("adminLogin")),
-        "ums"
-      );
+      return cryptoJSON.decrypt(JSON.parse(localStorage.getItem("adminLogin")),"ums");
     }
   },
  

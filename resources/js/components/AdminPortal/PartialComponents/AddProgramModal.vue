@@ -68,18 +68,8 @@
 <script>
 // *** Event Bus Use to Communicate Data Between Two Components
 import EventBus from "../../../EventBus/eventBus";
-import {
-    required,
-    alpha_spaces,
-    numeric
-} from 'vee-validate/dist/rules';
-import {
-    extend,
-    ValidationObserver,
-    ValidationProvider,
-    setInteractionMode,
-
-} from "vee-validate";
+import {required,alpha_spaces,numeric} from 'vee-validate/dist/rules';
+import {extend, ValidationObserver, ValidationProvider,setInteractionMode,} from "vee-validate";
 
 setInteractionMode("eager");
 
@@ -101,7 +91,6 @@ export default {
     name: "AddProgramModel",
     props: ["editData", "editRowMessage"],
     components: {
-
         ValidationProvider,
         ValidationObserver
     },
@@ -109,10 +98,8 @@ export default {
         return {
             amount: 7,
             successMessage: "",
-           
             snackbar: false,
             items: [1, 2, 3, 4],
-
         };
     },
     methods: {
@@ -127,24 +114,16 @@ export default {
         //**addProgram Function Is use to Add The Program
         addProgram: function () {
             // Headers are required for authentication
-            let data = cryptoJSON.decrypt(
-                JSON.parse(localStorage.getItem("adminLogin")),
-                "ums"
-            );
             const headers = {
                 "Content-Type": "application/json",
-                Authorization: "Bearer  " + data.token
+                Authorization: "Bearer  " + this.userAuth.token
             };
             // sending request to Api Route
-            axios
-                .post(process.env.MIX_APP_URL + "/insert-program", this.programDetail, {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + "/insert-program", this.programDetail, {headers: headers})
                 .then(res => {
                     this.successMessage = "Program is Add Successfully";
                     this.successCall();
                 })
-
                 .catch(err => {
 
                 });
@@ -158,17 +137,14 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // sending request to Api Route
-            axios
-                .post(process.env.MIX_APP_URL + "/edit-program", this.programDetail, {
+            axios.post(process.env.MIX_APP_URL + "/edit-program", this.programDetail, {
                     headers: headers
                 })
                 .then(res => {
                     this.successMessage = "Program is Updated Successfully";
                     this.successCall();
                 })
-
                 .catch(err => {
-
                 });
         }
     },

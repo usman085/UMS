@@ -75,7 +75,6 @@ export default {
   data() {
     return {
       editor: ClassicEditor,
-
       values: [],
       value: null,
       editorConfig: {
@@ -115,20 +114,12 @@ export default {
         "Content-Type": "application/json",
         Authorization: "Bearer  " + this.userAuth.token
       };
-
-      axios
-        .post(
-          process.env.MIX_APP_URL + "/add-course-outline",
-          this.courseOutline,
-          {
-            headers: headers
-          }
-        )
-        .then(res => {
-          this.$store.dispatch("AssignOutlineModalToggle");
-          EventBus.$emit("courseEdited");
-        })
-        .catch(() => {});
+      axios.post(process.env.MIX_APP_URL + "/add-course-outline", this.courseOutline,{headers: headers})
+            .then(res => {
+              this.$store.dispatch("AssignOutlineModalToggle");
+              EventBus.$emit("courseEdited");
+            })
+          .catch(() => {});
     }
   }
 };

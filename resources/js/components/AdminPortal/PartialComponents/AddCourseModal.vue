@@ -2,20 +2,17 @@
 <div>
     <v-row justify="center">
         <v-dialog scrollable v-model="dialog" persistent max-width="600px">
-            <v-card>
-                 
+            <v-card>           
                 <v-card-title>
                     <!-- When Edit Function Call Add A New Course change to Update Course will display -->
                     <span class="headline">{{ editRowMessage ? 'Update Course' :' Add A New' }} Course</span>
                     <!-- When Edit Function Call Add A New Course change to Update Course will display -->
                 </v-card-title>
-                
                 <v-card-text>  
                      <ValidationObserver ref="observer"  v-slot="{invalid}">
                         <!-- form for adding course  -->
                     <v-form  ref="form">   
-                    <v-container>
-                    
+                    <v-container>     
                             <v-row>
                                 <v-col cols="12">
                                    <ValidationProvider name="Course Code" rules="required" v-slot="{ errors }">
@@ -27,14 +24,12 @@
                                     <v-text-field  :error-messages="errors" v-model="courseDetail.course_title"  label="Course Title*" hint="Web Engineering" required></v-text-field>
                                     </ValidationProvider>
                                 </v-col>
-
                                 <v-col cols="12">
                                     <ValidationProvider name="Credit Hours" rules="required" v-slot="{ errors }">
                                     <v-text-field  :error-messages="errors" v-model="courseDetail.credit_hours"  required label="Credit Hours" hint="4(3-1)"></v-text-field>
                                     </ValidationProvider>
                                 </v-col>
                             </v-row>
-                        
                     </v-container>
                     <small>*indicates required field</small>
                     <v-card-actions>
@@ -47,7 +42,6 @@
                         <!-- form for adding course  -->
                     </ValidationObserver>
                 </v-card-text>
-                
             </v-card>
         </v-dialog>
     </v-row>
@@ -66,13 +60,7 @@ import EventBus from "../../../EventBus/eventBus";
 
 
 import { required,alpha_spaces,} from 'vee-validate/dist/rules';
-import {  extend,
-    ValidationObserver,
-    ValidationProvider,
-    setInteractionMode,
-    
-} from "vee-validate";
-
+import {  extend, ValidationObserver, ValidationProvider, setInteractionMode} from "vee-validate";
 setInteractionMode("eager");
 
 extend('alpha_spaces', {
@@ -89,13 +77,11 @@ export default {
     name: "AddCourseModel",
     props: ["editData", "editRowMessage"],
     components: {
-
         ValidationProvider,
         ValidationObserver
     },
     data() {
         return {
-
             succesMessage: "",
             valid: true,
             snackbar: false,
@@ -103,7 +89,6 @@ export default {
         };
     },
     methods: {
-  
         successCall: function () {
             this.$refs.form.reset();
             this.$store.dispatch("AddCourseModalToggle");
@@ -114,16 +99,12 @@ export default {
         //Insert Course Function use to Add Cousre
         insertCourse: function () {
             // Headers are required for authentication
-
             let headers = {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // sending request to Api Route
-            axios
-                .post(process.env.MIX_APP_URL + "/insert-course", this.courseDetail, {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + "/insert-course", this.courseDetail, {headers: headers})
                 .then(res => {
                     this.succesMessage = "Course was Add Successfully";
                     this.successCall();
@@ -144,15 +125,12 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // sending request to Api Route
-            axios
-                .post(process.env.MIX_APP_URL + "/edit-course", this.courseDetail, {
-                    headers: headers
-                })
-                .then(res => {
+            axios.post(process.env.MIX_APP_URL + "/edit-course", this.courseDetail, {headers: headers})
+                 .then(res => {
                     this.succesMessage = "Course was Update Successfully";
                     this.successCall();
                 })
-                .catch(err => {
+                 .catch(err => {
                     if (error.response.status == 401) {
                         this.$router.push({
                             name: "login"

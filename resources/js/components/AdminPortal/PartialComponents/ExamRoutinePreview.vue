@@ -82,10 +82,7 @@ export default {
     computed: {
         //User Auth function authorizing Admin & use in Header
         userAuth: function () {
-            return cryptoJSON.decrypt(
-                JSON.parse(localStorage.getItem("adminLogin")),
-                "ums"
-            );
+            return cryptoJSON.decrypt(JSON.parse(localStorage.getItem("adminLogin")),"ums");
         },
     },
 
@@ -97,21 +94,10 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token,
             };
             // send request to Api Route
-            axios
-                .post(
-                    process.env.MIX_APP_URL + "/get-exam-schedule", {
-                        'id': id,
-                    }, {
-                        headers: headers,
-                    }
-                )
+            axios.post(process.env.MIX_APP_URL + "/get-exam-schedule", {'id': id,}, {headers: headers,})
                 .then((response) => {
-
                     this.examSchedule = response.data.examSchedule[0];
-
                     this.program = response.data.examSchedule[0];
-                   
-
                     this.loading = false;
                 })
                 .catch((error) => {});

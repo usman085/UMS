@@ -65,7 +65,6 @@
                         <tr v-else>
                             <td colspan="7" class="text-center">
                                 <template v-if="message">
-
                                     <v-progress-circular indeterminate color="primary"></v-progress-circular>
                                 </template>
                                 <template v-else>No Data Found!</template>
@@ -109,24 +108,16 @@ export default {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token
             };
-            axios.post(process.env.MIX_APP_URL + '/del-time-table', {
-                    'id': id
-                }, {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + '/del-time-table', {'id': id}, {headers: headers})
                 .then(res => {
                     this.getAllTimeTable();
                     this.snackbar = true;
-                    this.text = 'Time Table Delete Successfully'
-
+                    this.text = 'Time Table Delete Successfully';
                 })
-                .catch(err => err);
-
+                .catch(err =>{});
         },
         createTimeTable: function () {
-            this.$router.push({
-                name: "createTimeTable"
-            });
+            this.$router.push({ name: "createTimeTable"});
         },
         changeStatus: function (id, status) {
             // Headers are required for authentication
@@ -134,12 +125,7 @@ export default {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token
             };
-            axios.post(process.env.MIX_APP_URL + '/time-table-status', {
-                    'id': id,
-                    'status': status
-                }, {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + '/time-table-status', {'id': id,'status': status},{headers: headers})
                 .then(res => {
                     this.snackbar = true;
                     this.text = 'Time Table Change Successfully'
@@ -154,11 +140,8 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // sending request to Api Route
-            axios.post(process.env.MIX_APP_URL + '/get-all-time-table', "", {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + '/get-all-time-table', "", {headers: headers})
                 .then((res) => {
-                
                     this.$store.dispatch("timeTable", res.data.timeTables);
                     this.message = false;
                 })

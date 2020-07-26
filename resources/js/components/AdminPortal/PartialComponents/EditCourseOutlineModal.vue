@@ -1,12 +1,7 @@
 <template>
   <div>
     <v-row justify="center">
-      <v-dialog
-        v-model="$store.state.EditCourseOutlineModal"
-        fullscreen
-        hide-overlay
-        transition="dialog-bottom-transition"
-      >
+      <v-dialog v-model="$store.state.EditCourseOutlineModal" fullscreen hide-overlay transition="dialog-bottom-transition">
         <v-card>
           <v-toolbar dark color="primary">
             <v-btn icon dark @click="$store.dispatch('EditCourseOutlineModalToggle')">
@@ -70,10 +65,7 @@ export default {
   },
   computed: {
        userAuth: function() {
-      return cryptoJSON.decrypt(
-        JSON.parse(localStorage.getItem("adminLogin")),
-        "ums"
-      );
+      return cryptoJSON.decrypt(JSON.parse(localStorage.getItem("adminLogin")),"ums" );
     },
     courseOutline: function() {
       return {
@@ -81,7 +73,6 @@ export default {
         lectures:this.courseDetailOutline.lectures,
         labs:this.courseDetailOutline.labs,
         course_outline:this.courseDetailOutline.course_outline,
-
         id: this.courseDetailOutline.id
       };
     }
@@ -94,20 +85,12 @@ export default {
         Authorization: "Bearer  " + this.userAuth.token
       };
 
-      axios
-        .post(
-          process.env.MIX_APP_URL + "/update-course-outline",
-          this.courseOutline,
-          {
-            headers: headers
-          }
-        )
+      axios.post(process.env.MIX_APP_URL + "/update-course-outline",this.courseOutline,{headers: headers})
         .then(res => {
           this.$store.dispatch("EditCourseOutlineModalToggle");
           EventBus.$emit("courseEdited");
         })
         .catch(() => {});
-    
       }
   }
 

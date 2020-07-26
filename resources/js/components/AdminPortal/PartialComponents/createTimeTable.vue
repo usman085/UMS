@@ -202,13 +202,13 @@ export default {
                 this.updateBtn = false;
                 if (item.id == data.id) {
                     item.day = data.day;
-                item.teacher=data.teacher,
-                item.subject_id=data.subject_id,
-                item.subject_name=data.subject_name,
-                item.startingTime=data.startingTime,
-                item.endingTime=data.endingTime,
-                item.classRoom_name=data.classRoom_name,
-                item.class_room_id=data.class_room_id
+                    item.teacher=data.teacher,
+                    item.subject_id=data.subject_id,
+                    item.subject_name=data.subject_name,
+                    item.startingTime=data.startingTime,
+                    item.endingTime=data.endingTime,
+                    item.classRoom_name=data.classRoom_name,
+                    item.class_room_id=data.class_room_id
                 }
             });
         });
@@ -218,8 +218,8 @@ export default {
             this.scheduleHead.program = data.program;
             this.scheduleHead.semester = data.semester;
             this.scheduleHead.shift = data.shift;
-           this.scheduleHead.program_name = data.program_name;
-           this.scheduleHead.shift_name = data.shift_name;
+            this.scheduleHead.program_name = data.program_name;
+            this.scheduleHead.shift_name = data.shift_name;
         });
         // *** Add time table Schedule in array
         EventBus.$on("timeTableData", data => {
@@ -271,7 +271,6 @@ export default {
     // Methods Object
     methods: {
         insertFinalTimeTable: function () {
-
             this.tableMessage="Saving Time Table...";
             this.$store.dispatch('overlay');
             let headers = {
@@ -283,11 +282,7 @@ export default {
                 semester:  this.scheduleHead.semester,
                 shift: this.scheduleHead.shift,
                 timeTableDetail:JSON.stringify(this.timeTableData)
-            },{
-                headers:headers
-            })
-            .then(res=>{
-               
+            },{headers:headers}).then(res=>{
             this.tableMessage="";
             this.$store.dispatch('overlay');
              this.$router.push({name :'PreviewTimeTable', params: { id:res.data.time_table_id,slug:'Newly Added Time Table' } })
@@ -301,8 +296,7 @@ export default {
         // *** Edit Array
         editEntry: function (id) {
              let filterRow = this.timeTableData.filter(data => data.id == id);
-
-            this.EditTimeTableData.id = filterRow[0].id,
+                this.EditTimeTableData.id = filterRow[0].id,
                 this.EditTimeTableData.day = filterRow[0].day,
                 this.EditTimeTableData.teacher = filterRow[0].teacher,
                 this.EditTimeTableData.subject_id = filterRow[0].subject_id,
@@ -311,8 +305,8 @@ export default {
                 this.EditTimeTableData.endingTime = filterRow[0].endingTime,
                 this.EditTimeTableData.classRoom_name = filterRow[0].classRoom_name,
                 this.EditTimeTableData.class_room_id = filterRow[0].class_room_id,
-            this.updateBtn = true;
-            this.$store.dispatch("CreateTimeTableModal");
+                this.updateBtn = true;
+                this.$store.dispatch("CreateTimeTableModal");
         },
         //  Genrate Randam string Fun
         randStr(len) {
@@ -327,10 +321,7 @@ export default {
     // Reactive Property
     computed: {
         userAuth: function () {
-            return cryptoJSON.decrypt(
-                JSON.parse(localStorage.getItem("adminLogin")),
-                "ums"
-            );
+            return cryptoJSON.decrypt(JSON.parse(localStorage.getItem("adminLogin")),"ums");
         },
         // *** Filter Monday Data in Root Array
         mondaySchedule: function () {

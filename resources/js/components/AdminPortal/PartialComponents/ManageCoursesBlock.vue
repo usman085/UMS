@@ -138,10 +138,7 @@ export default {
         Authorization: "Bearer  " + this.userAuth.token
       };
       // send request to Api Route
-      axios
-        .post(process.env.MIX_APP_URL + "/get-all-course", "", {
-          headers: headers
-        })
+      axios.post(process.env.MIX_APP_URL + "/get-all-course", "",{headers: headers})
         .then(res => {
           this.$store.dispatch("allCourses", res.data.courses);
           this.message = false;
@@ -166,16 +163,7 @@ export default {
         Authorization: "Bearer  " + this.userAuth.token
       };
       // send request to Api Route
-      axios
-        .post(
-          process.env.MIX_APP_URL + "/del-course",
-          {
-            id: id
-          },
-          {
-            headers: headers
-          }
-        )
+      axios.post(process.env.MIX_APP_URL + "/del-course",{id: id},{headers: headers})
         .then(res => {
           this.snackbar = true;
           this.succesMessage = "Course Delete Successfully!";
@@ -187,10 +175,7 @@ export default {
   computed: {
     //User Auth function authorizing Admin & use in Header
     userAuth: function() {
-      return cryptoJSON.decrypt(
-        JSON.parse(localStorage.getItem("adminLogin")),
-        "ums"
-      );
+      return cryptoJSON.decrypt(JSON.parse(localStorage.getItem("adminLogin")),"ums");
     }
   },
   // use as a constructor

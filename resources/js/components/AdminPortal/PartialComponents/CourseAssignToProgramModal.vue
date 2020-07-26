@@ -3,7 +3,6 @@
     <v-card>
         <v-card-title>
             {{ programDetail.program_title | capitalize }}
-
             <v-spacer></v-spacer>
             <v-icon @click="close()">mdi-close</v-icon>
         </v-card-title>
@@ -83,14 +82,10 @@ export default {
     components:{pacer},
     computed: {
         program_id: function () {
-            return this.programDetail.id
-
+            return this.programDetail.id;
         },
         userAuth: function () {
-            return cryptoJSON.decrypt(
-                JSON.parse(localStorage.getItem("adminLogin")),
-                "ums"
-            );
+            return cryptoJSON.decrypt(JSON.parse(localStorage.getItem("adminLogin")),"ums");
         }
     },
     methods: {
@@ -105,25 +100,19 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
 
-            axios
-                .post(process.env.MIX_APP_URL + "/assign-course-to-program", {
+            axios.post(process.env.MIX_APP_URL + "/assign-course-to-program", {
                     'program_id': this.program_id,
                     'selected': this.selected,
                     'semester': this.semester,
-                }, {
-                    headers: headers
-                })
+                }, {headers: headers})
                 .then(res => {
-                    
                     this.saving=false;
                      this.$refs.form.reset();
                     //this.$store.dispatch("allCourses", res.data.courses);
                 })
                 .catch(err => {
                     if (error.response.status == 401) {
-                        this.$router.push({
-                            name: "login"
-                        });
+                        this.$router.push({ name: "login"});
                     }
                 });
         },
@@ -132,19 +121,13 @@ export default {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token
             };
-
-            axios
-                .post(process.env.MIX_APP_URL + "/get-all-course", "", {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + "/get-all-course", "", {headers: headers})
                 .then(res => {
                     this.$store.dispatch("allCourses", res.data.courses);
                 })
                 .catch(err => {
                     if (error.response.status == 401) {
-                        this.$router.push({
-                            name: "login"
-                        });
+                        this.$router.push({name: "login"});
                     }
                 });
         }

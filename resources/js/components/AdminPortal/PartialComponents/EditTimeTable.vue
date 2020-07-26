@@ -265,9 +265,7 @@ export default {
                 program: '',
                 semester: '',
                 shift: '',
-
             }
-
         }
     },
     // Methods Object
@@ -283,10 +281,10 @@ export default {
              axios.post(process.env.MIX_APP_URL + '/update-time-table-data',{
                  'timeTableData':this.timeTableData,
                  'time_table_id':this.time_table_id},{headers: headers})
-            .then(res=>{
+                .then(res=>{
                 this.tableMessage="";
-            this.$store.dispatch('overlay');
-             this.$router.push({name :'PreviewTimeTable', params: { id:this.time_table_id,slug:'Updated Time Table' } })
+                this.$store.dispatch('overlay');
+                this.$router.push({name :'PreviewTimeTable', params: { id:this.time_table_id,slug:'Updated Time Table' } })
             })
             .catch(err=>{})
         },
@@ -297,30 +295,23 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // sending request to Api Route
-            axios.post(process.env.MIX_APP_URL + '/time-table-data', {
-                    'id': id
-                }, {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + '/time-table-data', {'id': id}, { headers: headers})
                 .then((res) => {
                     this.timeTableData = res.data.timeTable[0].time_table_detail;
                     this.time_table_id=this.$route.params.id;
-                   
                     this.program = res.data.timeTable[0];
                     this.loading = false;
                 })
-                .catch(err => err)
+                .catch(err => {})
         },
         // *** Delete Entry In array
         delEntry: function (id) {
             this.timeTableData = this.timeTableData.filter(data => data.id != id);
-
         },
         // *** Edit Array
         editEntry: function (id) {
             let filterRow = this.timeTableData.filter(data => data.id == id);
-
-            this.EditTimeTableData.id = filterRow[0].id,
+                this.EditTimeTableData.id = filterRow[0].id,
                 this.EditTimeTableData.day = filterRow[0].day,
                 this.EditTimeTableData.teacher = filterRow[0].teacher,
                 this.EditTimeTableData.subject_id = filterRow[0].course_id,
@@ -331,7 +322,7 @@ export default {
                 this.EditTimeTableData.class_room_id = filterRow[0].class_room_id,
                 this.EditTimeTableData.time_table_id=this.time_table_id
                 this.updateBtn = true;
-            this.$store.dispatch('CreateTimeTableModal')
+                this.$store.dispatch('CreateTimeTableModal')
         },
         //  Genrate Randam string Fun
         randStr(len) {

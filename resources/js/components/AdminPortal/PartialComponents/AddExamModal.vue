@@ -67,34 +67,28 @@ import EventBus from "../../../EventBus/eventBus";
 import {
     required
 } from 'vee-validate/dist/rules';
-import {
-    extend,
-    ValidationObserver,
-    ValidationProvider,
-    setInteractionMode
-} from "vee-validate";
+import { extend, ValidationObserver,ValidationProvider,setInteractionMode} from "vee-validate";
 extend('required', {
     ...required,
     message: '{_field_} can not be empty',
 });
+
 setInteractionMode("eager");
 
 export default {
     name: "AddExamModal",
-components: {
+    components: { 
         ValidationObserver,
         ValidationProvider,
     },
     data: function () {
         return {
             step: 1,
-             valid: true,
+            valid: true,
             loading:false,
             program: [],
             semester: ["1", "2", "3", "4", "5","6","7","8" ],
             shift: [],
-
-            //  returning data selected
             scheduleHead: {
                 program: "",
                 semester: "",
@@ -103,20 +97,16 @@ components: {
         };
     },
     methods: {
-            check: function () {
-
+        check: function () {
             if (this.step == 2) {
                 let headers = {
                     "Content-Type": "application/json",
                     Authorization: "Bearer " + this.userAuth.token
                 };
-                axios.post(process.env.MIX_APP_URL + '/check-exam-routine', this.scheduleHead, {
-                        headers: headers
-                    })
+                axios.post(process.env.MIX_APP_URL + '/check-exam-routine', this.scheduleHead, {headers: headers})
                     .then(res => {
                         this.avaiable = res.data.ExamRoutine;
-                        this.loading=true;
-                       
+                        this.loading=true;   
                     })
                     .catch((err) => err)
             }
@@ -130,13 +120,8 @@ components: {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // send request to Api Route
-            axios
-                .post(process.env.MIX_APP_URL + "/get-shift", "", {
-                    headers: headers
-                })
-                .then(response => {
-                    this.shift = response.data.data;
-                })
+            axios.post(process.env.MIX_APP_URL + "/get-shift", "", {headers: headers})
+                .then(response => {this.shift = response.data.data;})
                 .catch(error => {});
         },
         // getting program from Database
@@ -147,13 +132,8 @@ components: {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // send request to Api Route
-            axios
-                .post(process.env.MIX_APP_URL + "/get-all-program", "", {
-                    headers: headers
-                })
-                .then(response => {
-                    this.program = response.data.data;
-                })
+            axios.post(process.env.MIX_APP_URL + "/get-all-program", "", {headers: headers})
+                .then(response => {this.program = response.data.data;})
                 .catch(error => {});
         },
 
@@ -181,7 +161,6 @@ components: {
         }
     },
     created() {
-
         this.getProgram();
         this.getShift();
     }

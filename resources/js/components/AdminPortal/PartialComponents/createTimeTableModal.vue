@@ -12,7 +12,6 @@
                         <!-- Form Start -->
                 <ValidationObserver ref="observer" v-slot="{ invalid }">
                     <v-form  ref="form">
-                      
                             <!--Form Ref variable-->
                             <v-row>
                                 <!-- hidden field for updating -->
@@ -87,19 +86,14 @@
 <script>
 // *** Import Event Bus
 import EventBus from "../../../EventBus/eventBus";
-import {
-    required
-} from 'vee-validate/dist/rules';
-import {
-    extend,
-    ValidationObserver,
-    ValidationProvider,
-    setInteractionMode
-} from "vee-validate";
+import {required} from 'vee-validate/dist/rules';
+import {extend,ValidationObserver,ValidationProvider,setInteractionMode} from "vee-validate";
+
 extend('required', {
     ...required,
     message: '{_field_} can not be empty',
 });
+
 setInteractionMode("eager");
 export default {
     name: "TimeTableModal",
@@ -107,10 +101,9 @@ export default {
     data: function () {
         return {
             classRooms: [],
-              courses: [],
+            courses: [],
             startingTimeModal: false, //Time picker modal For Starting time
             endingTimeModal: false, // Time Picker modl for Ending Time
-          
         };
     },
     components: {
@@ -130,13 +123,9 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // send request to Api Route
-            axios
-                .post(process.env.MIX_APP_URL + "/get-all-course", "", {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + "/get-all-course", "", { headers: headers})
                 .then(res => {
                     this.$store.dispatch("allCourses", res.data.courses);
-
                 })
                 .catch(error => {});
         },
@@ -145,9 +134,7 @@ export default {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token
             };
-            axios.post(process.env.MIX_APP_URL + '/get-class-room-detail', '', {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + '/get-class-room-detail', '', {headers: headers})
                 .then((res) => {
                     this.classRooms = res.data.rooms;
                 })
@@ -163,9 +150,10 @@ export default {
 
             let subject = this.$store.state.allCourses.filter(item => item.id == this.detailSchedule.subject_id);
             let ClassRoom = this.classRooms.filter(item => item.id == this.detailSchedule.class_room_id);
-               
+
             this.detailSchedule.subject_name = subject[0].course_title;
             this.detailSchedule.classRoom_name = ClassRoom[0].class_room;
+
             EventBus.$emit("updateTimeTableData", this.detailSchedule);
             this.$store.dispatch("CreateTimeTableModal");
             this.$refs.form.reset();
@@ -173,23 +161,23 @@ export default {
         },
         //*** Insert Data In Table
         insertTimeTable: function () {
+            
             let subject = this.$store.state.allCourses.filter(item => item.id == this.detailSchedule.subject_id);
             let ClassRoom = this.classRooms.filter(item => item.id == this.detailSchedule.class_room_id);
+            
             this.detailSchedule.subject_name = subject[0].course_title;
             this.detailSchedule.classRoom_name = ClassRoom[0].class_room;
+            
             EventBus.$emit("timeTableData", this.detailSchedule);
-            this.$store.dispatch("CreateTimeTableModal");
             this.$refs.form.reset();
             this.$refs.observer.reset();
+            this.$store.dispatch("CreateTimeTableModal");
         }
     },
     // *** Reactive Property
     computed: {
         userAuth: function () {
-            return cryptoJSON.decrypt(
-                JSON.parse(localStorage.getItem("adminLogin")),
-                "ums"
-            );
+            return cryptoJSON.decrypt(JSON.parse(localStorage.getItem("adminLogin")),"ums");
         },
         // *** Time Table Modal Object if update data get then put in object
         detailSchedule: function () {

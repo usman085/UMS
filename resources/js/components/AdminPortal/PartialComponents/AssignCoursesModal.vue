@@ -14,7 +14,6 @@
                 </v-toolbar>
                 <v-card-text>
                     <div class="text-center">
-
                         <v-container>
                             <v-card-title text-center></v-card-title>
                             <v-row>
@@ -424,16 +423,12 @@ export default {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token
             };
-            axios.post(process.env.MIX_APP_URL + '/del-assign-course', {
-                    'id': id
-                }, {
-                    headers: headers
+            axios.post(process.env.MIX_APP_URL + '/del-assign-course', {'id': id}, {headers: headers})
+                .then((res) => {
+                    this.snackbar=true;
+                    EventBus.$emit('loadAssignCourse',this.program.id);
                 })
-                .then((res) => {console.log(res);
-                this.snackbar=true;
-                EventBus.$emit('loadAssignCourse',this.program.id);
-                })
-                .catch((err) => console.log(err))
+                .catch((err) => {})
         }
     }
 };

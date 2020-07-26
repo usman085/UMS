@@ -102,7 +102,6 @@ import CourseAssignToProgramModal from './CourseAssignToProgramModal';
 
 export default {
     name: "manageProgramblock",
-
     data() {
         return {
             allProgram:null,
@@ -134,36 +133,27 @@ export default {
         AssignCoursesModal,
         CourseAssignToProgramModal
     },
-
     methods: {
         // assigedCourses function use to assign course to program
         assigedCourses: function (item) {
             this.program_title_props = item;
             this.$store.dispatch('overlay');
-
             this.$store.dispatch('AssignCoursesModalToggle');
             let headers = {
                 'Content-type': 'application/json',
                 'Authorization': "Bearer  " + this.userAuth.token
             }
-            axios.post(process.env.MIX_APP_URL + '/assign-courses', {
-                    'id': item.id
-                }, {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + '/assign-courses', {'id': item.id }, { headers: headers})
                 .then(res => {
                     this.AssignCourseData = res.data;
                     this.$store.dispatch('overlay');
-
                 })
                 .catch(error => {
-
                 });
 
         },
         addCourseModal: function (program) {
             this.programDetail = program;
-
             this.$store.dispatch('CourseAssignModal');
         },
 
@@ -187,57 +177,38 @@ export default {
                 'Authorization': "Bearer  " + this.userAuth.token
             };
             // send request to Api Route
-            axios
-                .post(
-                    process.env.MIX_APP_URL + "/del-program", {
-                        id: id
-                    }, {
-                        headers: headers
-                    }
-                )
+            axios.post(process.env.MIX_APP_URL + "/del-program", {id: id}, {headers: headers})
                 .then(res => {
                     this.snackbar = true;
                     this.succesMessage = "Program Delete Successfully!";
                     this.getProgram();
                 })
                 .catch(error => {
-
                 });
         },
 
         // **getProgram Function is Use to get all Program Data
         getProgram: function () {
             // Headers are defined for authentication
-            let data = cryptoJSON.decrypt(
-                JSON.parse(localStorage.getItem("adminLogin")),
-                "ums"
-            );
+            let data = cryptoJSON.decrypt(JSON.parse(localStorage.getItem("adminLogin")),"ums");
             const headers = {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + data.token
             };
             // send request to Api Route
-            axios
-                .post(process.env.MIX_APP_URL + "/get-program", "", {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + "/get-program", "", {headers: headers})
                 .then(res => {
-                        console.log(res);
                     this.$store.dispatch("allProgram", res.data.allProgram);
                     this.message = false;
                 })
                 .catch(error => {
-
                 });
         }
     },
     computed: {
         //User Auth function authorizing Admin & use in Header  
         userAuth: function () {
-            return cryptoJSON.decrypt(
-                JSON.parse(localStorage.getItem("adminLogin")),
-                "ums"
-            );
+            return cryptoJSON.decrypt( JSON.parse(localStorage.getItem("adminLogin")),"ums");
         }
     },
     // use as a constructor 
@@ -251,11 +222,7 @@ export default {
                 'Content-type': 'application/json',
                 'Authorization': "Bearer  " + this.userAuth.token
             }
-            axios.post(process.env.MIX_APP_URL + '/assign-courses', {
-                    'id': id
-                }, {
-                    headers: headers
-                })
+            axios.post(process.env.MIX_APP_URL + '/assign-courses', {'id': id}, {headers: headers})
                 .then(res => {
                     this.AssignCourseData = res.data;
                 })

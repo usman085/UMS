@@ -12,12 +12,10 @@
         <span v-if="program == null">
           <v-progress-linear indeterminate color="cyan"></v-progress-linear>
         </span>
-        <span
-          v-else
-        >{{program.program.program_title}} - Semester {{ program.semester | numberToNth }}</span>
+        <span v-else>
+          {{program.program.program_title}} - Semester {{ program.semester | numberToNth }}</span>
       </v-card-subtitle>
          <v-btn style="float:right;" @click="$store.dispatch('AddExamRoutineModalToggle')">Add More Class Routine</v-btn>
-
       <v-divider></v-divider>
       <v-card-text>
         <div v-if="loading" class="text-center">
@@ -107,7 +105,7 @@ export default {
   mounted() {
     // Listen The data Recieve From  insertExamData To insert Data
     EventBus.$on("insertExamData", (data) => {
-      console.log(data);
+     
       let id = this.randStr(6); //Genrate Random String
       // *** Push in array
       this.examSchedule.push({
@@ -128,17 +126,14 @@ export default {
       this.examSchedule.filter((item) => {
         this.updateBtn = false;
         if (item.id == data.id) {
-          console.log(item.class_room_id);
-          console.log(data.classRoom_id);
-          item.day = data.day;
-          item.date = data.date;
-          (item.course_id = data.subject_id),
+            item.day = data.day;
+            item.date = data.date;
+            (item.course_id = data.subject_id),
             (item.course.course_title = data.subject_name),
             (item.startingTime = data.startingTime),
             (item.endingTime = data.endingTime),
             (item.class_room.class_room = data.classRoom_name),
             (item.class_room_id = data.classRoom_id)
-           
         }
       });
     });
@@ -153,10 +148,7 @@ export default {
   computed: {
     //User Auth function authorizing Admin & use in Header
     userAuth: function () {
-      return cryptoJSON.decrypt(
-        JSON.parse(localStorage.getItem("adminLogin")),
-        "ums"
-      );
+      return cryptoJSON.decrypt(JSON.parse(localStorage.getItem("adminLogin")),"ums");
     },
   },
 
@@ -168,21 +160,10 @@ export default {
         Authorization: "Bearer  " + this.userAuth.token,
       };
       // send request to Api Route
-      axios
-        .post(
-          process.env.MIX_APP_URL + "/get-exam-schedule",
-          {
-            id: id,
-          },
-          {
-            headers: headers,
-          }
-        )
+      axios.post(process.env.MIX_APP_URL + "/get-exam-schedule",{ id: id,},{headers: headers,})
         .then((response) => {
           this.examSchedule = response.data.examSchedule[0].exam_routine_detail;
-
           this.program = response.data.examSchedule[0];
-
           this.loading = false;
         })
         .catch((error) => {});
@@ -205,7 +186,7 @@ export default {
     // Edit Data Function Is use to Edit Row Data
     // Edit Data Function Is use to Edit Row Data
     editData(item) {
-      (this.EditExamData.id = item.id),
+        (this.EditExamData.id = item.id),
         (this.EditExamData.day = item.day),
         (this.EditExamData.date = item.date),
         (this.EditExamData.subject_id = item.course_id),
@@ -215,8 +196,8 @@ export default {
         (this.EditExamData.classRoom_name = item.class_room.class_room),
         (this.EditExamData.class_room_id = item.class_room_id),
         (this.EditExamData.exam_routine_id = item.id);
-      this.updateBtn = true;
-      this.$store.dispatch("AddExamRoutineModalToggle");
+        this.updateBtn = true;
+        this.$store.dispatch("AddExamRoutineModalToggle");
     },
     // Delete item Function Delete The Desired Row
     deleteItem(id) {
