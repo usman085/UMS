@@ -17,7 +17,28 @@ protected $examRoutineDetail;
     {
         $this->examRoutineDetail = $ExamRoutineDetailInterface;
     }
+    public function UpdateExamRoutine($request){
+        $createTimeTable=null;
+        $Remove=ExamRoutineDetail::where('exam_routine_id',$request->exam_routine)->delete();
 
+        foreach($request->exam_rouine_data as $data){
+            
+            $createExamRoutine=ExamRoutineDetail::create([
+                'day'=>$data['day'],
+                'course_id'=>$data['course_id'],
+                'date'=>$data['date'],
+                'startingTime'=>$data['startingTime'],
+                'endingTime'=>$data['endingTime'],
+                'class_room_id'=>$data['class_room_id'],
+                'exam_routine_id'=>$request->exam_routine
+            ]);
+            }
+            if ( $createExamRoutine != null ) {
+                return response( ['message'=>'Status Update'], 200 );
+            } else {
+                return response( ['message'=>'Noting tp update'], 200 );
+            }
+    }
     public function deleteExamRoutine( $request )
     {
         $deleteExamRoutine = ExamRoutine::where( 'id',$request->id );

@@ -167,7 +167,7 @@ export default {
         classRoom_name: data.classRoom_name,
         day: data.day,
         date: data.date,
-        startingtime: data.startingtime,
+        startingTime: data.startingTime,
         endingTime: data.endingTime,
         classRoom_id: data.classRoom_id,
       });

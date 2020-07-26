@@ -62,6 +62,7 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/insert-time-table','ApiController\TimeTable\TimeTableController@InserTimeTable');
 
     // Exam Routine
+    Route::post('/update-exam-routine','ApiController\ExamRoutine\ExamRoutineController@UpdateExamRoutine');
     Route::post('/delete-exam-routine','ApiController\ExamRoutine\ExamRoutineController@deleteExamRoutine');
     Route::post('/get-exam-routine','ApiController\ExamRoutine\ExamRoutineController@getExamRoutine');
     Route::post('/insert-exam-routine','ApiController\ExamRoutine\ExamRoutineController@InsertExamRoutine');

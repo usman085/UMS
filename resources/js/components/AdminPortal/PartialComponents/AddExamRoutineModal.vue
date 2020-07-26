@@ -6,7 +6,9 @@
             <v-card>
                 <!-- Condional Rendering -->
                 <v-card-title>{{ updateBtn ? 'Update' : 'Enter' }} Add Exam Schedual</v-card-title>
-                <v-card-subtitle>Select and Enter Exam Schedual</v-card-subtitle>
+                <v-card-subtitle>Select and Enter Exam Schedual
+                     
+                </v-card-subtitle>
                 <v-card-text>
                     <v-container>
                         <!-- Form Start -->
@@ -133,13 +135,7 @@ export default {
         },
         //*** fun for get updated data and send to array
         updateExamData: function () {
-            EventBus.$emit("updateExamData", this.ExamRoutineData);
-            this.$store.dispatch("AddExamRoutineModalToggle");
-        },
-        //*** Insert Data In Table
-
-        insertExamData: function () {
-            let subject = this.$store.state.allCourses.filter(
+              let subject = this.$store.state.allCourses.filter(
                 item => item.id == this.ExamRoutineData.subject_id
             );
             let ClassRoom = this.classRooms.filter(
@@ -147,9 +143,21 @@ export default {
             );
             this.ExamRoutineData.subject_name = subject[0].course_title;
             this.ExamRoutineData.classRoom_name = ClassRoom[0].class_room;
-            EventBus.$emit("insertExamData", this.ExamRoutineData);
-            this.$store.dispatch("AddExamRoutineModalToggle");
+            EventBus.$emit("updateExamData", this.ExamRoutineData);
             this.$refs.form.reset();
+            this.$store.dispatch("AddExamRoutineModalToggle");
+        },
+        //*** Insert Data In Table
+
+        insertExamData: function () {
+          let subject = this.$store.state.allCourses.filter(item => item.id == this.ExamRoutineData.subject_id);
+            let ClassRoom = this.classRooms.filter(item => item.id == this.ExamRoutineData.classRoom_id);
+             this.ExamRoutineData.subject_name = subject[0].course_title;
+            this.ExamRoutineData.classRoom_name = ClassRoom[0].class_room;
+            EventBus.$emit("insertExamData", this.ExamRoutineData);
+            this.$refs.form.reset();
+            this.$store.dispatch("AddExamRoutineModalToggle");
+           
         },
         formatDate(date) {
             if (!date) return null;

@@ -9,6 +9,7 @@ interface ExamRoutineInterface
     *
     * @return Response All exam routine
     */
+    public function UpdateExamRoutine($request);
 
     public function getExamSchedule($id);
     

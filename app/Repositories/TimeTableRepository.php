@@ -58,7 +58,7 @@ class TimeTableRepository implements TimeTableInterface {
                 'time_table_id'=>$data['time_table_id']
             ]);
         }
-       return $request->all();
+       
         if ( $createTimeTable != null ) {
             return response( ['message'=>'Status Update'], 200 );
         } else {

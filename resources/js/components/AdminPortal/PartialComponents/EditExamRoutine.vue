@@ -8,6 +8,7 @@
         Exam Schedule
       </v-card-title>
       <v-card-subtitle>
+         
         <span v-if="program == null">
           <v-progress-linear indeterminate color="cyan"></v-progress-linear>
         </span>
@@ -15,6 +16,8 @@
           v-else
         >{{program.program.program_title}} - Semester {{ program.semester | numberToNth }}</span>
       </v-card-subtitle>
+         <v-btn style="float:right;" @click="$store.dispatch('AddExamRoutineModalToggle')">Add More Class Routine</v-btn>
+
       <v-divider></v-divider>
       <v-card-text>
         <div v-if="loading" class="text-center">
@@ -53,7 +56,7 @@
           </v-simple-table>
 
           <div>
-            <v-btn class="text-center save-btn" color="primary">Save Exam Routine</v-btn>
+            <v-btn class="text-center save-btn" @click="updateExamDB()" color="primary">Update Exam Routine</v-btn>
           </div>
         </div>
       </v-card-text>
@@ -104,9 +107,10 @@ export default {
   mounted() {
     // Listen The data Recieve From  insertExamData To insert Data
     EventBus.$on("insertExamData", (data) => {
+      console.log(data);
       let id = this.randStr(6); //Genrate Random String
       // *** Push in array
-      this.insertExamData.push({
+      this.examSchedule.push({
         id: id,
         day: data.day,
         date: data.date,
@@ -115,8 +119,7 @@ export default {
         startingTime: data.startingTime,
         endingTime: data.endingTime,
         class_room: { class_room: data.classRoom_name },
-        class_room_id: data.class_room_id,
-        exam_routine_id: data.exam_routine_id,
+        class_room_id: data.classRoom_id,
       });
     });
 
@@ -134,8 +137,8 @@ export default {
             (item.startingTime = data.startingTime),
             (item.endingTime = data.endingTime),
             (item.class_room.class_room = data.classRoom_name),
-            (item.class_room_id = data.classRoom_id),
-            (item.exam_routine_id = this.exam_routine_id);
+            (item.class_room_id = data.classRoom_id)
+           
         }
       });
     });
@@ -181,6 +184,21 @@ export default {
           this.program = response.data.examSchedule[0];
 
           this.loading = false;
+        })
+        .catch((error) => {});
+    },
+    updateExamDB:function(){
+       // Headers are defined for authentication
+      let headers = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer  " + this.userAuth.token,
+      };
+     axios.post(process.env.MIX_APP_URL + "/update-exam-routine",{
+       'exam_routine':this.$route.params.id,
+       'exam_rouine_data':this.examSchedule
+       },{headers: headers,})
+        .then((res) => {
+         console.log(res);
         })
         .catch((error) => {});
     },

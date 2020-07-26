@@ -72,6 +72,9 @@ protected $ExamRoutineRepository;
         return $this->ExamRoutineRepository->checkExamRoutine($request);
     }
 
+    public function UpdateExamRoutine(Request $request){
+        return $this->ExamRoutineRepository->UpdateExamRoutine($request);
+    }
     public function getExamSchedule(Request $request)
     {
           return $this->ExamRoutineRepository->getExamSchedule($request->id);
