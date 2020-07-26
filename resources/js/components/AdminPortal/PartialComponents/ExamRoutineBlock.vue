@@ -33,20 +33,20 @@
                       <v-icon color="primary" v-bind="attrs" v-on="on">mdi-dots-vertical</v-icon>
                     </template>
                     <v-list>
-                      <v-list-item>
-                        <v-list-item-title>
-                          <v-btn :to="{name:'ExamRoutinePreview',params: { id:examDetail.id,slug:examDetail.program.program_title } }">
+                      <v-list-item :to="{name:'ExamRoutinePreview',params: { id:examDetail.id,slug:examDetail.program.program_title } }">
+                        <v-list-item-title >
+                         
                             <v-icon class="mr-2" >mdi-eye</v-icon>Preview
-                          </v-btn>
+                         
                         </v-list-item-title>
                       </v-list-item>
-                      <v-list-item>
+                      <v-list-item  :to="{name:'EditExamRoutine',params: { id:examDetail.id,slug:examDetail.program.program_title } }">
                         <v-list-item-title>
                           <v-icon class="mr-2">mdi-tooltip-edit</v-icon>Modify
                         </v-list-item-title>
                       </v-list-item>
-                      <v-list-item>
-                        <v-list-item-title class="cursor" @click="delet(examDetail.id)">
+                      <v-list-item @click="delet(examDetail.id)">
+                        <v-list-item-title class="cursor" >
                           <v-icon class="mr-2" >mdi-delete</v-icon>Delete
                         </v-list-item-title>
                       </v-list-item>

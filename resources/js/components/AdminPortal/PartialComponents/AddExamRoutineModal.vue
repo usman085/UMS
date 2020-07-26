@@ -182,8 +182,8 @@ export default {
                 day: this.editData.day,
                 date: this.editData.date,
                 endingTime: this.editData.endingTime,
-                startingtime: this.editData.startingtime,
-                classRoom_id: this.editData.classRoom_id,
+                startingTime: this.editData.startingTime,
+                classRoom_id: this.editData.class_room_id,
                 classRoom_name: this.editData.classRoom_name
             };
         },

@@ -75,7 +75,7 @@
     <!-- Icon table Add -->
   </div>
 </template>
-
+   
 <script>
 // *** Import Model From Partial Components
 import AddExamModal from "../PartialComponents/AddExamModal";

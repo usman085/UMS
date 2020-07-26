@@ -158,7 +158,7 @@ export default {
                     headers: headers
                 })
                 .then((res) => {
-                    console.log(res);
+                
                     this.$store.dispatch("timeTable", res.data.timeTables);
                     this.message = false;
                 })
