@@ -15,6 +15,7 @@ import AllTimeTable from '../components/AdminPortal/PartialComponents/AllTimeTab
 import createTimeTable from '../components/AdminPortal/PartialComponents/createTimeTable';
 import PreviewTimeTable from '../components/AdminPortal/PartialComponents/PreviewTimeTable';
 import EditTimeTable from '../components/AdminPortal/PartialComponents/EditTimeTable';
+import EditExamRoutine from '../components/AdminPortal/PartialComponents/EditExamRoutine';
 import notificationPage from '../components/AdminPortal/Pages/Notification';
 import ManageApplication from '../components/AdminPortal/Pages/ManageApplication';
 import ManageApplicationBlock from '../components/AdminPortal/PartialComponents/ManageApplicationBlock';
@@ -65,11 +66,19 @@ const AdminRoutes = [{
                     name: 'AddExamRoutine'
                 },
                 {
-                    path: 'exam-routine-preview',
+                    path: 'exam-routine-preview/:id/:slug',
                     component: examRoutinePreview,
                     name: 'ExamRoutinePreview'
                 },
                 {
+                    path: 'EditExamRoutine/:id/:slug',
+                    component: EditExamRoutine,
+                    name: 'EditExamRoutine'
+                },
+                {
+                    path: '*',
+                    redirect: 'exam-routine-block'
+                }, {
                     path: '/',
                     redirect: 'exam-routine-block'
                 }

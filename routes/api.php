@@ -20,14 +20,17 @@ Route::post('/register','ApiController\Auth\AuthController@register');
 
 Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () {
      
+  // course
     Route::post('/insert-course','ApiController\Course\CourseController@insertCourse');
     Route::post('/get-all-course','ApiController\Course\CourseController@getCourse');
     Route::post('/del-course','ApiController\Course\CourseController@delCourse');
     Route::post('/edit-course','ApiController\Course\CourseController@editCourse');
-    Route::post('/add-course-outline','ApiController\Course\CourseController@addCourseOutline');
   
+  // Course Outline
+    Route::post('/add-course-outline','ApiController\Course\CourseController@addCourseOutline');
     Route::post('/del-course-outline','ApiController\Course\CourseController@delCourseOutline');
     Route::post('/update-course-outline','ApiController\Course\CourseController@updateCourseOutline');
+  //Assign Course 
     Route::post('/assign-courses','ApiController\Program\ProgramController@AssignCourses');
     Route::post('/assign-course-to-program','ApiController\Program\ProgramController@AssignCourseToProgram');
 
@@ -47,7 +50,7 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/get-shift','ApiController\StudentRegistration\RegistrationController@getShift');
     Route::post('/get-all-program','ApiController\StudentRegistration\RegistrationController@getAllProgram');
     Route::post('/get-blood-group','ApiController\StudentRegistration\RegistrationController@getBloodGroup');
-  Route::post('/all-states','ApiController\StudentRegistration\RegistrationController@getStates');
+    Route::post('/all-states','ApiController\StudentRegistration\RegistrationController@getStates');
     Route::post('/register-student','ApiController\StudentRegistration\RegistrationController@registerStudent');
     Route::post('/get-all-time-table','ApiController\TimeTable\TimeTableController@getAllTimeTable');
     Route::post('/check-time-table','ApiController\TimeTable\TimeTableController@checkTimeTable');
@@ -57,6 +60,14 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     // register student End
     Route::post('/get-class-room-detail','ApiController\ClassRoom\ClassRoomController@getAllClassRoom');
     Route::post('/insert-time-table','ApiController\TimeTable\TimeTableController@InserTimeTable');
+
+    // Exam Routine
+    Route::post('/delete-exam-routine','ApiController\ExamRoutine\ExamRoutineController@deleteExamRoutine');
+    Route::post('/get-exam-routine','ApiController\ExamRoutine\ExamRoutineController@getExamRoutine');
+    Route::post('/insert-exam-routine','ApiController\ExamRoutine\ExamRoutineController@InsertExamRoutine');
+    Route::post('/check-exam-routine','ApiController\ExamRoutine\ExamRoutineController@checkExamRoutine');
+    Route::post('/get-exam-schedule','ApiController\ExamRoutine\ExamRoutineController@getExamSchedule');
+  
     // *** Route Group End ***//
 });
 

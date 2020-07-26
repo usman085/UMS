@@ -19,20 +19,20 @@
                                     <v-select :items="$store.state.days" v-model="ExamRoutineData.day" label="Select Day"></v-select>
                                 </v-col>
                                 <v-col cols="12" xs="6" md="6">
-                                    <v-menu ref="menu1" v-model="ExamRoutineData.date" :close-on-content-click="false" :return-value.sync="ExamRoutineData.date" transition="scale-transition" offset-y max-width="290px" min-width="290px">
-                                        <template v-slot:activator="{ on, attrs }">
-                                            <v-text-field v-model="ExamRoutineData.date" label="Select Date *" hint="MM/DD/YYYY" persistent-hint v-bind="attrs" @blur="date = parseDate(ExamRoutineData.date)" v-on="on"></v-text-field>
-                                        </template>
-                                        <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
-                                    </v-menu>
+                                   <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-text-field  v-model="date" label="Date of Birth*" hint="MM/DD/YYYY" persistent-hint v-bind="attrs" @blur="date = parseDate(dateFormatted)" v-on="on" required></v-text-field>
+                                    </template>
+                                    <v-date-picker required v-model="date" no-title @input="menu1 = false"></v-date-picker>
+                                </v-menu>
                                 </v-col>
 
                                 <v-col cols="6" xs="6" md="6">
-                                    <v-select :items="$store.state.subjects" v-model="ExamRoutineData.subject" label="Select Course"></v-select>
+                                    <v-select :items="$store.state.allCourses" v-model="ExamRoutineData.subject_id" item-text="course_title" item-value="id" label="Select Course"></v-select>
                                 </v-col>
 
                                 <v-col cols="6">
-                                    <v-select :items="$store.state.classRooms" v-model="ExamRoutineData.classRoom" label="Select Class Room"></v-select>
+                                    <v-select :items="classRooms" item-value="id" item-text="class_room" v-model="ExamRoutineData.classRoom_id" label="Select Class Room"></v-select>
                                 </v-col>
                                 <v-col cols="6">
                                     <!-- time picker -->
@@ -85,7 +85,9 @@ export default {
         dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
         menu1: false,
         startingTimeModal: false, //Time picker modal For Starting time
-        endingTimeModal: false // Time Picker modl for Ending Time
+        endingTimeModal: false, // Time Picker modl for Ending Time
+        classRooms: [],
+        courses: []
     }),
 
     watch: {
@@ -94,6 +96,36 @@ export default {
         }
     },
     methods: {
+        getClassRoom() {
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            axios
+                .post(process.env.MIX_APP_URL + "/get-class-room-detail", "", {
+                    headers: headers
+                })
+                .then(res => {
+                    this.classRooms = res.data.rooms;
+                })
+                .catch(err => {});
+        },
+        getCourse: function () {
+            // Headers are defined for authentication
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            // send request to Api Route
+            axios
+                .post(process.env.MIX_APP_URL + "/get-all-course", "", {
+                    headers: headers
+                })
+                .then(res => {
+                    this.$store.dispatch("allCourses", res.data.courses);
+                })
+                .catch(error => {});
+        },
         //*** Fun for Close Modal
         cancel: function () {
             this.$store.dispatch("AddExamRoutineModalToggle");
@@ -105,7 +137,16 @@ export default {
             this.$store.dispatch("AddExamRoutineModalToggle");
         },
         //*** Insert Data In Table
+
         insertExamData: function () {
+            let subject = this.$store.state.allCourses.filter(
+                item => item.id == this.ExamRoutineData.subject_id
+            );
+            let ClassRoom = this.classRooms.filter(
+                item => item.id == this.ExamRoutineData.classRoom_id
+            );
+            this.ExamRoutineData.subject_name = subject[0].course_title;
+            this.ExamRoutineData.classRoom_name = ClassRoom[0].class_room;
             EventBus.$emit("insertExamData", this.ExamRoutineData);
             this.$store.dispatch("AddExamRoutineModalToggle");
             this.$refs.form.reset();
@@ -125,16 +166,25 @@ export default {
     },
     // *** Reactive Property
     computed: {
+        //User Auth function authorizing Admin & use in Header
+        userAuth: function () {
+            return cryptoJSON.decrypt(
+                JSON.parse(localStorage.getItem("adminLogin")),
+                "ums"
+            );
+        },
         // *** Time Table Modal Object if update data get then put in object
         ExamRoutineData: function () {
             return {
                 id: this.editData.id,
-                subject: this.editData.subject,
+                subject_id: this.editData.subject_id,
+                subject_name: this.editData.subject_name,
                 day: this.editData.day,
                 date: this.editData.date,
                 endingTime: this.editData.endingTime,
                 startingTime: this.editData.startingTime,
-                classRoom: this.editData.classRoom
+                classRoom_id: this.editData.class_room_id,
+                classRoom_name: this.editData.classRoom_name
             };
         },
         // set the formate of date
@@ -145,6 +195,10 @@ export default {
         AddExamRoutineModal: function () {
             return this.$store.state.AddExamRoutineModal;
         }
+    },
+    created() {
+        this.getCourse();
+        this.getClassRoom();
     }
 };
 </script>

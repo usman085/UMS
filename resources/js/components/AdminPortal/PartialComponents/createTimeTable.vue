@@ -35,6 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                {{ mondaySchedule }}
                     <!-- Monday Rendering -->
                     <tr>
                         <td class="day">Monday</td>

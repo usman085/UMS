@@ -15,7 +15,6 @@
 // *** Index Route Render Vue App
 
 
-
 Route::get('/{any}', function(){
     return view('index');
 })->where('any', '.*');

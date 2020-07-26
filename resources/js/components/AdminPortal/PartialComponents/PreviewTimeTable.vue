@@ -18,120 +18,120 @@
                 <v-progress-circular indeterminate :size="50" color="primary"></v-progress-circular>
             </div>
             <div v-else>
-               
+
                 <div v-if="items.length > 0">
-                <v-simple-table  class="mt-5 elevation-2">
-                <template>
-                    <thead>
-                        <tr>
-                            <th colspan="4">Class Routine Day By Day</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="day">Monday</td>
+                    <v-simple-table class="mt-5 elevation-2">
+                        <template>
+                            <thead>
+                                <tr>
+                                    <th colspan="4">Class Routine Day By Day</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="day">Monday</td>
 
-                            <td v-for="(timeTable, index) in mondaySchdule" :key="index">
-                                <span class="class-room">{{
+                                    <td v-for="(timeTable, index) in mondaySchdule" :key="index">
+                                        <span class="class-room">{{
                             timeTable.class_room.class_room | capitalize
                         }}</span>
-                                <span class="class-time">{{
+                                        <span class="class-time">{{
                             timeTable.startingTime +'-' +timeTable.endingTime | capitalize
                         }}</span>
-                                <br />
-                                <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
-                                <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
-                            </td>
-                        </tr>
+                                        <br />
+                                        <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
+                                        <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
+                                    </td>
+                                </tr>
 
-                        <tr>
-                            <td class="day">Tuesday</td>
+                                <tr>
+                                    <td class="day">Tuesday</td>
 
-                            <td v-for="(timeTable, index) in tuesdaySchdule" :key="index">
-                                <span class="class-room">{{
+                                    <td v-for="(timeTable, index) in tuesdaySchdule" :key="index">
+                                        <span class="class-room">{{
                             timeTable.class_room.class_room | capitalize
                         }}</span>
-                                <span class="class-time">{{
+                                        <span class="class-time">{{
                             timeTable.startingTime +'-' +timeTable.endingTime | capitalize
                         }}</span>
-                                <br />
-                                <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
-                                <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
-                            </td>
-                        </tr>
+                                        <br />
+                                        <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
+                                        <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
+                                    </td>
+                                </tr>
 
-                        <tr>
-                            <td class="day">Wednesday</td>
+                                <tr>
+                                    <td class="day">Wednesday</td>
 
-                            <td v-for="(timeTable, index) in wednesdaySchdule" :key="index">
-                                <span class="class-room">{{
+                                    <td v-for="(timeTable, index) in wednesdaySchdule" :key="index">
+                                        <span class="class-room">{{
                             timeTable.class_room.class_room | capitalize
                         }}</span>
-                                <span class="class-time">{{
+                                        <span class="class-time">{{
                             timeTable.startingTime +'-' +timeTable.endingTime | capitalize
                         }}</span>
-                                <br />
-                                <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
-                                <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
-                            </td>
-                        </tr>
+                                        <br />
+                                        <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
+                                        <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
+                                    </td>
+                                </tr>
 
-                        <tr>
-                            <td class="day">Thrusday</td>
+                                <tr>
+                                    <td class="day">Thrusday</td>
 
-                            <td v-for="(timeTable, index) in thrusdaySchdule" :key="index">
-                                <span class="class-room">{{
+                                    <td v-for="(timeTable, index) in thrusdaySchdule" :key="index">
+                                        <span class="class-room">{{
                             timeTable.class_room.class_room | capitalize
                         }}</span>
-                                <span class="class-time">{{
+                                        <span class="class-time">{{
                             timeTable.startingTime +'-' +timeTable.endingTime | capitalize
                         }}</span>
-                                <br />
-                                <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
-                                <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
-                            </td>
-                        </tr>
+                                        <br />
+                                        <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
+                                        <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
+                                    </td>
+                                </tr>
 
-                        <tr>
-                            <td class="day">Friday</td>
+                                <tr>
+                                    <td class="day">Friday</td>
 
-                            <td v-for="(timeTable, index) in thrusdaySchdule" :key="index">
-                                <span class="class-room">{{
+                                    <td v-for="(timeTable, index) in thrusdaySchdule" :key="index">
+                                        <span class="class-room">{{
                             timeTable.class_room.class_room | capitalize
                         }}</span>
-                                <span class="class-time">{{
+                                        <span class="class-time">{{
                             timeTable.startingTime +'-' +timeTable.endingTime | capitalize
                         }}</span>
-                                <br />
-                                <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
-                                <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
-                            </td>
-                        </tr>
+                                        <br />
+                                        <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
+                                        <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
+                                    </td>
+                                </tr>
 
-                        <tr>
-                            <td class="day">Saturday</td>
+                                <tr>
+                                    <td class="day">Saturday</td>
 
-                            <td v-for="(timeTable, index) in saturdaySchdule" :key="index">
-                                <span class="class-room">{{
+                                    <td v-for="(timeTable, index) in saturdaySchdule" :key="index">
+                                        <span class="class-room">{{
                             timeTable.class_room.class_room | capitalize
                         }}</span>
-                                <span class="class-time">{{
+                                        <span class="class-time">{{
                             timeTable.startingTime +'-' +timeTable.endingTime | capitalize
                         }}</span>
-                                <br />
-                                <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
-                                <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </template>
-               </v-simple-table>
-               </div>
+                                        <br />
+                                        <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
+                                        <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </template>
+                    </v-simple-table>
+                </div>
                 <div v-else>
                     <p>Noting to Show</p>
                 </div>
             </div>
-          
+
         </v-card-text>
     </v-card>
 </div>

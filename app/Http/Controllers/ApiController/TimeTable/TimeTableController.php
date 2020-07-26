@@ -10,6 +10,7 @@ use App\Repositories\Interfaces\TimeTableInterface;
 class TimeTableController extends Controller
 {
     protected $timeTableRepository;
+
     /**
      * Class Constructor
      * @param TimeTableInterface
@@ -25,7 +26,11 @@ class TimeTableController extends Controller
      * 
      * @return All-TimeTable
      */
-    public function getAllTimeTable(){
+    
+    
+    public function getAllTimeTable()
+    {
+
         return $this->timeTableRepository->getAllTimeTable();
     }
      /**
