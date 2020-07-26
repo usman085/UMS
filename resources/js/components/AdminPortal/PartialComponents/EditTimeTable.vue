@@ -1,16 +1,25 @@
 <template>
 <div class="create-time-table-wrapper">
-    <v-card>
-        <span text-align="left" class="back-btn">
-            <v-icon @click="$router.push('all-time-table')">mdi-arrow-left</v-icon>
-        </span>
-        <v-card-title class=" time-header">
-            <b class="tmeTableHead text-center">Daily Time Table</b></v-card-title>
-        <!-- Card Sub title On Inserted Object -->
-        <v-card-subtitle>test</v-card-subtitle>
-    </v-card>
+    <v-card> 
+       <v-card-title>
+            <span class="back-btn">
+                <v-icon @click="$router.push({name:'AllTimeTable'})">mdi-arrow-left</v-icon>
+            </span>
+            Time Table</v-card-title>
+        <v-card-subtitle>
+            <span v-if="program == null">
+                <v-progress-linear indeterminate color="cyan"></v-progress-linear>
+            </span>
+            <span v-else> {{program.program.program_title}} - Semester {{ program.semester | numberToNth }} </span>
+        </v-card-subtitle>
+        <v-divider></v-divider>
     <!-- Conditional Rendering  -->
-    <div>
+    <v-card-text>
+      <div v-if="loading" class="text-center">
+                <v-progress-circular indeterminate :size="50" color="primary"></v-progress-circular>
+            </div>
+            <div v-else>
+                <div v-if="timeTableData.length > 0"> 
         <!-- Time Table Start -->
         <v-simple-table class="mt-5 elevation-2">
             <template>
@@ -23,83 +32,99 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Monday Rendering -->
                     <tr>
                         <td class="day">Monday</td>
-                        <td v-for="(timeTable,index) in mondaySchedule" :key="index">
-                            <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
-                            <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime | capitalize  }}</span>
-                            <br>
-                            <span class="teacher-name text-center">{{ timeTable.subject | capitalize  }}<br></span>
-                            <span class="subject-name">({{ timeTable.teacher | capitalize  }})</span>
+
+                        <td v-for="(timeTable, index) in mondaySchedule" :key="index">
+                            <span class="class-room">{{
+                            timeTable.class_room.class_room | capitalize
+                        }}</span>
+                            <span class="class-time">{{
+                            timeTable.startingTime +'-' +timeTable.endingTime | capitalize
+                        }}</span>
+                            <br />
+                            <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
+                            <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
                             <span class="action-icons">
                                 <v-icon @click="editEntry(timeTable.id)">mdi-pencil</v-icon>
                                 <v-icon @click="delEntry(timeTable.id)">mdi-delete</v-icon>
                             </span>
                         </td>
                     </tr>
-                    <!-- Monday Rendering -->
 
-                    <!-- Tuesday Rendering -->
                     <tr>
                         <td class="day">Tuesday</td>
-                        <td v-for="(timeTable,index) in tuesdaySchedule" :key="index">
-                            <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
-                            <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime | capitalize  }}</span>
-                            <br>
-                            <span class="teacher-name text-center">{{ timeTable.subject | capitalize  }}<br></span>
-                            <span class="subject-name">({{ timeTable.teacher | capitalize  }})</span>
+
+                        <td v-for="(timeTable, index) in tuesdaySchedule" :key="index">
+                            <span class="class-room">{{
+                            timeTable.class_room.class_room | capitalize
+                        }}</span>
+                            <span class="class-time">{{
+                            timeTable.startingTime +'-' +timeTable.endingTime | capitalize
+                        }}</span>
+                            <br />
+                            <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
+                            <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
                             <span class="action-icons">
                                 <v-icon @click="editEntry(timeTable.id)">mdi-pencil</v-icon>
                                 <v-icon @click="delEntry(timeTable.id)">mdi-delete</v-icon>
                             </span>
                         </td>
                     </tr>
-                    <!-- Tuesday Rendering -->
 
-                    <!-- Wednesday Rendering -->
                     <tr>
                         <td class="day">Wednesday</td>
-                        <td v-for="(timeTable,index) in wednesdaySchedule" :key="index">
-                            <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
-                            <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime | capitalize  }}</span>
-                            <br>
-                            <span class="teacher-name text-center">{{ timeTable.subject | capitalize  }}<br></span>
-                            <span class="subject-name">({{ timeTable.teacher | capitalize  }})</span>
+
+                        <td v-for="(timeTable, index) in wednesdaySchedule" :key="index">
+                            <span class="class-room">{{
+                            timeTable.class_room.class_room | capitalize
+                        }}</span>
+                            <span class="class-time">{{
+                            timeTable.startingTime +'-' +timeTable.endingTime | capitalize
+                        }}</span>
+                            <br />
+                            <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
+                            <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
                             <span class="action-icons">
                                 <v-icon @click="editEntry(timeTable.id)">mdi-pencil</v-icon>
                                 <v-icon @click="delEntry(timeTable.id)">mdi-delete</v-icon>
                             </span>
                         </td>
                     </tr>
-                    <!-- Wednesday rendering -->
 
-                    <!-- Thursday Rendering -->
                     <tr>
-                        <td class="day">Thursday</td>
-                        <td v-for="(timeTable,index) in thursdaySchedule" :key="index">
-                            <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
-                            <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime | capitalize  }}</span>
-                            <br>
-                            <span class="teacher-name text-center">{{ timeTable.subject | capitalize  }}<br></span>
-                            <span class="subject-name">({{ timeTable.teacher | capitalize  }})</span>
+                        <td class="day">Thrusday</td>
+
+                        <td v-for="(timeTable, index) in thursdaySchedule" :key="index">
+                            <span class="class-room">{{
+                            timeTable.class_room.class_room | capitalize
+                        }}</span>
+                            <span class="class-time">{{
+                            timeTable.startingTime +'-' +timeTable.endingTime | capitalize
+                        }}</span>
+                            <br />
+                            <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
+                            <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
                             <span class="action-icons">
                                 <v-icon @click="editEntry(timeTable.id)">mdi-pencil</v-icon>
                                 <v-icon @click="delEntry(timeTable.id)">mdi-delete</v-icon>
                             </span>
                         </td>
                     </tr>
-                    <!-- Thursday  Rendering-->
 
-                    <!-- Friday Rendering -->
                     <tr>
                         <td class="day">Friday</td>
-                        <td v-for="(timeTable,index) in fridaySchedule" :key="index">
-                            <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
-                            <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime | capitalize  }}</span>
-                            <br>
-                            <span class="teacher-name text-center">{{ timeTable.subject | capitalize  }}<br></span>
-                            <span class="subject-name">({{ timeTable.teacher | capitalize  }})</span>
+
+                        <td v-for="(timeTable, index) in fridaySchedule" :key="index">
+                            <span class="class-room">{{
+                            timeTable.class_room.class_room | capitalize
+                        }}</span>
+                            <span class="class-time">{{
+                            timeTable.startingTime +'-' +timeTable.endingTime | capitalize
+                        }}</span>
+                            <br />
+                            <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
+                            <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
                             <span class="action-icons">
                                 <v-icon @click="editEntry(timeTable.id)">mdi-pencil</v-icon>
                                 <v-icon @click="delEntry(timeTable.id)">mdi-delete</v-icon>
@@ -107,40 +132,45 @@
                         </td>
                     </tr>
 
-                    <!-- Friday Rendering -->
-
-                    <!-- Saturday Rendering -->
                     <tr>
                         <td class="day">Saturday</td>
-                        <td v-for="(timeTable,index) in saturdaySchedule" :key="index">
-                            <span class="class-room">{{ timeTable.classRoom | capitalize  }}</span>
-                            <span class="class-time">{{ timeTable.startingtime+'-'+timeTable.endingTime   }}</span>
-                            <br>
-                            <span class="teacher-name text-center">{{ timeTable.subject | capitalize  }}<br></span>
-                            <span class="subject-name">({{ timeTable.teacher | capitalize  }})</span>
+
+                        <td v-for="(timeTable, index) in saturdaySchedule" :key="index">
+                            <span class="class-room">{{
+                            timeTable.class_room.class_room | capitalize
+                        }}</span>
+                            <span class="class-time">{{
+                            timeTable.startingTime +'-' +timeTable.endingTime | capitalize
+                        }}</span>
+                            <br />
+                            <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
+                            <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
                             <span class="action-icons">
                                 <v-icon @click="editEntry(timeTable.id)">mdi-pencil</v-icon>
                                 <v-icon @click="delEntry(timeTable.id)">mdi-delete</v-icon>
                             </span>
                         </td>
                     </tr>
-
-                    <!-- Satrday Rendering -->
                 </tbody>
             </template>
         </v-simple-table>
+        </div>
+         <div v-else>
+                    <p>Noting to Show</p>
+                </div>
         <!-- Time Table -->
         <div>
-            <v-btn class="text-center save-btn" color="primary">Update Time Table</v-btn>
+            <v-btn class="text-center save-btn" color="primary" @click="updateTimeTable()">Update Time Table</v-btn>
         </div>
     </div>
-
+    </v-card-text>
+</v-card>
     <!-- Time Table Steps Modal -->
     <timeTableDetail />
 
     <!-- Time Table detail Modal & 2 props-->
     <TimeTableModal :editData="EditTimeTableData" :updateBtn="updateBtn" />
-
+        <pacer :message="tableMessage"/>
 </div>
 </template>
 
@@ -150,26 +180,32 @@ import TimeTableModal from './createTimeTableModal';
 import timeTableDetail from './TimeTableDetail';
 // *** Event Bus
 import EventBus from '../../../EventBus/eventBus';
-
+import pacer from '../../CommonGobalComponent/Pacer';
 export default {
     name: 'EditTimeTable',
     components: {
         TimeTableModal,
-        timeTableDetail
+        timeTableDetail,
+        pacer
     }, //Register Components
     // Mounted Hook
     mounted() {
+
+        this.getTImeTableData(this.$route.params.id);
         // *** Update Array
         EventBus.$on('updateTimeTableData', (data) => {
             this.timeTableData.filter(item => {
                 this.updateBtn = false;
                 if (item.id == data.id) {
                     item.day = data.day;
-                    item.teacher = data.teacher;
-                    item.classRoom = data.classRoom;
-                    item.startingtime = data.startingtime;
-                    item.endingTime = data.endingTime;
-                    item.subject = data.subject;
+                    item.teacher = data.teacher,
+                    item.course_id= data.subject_id,
+                    item.course.course_title = data.subject_name,
+                    item.startingTime = data.startingTime,
+                    item.endingTime = data.endingTime,
+                    item.class_room.class_room = data.classRoom_name,
+                    item.class_room_id = data.class_room_id,
+                    item.time_table_id=this.time_table_id
                 }
             });
         });
@@ -184,14 +220,18 @@ export default {
         EventBus.$on('timeTableData', (data) => {
             let id = this.randStr(6); //Genrate Random String
             // *** Push in array
+            
             this.timeTableData.push({
                 id: id,
                 day: data.day,
                 teacher: data.teacher,
-                subject: data.subject,
-                startingtime: data.startingtime,
+                course_id: data.subject_id,
+                course:{course_title: data.subject_name},
+                startingTime: data.startingTime,
                 endingTime: data.endingTime,
-                classRoom: data.classRoom
+                class_room:{class_room: data.classRoom_name},
+                class_room_id: data.class_room_id,
+                time_table_id:this.time_table_id
             });
 
         });
@@ -199,157 +239,27 @@ export default {
     // *** Data Object
     data: function () {
         return {
-            timeTableData: [{
-                    id: 1,
-                    day: "Monday",
-                    teacher: "usman",
-                    subject: "Eng",
-                    startingtime: "10:00",
-                    endingTime: "11:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 2,
-                    day: "Monday",
-                    teacher: "mehreen",
-                    subject: "Math",
-                    startingtime: "10:00",
-                    endingTime: "11:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 3,
-                    day: "Monday",
-                    teacher: "Ijaz",
-                    subject: "OOP",
-                    startingtime: "10:00",
-                    endingTime: "11:00",
-                    classRoom: "cr4"
-                },
-                {
-                    id: 4,
-                    day: "Tuesday",
-                    teacher: "usman",
-                    subject: "English",
-                    startingtime: "10:00",
-                    endingTime: "11:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 5,
-                    day: "Tuesday",
-                    teacher: "test",
-                    subject: "English",
-                    startingtime: "10:00",
-                    endingTime: "11:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 6,
-                    day: "Tuesday",
-                    teacher: "usman",
-                    subject: "urdu",
-                    startingtime: "10:00",
-                    endingTime: "11:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 7,
-                    day: "Saturday",
-                    teacher: "test",
-                    subject: "English",
-                    startingtime: "10:00",
-                    endingTime: "11:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 8,
-                    day: "Saturday",
-                    teacher: "test",
-                    subject: "Letrature",
-                    startingtime: "10:00",
-                    endingTime: "11:00",
-                    classRoom: "cr8"
-                },
-                {
-                    id: 8,
-                    day: "Saturday",
-                    teacher: "Aslam",
-                    subject: "English",
-                    startingtime: "10:00",
-                    endingTime: "11:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 10,
-                    day: "Wednesday",
-                    teacher: "usman",
-                    subject: "English",
-                    startingtime: "10:00",
-                    endingTime: "11:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 11,
-                    day: "Wednesday",
-                    teacher: "Amjad",
-                    subject: "Islamiyat",
-                    startingtime: "10:00",
-                    endingTime: "11:00",
-                    classRoom: "cr2"
-                },
-                {
-                    id: 12,
-                    day: "Wednesday",
-                    teacher: "Amjad",
-                    subject: "Islamiyat",
-                    startingtime: "10:00",
-                    endingTime: "11:00",
-                    classRoom: "cr2"
-                },
-                {
-                    id: 13,
-                    day: "Thrusday",
-                    teacher: "usman",
-                    subject: "English",
-                    startingtime: "10:00",
-                    endingTime: "11:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 14,
-                    day: "Friday",
-                    teacher: "usman",
-                    subject: "English",
-                    startingtime: "10:00",
-                    endingTime: "11:00",
-                    classRoom: "cr3"
-                },
-
-                {
-                    id: 15,
-                    day: "Sunday",
-                    teacher: "usman",
-                    subject: "English",
-                    startingtime: "10:00",
-                    endingTime: "11:00",
-                    classRoom: "cr3"
-                },
-
-            ],
+            
+            loading: true,
+            program: null,
+            timeTableData: [],
+            time_table_id:'',
             updateBtn: false, //props for modal buttons
             // ***Edit Time Array use as a props
-            EditTimeTableData: [{
+            EditTimeTableData: {
                 id: '',
                 day: '',
                 teacher: '',
-                subject: '',
-                startingtime: '',
+                subject_id: '',
+                subject_name: '',
+                startingTime: '',
                 endingTime: '',
-                classRoom: '',
-            }],
+                classRoom_name: '',
+                class_room_id: '',
+                time_table_id:''
+            },
             // *** Root Time Table Array
-
+        tableMessage:'',
             //*** Time Table Detail
             scheduleHead: {
                 program: '',
@@ -362,6 +272,45 @@ export default {
     },
     // Methods Object
     methods: {
+        updateTimeTable:function(){
+            this.tableMessage="Updating Time Table......";
+            this.$store.dispatch('overlay');
+             // Headers are required for authentication
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+             axios.post(process.env.MIX_APP_URL + '/update-time-table-data',{
+                 'timeTableData':this.timeTableData,
+                 'time_table_id':this.time_table_id},{headers: headers})
+            .then(res=>{
+                this.tableMessage="";
+            this.$store.dispatch('overlay');
+             this.$router.push({name :'PreviewTimeTable', params: { id:this.time_table_id,slug:'Updated Time Table' } })
+            })
+            .catch(err=>{})
+        },
+        getTImeTableData: function (id) {
+            // Headers are required for authentication
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            // sending request to Api Route
+            axios.post(process.env.MIX_APP_URL + '/time-table-data', {
+                    'id': id
+                }, {
+                    headers: headers
+                })
+                .then((res) => {
+                    this.timeTableData = res.data.timeTable[0].time_table_detail;
+                    this.time_table_id=this.$route.params.id;
+                   
+                    this.program = res.data.timeTable[0];
+                    this.loading = false;
+                })
+                .catch(err => err)
+        },
         // *** Delete Entry In array
         delEntry: function (id) {
             this.timeTableData = this.timeTableData.filter(data => data.id != id);
@@ -369,8 +318,19 @@ export default {
         },
         // *** Edit Array
         editEntry: function (id) {
-            this.EditTimeTableData = this.timeTableData.filter(data => data.id == id);
-            this.updateBtn = true;
+            let filterRow = this.timeTableData.filter(data => data.id == id);
+
+            this.EditTimeTableData.id = filterRow[0].id,
+                this.EditTimeTableData.day = filterRow[0].day,
+                this.EditTimeTableData.teacher = filterRow[0].teacher,
+                this.EditTimeTableData.subject_id = filterRow[0].course_id,
+                this.EditTimeTableData.subject_name = filterRow[0].course.course_title,
+                this.EditTimeTableData.startingTime = filterRow[0].startingTime,
+                this.EditTimeTableData.endingTime = filterRow[0].endingTime,
+                this.EditTimeTableData.classRoom_name = filterRow[0].class_room.class_room,
+                this.EditTimeTableData.class_room_id = filterRow[0].class_room_id,
+                this.EditTimeTableData.time_table_id=this.time_table_id
+                this.updateBtn = true;
             this.$store.dispatch('CreateTimeTableModal')
         },
         //  Genrate Randam string Fun
@@ -385,6 +345,9 @@ export default {
     },
     // Reactive Property
     computed: {
+        userAuth: function () {
+            return cryptoJSON.decrypt(JSON.parse(localStorage.getItem("adminLogin")), "ums");
+        },
         // *** Filter Monday Data in Root Array
         mondaySchedule: function () {
             return this.timeTableData.filter(data => data.day == "Monday");

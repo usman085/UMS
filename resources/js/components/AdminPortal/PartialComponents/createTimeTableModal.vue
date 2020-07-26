@@ -10,54 +10,70 @@
                 <v-card-text>
                     <v-container>
                         <!-- Form Start -->
-                        <v-form ref="form">
+                <ValidationObserver ref="observer" v-slot="{ invalid }">
+                    <v-form  ref="form">
+                      
                             <!--Form Ref variable-->
                             <v-row>
                                 <!-- hidden field for updating -->
                                 <input type="hidden" v-model="detailSchedule.id" />
                                 <v-col cols="12">
-
-                                    <v-select :items="$store.state.days" v-model="detailSchedule.day" label="Select Day"></v-select>
+                                    <ValidationProvider name="Day" rules="required" v-slot="{ errors }">
+                                    <v-select :error-messages="errors" :items="$store.state.days" v-model="detailSchedule.day" label="Select Day"></v-select>
+                                    </ValidationProvider>
                                 </v-col>
                                 <v-col cols="12">
-                                    <v-select :items="$store.state.allCourses" item-text="course_title" item-value="id" v-model="detailSchedule.subject_id" label="Select Subject"></v-select>
+                                     <ValidationProvider name="Course" rules="required" v-slot="{ errors }">
+                                          <v-select :error-messages="errors" :items="$store.state.allCourses" item-text="course_title" item-value="id" v-model="detailSchedule.subject_id" label="Select Course"></v-select>
+                                       </ValidationProvider>   
+                                   
                                 </v-col>
 
                                 <v-col cols="6">
-                                    <v-select :items="$store.state.teachers" v-model="detailSchedule.teacher" label="Select Teacher"></v-select>
+                                    <ValidationProvider name="Teacher" rules="required" v-slot="{ errors }">
+                                    <v-select :error-messages="errors" :items="$store.state.teachers" v-model="detailSchedule.teacher" label="Select Teacher"></v-select>
+                                    </ValidationProvider>
                                 </v-col>
 
                                 <v-col cols="6">
-                                    <v-select :items="classRooms" item-value="id" item-text="class_room" v-model="detailSchedule.classRoom_id" label="Select Class"></v-select>
+                                    <ValidationProvider name="Teacher" rules="required" v-slot="{ errors }">
+                                      <v-select :error-messages="errors" :items="classRooms" item-value="id" item-text="class_room" v-model="detailSchedule.class_room_id" label="Select Class Room"></v-select>
+                                    </ValidationProvider>
+                                  
                                 </v-col>
                                 <v-col cols="6">
                                     <!-- time picker -->
-                                    <v-menu ref="menu" v-model="startingTimeModal" :close-on-content-click="false" :nudge-right="40" :return-value.sync="detailSchedule.startingtime" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+                                    <v-menu ref="menu" v-model="startingTimeModal" :close-on-content-click="false" :nudge-right="40" :return-value.sync="detailSchedule.startingTime" transition="scale-transition" offset-y max-width="290px" min-width="290px">
                                         <template v-slot:activator="{ on, attrs }">
-                                            <v-text-field v-model="detailSchedule.startingtime" label="Pick Starting Time" prepend-icon readonly v-bind="attrs" v-on="on"></v-text-field>
+                                            <ValidationProvider name="Starting Time" rules="required" v-slot="{ errors }">
+                                            <v-text-field :error-messages="errors" v-model="detailSchedule.startingTime" label="Pick Starting Time" prepend-icon readonly v-bind="attrs" v-on="on"></v-text-field>
+                                            </ValidationProvider>
                                         </template>
-                                        <v-time-picker v-if="startingTimeModal" v-model="detailSchedule.startingtime" full-width @click:minute="$refs.menu.save(detailSchedule.startingtime)"></v-time-picker>
+                                        <v-time-picker v-if="startingTimeModal" v-model="detailSchedule.startingTime" full-width @click:minute="$refs.menu.save(detailSchedule.startingTime)"></v-time-picker>
                                     </v-menu>
                                 </v-col>
 
                                 <v-col cols="6">
                                     <v-menu ref="menu2" v-model="endingTimeModal" :close-on-content-click="false" :nudge-right="40" :return-value.sync="detailSchedule.endingTime" transition="scale-transition" offset-y max-width="290px" min-width="290px">
                                         <template v-slot:activator="{ on, attrs }">
-                                            <v-text-field v-model="detailSchedule.endingTime" label="Pick Ending Time" prepend-icon readonly v-bind="attrs" v-on="on"></v-text-field>
-                                        </template>
+                                            <ValidationProvider name="Ending Time" rules="required" v-slot="{ errors }">
+                                            <v-text-field :error-messages="errors" v-model="detailSchedule.endingTime" label="Pick Ending Time" prepend-icon readonly v-bind="attrs" v-on="on"></v-text-field>
+                                            </ValidationProvider>
+                                       </template>
                                         <v-time-picker v-if="endingTimeModal" v-model="detailSchedule.endingTime" full-width @click:minute="$refs.menu2.save(detailSchedule.endingTime)"></v-time-picker>
                                     </v-menu>
                                 </v-col>
 
                                 <v-col cols="12">
                                     <div class="text-center">
-                                        <v-btn color="primary" v-if="!updateBtn" @click.stop="insertTimeTable()">Add To Schedule</v-btn>
-                                        <v-btn color="primary" v-if="updateBtn" @click.stop="updateTableData()">Update the Schedule</v-btn>
-                                        <v-btn color="red" class="cancel-btn" @click.stop="cancel()">Cancel</v-btn>
+                                        <v-btn color="primary" :disabled="invalid" v-if="!updateBtn" @click.stop="insertTimeTable()">Add To Schedule</v-btn>
+                                        <v-btn color="primary" :disabled="invalid" v-if="updateBtn" @click.stop="updateTableData()">Update the Schedule</v-btn>
+                                        <v-btn color="red"  class="cancel-btn" @click.stop="cancel()">Cancel</v-btn>
                                     </div>
                                 </v-col>
                             </v-row>
                         </v-form>
+                        </ValidationObserver>
                     </v-container>
                 </v-card-text>
             </v-card>
@@ -71,7 +87,20 @@
 <script>
 // *** Import Event Bus
 import EventBus from "../../../EventBus/eventBus";
-
+import {
+    required
+} from 'vee-validate/dist/rules';
+import {
+    extend,
+    ValidationObserver,
+    ValidationProvider,
+    setInteractionMode
+} from "vee-validate";
+extend('required', {
+    ...required,
+    message: '{_field_} can not be empty',
+});
+setInteractionMode("eager");
 export default {
     name: "TimeTableModal",
     props: ["editData", "updateBtn"], //props 'editData' for Updating & 'updateBtn' for Btn & title
@@ -83,6 +112,10 @@ export default {
             endingTimeModal: false, // Time Picker modl for Ending Time
           
         };
+    },
+    components: {
+        ValidationObserver,
+        ValidationProvider,
     },
     mounted() {
         this.getCourse();
@@ -127,6 +160,12 @@ export default {
         },
         //*** fun for get updated data and send to array
         updateTableData: function () {
+
+            let subject = this.$store.state.allCourses.filter(item => item.id == this.detailSchedule.subject_id);
+            let ClassRoom = this.classRooms.filter(item => item.id == this.detailSchedule.class_room_id);
+               
+            this.detailSchedule.subject_name = subject[0].course_title;
+            this.detailSchedule.classRoom_name = ClassRoom[0].class_room;
             EventBus.$emit("updateTimeTableData", this.detailSchedule);
             this.$store.dispatch("CreateTimeTableModal");
             this.$refs.form.reset();
@@ -134,9 +173,9 @@ export default {
         //*** Insert Data In Table
         insertTimeTable: function () {
             let subject = this.$store.state.allCourses.filter(item => item.id == this.detailSchedule.subject_id);
-            let ClassRoom = this.classRooms.filter(item => item.id == this.detailSchedule.classRoom_id);
+            let ClassRoom = this.classRooms.filter(item => item.id == this.detailSchedule.class_room_id);
             this.detailSchedule.subject_name = subject[0].course_title;
-            this.detailSchedule.classRoom_name=ClassRoom[0].class_room;
+            // this.detailSchedule.classRoom_name = ClassRoom[0].class_room;
             EventBus.$emit("timeTableData", this.detailSchedule);
             this.$store.dispatch("CreateTimeTableModal");
             this.$refs.form.reset();
@@ -153,15 +192,15 @@ export default {
         // *** Time Table Modal Object if update data get then put in object
         detailSchedule: function () {
             return {
-                id: this.editData[0].id,
-                day: this.editData[0].day,
-                teacher: this.editData[0].teacher,
-                subject_id: this.editData[0].subject_id,
-                subject_name: this.editData[0].subject_name,
-                startingtime: this.editData[0].startingtime,
-                endingTime: this.editData[0].endingTime,
-                classRoom_id: this.editData[0].classRoom_id,
-                classRoom_name: this.editData[0].classRoom_name
+                id: this.editData.id,
+                day: this.editData.day,
+                teacher: this.editData.teacher,
+                subject_id: this.editData.subject_id,
+                subject_name: this.editData.subject_name,
+                startingTime: this.editData.startingTime,
+                endingTime: this.editData.endingTime,
+                class_room_id: this.editData.class_room_id,
+                classRoom_name: this.editData.classRoom_name
             };
         },
         // *** Toggle Schedule Modal

@@ -44,7 +44,7 @@
             <tr v-for="(item, index) in insertExamData" :key="index">
               <td class="text-center title">{{ item.day }}</td>
               <td class="text-center title">{{ item.date }}</td>
-              <td class="text-center title">{{ item.startingtime }}</td>
+              <td class="text-center title">{{ item.startingTime }}</td>
               <td class="text-center title">{{ item.endingTime }}</td>
               <td class="text-center title">{{ item.subject_name }}</td>
               <td class="text-center title">
@@ -106,7 +106,7 @@ export default {
         day: "",
         date: "",
         subject: "",
-        startingtime: "",
+        startingTime: "",
         endingTime: "",
         classRoom: ""
       }
@@ -181,7 +181,7 @@ export default {
           item.day = data.day;
           item.date = data.date;
           item.classRoom = data.classRoom;
-          item.startingtime = data.startingtime;
+          item.startingTime = data.startingTime;
           item.endingTime = data.endingTime;
           item.subject = data.subject;
         }

@@ -40,10 +40,11 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/del-program','ApiController\Program\ProgramController@deleteProgram');
     Route::post('/edit-program','ApiController\Program\ProgramController@editProgram');
     Route::post('/del-assign-course','ApiController\Program\ProgramController@delAssignCourse');
-  //  program routes end
-    Route::post('/all-country','ApiController\StudentRegistration\RegistrationController@allCountry');
-    Route::post('/all-cities','ApiController\StudentRegistration\RegistrationController@allCity');
-  // register student start
+    //  program routes end
+  Route::post('/all-country','ApiController\StudentRegistration\RegistrationController@allCountry');
+  Route::post('/all-cities','ApiController\StudentRegistration\RegistrationController@allCity');
+    // register student start
+    Route::post('/del-time-table','ApiController\TimeTable\TimeTableController@delTimeTable');
     Route::post('/get-gender','ApiController\StudentRegistration\RegistrationController@getGender');
     Route::post('/get-guardian','ApiController\StudentRegistration\RegistrationController@getGuardian');
     Route::post('/get-shift','ApiController\StudentRegistration\RegistrationController@getShift');
@@ -53,6 +54,9 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/register-student','ApiController\StudentRegistration\RegistrationController@registerStudent');
     Route::post('/get-all-time-table','ApiController\TimeTable\TimeTableController@getAllTimeTable');
     Route::post('/check-time-table','ApiController\TimeTable\TimeTableController@checkTimeTable');
+    Route::post('/time-table-data','ApiController\TimeTable\TimeTableController@TimeTableDataById');
+    Route::post('/update-time-table-data','ApiController\TimeTable\TimeTableController@UpdateTimeTable');
+    Route::post('/time-table-status','ApiController\TimeTable\TimeTableController@changeTimeTableStatus');
     // register student End
     Route::post('/get-class-room-detail','ApiController\ClassRoom\ClassRoomController@getAllClassRoom');
     Route::post('/insert-time-table','ApiController\TimeTable\TimeTableController@InserTimeTable');

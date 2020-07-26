@@ -35,7 +35,7 @@
                                     <h3 class="title font-weight-light mb-2">Done!</h3>
                                     <span class="caption grey--text">This Parameters Are same For all enter schedules</span>
                                     <span class="caption grey--text">Thanks for Setting require Parameter</span><br>
-                                    <v-btn color="primary" v-if="avaiable">Modify Time Table</v-btn>
+                                    <v-btn color="primary" v-if="avaiable != '' " @click="modify()">Modify Time Table</v-btn>
                                     <v-btn color="primary" @click="AddTimeTableModel()" v-else>Create Time Table</v-btn>
                                 </div>
                                 <div v-else class="text-center">
@@ -98,15 +98,21 @@ export default {
             program: [],
             semester: ["1", "2", "3", "4", "5", '6', '7', '8'],
             shift: [],
-            avaiable: true,
+            avaiable: null,
             scheduleHead: {
                 program: "",
+                program_name:'',
                 semester: "",
-                shift: ""
+                shift: "",
+                shift_name:''
             }
         };
     },
     methods: {
+        modify:function(){
+            this.$store.dispatch("TimeTableDetailModal");
+            this.$router.push({name:'EditTimeTable',params: { id:this.avaiable[0].id,slug:'Modifying Time Table' }})
+        },
         check: function () {
 
             if (this.step == 2) {
@@ -119,8 +125,9 @@ export default {
                     })
                     .then(res => {
                         this.avaiable = res.data.timeTables;
+                      
                         this.loading=true;
-                        console.log(res);
+                       
                     })
                     .catch((err) => err)
             }
@@ -161,7 +168,10 @@ export default {
         },
         // AddTimeTableModel  Use to open Dilog Box 
         AddTimeTableModel() {
-          
+         let program_name= this.program.filter(item=>item.id==this.scheduleHead.program);
+         this.scheduleHead.program_name=program_name[0].program_title;
+          let shift_name= this.shift.filter(item=>item.id==this.scheduleHead.shift);
+         this.scheduleHead.shift_name=shift_name[0].shift;
             EventBus.$emit("timeTableDetail", this.scheduleHead);
             this.$store.dispatch("TimeTableDetailModal");
             this.$store.dispatch("CreateTimeTableModal");
