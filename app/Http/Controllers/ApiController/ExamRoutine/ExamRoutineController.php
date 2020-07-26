@@ -35,7 +35,45 @@ protected $ExamRoutineRepository;
     
     public function getExamRoutine()
     {
-        return $this->ExamRoutineRepository->getExamRoutine();
+        return $this->ExamRoutineRepository->getExamRoutine( );
+    }
+  public function deleteExamRoutine( Request $request ) 
+    {
+        $validator = Validator::make( $request->all(), 
+        [
+            'id' => 'required',
+        ]);
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
+        return   $this->ExamRoutineRepository->deleteExamRoutine( $request );
+    }
+    
+    public function InsertExamRoutine(Request $request)
+    {
+        return $this->ExamRoutineRepository->InsertExamRoutine( $request);
     }
 
+
+    
+    public function checkExamRoutine(Request $request)
+    {
+        $validator = Validator::make( $request->all(), 
+        [
+            'program'=>'required',
+            'shift'=>'required',
+            'semester'=>'required',
+
+        ]);
+
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
+        return $this->ExamRoutineRepository->checkExamRoutine($request);
+    }
+
+    public function getExamSchedule(Request $request)
+    {
+          return $this->ExamRoutineRepository->getExamSchedule($request->id);
+    }
 }

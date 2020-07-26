@@ -6,16 +6,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExamRoutine extends Model
 {
-protected $fillable = [ 'program_title','shift_id','semester'];
+//
+    protected $fillable=['program_id','shift_id','semester','add_by'];
+    
+    public function ExamRoutineDetail()
+    {
+        return $this->hasMany('App\Models\ExamRoutineDetail');
+    }
 
-   /**
-    *  Exam Routine belongs to Program 
-    * 
-    *
-    */
-      public function program()
-      {
-        return $this->BelongsTo('App\Models\Program');
+    public function program(){
+        return $this->belongsTo('App\Models\Program');
+    }
+    public function shift(){
+        return $this->belongsTo('App\Models\Shift');
+    }
+    public function getCreatedAtAttribute($value){
+
+      return  \Carbon\Carbon::createFromTimeStamp(strtotime($value))->diffForHumans();
+       
+    }
+    public function getUpdatedAtAttribute($value){
+        return  \Carbon\Carbon::createFromTimeStamp(strtotime($value))->diffForHumans(); 
       }
-
 }

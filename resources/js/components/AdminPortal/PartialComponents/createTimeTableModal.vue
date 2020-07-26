@@ -78,9 +78,10 @@ export default {
     data: function () {
         return {
             classRooms: [],
+              courses: [],
             startingTimeModal: false, //Time picker modal For Starting time
             endingTimeModal: false, // Time Picker modl for Ending Time
-            courses: [],
+          
         };
     },
     mounted() {

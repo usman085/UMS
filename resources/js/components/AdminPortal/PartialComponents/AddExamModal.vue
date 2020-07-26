@@ -7,42 +7,53 @@
                     <span>Add Exam Routine</span>
                     <v-avatar color="primary lighten-2" class="subheading white--text" size="24" v-text="step"></v-avatar>
                 </v-card-title>
-                <!-- Model for selecting Program,Semester & Shift -->
-                <v-window v-model="step">
-                    <v-window-item :value="1">
-                        <v-card-text>
-                            <v-select :items="program" v-model="scheduleHead.program"  item-text="program_title" item-value="id" label="Select Program"></v-select>
+                  <ValidationObserver ref="observer" v-slot="{ invalid }">
+                    <v-form v-model="valid" ref="form">
+                        <v-window v-model="step">
+                            <v-window-item :value="1">
+                                <v-card-text>
+                                    <ValidationProvider name="Program" rules="required" v-slot="{ errors }">
+                                        <v-select item-text="program_title" item-value="id" :items="program" :error-messages="errors" v-model="scheduleHead.program" label="Select Program"></v-select>
+                                    </ValidationProvider>
+                                    <ValidationProvider name="Semester" rules="required" v-slot="{ errors }">
+                                        <v-select :items="semester" :error-messages="errors" v-model="scheduleHead.semester" label="Select Semester"></v-select>
+                                    </ValidationProvider>
 
-                            <v-select :items="semester" v-model="scheduleHead.semester" label="Select Semester"></v-select>
-                        </v-card-text>
-                    </v-window-item>
+                                </v-card-text>
+                            </v-window-item>
 
-                    <v-window-item :value="2">
-                        <v-card-text>
-                            <v-select :items="shift" v-model="scheduleHead.shift" item-text="Shift" item-value="id" label="Select Shift"></v-select>
-                        </v-card-text>
-                    </v-window-item>
+                            <v-window-item :value="2">
+                                <v-card-text>
+                                    <ValidationProvider name="Shift" rules="required" v-slot="{ errors }">
+                                        <v-select :items="shift" item-text="Shift" item-value="id" :error-messages="errors" v-model="scheduleHead.shift" label="Select Shift"></v-select>
+                                    </ValidationProvider>
+                                </v-card-text>
+                            </v-window-item>
 
-                    <v-window-item :value="3">
-                        <div class="pa-4 text-center">
-                            <h3 class="title font-weight-light mb-2">Done!</h3>
-                            <span class="caption grey--text">This Parameters Are same For all enter schedules</span>
-                            <span class="caption grey--text">Thanks for Setting require Parameter</span>
-                        </div>
-                    </v-window-item>
-                </v-window>
+                            <v-window-item :value="3">
+                                <div class="pa-4 text-center" v-if="loading">
+                                    <h3 class="title font-weight-light mb-2">Done!</h3>
+                                    <span class="caption grey--text">This Parameters Are same For all enter schedules</span>
+                                    <span class="caption grey--text">Thanks for Setting require Parameter</span><br>
+                                    <v-btn color="primary" v-if="avaiable">Modify Time Table</v-btn>
+                                    <v-btn color="primary" @click="AddExamRoutineModalToggle()" v-else>Create Time Table</v-btn>
+                                </div>
+                                <div v-else class="text-center">
+                                    <v-progress-circular indeterminate color="primary"></v-progress-circular>
+                                </div>
+                            </v-window-item>
+                        </v-window>
 
-                <v-divider></v-divider>
+                        <v-divider></v-divider>
 
-                <v-card-actions>
-                    <!-- One Step Back to Model  -->
-                    <v-btn :disabled="step === 1" text @click="step--">Back</v-btn>
-                    <v-spacer></v-spacer>
+                        <v-card-actions>
+                            <v-btn :disabled="step === 1" text @click="step--">Back</v-btn>
+                            <v-spacer></v-spacer>
 
-                    <v-btn :disabled="step === 3" color="primary" depressed @click="step++" v-if="step < 3">Next</v-btn>
-
-                    <v-btn color="primary" v-if="step == 3" @click="AddExamRoutineModalToggle()">Create Exam Routine Now!</v-btn>
-                </v-card-actions>
+                            <v-btn :disabled="step === 3 || (step===2 && invalid)" color="primary" depressed @click="check()" v-if="step < 3">Next</v-btn>
+                        </v-card-actions>
+                    </v-form>
+                </ValidationObserver>
             </v-card>
         </v-dialog>
     </v-row>
@@ -52,12 +63,33 @@
 <script>
 // Event Bus is Use to communicate  Between Two Components
 import EventBus from "../../../EventBus/eventBus";
+
+import {
+    required
+} from 'vee-validate/dist/rules';
+import {
+    extend,
+    ValidationObserver,
+    ValidationProvider,
+    setInteractionMode
+} from "vee-validate";
+extend('required', {
+    ...required,
+    message: '{_field_} can not be empty',
+});
+setInteractionMode("eager");
+
 export default {
     name: "AddExamModal",
-
+components: {
+        ValidationObserver,
+        ValidationProvider,
+    },
     data: function () {
         return {
             step: 1,
+             valid: true,
+            loading:false,
             program: [],
             semester: ["1", "2", "3", "4", "5","6","7","8" ],
             shift: [],
@@ -71,7 +103,25 @@ export default {
         };
     },
     methods: {
+            check: function () {
 
+            if (this.step == 2) {
+                let headers = {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + this.userAuth.token
+                };
+                axios.post(process.env.MIX_APP_URL + '/check-exam-routine', this.scheduleHead, {
+                        headers: headers
+                    })
+                    .then(res => {
+                        this.avaiable = res.data.ExamRoutine;
+                        this.loading=true;
+                       
+                    })
+                    .catch((err) => err)
+            }
+            this.step++;
+        },
         // getting shift from Database
         getShift: function () {
             // Headers are defined for authentication

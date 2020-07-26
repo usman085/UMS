@@ -15,9 +15,11 @@ class CreateExamRoutinesTable extends Migration
     {
         Schema::create('exam_routines', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('program_id');
-            $table->integer('semester');
-            $table->integer('shift_id');
+            $table->unsignedBigInteger('program_id');
+            $table->unsignedBigInteger('semester');
+            $table->unsignedBigInteger('shift_id');
+            $table->unsignedBigInteger('add_by');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

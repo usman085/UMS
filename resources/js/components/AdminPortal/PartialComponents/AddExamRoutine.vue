@@ -17,7 +17,7 @@
         </span>
         <!-- Edit Icon Base on condition -->
         <span v-if="!scheduleHead.program == '' && !$store.state.TimeTableDetailModal">
-        <!-- Open Add Exam Model To Edit Details -->
+          <!-- Open Add Exam Model To Edit Details -->
           <v-icon @click.stop="$store.dispatch('AddExamModalToggle')">mdi-pencil</v-icon>
         </span>
       </v-card-subtitle>
@@ -46,9 +46,10 @@
               <td class="text-center title">{{ item.date }}</td>
               <td class="text-center title">{{ item.startingtime }}</td>
               <td class="text-center title">{{ item.endingTime }}</td>
-              <td class="text-center title">{{ item.subject }}</td>
+              <td class="text-center title">{{ item.subject_name }}</td>
               <td class="text-center title">
-                {{ item.classRoom }}
+                {{ item.classRoom_name }}
+                
                 <span class="action-icons">
                   <v-icon @click="editData(index)">mdi-pencil</v-icon>
                   <v-icon @click="deleteItem(index)">mdi-delete</v-icon>
@@ -60,11 +61,11 @@
       </v-simple-table>
 
       <div>
-        <v-btn class="text-center save-btn" color="primary">Save Time Table</v-btn>
+        <v-btn class="text-center save-btn" @click="insertExamRoutine()" color="primary">Save Time Table</v-btn>
       </div>
     </div>
     <div class="addition-card text-center" v-else>
-    <!-- Open Model To Edit Exam Routin -->
+      <!-- Open Model To Edit Exam Routin -->
       <v-icon class="add-table" @click.stop="$store.dispatch('AddExamModalToggle')">mdi-table-edit</v-icon>
     </div>
     <!-- Conditional Rendering  -->
@@ -112,9 +113,24 @@ export default {
     };
   },
   methods: {
+     insertExamRoutine: function () {
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            axios.post(process.env.MIX_APP_URL+'/insert-exam-routine',{
+                 program: this.scheduleHead.program,
+                semester:  this.scheduleHead.semester,
+                shift: this.scheduleHead.shift,
+                examRoutineDetail:JSON.stringify(this.insertExamData)
+            },{
+                headers:headers
+            })
+            .then(res=>console.log(res.data))
+            .catch(err =>{})
+        },
     // Open The Model To Add Data
     AddExamModalToggle: function() {
-      
       this.$store.dispatch("AddExamModalToggle");
     },
     // Edit Data Function Is use to Edit Row Data
@@ -123,14 +139,13 @@ export default {
       this.updateBtn = true;
       this.$store.dispatch("AddExamRoutineModalToggle");
     },
-    
+
     // Delete item Function Delete The Desired Row
     deleteItem(index) {
       this.insertExamData.splice(index, 1);
-    
     },
-    
-    // randStr function Is Use To Generate Random String For Id 
+
+    // randStr function Is Use To Generate Random String For Id
     randStr(len) {
       let text = "";
       let chars = "abcdefghijklmnopqrstuvwxyz";
@@ -141,19 +156,20 @@ export default {
     }
   },
   mounted() {
-    
     // Listen The data Recieve From  insertExamData To insert Data
     EventBus.$on("insertExamData", data => {
       let id = this.randStr(6); //Genrate Random String
       // *** Push in array
       this.insertExamData.push({
         id: id,
-        subject: data.subject,
-        classRoom: data.classRoom,
+        subject_id: data.subject_id,
+        subject_name: data.subject_name,
+        classRoom_name: data.classRoom_name,
         day: data.day,
         date: data.date,
         startingtime: data.startingtime,
-        endingTime: data.endingTime
+        endingTime: data.endingTime,
+        classRoom_id: data.classRoom_id,
       });
     });
 
@@ -171,13 +187,22 @@ export default {
         }
       });
     });
-    
+
     // *** Add Time Table Detail in array
     EventBus.$on("ExamRoutineDetail", data => {
       this.scheduleHead.program = data.program;
       this.scheduleHead.semester = data.semester;
       this.scheduleHead.shift = data.shift;
     });
+  },
+  computed:{
+     //User Auth function authorizing Admin & use in Header
+        userAuth: function () {
+            return cryptoJSON.decrypt(
+                JSON.parse(localStorage.getItem("adminLogin")),
+                "ums"
+            );
+        },
   }
 };
 </script>

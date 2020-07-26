@@ -43,6 +43,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
                 'App\Repositories\Interfaces\ExamRoutineInterface',
                 'App\Repositories\ExamRoutineRepository');
+                
+         $this->app->bind(
+                'App\Repositories\Interfaces\ExamRoutineDetailInterface',
+                'App\Repositories\ExamRoutineDetailRepository');
     }
 
     /**

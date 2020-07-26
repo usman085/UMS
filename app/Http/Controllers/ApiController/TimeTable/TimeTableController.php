@@ -10,12 +10,17 @@ use App\Repositories\Interfaces\TimeTableInterface;
 class TimeTableController extends Controller
 {
     protected $timeTableRepository;
-    public function __construct(TimeTableInterface $TimeTableInterface){
+
+    public function __construct(TimeTableInterface $TimeTableInterface)
+    {
         $this->timeTableRepository=$TimeTableInterface;
     }
-    public function getAllTimeTable(){
+    
+    public function getAllTimeTable()
+    {
         return $this->timeTableRepository->getAllTimeTable();
     }
+    
     public function checkTimeTable(Request $request)
     {
         $validator = Validator::make( $request->all(), 

@@ -15,13 +15,13 @@ class CreateExamRoutineDetailsTable extends Migration
     {
         Schema::create('exam_routine_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('subject');
             $table->string('day');
-            $table->year('date')->nullable();
-            $table->string('endingTime');
-            $table->string('startingtime');
-            $table->string('classRoom');
-
+            $table->string('date');
+            $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('class_room_id');
+            $table->time('startingTime');
+            $table->unsignedBigInteger('exam_routine_id');
+            $table->time('endingTime');
             $table->timestamps();
         });
     }

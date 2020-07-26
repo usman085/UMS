@@ -10,5 +10,13 @@ interface ExamRoutineInterface
     * @return Response All exam routine
     */
 
+    public function getExamSchedule($id);
+    
+    public function deleteExamRoutine($request);
+
     public function getExamRoutine();
+
+    public function checkExamRoutine($request);
+
+    public function InsertExamRoutine($request);
 }

@@ -152,21 +152,28 @@ class StudentRegisterRepository implements StudentRegisterInterface {
     * @param request
     * @return Response Get program 
     */
-     public function getAllProgram()  {
+    
+    public function getAllProgram()  
+    {
            $data = Program::select('program_title','id')->get();
 
             return  response( ['data'=> $data], 200 );
     }
+    
     public function getStates()
     {
       $data=State::all();
       return response(['states'=>$data],200);
     }
-    public function allCountry(){
+    
+    public function allCountry()
+    {
       $data=Country::all();
       return response(['counties'=>$data],200);
     }
-    public function allCity(){
+
+    public function allCity()
+    {
       $data=City::all();
       return response(['cities'=>$data],200);
     }
