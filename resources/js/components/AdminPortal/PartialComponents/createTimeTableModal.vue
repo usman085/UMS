@@ -168,16 +168,18 @@ export default {
             EventBus.$emit("updateTimeTableData", this.detailSchedule);
             this.$store.dispatch("CreateTimeTableModal");
             this.$refs.form.reset();
+            this.$refs.observer.reset();
         },
         //*** Insert Data In Table
         insertTimeTable: function () {
             let subject = this.$store.state.allCourses.filter(item => item.id == this.detailSchedule.subject_id);
             let ClassRoom = this.classRooms.filter(item => item.id == this.detailSchedule.class_room_id);
             this.detailSchedule.subject_name = subject[0].course_title;
-            // this.detailSchedule.classRoom_name = ClassRoom[0].class_room;
+            this.detailSchedule.classRoom_name = ClassRoom[0].class_room;
             EventBus.$emit("timeTableData", this.detailSchedule);
             this.$store.dispatch("CreateTimeTableModal");
             this.$refs.form.reset();
+            this.$refs.observer.reset();
         }
     },
     // *** Reactive Property

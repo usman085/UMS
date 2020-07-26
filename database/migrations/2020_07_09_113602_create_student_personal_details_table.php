@@ -15,7 +15,7 @@ class CreateStudentPersonalDetailsTable extends Migration
     {
         Schema::create('student_personal_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('student_detail_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned()->index();
             $table->integer('guardian_id')->unsigned()->index();
             $table->integer('blood_id')->unsigned()->index()->nullable();
             $table->integer('gender_id')->unsigned()->index();
@@ -24,14 +24,17 @@ class CreateStudentPersonalDetailsTable extends Migration
             $table->integer('city_id')->unsigned()->index();
             $table->string('student_name');
             $table->string('father_name');
-            $table->year('date_of_birth')->nullable();
+            $table->date('date_of_birth')->nullable();
             $table->string('religion');
             $table->string('phone_number');
             $table->string('land_line_number')->nullable();    
-            $table->string('email')->unique();     
-            $table->integer('cnic')->unique(); 
+            $table->string('email');     
+            $table->string('cnic')->unique(); 
             $table->string('address'); 
             
+            $table->foreign('user_id')->references('id')->on('users') ->onDelete('cascade');
+
+
             $table->timestamps();
         });
     }

@@ -112,7 +112,6 @@ class RegistrationController extends Controller
     
     public function registerStudent(Request $request)
     {
-        return $request->state;
        
          $validator = Validator::make( $request->all(), 
         [

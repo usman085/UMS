@@ -7,7 +7,7 @@
                     <!-- If editRowMessage is tru then update else Add A New   -->
                     <span class="headline">{{ editRowMessage ? 'Update ' :' Add A New' }} Program</span>
                 </v-card-title>
-                <ValidationObserver ref="observer" v-slot="{invalid}">
+                <ValidationObserver ref="observer"  v-slot="{invalid}">
                             <!-- Form To add or Update Data -->
                             <v-form ref="form">
                 <v-card-text>
@@ -109,7 +109,7 @@ export default {
         return {
             amount: 7,
             successMessage: "",
-            valid: true,
+           
             snackbar: false,
             items: [1, 2, 3, 4],
 
@@ -121,6 +121,7 @@ export default {
             this.$refs.form.reset();
             this.$store.dispatch("AddProgramModalToggle");
             this.snackbar = true;
+            this.$refs.observer.reset();
             EventBus.$emit("EditProgram");
         },
         //**addProgram Function Is use to Add The Program

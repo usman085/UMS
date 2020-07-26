@@ -3,16 +3,19 @@
     <v-row justify="center">
         <v-dialog scrollable v-model="dialog" persistent max-width="600px">
             <v-card>
+                 
                 <v-card-title>
                     <!-- When Edit Function Call Add A New Course change to Update Course will display -->
                     <span class="headline">{{ editRowMessage ? 'Update Course' :' Add A New' }} Course</span>
                     <!-- When Edit Function Call Add A New Course change to Update Course will display -->
                 </v-card-title>
-                <v-card-text>
-                    <v-container>
-                    <ValidationObserver ref="observer">
+                
+                <v-card-text>  
+                     <ValidationObserver ref="observer"  v-slot="{invalid}">
                         <!-- form for adding course  -->
-                        <v-form v-model="valid" ref="form">
+                    <v-form  ref="form">   
+                    <v-container>
+                    
                             <v-row>
                                 <v-col cols="12">
                                    <ValidationProvider name="Course Code" rules="required" v-slot="{ errors }">
@@ -31,18 +34,20 @@
                                     </ValidationProvider>
                                 </v-col>
                             </v-row>
-                        </v-form>
-                        <!-- form for adding course  -->
-                    </ValidationObserver>
+                        
                     </v-container>
                     <small>*indicates required field</small>
-                </v-card-text>
-                <v-card-actions>
+                    <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn small color="error" @click="$store.dispatch('AddCourseModalToggle');$refs.form.reset();">Close</v-btn>
-                    <v-btn small :disabled="!valid" v-if="!editRowMessage" color="primary" @click="insertCourse()">Add</v-btn>
-                    <v-btn small :disabled="!valid" v-else color="primary" @click="editCourse()">Update</v-btn>
+                    <v-btn small :disabled="invalid" v-if="!editRowMessage" color="primary" @click="insertCourse()">Add</v-btn>
+                    <v-btn small :disabled="invalid" v-else color="primary" @click="editCourse()">Update</v-btn>
                 </v-card-actions>
+                </v-form>
+                        <!-- form for adding course  -->
+                    </ValidationObserver>
+                </v-card-text>
+                
             </v-card>
         </v-dialog>
     </v-row>
@@ -102,6 +107,7 @@ export default {
         successCall: function () {
             this.$refs.form.reset();
             this.$store.dispatch("AddCourseModalToggle");
+            this.$refs.observer.reset();
             this.snackbar = true;
             EventBus.$emit("courseEdited");
         },

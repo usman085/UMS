@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\StudentEducationalDetail;
 use App\Models\StudentPersonalDetail;
 use App\Models\StudentOfficialDetail;
-use App\Models\StudentDetail;
 use App\Models\State;
 use App\Models\City;
 use App\Models\BloodGroup;
@@ -46,12 +45,10 @@ class StudentRegisterRepository implements StudentRegisterInterface {
         'role'=>'0'
       ]);
       
-      $StudentDetail=StudentDetail::create([
-        'user_id'=>$user->id
-        ]);
-        
+
+       
       $StudentPersonalDetail=StudentPersonalDetail::create([
-        'student_detail_id' =>$StudentDetail->id,
+        'user_id'=>$user->id,
         'guardian_id' =>$request->guardian,
         'blood_id' =>$request->bloodGroup,
         'gender_id' =>$request->gender,
@@ -71,7 +68,7 @@ class StudentRegisterRepository implements StudentRegisterInterface {
 
         $StudentOfficialDetail=StudentOfficialDetail::create([
         
-        'student_detail_id' =>$StudentDetail->id,
+        'user_id'=>$user->id,
         'program_id' =>$request->program,
         'shift_id' =>$request->shift,
         'current_semester' =>$request->semester,
@@ -81,24 +78,23 @@ class StudentRegisterRepository implements StudentRegisterInterface {
            
         ]);
 
-        $StudentEducationalDetail=StudentEducationalDetail::create([
-        
-        'student_detail_id' =>$StudentDetail->id,
+        $StudentEducationalDetail=StudentEducationalDetail::create([ 
+          'user_id'=>$user->id,
         'matric_marks' =>$request->matric_marks,
         'fa_marks' =>$request->secondYear_marks,
         'school_name' =>$request->school,
         'college_name' =>$request->college,
         'matric_passing_year' =>$request->school_passing_year,
         'fa_passing_year' =>$request->college_passing_year,
-           
         ]);
         DB::commit();
+        return response( ['register'=> $user], 200 );
      }
      catch(\Exception $ex){
         DB::rollback();
-        throw $ex;
+        return response( ['register'=> $ex], 200 );
      }  
-        return response( ['register'=> $user], 200 );
+        
     }
 
     /**

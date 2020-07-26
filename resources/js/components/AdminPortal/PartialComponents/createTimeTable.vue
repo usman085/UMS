@@ -222,7 +222,7 @@ export default {
         });
         // *** Add time table Schedule in array
         EventBus.$on("timeTableData", data => {
-
+           
             let id = this.randStr(6); //Genrate Random String
             // *** Push in array
             this.timeTableData.push({

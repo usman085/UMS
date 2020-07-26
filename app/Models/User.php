@@ -41,4 +41,31 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+    *  Student  Detail belongs to user 
+    * 
+    *
+    */
+
+    public function user()
+    {
+       return $this->belongsTo('App\Models\User');
+    }
+
+
+   /**
+   *   student detail relationship with Student Personal Detail .
+   */
+   public function studentPersonalDetail()
+   {
+       return $this->hasOne('App\Models\StudentPersonalDetail');
+   }
+
+    /**
+   *  Blood Group relationship with Student Educational Detail .
+   */
+   public function studentEducationalDetail()
+   {
+       return $this->hasOne('App\Models\StudentEducationalDetail');
+   }
 }

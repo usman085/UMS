@@ -15,13 +15,15 @@ class CreateStudentEducationalDetailsTable extends Migration
     {
         Schema::create('student_educational_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('student_detail_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned()->index();
             $table->integer('matric_marks');
             $table->integer('fa_marks');
             $table->string('school_name')->nullable();
             $table->string('college_name')->nullable();
             $table->string('matric_passing_year');
             $table->string('fa_passing_year');
+
+            $table->foreign('user_id')->references('id')->on('users') ->onDelete('cascade');
 
             $table->timestamps();
         });

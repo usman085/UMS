@@ -17,11 +17,13 @@ class CreateStudentOfficialDetailsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('program_id')->unsigned()->index();
             $table->integer('shift_id')->unsigned()->index();
-            $table->integer('student_detail_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned()->index();
             $table->string('current_semester');
             $table->string('session_year');
             $table->string('roll_no');
             $table->string('registration_no');
+            
+            $table->foreign('user_id')->references('id')->on('users') ->onDelete('cascade');
             
             $table->timestamps();
         });

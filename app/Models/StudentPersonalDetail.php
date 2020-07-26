@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class StudentPersonalDetail extends Model
 {
-      protected $fillable = ['student_detail_id','guardian_id','blood_id','gender_id','country_id','city_id',
-    'student_name','father_name','date_of_birth','religion','phone_number','land_line_number','email','cnic',
+      protected $fillable = ['user_id','guardian_id','blood_id','gender_id','country_id','city_id',
+    'student_name','state_id','father_name','date_of_birth','religion','phone_number','land_line_number','email','cnic',
     'address'];
 
 
