@@ -40,6 +40,14 @@ class TimeTableController extends Controller
      * @return TimeTable-Specfic-ID
      */
     public function TimeTableDataById(Request $request){
+        $validator = Validator::make( $request->all(), 
+        [
+            'id'=>'required',
+        ]);
+
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
         return $this->timeTableRepository->TimeTableDataById($request->id);
     } 
 
@@ -76,14 +84,11 @@ class TimeTableController extends Controller
     public function UpdateTimeTable(Request $request){
         $validator = Validator::make( $request->all(), 
         [
-            'day'=>'required',
-            'course_id'=>'required',
-            'teacher'=>'required',
-            'startingTime'=>'required',
-            'endingTime'=>'required',
-            'class_room_id'=>'required',
+            
+            'timeTableData'=>'required',
             'time_table_id'=>'required',
         ]);
+            
 
         if ( $validator->fails() ) {
             return response( ['errors'=>$validator->errors()->all()], 422 );
@@ -101,12 +106,10 @@ class TimeTableController extends Controller
     public function InserTimeTable(Request $request){
         $validator = Validator::make( $request->all(), 
         [
-            'day'=>'required',
-            'course_id'=>'required',
-            'teacher'=>'required',
-            'startingTime'=>'required',
-            'endingTime'=>'required',
-            'class_room_id'=>'required',
+            'program'=>'required',
+            'semester'=>'required',
+            'shift'=>'required',
+            'timeTableDetail'=>'required',
         ]);
 
         if ( $validator->fails() ) {
