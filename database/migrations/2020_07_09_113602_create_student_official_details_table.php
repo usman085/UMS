@@ -15,9 +15,9 @@ class CreateStudentOfficialDetailsTable extends Migration
     {
         Schema::create('student_official_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('program_id')->unsigned()->index();
-            $table->integer('shift_id')->unsigned()->index();
-            $table->integer('user_id')->unsigned()->index();
+            $table->unsignedBigInteger('program_id');
+            $table->unsignedBigInteger('shift_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('current_semester');
             $table->string('session_year');
             $table->string('roll_no');

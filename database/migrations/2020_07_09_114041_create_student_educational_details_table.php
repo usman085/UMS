@@ -15,7 +15,7 @@ class CreateStudentEducationalDetailsTable extends Migration
     {
         Schema::create('student_educational_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned()->index();
+            $table->unsignedBigInteger('user_id');
             $table->integer('matric_marks');
             $table->integer('fa_marks');
             $table->string('school_name')->nullable();

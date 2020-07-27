@@ -15,13 +15,13 @@ class CreateStudentPersonalDetailsTable extends Migration
     {
         Schema::create('student_personal_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->integer('guardian_id')->unsigned()->index();
-            $table->integer('blood_id')->unsigned()->index()->nullable();
-            $table->integer('gender_id')->unsigned()->index();
-            $table->integer('country_id')->unsigned()->index();
-            $table->integer('state_id')->unsigned()->index();
-            $table->integer('city_id')->unsigned()->index();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('guardian_id');
+            $table->unsignedBigInteger('blood_id')->nullable();
+            $table->unsignedBigInteger('gender_id');
+            $table->unsignedBigInteger('country_id');
+            $table->unsignedBigInteger('state_id');
+            $table->unsignedBigInteger('city_id');
             $table->string('student_name');
             $table->string('father_name');
             $table->date('date_of_birth')->nullable();
