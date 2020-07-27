@@ -154,4 +154,8 @@ class TimeTableController extends Controller
         return $this->timeTableRepository->delTimeTable($request->id);
     }
     
+
+    public function TimeTableDataForStudent(){
+        return $this->timeTableRepository->TimeTableDataForStudent();
+    }
 }

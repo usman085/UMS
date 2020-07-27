@@ -160,7 +160,7 @@
                 </div>
         <!-- Time Table -->
         <div>
-            <v-btn class="text-center save-btn" color="primary" @click="updateTimeTable()">Update Time Table</v-btn>
+            <v-btn :disabled="timeTableData.length <= 0" class="text-center save-btn" color="primary" @click="updateTimeTable()">Update Time Table</v-btn>
         </div>
     </div>
     </v-card-text>

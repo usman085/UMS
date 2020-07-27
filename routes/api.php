@@ -19,7 +19,7 @@ Route::post('/register','ApiController\Auth\AuthController@register');
 
 
 Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () {
-     
+    Route::post('/get-student-class-routine','ApiController\TimeTable\TimeTableController@TimeTableDataForStudent');
   // course
     Route::post('/insert-course','ApiController\Course\CourseController@insertCourse');
     Route::post('/get-all-course','ApiController\Course\CourseController@getCourse');

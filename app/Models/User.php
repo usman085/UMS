@@ -61,6 +61,10 @@ class User extends Authenticatable
        return $this->hasOne('App\Models\StudentPersonalDetail');
    }
 
+   public function studentOfficalDetail()
+   {
+       return $this->hasOne('App\Models\StudentOfficialDetail');
+   }
     /**
    *  Blood Group relationship with Student Educational Detail .
    */
