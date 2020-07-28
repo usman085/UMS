@@ -6,9 +6,7 @@
                 <v-row v-if="item.heading" :key="item.heading" align="center">
                     <v-col cols="6">
                         <v-subheader v-if="item.heading">
-                            {{
-                item.heading
-                }}
+                            {{ item.heading }}
                         </v-subheader>
                     </v-col>
                 </v-row>
@@ -16,9 +14,7 @@
                     <template v-slot:activator>
                         <v-list-item-content class="list-acnhor">
                             <v-list-item-title>
-                                {{
-                  item.text
-                  }}
+                                {{ item.text }}
                             </v-list-item-title>
                         </v-list-item-content>
                     </template>
@@ -43,17 +39,13 @@
                 <v-list-item v-else :key="item.text" :to="item.url">
                     <v-list-item-action class="list-acnhor">
                         <v-icon class="list-acnhor">
-                            {{
-                item.icon
-                }}
+                            {{ item.icon }}
                         </v-icon>
                     </v-list-item-action>
 
                     <v-list-item-content class="list-acnhor">
                         <v-list-item-title>
-                            {{
-                item.text
-                }}
+                            {{ item.text }}
                         </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
@@ -138,7 +130,8 @@ export default {
                 "icon-alt": "mdi-chevron-down",
                 text: "Academics",
                 model: false,
-                children: [{
+                children: 
+                    [{
                         text: "Manage Programs",
                         icon: "mdi-book-open",
                         url: "/admin-portal/manage-program"
@@ -147,10 +140,10 @@ export default {
                         text: "Manage Courses",
                         icon: "mdi-clipboard-text",
                         url: "/admin-portal/manage-course"
-                    }
-                ]
-            }, {
-                icon: "mdi-bell",
+                    }]
+            }, 
+            {
+                icon: "mdi-calendar-text",
                 text: "Exam Routine",
                 url: "/admin-portal/exam-routine",
             },

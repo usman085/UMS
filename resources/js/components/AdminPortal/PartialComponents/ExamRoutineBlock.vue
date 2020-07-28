@@ -69,6 +69,14 @@
         </v-simple-table>
       </v-card-text>
     </v-card>
+     <v-snackbar v-model="snackbar">
+        {{ text }}
+        <template v-slot:action="{ attrs }">
+            <v-btn color="primary" text top right text-color="white" v-bind="attrs" @click="snackbar = false">
+                Close
+            </v-btn>
+        </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -77,6 +85,8 @@ export default {
   name: "ExamRoutineBlock",
   data(){
     return{
+      snackbar: false,
+            text: '',
          message: true,
       examRoutine:[],
     }
@@ -109,8 +119,8 @@ export default {
       axios
         .post(process.env.MIX_APP_URL + "/delete-exam-routine",{ id: id},{headers: headers})
         .then(res => {
-          // this.snackbar = true;
-          // this.succesMessage = "Course Delete Successfully!";
+          this.snackbar = true;
+          this.text = "Exam Schedule Delete Successfully!";
           this.getExamRoutine();
         })
         .catch(error => {});

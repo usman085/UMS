@@ -104,6 +104,7 @@ export default {
         modify:function(){
             this.$store.dispatch("TimeTableDetailModal");
             this.$router.push({name:'EditTimeTable',params: { id:this.avaiable[0].id,slug:'Modifying Time Table' }})
+          
         },
         check: function () {
             if (this.step == 2) {
@@ -114,6 +115,7 @@ export default {
                 axios.post(process.env.MIX_APP_URL + '/check-time-table', this.scheduleHead, {headers: headers})
                     .then(res => {
                         this.avaiable = res.data.timeTables;
+                        
                         this.loading=true;
                     })
                     .catch((err) => err)
@@ -151,7 +153,7 @@ export default {
          let program_name= this.program.filter(item=>item.id==this.scheduleHead.program);
          this.scheduleHead.program_name=program_name[0].program_title;
           let shift_name= this.shift.filter(item=>item.id==this.scheduleHead.shift);
-         this.scheduleHead.shift_name=shift_name[0].shift;
+         this.scheduleHead.shift_name=shift_name[0].Shift;
             EventBus.$emit("timeTableDetail", this.scheduleHead);
             this.$store.dispatch("TimeTableDetailModal");
             this.$store.dispatch("CreateTimeTableModal");

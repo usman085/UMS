@@ -306,7 +306,7 @@ export default {
         },
         // *** Delete Entry In array
         delEntry: function (id) {
-            this.timeTableData = this.timeTableData.filter(data => data.id != id);
+           cc
         },
         // *** Edit Array
         editEntry: function (id) {

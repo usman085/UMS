@@ -72,7 +72,7 @@
                                 </v-col>
                             </v-row>
                         </v-form>
-                        </ValidationObserver>
+                </ValidationObserver>
                     </v-container>
                 </v-card-text>
             </v-card>

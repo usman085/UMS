@@ -161,6 +161,7 @@ export default {
             axios.post(process.env.MIX_APP_URL + '/time-table-data', {'id': id}, {headers: headers})
                 .then((res) => {
                     this.items = res.data.timeTable[0].time_table_detail;
+                
                     this.program = res.data.timeTable[0];
                     this.loading = false;
                 })

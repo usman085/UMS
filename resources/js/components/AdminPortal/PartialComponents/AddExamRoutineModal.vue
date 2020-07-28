@@ -6,64 +6,80 @@
             <v-card>
                 <!-- Condional Rendering -->
                 <v-card-title>{{ updateBtn ? 'Update' : 'Enter' }} Add Exam Schedual</v-card-title>
-                <v-card-subtitle>Select and Enter Exam Schedual
-                     
-                </v-card-subtitle>
+                <v-card-subtitle>Select and Enter Exam Schedual</v-card-subtitle>
                 <v-card-text>
                     <v-container>
-                        <!-- Form Start -->
-                        <v-form ref="form">
-                            <!--Form Ref variable-->
-                            <v-row>
-                                <!-- hidden field for updating -->
-                                <input type="hidden" v-model="ExamRoutineData.id" />
-                                <v-col cols="12" xs="6" md="6">
-                                    <v-select :items="$store.state.days" v-model="ExamRoutineData.day" label="Select Day"></v-select>
-                                </v-col>
-                                <v-col cols="12" xs="6" md="6">
-                                   <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" transition="scale-transition" offset-y max-width="290px" min-width="290px">
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-text-field  v-model="date" label="Date of Birth*" hint="MM/DD/YYYY" persistent-hint v-bind="attrs" @blur="date = parseDate(dateFormatted)" v-on="on" required></v-text-field>
-                                    </template>
-                                    <v-date-picker required v-model="date" no-title @input="menu1 = false"></v-date-picker>
-                                </v-menu>
-                                </v-col>
+                        <ValidationObserver ref="observer" v-slot="{ invalid }">
+                            <!-- Form Start -->
+                            <v-form ref="form">
+                                <!--Form Ref variable-->
+                                <v-row>
+                                    <!-- hidden field for updating -->
+                                    <input type="hidden" v-model="ExamRoutineData.id" />
+                                    <v-col cols="12" xs="6" md="6">
+                                        <ValidationProvider name="Day" rules="required" v-slot="{ errors }">
+                                            <v-select :error-messages="errors" :items="$store.state.days" v-model="ExamRoutineData.day" label="Select Day"></v-select>
+                                        </ValidationProvider>
+                                    </v-col>
+                                    <v-col cols="12" xs="6" md="6">
+                                        <ValidationProvider name="Date" rules="required" v-slot="{ errors }">
+                                            <v-menu ref="menu1" v-model="menu1" :error-messages="errors" :close-on-content-click="false" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+                                                <template v-slot:activator="{ on, attrs }">
+                                                    <v-text-field v-model="date" label="Date*" hint="MM/DD/YYYY" persistent-hint v-bind="attrs" @blur="date = parseDate(dateFormatted)" v-on="on" required></v-text-field>
+                                                </template>
+                                                <v-date-picker required v-model="date" no-title @input="menu1 = false"></v-date-picker>
+                                            </v-menu>
+                                        </ValidationProvider>
+                                    </v-col>
 
-                                <v-col cols="6" xs="6" md="6">
-                                    <v-select :items="$store.state.allCourses" v-model="ExamRoutineData.subject_id" item-text="course_title" item-value="id" label="Select Course"></v-select>
-                                </v-col>
+                                    <v-col cols="6" xs="6" md="6">
+                                        <ValidationProvider name="Course " rules="required" v-slot="{ errors }">
+                                            <v-select :error-messages="errors" :items="$store.state.allCourses" v-model="ExamRoutineData.subject_id" item-text="course_title" item-value="id" label="Select Course"></v-select>
+                                        </ValidationProvider>
+                                    </v-col>
 
-                                <v-col cols="6">
-                                    <v-select :items="classRooms" item-value="id" item-text="class_room" v-model="ExamRoutineData.classRoom_id" label="Select Class Room"></v-select>
-                                </v-col>
-                                <v-col cols="6">
-                                    <!-- time picker -->
-                                    <v-menu ref="menu" v-model="startingTimeModal" :close-on-content-click="false" :nudge-right="40" :return-value.sync="ExamRoutineData.startingTime" transition="scale-transition" offset-y max-width="290px" min-width="290px">
-                                        <template v-slot:activator="{ on, attrs }">
-                                            <v-text-field v-model="ExamRoutineData.startingTime" label="Exam Start Time" prepend-icon readonly v-bind="attrs" v-on="on"></v-text-field>
-                                        </template>
-                                        <v-time-picker v-if="startingTimeModal" v-model="ExamRoutineData.startingTime" full-width @click:minute="$refs.menu.save(ExamRoutineData.startingTime)"></v-time-picker>
-                                    </v-menu>
-                                </v-col>
+                                    <v-col cols="6">
+                                        <ValidationProvider name="Class Room" rules="required" v-slot="{ errors }">
+                                            <v-select :error-messages="errors" :items="classRooms" item-value="id" item-text="class_room" v-model="ExamRoutineData.class_room_id" label="Select Class Room"></v-select>
+                                        </ValidationProvider>
+                                    </v-col>
+                                    <v-col cols="6">
+                                        <!-- time picker -->
+                                        
+                                            <v-menu ref="menu"  v-model="startingTimeModal" :close-on-content-click="false" :nudge-right="40" :return-value.sync="ExamRoutineData.startingTime" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+                                                <template v-slot:activator="{ on, attrs }">
+                                                  <ValidationProvider name="Starting Time" rules="required" v-slot="{ errors }">
+                                                    <v-text-field  :error-messages="errors" v-model="ExamRoutineData.startingTime" label="Exam Start Time" prepend-icon readonly v-bind="attrs" v-on="on"></v-text-field>
+                                                  </ValidationProvider>
+                                                </template>
+                                                <v-time-picker v-if="startingTimeModal" v-model="ExamRoutineData.startingTime" full-width @click:minute="$refs.menu.save(ExamRoutineData.startingTime)"></v-time-picker>
+                                            </v-menu>
+                                     
+                                    </v-col>
 
-                                <v-col cols="6">
-                                    <v-menu ref="menu2" v-model="endingTimeModal" :close-on-content-click="false" :nudge-right="40" :return-value.sync="ExamRoutineData.endingTime" transition="scale-transition" offset-y max-width="290px" min-width="290px">
-                                        <template v-slot:activator="{ on, attrs }">
-                                            <v-text-field v-model="ExamRoutineData.endingTime" label="Pick Ending Time" prepend-icon readonly v-bind="attrs" v-on="on"></v-text-field>
-                                        </template>
-                                        <v-time-picker v-if="ExamRoutineData" v-model="ExamRoutineData.endingTime" full-width @click:minute="$refs.menu2.save(ExamRoutineData.endingTime)"></v-time-picker>
-                                    </v-menu>
-                                </v-col>
+                                    <v-col cols="6">
+                                     
+                                            <v-menu ref="menu2" v-model="endingTimeModal" :close-on-content-click="false" :nudge-right="40" :return-value.sync="ExamRoutineData.endingTime" transition="scale-transition" offset-y max-width="290px" min-width="290px">
+                                                <template v-slot:activator="{ on, attrs }">
+                                                    <ValidationProvider name="Ending Time" rules="required" v-slot="{ errors }">
+                                                    <v-text-field  :error-messages="errors" v-model="ExamRoutineData.endingTime" label="Pick Ending Time" prepend-icon readonly v-bind="attrs" v-on="on"></v-text-field>
+                                                 </ValidationProvider>
+                                                </template>
+                                                <v-time-picker v-if="ExamRoutineData" v-model="ExamRoutineData.endingTime" full-width @click:minute="$refs.menu2.save(ExamRoutineData.endingTime)"></v-time-picker>
+                                            </v-menu>
+                                       
+                                    </v-col>
 
-                                <v-col cols="12">
-                                    <div class="text-center">
-                                        <v-btn color="primary" v-if="!updateBtn" @click.stop="insertExamData()">Add To Schedule</v-btn>
-                                        <v-btn color="primary" v-if="updateBtn" @click.stop="updateExamData()">Update the Schedule</v-btn>
-                                        <v-btn color="red" class="cancel-btn" @click.stop="cancel()">Cancel</v-btn>
-                                    </div>
-                                </v-col>
-                            </v-row>
-                        </v-form>
+                                    <v-col cols="12">
+                                        <div class="text-center">
+                                            <v-btn color="primary" :disabled="invalid" v-if="!updateBtn" @click.stop="insertExamData()">Add To Schedule</v-btn>
+                                            <v-btn color="primary" :disabled="invalid" v-if="updateBtn" @click.stop="updateExamData()">Update the Schedule</v-btn>
+                                            <v-btn color="red" class="cancel-btn" @click.stop="cancel()">Cancel</v-btn>
+                                        </div>
+                                    </v-col>
+                                </v-row>
+                            </v-form>
+                        </ValidationObserver>
                     </v-container>
                 </v-card-text>
             </v-card>
@@ -77,50 +93,74 @@
 <script>
 // *** Import Event Bus
 import EventBus from "../../../EventBus/eventBus";
+import {
+    required
+} from "vee-validate/dist/rules";
+import {
+    extend,
+    ValidationObserver,
+    ValidationProvider,
+    setInteractionMode,
+} from "vee-validate";
 
+extend("required", {
+    ...required,
+    message: "{_field_} can not be empty",
+});
+
+setInteractionMode("eager");
 export default {
     name: "AddExamRoutineModal",
     props: ["editData", "updateBtn"],
-
-    data: vm => ({
+    components: {
+        ValidationObserver,
+        ValidationProvider,
+    },
+    data: (vm) => ({
         date: new Date().toISOString().substr(0, 10),
         dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
         menu1: false,
         startingTimeModal: false, //Time picker modal For Starting time
         endingTimeModal: false, // Time Picker modl for Ending Time
         classRooms: [],
-        courses: []
+        courses: [],
     }),
 
     watch: {
         date(val) {
             this.ExamRoutineData.date = this.formatDate(this.date);
-        }
+        },
     },
     methods: {
         getClassRoom() {
             let headers = {
                 "Content-Type": "application/json",
-                Authorization: "Bearer  " + this.userAuth.token
+                Authorization: "Bearer  " + this.userAuth.token,
             };
-            axios.post(process.env.MIX_APP_URL + "/get-class-room-detail", "", { headers: headers})
-                .then(res => {
+            axios
+                .post(process.env.MIX_APP_URL + "/get-class-room-detail", "", {
+                    headers: headers,
+                })
+                .then((res) => {
                     this.classRooms = res.data.rooms;
                 })
-                .catch(err => {});
+                .catch((err) => {});
         },
         getCourse: function () {
             // Headers are defined for authentication
             let headers = {
                 "Content-Type": "application/json",
-                Authorization: "Bearer  " + this.userAuth.token
+                Authorization: "Bearer  " + this.userAuth.token,
             };
             // send request to Api Route
-            axios.post(process.env.MIX_APP_URL + "/get-all-course", "", {headers: headers})
-                .then(res => {
+            axios
+                .post(process.env.MIX_APP_URL + "/get-all-course", "", {
+                    headers: headers,
+                })
+                .then((res) => {
                     this.$store.dispatch("allCourses", res.data.courses);
                 })
-                .catch(error => {});
+                .catch((error) => {});
         },
         //*** Fun for Close Modal
         cancel: function () {
@@ -129,10 +169,15 @@ export default {
         },
         //*** fun for get updated data and send to array
         updateExamData: function () {
-              let subject = this.$store.state.allCourses.filter(item => item.id == this.ExamRoutineData.subject_id);
-            let ClassRoom = this.classRooms.filter(item => item.id == this.ExamRoutineData.classRoom_id);
+            let subject = this.$store.state.allCourses.filter(
+                (item) => item.id == this.ExamRoutineData.subject_id
+            );
+            let ClassRoom = this.classRooms.filter(
+                (item) => item.id == this.ExamRoutineData.class_room_id
+            );
             this.ExamRoutineData.subject_name = subject[0].course_title;
             this.ExamRoutineData.classRoom_name = ClassRoom[0].class_room;
+           
             EventBus.$emit("updateExamData", this.ExamRoutineData);
             this.$refs.form.reset();
             this.$store.dispatch("AddExamRoutineModalToggle");
@@ -140,14 +185,17 @@ export default {
         //*** Insert Data In Table
 
         insertExamData: function () {
-            let subject = this.$store.state.allCourses.filter(item => item.id == this.ExamRoutineData.subject_id);
-            let ClassRoom = this.classRooms.filter(item => item.id == this.ExamRoutineData.classRoom_id);
+            let subject = this.$store.state.allCourses.filter(
+                (item) => item.id == this.ExamRoutineData.subject_id
+            );
+            let ClassRoom = this.classRooms.filter(
+                (item) => item.id == this.ExamRoutineData.class_room_id
+            );
             this.ExamRoutineData.subject_name = subject[0].course_title;
             this.ExamRoutineData.classRoom_name = ClassRoom[0].class_room;
             EventBus.$emit("insertExamData", this.ExamRoutineData);
             this.$refs.form.reset();
             this.$store.dispatch("AddExamRoutineModalToggle");
-           
         },
         formatDate(date) {
             if (!date) return null;
@@ -158,7 +206,7 @@ export default {
             if (!date) return null;
             const [month, day, year] = date.split("/");
             return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
-        }
+        },
     },
     // *** Reactive Property
     computed: {
@@ -179,8 +227,8 @@ export default {
                 date: this.editData.date,
                 endingTime: this.editData.endingTime,
                 startingTime: this.editData.startingTime,
-                classRoom_id: this.editData.class_room_id,
-                classRoom_name: this.editData.classRoom_name
+                class_room_id: this.editData.class_room_id,
+                classRoom_name: this.editData.classRoom_name,
             };
         },
         // set the formate of date
@@ -190,12 +238,12 @@ export default {
         // *** Toggle Schedule Modal
         AddExamRoutineModal: function () {
             return this.$store.state.AddExamRoutineModal;
-        }
+        },
     },
     created() {
         this.getCourse();
         this.getClassRoom();
-    }
+    },
 };
 </script>
 

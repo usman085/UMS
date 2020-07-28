@@ -18,7 +18,7 @@ class ExamRoutineDetailRepository implements ExamRoutineDetailInterface
             'date'=>$data['date'],
             'startingTime'=>$data['startingTime'],
             'endingTime'=>$data['endingTime'],
-            'class_room_id'=>$data['classRoom_id'],
+            'class_room_id'=>$data['class_room_id'],
             'exam_routine_id'=>$examRoutine->id
         ]);
         }

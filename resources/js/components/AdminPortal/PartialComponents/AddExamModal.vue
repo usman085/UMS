@@ -7,7 +7,7 @@
                     <span>Add Exam Routine</span>
                     <v-avatar color="primary lighten-2" class="subheading white--text" size="24" v-text="step"></v-avatar>
                 </v-card-title>
-                  <ValidationObserver ref="observer" v-slot="{ invalid }">
+                <ValidationObserver ref="observer" v-slot="{ invalid }">
                     <v-form v-model="valid" ref="form">
                         <v-window v-model="step">
                             <v-window-item :value="1">
@@ -18,7 +18,6 @@
                                     <ValidationProvider name="Semester" rules="required" v-slot="{ errors }">
                                         <v-select :items="semester" :error-messages="errors" v-model="scheduleHead.semester" label="Select Semester"></v-select>
                                     </ValidationProvider>
-
                                 </v-card-text>
                             </v-window-item>
 
@@ -34,8 +33,9 @@
                                 <div class="pa-4 text-center" v-if="loading">
                                     <h3 class="title font-weight-light mb-2">Done!</h3>
                                     <span class="caption grey--text">This Parameters Are same For all enter schedules</span>
-                                    <span class="caption grey--text">Thanks for Setting require Parameter</span><br>
-                                    <v-btn color="primary" v-if="avaiable">Modify Time Table</v-btn>
+                                    <span class="caption grey--text">Thanks for Setting require Parameter</span>
+                                    <br />
+                                    <v-btn color="primary" v-if="avaiable != ''" @click="modify()">Modify Time Table</v-btn>
                                     <v-btn color="primary" @click="AddExamRoutineModalToggle()" v-else>Create Time Table</v-btn>
                                 </div>
                                 <div v-else class="text-center">
@@ -66,34 +66,42 @@ import EventBus from "../../../EventBus/eventBus";
 
 import {
     required
-} from 'vee-validate/dist/rules';
-import { extend, ValidationObserver,ValidationProvider,setInteractionMode} from "vee-validate";
-extend('required', {
+} from "vee-validate/dist/rules";
+import {
+    extend,
+    ValidationObserver,
+    ValidationProvider,
+    setInteractionMode,
+} from "vee-validate";
+extend("required", {
     ...required,
-    message: '{_field_} can not be empty',
+    message: "{_field_} can not be empty",
 });
 
 setInteractionMode("eager");
 
 export default {
     name: "AddExamModal",
-    components: { 
+    components: {
         ValidationObserver,
         ValidationProvider,
     },
     data: function () {
         return {
+            avaiable: null,
             step: 1,
             valid: true,
-            loading:false,
+            loading: false,
             program: [],
-            semester: ["1", "2", "3", "4", "5","6","7","8" ],
+            semester: ["1", "2", "3", "4", "5", "6", "7", "8"],
             shift: [],
             scheduleHead: {
                 program: "",
+                program_name: "",
                 semester: "",
-                shift: ""
-            }
+                shift: "",
+                shift_name: "",
+            },
         };
     },
     methods: {
@@ -101,51 +109,87 @@ export default {
             if (this.step == 2) {
                 let headers = {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer " + this.userAuth.token
+                    Authorization: "Bearer " + this.userAuth.token,
                 };
-                axios.post(process.env.MIX_APP_URL + '/check-exam-routine', this.scheduleHead, {headers: headers})
-                    .then(res => {
+                axios
+                    .post(
+                        process.env.MIX_APP_URL + "/check-exam-routine",
+                        this.scheduleHead, {
+                            headers: headers
+                        }
+                    )
+                    .then((res) => {
                         this.avaiable = res.data.ExamRoutine;
-                        this.loading=true;   
+                        this.loading = true;
                     })
-                    .catch((err) => err)
+                    .catch((err) => err);
             }
             this.step++;
         },
+        modify: function () {
+            this.$store.dispatch("AddExamModalToggle");
+
+            this.$router.push({
+                name: 'EditExamRoutine',
+                params: {
+                    id: this.avaiable[0].id,
+                    slug: 'Modifying Exam Routine'
+                }
+            })
+        },
+
         // getting shift from Database
         getShift: function () {
             // Headers are defined for authentication
             let headers = {
                 "Content-Type": "application/json",
-                Authorization: "Bearer  " + this.userAuth.token
+                Authorization: "Bearer  " + this.userAuth.token,
             };
             // send request to Api Route
-            axios.post(process.env.MIX_APP_URL + "/get-shift", "", {headers: headers})
-                .then(response => {this.shift = response.data.data;})
-                .catch(error => {});
+            axios
+                .post(process.env.MIX_APP_URL + "/get-shift", "", {
+                    headers: headers
+                })
+                .then((response) => {
+                    this.shift = response.data.data;
+                })
+                .catch((error) => {});
         },
         // getting program from Database
         getProgram: function () {
             // Headers are defined for authentication
             let headers = {
                 "Content-Type": "application/json",
-                Authorization: "Bearer  " + this.userAuth.token
+                Authorization: "Bearer  " + this.userAuth.token,
             };
             // send request to Api Route
-            axios.post(process.env.MIX_APP_URL + "/get-all-program", "", {headers: headers})
-                .then(response => {this.program = response.data.data;})
-                .catch(error => {});
+            axios
+                .post(process.env.MIX_APP_URL + "/get-all-program", "", {
+                    headers: headers,
+                })
+                .then((response) => {
+                    this.program = response.data.data;
+                })
+                .catch((error) => {});
         },
 
         // Open The Add Exam Routine Modal
         AddExamRoutineModalToggle: function () {
-            // Store Selected Data from Model in Exam Routine Detail   
+            let program_name = this.program.filter(
+                (item) => item.id == this.scheduleHead.program
+            );
+            this.scheduleHead.program_name = program_name[0].program_title;
+            let shift_name = this.shift.filter(
+                (item) => item.id == this.scheduleHead.shift
+            );
+            this.scheduleHead.shift_name = shift_name[0].Shift;
+            // Store Selected Data from Model in Exam Routine Detail
             EventBus.$emit("ExamRoutineDetail", this.scheduleHead);
             // Close The Add Exam Model
             this.$store.dispatch("AddExamModalToggle");
             // Close The Add Exam Routine Model
             this.$store.dispatch("AddExamRoutineModalToggle");
-        }
+        },
     },
     computed: {
         //User Auth function authorizing Admin & use in Header
@@ -158,11 +202,11 @@ export default {
 
         AddExamModal: function () {
             return this.$store.state.AddExamModal;
-        }
+        },
     },
     created() {
         this.getProgram();
         this.getShift();
-    }
+    },
 };
 </script>

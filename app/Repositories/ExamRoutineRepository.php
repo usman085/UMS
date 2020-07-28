@@ -18,10 +18,11 @@ protected $examRoutineDetail;
         $this->examRoutineDetail = $ExamRoutineDetailInterface;
     }
     public function UpdateExamRoutine($request){
+      
         $createTimeTable=null;
         $Remove=ExamRoutineDetail::where('exam_routine_id',$request->exam_routine)->delete();
 
-        foreach($request->exam_rouine_data as $data){
+        foreach($request->exam_routine_data as $data){
             
             $createExamRoutine=ExamRoutineDetail::create([
                 'day'=>$data['day'],
@@ -70,7 +71,7 @@ protected $examRoutineDetail;
     public function checkExamRoutine( $request ) 
     {
         $ExamRoutine = ExamRoutine::where( 'program_id', $request->program )->where( 'shift_id', $request->shift )
-        ->where( 'semester', $request->semester )->exists();
+        ->where( 'semester', $request->semester )->get();
         
         return response( ['ExamRoutine'=>$ExamRoutine], 200 );
 

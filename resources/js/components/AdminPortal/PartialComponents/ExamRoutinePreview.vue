@@ -34,7 +34,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="schedule in examSchedule.exam_routine_detail" :key="schedule.id">
+                                <tr v-for="schedule in examSchedule" :key="schedule.id">
                                     <td class="text-center title">
                                         <span>{{ schedule.day }}</span>
                                     </td>
@@ -58,11 +58,12 @@
                             </tbody>
                         </template>
                     </v-simple-table>
-                <!-- </div>
-                <div v-else>
+                </div>
+                <!-- <div v-else>
+                
                     <p>No Data!</p>
                 </div> -->
-            </div>
+            <!-- </div> -->
 
         </v-card-text>
     </v-card>
@@ -96,7 +97,8 @@ export default {
             // send request to Api Route
             axios.post(process.env.MIX_APP_URL + "/get-exam-schedule", {'id': id,}, {headers: headers,})
                 .then((response) => {
-                    this.examSchedule = response.data.examSchedule[0];
+                    this.examSchedule = response.data.examSchedule[0].exam_routine_detail;
+                    
                     this.program = response.data.examSchedule[0];
                     this.loading = false;
                 })
