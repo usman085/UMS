@@ -35,8 +35,8 @@
                                     <span class="caption grey--text">This Parameters Are same For all enter schedules</span>
                                     <span class="caption grey--text">Thanks for Setting require Parameter</span>
                                     <br />
-                                    <v-btn color="primary" v-if="avaiable != ''" @click="modify()">Modify Time Table</v-btn>
-                                    <v-btn color="primary" @click="AddExamRoutineModalToggle()" v-else>Create Time Table</v-btn>
+                                    <v-btn color="primary" v-if="avaiable != ''" @click="modify()">Modify Exam Routine</v-btn>
+                                    <v-btn color="primary" @click="AddExamRoutineModalToggle()" v-else>Create Exam Routine</v-btn>
                                 </div>
                                 <div v-else class="text-center">
                                     <v-progress-circular indeterminate color="primary"></v-progress-circular>
@@ -182,6 +182,7 @@ export default {
             let shift_name = this.shift.filter(
                 (item) => item.id == this.scheduleHead.shift
             );
+            console.log(this.scheduleHead);
             this.scheduleHead.shift_name = shift_name[0].Shift;
             // Store Selected Data from Model in Exam Routine Detail
             EventBus.$emit("ExamRoutineDetail", this.scheduleHead);

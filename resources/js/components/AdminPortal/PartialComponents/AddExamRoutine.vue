@@ -211,6 +211,7 @@ export default {
 
         // *** Add Time Table Detail in array
         EventBus.$on("ExamRoutineDetail", data => {
+           
             this.scheduleHead.program = data.program;
             this.scheduleHead.semester = data.semester;
             this.scheduleHead.shift = data.shift;
