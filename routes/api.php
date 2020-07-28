@@ -25,7 +25,7 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/get-all-course','ApiController\Course\CourseController@getCourse');
     Route::post('/del-course','ApiController\Course\CourseController@delCourse');
     Route::post('/edit-course','ApiController\Course\CourseController@editCourse');
-  
+    Route::post('/get-course-for-student','ApiController\Course\CourseController@getCourseForStudent');
   // Course Outline
     Route::post('/add-course-outline','ApiController\Course\CourseController@addCourseOutline');
     Route::post('/del-course-outline','ApiController\Course\CourseController@delCourseOutline');
