@@ -54,4 +54,7 @@ interface CourseInterface
     public function addCourseOutline($request);
 
     public function updateCourseOutline($request);
+
+
+    public function getCourseForStudent();
 }

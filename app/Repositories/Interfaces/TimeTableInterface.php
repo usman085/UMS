@@ -17,4 +17,7 @@ interface TimeTableInterface
    public function delTimeTable($id);
 
    public function UpdateTimeTable($request);
+
+
+   public function TimeTableDataForStudent();
 }

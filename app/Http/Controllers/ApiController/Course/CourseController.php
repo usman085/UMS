@@ -129,12 +129,13 @@ class CourseController extends Controller
     */
 
     public function addCourseOutline(Request $request){
+        
         $validator = Validator::make( $request->all(), 
         [
             'prerequisite' => 'required',
             'labs'=>'required',
             'lectures'=>'required',
-            'course_id'=>'required',
+            'id'=>'required',
             'course_outline'=>'required'
         ]);
         
@@ -165,8 +166,11 @@ class CourseController extends Controller
             return response( ['errors'=>$validator->errors()->all()], 422 );
         }
 
-       return $this->courseRepository->updateCourseOutline($request);
+        return $this->courseRepository->updateCourseOutline($request);
     }
 
+    public function getCourseForStudent(){
+        return $this->courseRepository->getCourseForStudent();
+    }
     
 }

@@ -4,7 +4,8 @@ namespace App\Repositories;
 use App\Repositories\Interfaces\CourseInterface;
 use App\Models\Course;
 use App\Models\CourseOutline;
-
+use App\Models\User;
+use Auth;
 class CourseRepository implements CourseInterface 
 {
     
@@ -125,7 +126,7 @@ class CourseRepository implements CourseInterface
         }
     }
     public function addCourseOutline($request){
-    
+           
         $addCourseOutline=CourseOutline::create([
             'prerequisite'=>$request->prerequisite,
             'labs'=>$request->labs,
@@ -142,5 +143,18 @@ class CourseRepository implements CourseInterface
         else{
             return response(['message'=>'error'],200);
         }
+    }
+
+    public function getCourseForStudent(){
+        $course=User::with('studentOfficalDetail.program.AssignedCourses.coursesOutline')
+        ->where('id',Auth::user()->id)->first();
+
+        if($course){
+            return response(['course'=> $course->studentOfficalDetail->program,'currentSemester'=>$course->studentOfficalDetail->current_semester],200);
+         }
+         else{
+             return response(['message'=>'error'],200);
+         }
+        
     }
 }

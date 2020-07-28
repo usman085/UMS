@@ -6,19 +6,15 @@
                 <th colspan="4">Class Routine Day By Day</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody v-if="items.length>0">
             <tr>
                 <td class="day">Monday</td>
 
                 <td v-for="(timeTable, index) in mondaySchdule" :key="index">
-                    <span class="class-room">{{
-                            timeTable.classRoom | capitalize
-                        }}</span>
-                    <span class="class-time">{{
-                            timeTable.time | capitalize
-                        }}</span>
+                    <span class="class-room">{{timeTable.class_room.class_room | capitalize}}</span>
+                    <span class="class-time">{{ timeTable.startingTime+ '-'+timeTable.endingTime | capitalize}}</span>
                     <br />
-                    <span class="teacher-name text-center">{{ timeTable.subject | capitalize }}<br /></span>
+                    <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
                     <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
                 </td>
             </tr>
@@ -27,14 +23,10 @@
                 <td class="day">Tuesday</td>
 
                 <td v-for="(timeTable, index) in tuesdaySchdule" :key="index">
-                    <span class="class-room">{{
-                            timeTable.classRoom | capitalize
-                        }}</span>
-                    <span class="class-time">{{
-                            timeTable.time | capitalize
-                        }}</span>
+                    <span class="class-room">{{timeTable.class_room.class_room | capitalize}}</span>
+                    <span class="class-time">{{ timeTable.startingTime+ '-'+timeTable.endingTime | capitalize}}</span>
                     <br />
-                    <span class="teacher-name text-center">{{ timeTable.subject | capitalize }}<br /></span>
+                    <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
                     <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
                 </td>
             </tr>
@@ -43,14 +35,10 @@
                 <td class="day">Wednesday</td>
 
                 <td v-for="(timeTable, index) in wednesdaySchdule" :key="index">
-                    <span class="class-room">{{
-                            timeTable.classRoom | capitalize
-                        }}</span>
-                    <span class="class-time">{{
-                            timeTable.time | capitalize
-                        }}</span>
+                     <span class="class-room">{{timeTable.class_room.class_room | capitalize}}</span>
+                    <span class="class-time">{{ timeTable.startingTime+ '-'+timeTable.endingTime | capitalize}}</span>
                     <br />
-                    <span class="teacher-name text-center">{{ timeTable.subject | capitalize }}<br /></span>
+                    <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
                     <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
                 </td>
             </tr>
@@ -59,14 +47,10 @@
                 <td class="day">Thrusday</td>
 
                 <td v-for="(timeTable, index) in thrusdaySchdule" :key="index">
-                    <span class="class-room">{{
-                            timeTable.classRoom | capitalize
-                        }}</span>
-                    <span class="class-time">{{
-                            timeTable.time | capitalize
-                        }}</span>
+                     <span class="class-room">{{timeTable.class_room.class_room | capitalize}}</span>
+                    <span class="class-time">{{ timeTable.startingTime+ '-'+timeTable.endingTime | capitalize}}</span>
                     <br />
-                    <span class="teacher-name text-center">{{ timeTable.subject | capitalize }}<br /></span>
+                    <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
                     <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
                 </td>
             </tr>
@@ -74,15 +58,11 @@
             <tr>
                 <td class="day">Friday</td>
 
-                <td v-for="(timeTable, index) in thrusdaySchdule" :key="index">
-                    <span class="class-room">{{
-                            timeTable.classRoom | capitalize
-                        }}</span>
-                    <span class="class-time">{{
-                            timeTable.time | capitalize
-                        }}</span>
+                <td v-for="(timeTable, index) in fridaySchdule" :key="index">
+                     <span class="class-room">{{timeTable.class_room.class_room | capitalize}}</span>
+                    <span class="class-time">{{ timeTable.startingTime+ '-'+timeTable.endingTime | capitalize}}</span>
                     <br />
-                    <span class="teacher-name text-center">{{ timeTable.subject | capitalize }}<br /></span>
+                    <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
                     <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
                 </td>
             </tr>
@@ -91,18 +71,23 @@
                 <td class="day">Saturday</td>
 
                 <td v-for="(timeTable, index) in saturdaySchdule" :key="index">
-                    <span class="class-room">{{
-                            timeTable.classRoom | capitalize
-                        }}</span>
-                    <span class="class-time">{{
-                            timeTable.time | capitalize
-                        }}</span>
+                    <span class="class-room">{{timeTable.class_room.class_room | capitalize}}</span>
+                    <span class="class-time">{{ timeTable.startingTime+ '-'+timeTable.endingTime | capitalize}}</span>
                     <br />
-                    <span class="teacher-name text-center">{{ timeTable.subject | capitalize }}<br /></span>
+                    <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
                     <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
                 </td>
             </tr>
         </tbody>
+        <div v-else>
+            <div v-if="!loading" class="text-center loading">
+                    No Class Routine Found 😟 !
+            </div>
+            <div v-else class="text-center loading">
+                <v-progress-circular indeterminate color="primary" size="50"></v-progress-circular>
+                <p>Loading....</p>
+            </div>
+        </div>
     </template>
 </v-simple-table>
 </template>
@@ -110,169 +95,72 @@
 <script>
 export default {
     name: "ClassRoutineBlock",
-
     data() {
         return {
-            items: [{
-                    id: 4,
-                    day: "monday",
-                    teacher: "usman",
-                    subject: "English",
-                    time: "9:00-10:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 4,
-                    day: "monday",
-                    teacher: "mehreen",
-                    subject: "Math",
-                    time: "9:00-10:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 4,
-                    day: "monday",
-                    teacher: "Ijaz",
-                    subject: "OOP",
-                    time: "9:00-10:00",
-                    classRoom: "cr4"
-                },
-                {
-                    id: 32,
-                    day: "tuesday",
-                    teacher: "usman",
-                    subject: "English",
-                    time: "9:00-10:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 32,
-                    day: "tuesday",
-                    teacher: "test",
-                    subject: "English",
-                    time: "9:00-10:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 32,
-                    day: "tuesday",
-                    teacher: "usman",
-                    subject: "urdu",
-                    time: "9:00-10:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 32,
-                    day: "saturday",
-                    teacher: "test",
-                    subject: "English",
-                    time: "9:00-10:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 32,
-                    day: "saturday",
-                    teacher: "test",
-                    subject: "Letrature",
-                    time: "9:00-10:00",
-                    classRoom: "cr8"
-                },
-                {
-                    id: 32,
-                    day: "saturday",
-                    teacher: "Aslam",
-                    subject: "English",
-                    time: "9:00-10:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 43,
-                    day: "Wednesday",
-                    teacher: "usman",
-                    subject: "English",
-                    time: "9:00-10:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 43,
-                    day: "Wednesday",
-                    teacher: "Amjad",
-                    subject: "Islamiyat",
-                    time: "9:00-10:00",
-                    classRoom: "cr2"
-                },
-                {
-                    id: 43,
-                    day: "Wednesday",
-                    teacher: "Amjad",
-                    subject: "Islamiyat",
-                    time: "11:00-1:00",
-                    classRoom: "cr2"
-                },
-                {
-                    id: 334,
-                    day: "thrusday",
-                    teacher: "usman",
-                    subject: "English",
-                    time: "9:00-10:00",
-                    classRoom: "cr3"
-                },
-                {
-                    id: 544,
-                    day: "friday",
-                    teacher: "usman",
-                    subject: "English",
-                    time: "9:00-10:00",
-                    classRoom: "cr3"
-                },
-
-                {
-                    id: 644,
-                    day: "sunday",
-                    teacher: "usman",
-                    subject: "English",
-                    time: "9:00-10:00",
-                    classRoom: "cr3"
-                },
-
-            ]
+           items:[],
+           loading:true
         };
     },
+    mounted(){
+        this.getClassRouitne();
+    },
     computed: {
+        userAuth: function () {
+            return cryptoJSON.decrypt(
+                JSON.parse(localStorage.getItem("studentLogin")),
+                "ums"
+            );
+        },
         mondaySchdule: function () {
             return this.items.filter(
-                data => data.day.toLowerCase() == "monday"
+                data => data.day == "Monday"
             );
         },
         tuesdaySchdule: function () {
             return this.items.filter(
-                data => data.day.toLowerCase() == "tuesday"
+                data => data.day == "Tuesday"
             );
         },
         wednesdaySchdule: function () {
             return this.items.filter(
-                data => data.day.toLowerCase() == "wednesday"
+                data => data.day == "Wednesday"
             );
         },
         thrusdaySchdule: function () {
             return this.items.filter(
-                data => data.day.toLowerCase() == "thrusday"
+                data => data.day == "Thursday"
             );
         },
         fridaySchdule: function () {
             return this.items.filter(
-                data => data.day.toLowerCase() == "friday"
+                data => data.day == "Friday"
             );
         },
         saturdaySchdule: function () {
             return this.items.filter(
-                data => data.day.toLowerCase() == "saturday"
+                data => data.day == "Saturday"
             );
         },
         sundaySchdule: function () {
             return this.items.filter(
-                data => data.day.toLowerCase() == "sunday"
+                data => data.day == "Sunday"
             );
+        }
+    },
+    methods:{
+        getClassRouitne:function(){
+             // Headers are defined for authentication
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+            
+            axios.post(process.env.MIX_APP_URL+"/get-student-class-routine",'',{headers:headers})
+                .then(res=>{
+                   this.loading=false;
+                    this.items = res.data.timeTable.time_table_detail;
+                     
+                }).catch(err=>{})
         }
     }
 };
@@ -312,6 +200,9 @@ export default {
 
 .subject-name {
     text-align: left;
+}
+.loading{
+    margin: 20px 0;
 }
 
 @media only screen and (max-width:700px) {

@@ -4,6 +4,7 @@ namespace  App\Repositories;
 
 use App\Repositories\Interfaces\TimeTableInterface;
 use App\Models\TimeTable;
+use App\Models\User;
 use App\Models\TimeTableDetail;
 use App\Repositories\Interfaces\TimeTableDetailInterface;
 use Auth;
@@ -82,5 +83,15 @@ class TimeTableRepository implements TimeTableInterface {
         } else {
             return response( ['message'=>'Error'], 422 );
         }
+    }
+
+    public function TimeTableDataForStudent(){
+
+        $user=User::with('studentOfficalDetail')->where('id',Auth::user()->id)->first();
+
+        $data =TimeTable::with('TimeTableDetail','TimeTableDetail.course','TimeTableDetail.classRoom')->where('program_id',$user->studentOfficalDetail->program_id)
+        ->where('semester',$user->studentOfficalDetail->current_semester)
+        ->where('shift_id',$user->studentOfficalDetail->shift_id)->first();
+        return response(['timeTable'=>$data],200);
     }
 }

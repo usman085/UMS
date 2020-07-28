@@ -96,8 +96,7 @@ export default {
         lectures: "",
         labs: "",
         course_outline: "",
-        //   course_id:this.course.id,
-        id: this.course.id
+        id:this.course.id
       };
     },
     userAuth: function() {

@@ -64,8 +64,15 @@
 // *** Importing Event Bus
 import EventBus from "../../../EventBus/eventBus";
 
-import {required} from 'vee-validate/dist/rules';
-import {extend,ValidationObserver,ValidationProvider, setInteractionMode} from "vee-validate";
+import {
+    required
+} from 'vee-validate/dist/rules';
+import {
+    extend,
+    ValidationObserver,
+    ValidationProvider,
+    setInteractionMode
+} from "vee-validate";
 extend('required', {
     ...required,
     message: '{_field_} can not be empty',
@@ -86,25 +93,30 @@ export default {
         return {
             step: 1,
             valid: true,
-            loading:false,
+            loading: false,
             program: [],
             semester: ["1", "2", "3", "4", "5", '6', '7', '8'],
             shift: [],
             avaiable: null,
             scheduleHead: {
                 program: "",
-                program_name:'',
+                program_name: '',
                 semester: "",
                 shift: "",
-                shift_name:''
+                shift_name: ''
             }
         };
     },
     methods: {
-        modify:function(){
+        modify: function () {
             this.$store.dispatch("TimeTableDetailModal");
-            this.$router.push({name:'EditTimeTable',params: { id:this.avaiable[0].id,slug:'Modifying Time Table' }})
-          
+            this.$router.push({
+                name: 'EditTimeTable',
+                params: {
+                    id: this.avaiable[0].id,
+                    slug: 'Modifying Time Table'
+                }
+            })
         },
         check: function () {
             if (this.step == 2) {
@@ -112,11 +124,12 @@ export default {
                     "Content-Type": "application/json",
                     Authorization: "Bearer  " + this.userAuth.token
                 };
-                axios.post(process.env.MIX_APP_URL + '/check-time-table', this.scheduleHead, {headers: headers})
+                axios.post(process.env.MIX_APP_URL + '/check-time-table', this.scheduleHead, {
+                        headers: headers
+                    })
                     .then(res => {
                         this.avaiable = res.data.timeTables;
-                        
-                        this.loading=true;
+                        this.loading = true;
                     })
                     .catch((err) => err)
             }
@@ -129,7 +142,9 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // send request to Api Route
-            axios.post(process.env.MIX_APP_URL + "/get-all-program", "", {headers: headers})
+            axios.post(process.env.MIX_APP_URL + "/get-all-program", "", {
+                    headers: headers
+                })
                 .then(response => {
                     this.program = response.data.data;
                 })
@@ -142,7 +157,9 @@ export default {
                 Authorization: "Bearer  " + this.userAuth.token
             };
             // send request to Api Route
-            axios.post(process.env.MIX_APP_URL + "/get-shift", "", {headers: headers})
+            axios.post(process.env.MIX_APP_URL + "/get-shift", "", {
+                    headers: headers
+                })
                 .then(response => {
                     this.shift = response.data.data;
                 })
@@ -150,10 +167,10 @@ export default {
         },
         // AddTimeTableModel  Use to open Dilog Box 
         AddTimeTableModel() {
-         let program_name= this.program.filter(item=>item.id==this.scheduleHead.program);
-         this.scheduleHead.program_name=program_name[0].program_title;
-          let shift_name= this.shift.filter(item=>item.id==this.scheduleHead.shift);
-         this.scheduleHead.shift_name=shift_name[0].Shift;
+            let program_name = this.program.filter(item => item.id == this.scheduleHead.program);
+            this.scheduleHead.program_name = program_name[0].program_title;
+            let shift_name = this.shift.filter(item => item.id == this.scheduleHead.shift);
+            this.scheduleHead.shift_name = shift_name[0].Shift;
             EventBus.$emit("timeTableDetail", this.scheduleHead);
             this.$store.dispatch("TimeTableDetailModal");
             this.$store.dispatch("CreateTimeTableModal");
@@ -161,7 +178,7 @@ export default {
     },
     computed: {
         userAuth: function () {
-            return cryptoJSON.decrypt(JSON.parse(localStorage.getItem("adminLogin")),"ums");
+            return cryptoJSON.decrypt(JSON.parse(localStorage.getItem("adminLogin")), "ums");
         },
         TimeTableDetailModal: function () {
             return this.$store.state.TimeTableDetailModal;

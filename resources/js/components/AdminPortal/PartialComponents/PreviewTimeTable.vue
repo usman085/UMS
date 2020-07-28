@@ -95,7 +95,7 @@
                                 <tr>
                                     <td class="day">Friday</td>
 
-                                    <td v-for="(timeTable, index) in thrusdaySchdule" :key="index">
+                                    <td v-for="(timeTable, index) in fridaySchdule" :key="index">
                                         <span class="class-room">{{
                             timeTable.class_room.class_room | capitalize
                         }}</span>
@@ -112,15 +112,11 @@
                                     <td class="day">Saturday</td>
 
                                     <td v-for="(timeTable, index) in saturdaySchdule" :key="index">
-                                        <span class="class-room">{{
-                            timeTable.class_room.class_room | capitalize
-                        }}</span>
-                                        <span class="class-time">{{
-                            timeTable.startingTime +'-' +timeTable.endingTime | capitalize
-                        }}</span>
-                                        <br />
-                                        <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
-                                        <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
+                                         <span class="class-room">{{timeTable.class_room.class_room | capitalize}}</span>
+                    <span class="class-time">{{ timeTable.startingTime+ '-'+timeTable.endingTime | capitalize}}</span>
+                    <br />
+                    <span class="teacher-name text-center">{{ timeTable.course.course_title | capitalize }}<br /></span>
+                    <span class="subject-name">({{ timeTable.teacher | capitalize }})</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -160,6 +156,7 @@ export default {
             // sending request to Api Route
             axios.post(process.env.MIX_APP_URL + '/time-table-data', {'id': id}, {headers: headers})
                 .then((res) => {
+                    console.log(res);
                     this.items = res.data.timeTable[0].time_table_detail;
                 
                     this.program = res.data.timeTable[0];
@@ -189,7 +186,7 @@ export default {
         },
         thrusdaySchdule: function () {
             return this.items.filter(
-                data => data.day == "Thrusday"
+                data => data.day == 'Thursday'
             );
         },
         fridaySchdule: function () {
