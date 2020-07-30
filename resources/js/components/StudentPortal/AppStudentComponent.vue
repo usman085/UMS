@@ -29,6 +29,17 @@ export default {
     components: {
         SideBar,
         sendFeedbackAlert
+    },
+    created(){
+        this.listenForChanges();
+    },
+    methods:{
+        listenForChanges() {
+        Echo.channel('posts')
+          .listen('PostPublished', e => {
+             alert('gfd');
+          });
+        }
     }
 
 }

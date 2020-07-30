@@ -15,7 +15,14 @@ class CreateApplicationsTable extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('application_title');
+            $table->text('application_content');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('forward_to')->nullable();
+            $table->string('status')->default('pending')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

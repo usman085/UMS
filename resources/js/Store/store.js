@@ -16,7 +16,7 @@ const store = new Vuex.Store({
         CourseAssignModal: false,
         allCourses: [],
         allProgram: [],
-
+        NotificationCount: 0,
         NotificationPreviewModal: false,
         SubmitAssignmentModal: false,
         ApplicationRequestTimeModal: false,
@@ -51,7 +51,9 @@ const store = new Vuex.Store({
     },
     //  *** Mutations Function
     mutations: {
-
+        NotificationCount(state, data) {
+            state.NotificationCount = data;
+        },
         CourseOutlineView(state) {
             state.CourseOutlineView = !state.CourseOutlineView;
         },
@@ -131,6 +133,9 @@ const store = new Vuex.Store({
         },
         allProgram(context, data) {
             context.commit('allProgram', data);
+        },
+        NotificationCount(context, data) {
+            context.commit('NotificationCount', data);
         },
         timeTable(context, data) {
             context.commit('timeTable', data);
