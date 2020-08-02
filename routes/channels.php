@@ -11,6 +11,6 @@
 |
 */
 
-Broadcast::channel('posts', function ($user, $id) {
+Broadcast::channel('App.Models.{id}', function ($user, $id) {
     return true;
 });

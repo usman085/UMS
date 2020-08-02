@@ -47,8 +47,8 @@ const AdminRoutes = [{
 
         {
             path: 'register-new-student',
-            component: registerStudent
-
+            component: registerStudent,
+            name: "RegisterStudent"
         },
         {
             // *** ManageProgram Route
@@ -91,7 +91,7 @@ const AdminRoutes = [{
         }, {
             path: 'Manage-Application',
             component: ManageApplication,
-            // name: 'ManageApplication',
+
             children: [{
                     path: 'Application-inbox',
                     component: ManageApplicationBlock,
@@ -112,30 +112,20 @@ const AdminRoutes = [{
                 }
             ]
         },
-        // {
-        //     path: 'notification',
-        //     component: notificationPage,
-        //     name: "AdminNotification"
-        // },
-        // {
-        //     // *** ManageProgram Route
-        //     path: 'manage-course',
-        //     component: ManageCourse,
-        //     name: 'ManageCourse'
-        // },
-        // {
-        //     // *** Customer Support Route
-        //     path: 'customer-support',
-        //     component: customSupport,
-        //     name: 'customerSupport'
-        // },
-        // {
-        //     // *** Feedback Route
-        //     path: 'feedback',
-        //     component: feedback,
-        //     name: 'feedback'
 
-        // },
+        {
+            // *** Customer Support Route
+            path: 'customer-support',
+            component: customSupport,
+            name: 'AdmincustomerSupport'
+        },
+        {
+            // *** Feedback Route
+            path: 'feedback',
+            component: feedback,
+            name: 'Adminfeedback'
+
+        },
         {
             //***  Manage Time Table
             path: 'Mange-Time-Table',

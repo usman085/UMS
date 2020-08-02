@@ -5,11 +5,13 @@ namespace App\Http\Controllers\ApiController\Application;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\ApplicationInterface;
-use App\Notifications\testha;
 use App\Models\Application;
+use App\Notifications\NotificationGenrater;
+use App\Models\User;
+
 use Notification;
 use Auth;
-use App\Models\User;
+
 class ApplicationController extends Controller
 {
     
@@ -29,12 +31,13 @@ class ApplicationController extends Controller
 
         $users=User::where('role',5)->get();
 
-        $letter=collect(['title'=>'New Application','body'=> Auth::user()->name.' Send You A application']);
-
-        Notification::send($users,new testha($letter));
-
-        if($ApplicationCreate)
-            return response(['message'=>'Send Successfully']);
+        
+        if($ApplicationCreate){
+            $message=collect(['title'=>'New Application','body'=> Auth::user()->name.' Send  a application']);
+        Notification::send($users,new NotificationGenrater($message));
+        return response(['message'=>'Send Successfully']);
+        }
+           
             else
            return response(['message'=>'Error occurs']);
     }
