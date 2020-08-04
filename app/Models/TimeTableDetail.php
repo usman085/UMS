@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\Carbon;
 class TimeTableDetail extends Model
 {
     protected $fillable=[
@@ -18,5 +18,8 @@ class TimeTableDetail extends Model
 
     public function getDayAttribute($value){
         return  ucfirst($value);
-      }
+    }
+    public function getCreatedAtAttribute($value){
+      return  Carbon::parse($value)->format('H,i');  
+    }
 }

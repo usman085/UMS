@@ -27,7 +27,9 @@ var toastrConfigs = {
     position: 'top right',
     showDuration: 1
 }
-Vue.use(CxltToastr, toastrConfigs)
+
+Vue.use(CxltToastr, toastrConfigs);
+
 export default {
     name: "AdminPortal",
     components: {
@@ -54,7 +56,7 @@ export default {
             cluster: process.env.MIX_PUSHER_APP_CLUSTER,
             encrypted: true,
             auth: {
-                headers: {
+                headers: { 
                     Authorization: 'Bearer ' + this.userAuth.token,
                 },
             },
@@ -68,7 +70,6 @@ export default {
             this.Echo.private('App.Models.User.' + this.userAuth.id)
                 .notification(notification => {
                     this.$store.dispatch('NotificationCount', notification.TotalNotification);
-
                     this.$toast.success({
                         title: notification.notification.title,
                         message: notification.notification.body,

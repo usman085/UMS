@@ -155,7 +155,7 @@
             </v-list>
         </v-menu>
 
-        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200">
+        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" max-width="40%">
             <template v-slot:activator="{ on, attrs }">
                 <v-badge color="red" dot overlap>
                     <v-icon v-bind="attrs" v-on="on">mdi-bell</v-icon>
@@ -163,13 +163,23 @@
             </template>
 
             <v-card>
-                <v-list>
-                    <v-list-item>
-                        <v-list-item-title>Application Approved</v-list-item-title>
-                    </v-list-item>
-                </v-list>
+                <v-list subheader>
+                    <v-subheader>Lastest Update</v-subheader>
 
-                <v-divider></v-divider>
+                    <v-list-item two-line v-for="(item,index) in $store.state.NotificationBox" :key="index">
+                     
+                        <v-list-item-avatar>
+                            <div class="notification-icon"><v-icon>mdi-bell</v-icon></div>
+                        </v-list-item-avatar>
+                        <v-list-item-content>
+                            <v-list-item-title>{{ item.title }}</v-list-item-title>
+                            <v-list-item-subtitle>{{ item.body }}</v-list-item-subtitle>
+
+                        </v-list-item-content>
+                    </v-list-item>
+                    <v-divider></v-divider>
+
+                </v-list>
 
             </v-card>
         </v-menu>
@@ -194,7 +204,7 @@ export default {
     methods: {
         logout: function () {
             localStorage.removeItem("studentLogin");
-             localStorage.removeItem('token');
+            localStorage.removeItem('token');
             this.$router.push({
                 name: "login"
             });
@@ -209,7 +219,7 @@ export default {
                     headers: headers
                 })
                 .then(res => {
-                    console.log(res);
+                   
                     this.$store.dispatch('NotificationCount', res.data.notificationCount)
                 })
                 .catch(err => {})
@@ -241,6 +251,14 @@ export default {
 </script>
 
 <style scoped>
+.notification-icon {
+    background:#1565c02e;
+    width: 100%;
+    display: block;
+    height: 100%;
+    line-height: 2.2;
+}
+
 .v-application a {
     text-decoration: none;
 }

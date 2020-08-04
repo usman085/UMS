@@ -80,8 +80,14 @@ class TimeTableRepository implements TimeTableInterface {
             'semester'=>$request->semester,
             'add_by'=>Auth::user()->id
         ]);
-         $message=collect(['title'=>'Some Changing In time Table','body'=>'Admin Make some Change in Time Table']);
-            Notification::send($users,new NotificationGenrater($message));
+        $message=collect(['title'=>'New Time Table Add','body'=>'Admin Make New Time Table']);
+        
+        $users=User::whereHas('studentOfficalDetail', function($q) use ($request) {
+            $q->where('program_id',$request->program)->where('shift_id',$request->shift)->where('current_semester',$request->semester);
+        })->get();
+
+        Notification::send($users,new NotificationGenrater($message));
+
         return $this->timeTableDetail->InsertTimeTableDetail($request,$timeTable);
     }
     public function delTimeTable($id){

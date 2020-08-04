@@ -17,6 +17,7 @@ const store = new Vuex.Store({
         CourseAssignModal: false,
         allCourses: [],
         allProgram: [],
+        NotificationBox: [],
         NotificationCount: 0,
         NotificationPreviewModal: false,
         SubmitAssignmentModal: false,
@@ -56,6 +57,7 @@ const store = new Vuex.Store({
             state.PopNotification = !state.PopNotification;
         },
         NotificationCount(state, data) {
+            console.log(data);
             state.NotificationCount = data;
         },
         CourseOutlineView(state) {
@@ -125,9 +127,15 @@ const store = new Vuex.Store({
         EditCourseOutlineModalToggle(state) {
             state.EditCourseOutlineModal = !state.EditCourseOutlineModal;
         },
+        NotificationBox(state, data) {
+            state.NotificationBox.push(data);
+        }
     },
     // *** Action Functions
     actions: {
+        NotificationBox(context, data) {
+            context.commit('NotificationBox', data);
+        },
         PopNotification(context) {
             context.commit('PopNotification');
         },
