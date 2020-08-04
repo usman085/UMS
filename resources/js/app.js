@@ -28,8 +28,9 @@ axios.interceptors.response.use(
     (error) => {
         if (error.response.status == 401) {
             localStorage.removeItem('adminLogin');
-            router.push({name:'login'}).catch(()=>{});
-        } 
+            localStorage.removeItem('token');
+            router.push({ name: 'login' }).catch(() => {});
+        }
         return Promise.reject(error);
     },
 );

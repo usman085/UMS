@@ -13,10 +13,11 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     // *** State Variables
     state: {
+        PopNotification: true,
         CourseAssignModal: false,
         allCourses: [],
         allProgram: [],
-
+        NotificationCount: 0,
         NotificationPreviewModal: false,
         SubmitAssignmentModal: false,
         ApplicationRequestTimeModal: false,
@@ -51,7 +52,12 @@ const store = new Vuex.Store({
     },
     //  *** Mutations Function
     mutations: {
-
+        PopNotification(state) {
+            state.PopNotification = !state.PopNotification;
+        },
+        NotificationCount(state, data) {
+            state.NotificationCount = data;
+        },
         CourseOutlineView(state) {
             state.CourseOutlineView = !state.CourseOutlineView;
         },
@@ -122,7 +128,9 @@ const store = new Vuex.Store({
     },
     // *** Action Functions
     actions: {
-
+        PopNotification(context) {
+            context.commit('PopNotification');
+        },
         CourseOutlineView(context) {
             context.commit('CourseOutlineView');
         },
@@ -131,6 +139,9 @@ const store = new Vuex.Store({
         },
         allProgram(context, data) {
             context.commit('allProgram', data);
+        },
+        NotificationCount(context, data) {
+            context.commit('NotificationCount', data);
         },
         timeTable(context, data) {
             context.commit('timeTable', data);

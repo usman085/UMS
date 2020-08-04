@@ -8,6 +8,10 @@ use App\Models\User;
 use App\Models\TimeTableDetail;
 use App\Repositories\Interfaces\TimeTableDetailInterface;
 use Auth;
+
+
+use Notification;
+use App\Notifications\NotificationGenrater;
 class TimeTableRepository implements TimeTableInterface {
     protected $timeTableDetail;
 
@@ -61,6 +65,8 @@ class TimeTableRepository implements TimeTableInterface {
         }
        
         if ( $createTimeTable != null ) {
+
+           
             return response( ['message'=>'Status Update'], 200 );
         } else {
             return response( ['message'=>'Noting tp update'], 200 );
@@ -74,6 +80,8 @@ class TimeTableRepository implements TimeTableInterface {
             'semester'=>$request->semester,
             'add_by'=>Auth::user()->id
         ]);
+         $message=collect(['title'=>'Some Changing In time Table','body'=>'Admin Make some Change in Time Table']);
+            Notification::send($users,new NotificationGenrater($message));
         return $this->timeTableDetail->InsertTimeTableDetail($request,$timeTable);
     }
     public function delTimeTable($id){

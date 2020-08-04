@@ -49,12 +49,14 @@ const StudentRoutes = [{
         {
             // *** Academic Syllabus Route
             path: 'Academic-syllabus',
-            component: AcademicSyllabus
+            component: AcademicSyllabus,
+            name: 'AcademicSyllabus'
         },
         {
             // *** Academic Syllabus Route
             path: 'Assignments',
-            component: Assignment
+            component: Assignment,
+            name: 'Assignments'
         },
         {
             // *** Assignment Collector Route
@@ -81,25 +83,30 @@ const StudentRoutes = [{
         {
             // *** Class Routine Route
             path: 'Class-Routine',
-            component: ClassRoutine
+            component: ClassRoutine,
+            name: "classRoutine"
         },
         {
             // *** Attendance Sheet Route
             path: 'Attendance-Sheet',
-            component: AttendanceSheet
+            component: AttendanceSheet,
+            name: "AttendanceSheet"
         },
         {
             path: 'Exam-Routine',
-            component: ExamRoutine
+            component: ExamRoutine,
+            name: "ExamRoutine"
         },
         {
             // *** Exam Routine Route
             path: 'Result-Card-final',
-            component: finalResultCardComponent
+            component: finalResultCardComponent,
+            name: "ResultCardFinal"
         },
         {
             path: 'Result-Card-Sectional',
-            component: sectionalResultCardComponent
+            component: sectionalResultCardComponent,
+            namw: "SectionalCard"
         },
         {
             // *** Profile Route
@@ -111,13 +118,13 @@ const StudentRoutes = [{
             // *** Customer Support Route
             path: 'customer-support',
             component: customSupport,
-            name: 'customerSupport'
+            name: 'StudentCustomerSupport'
         },
         {
             // *** Feedback Route
             path: 'feedback',
             component: feedback,
-            name: 'feedback'
+            name: 'studentFeedBack'
         },
         {
             // *** Application Route

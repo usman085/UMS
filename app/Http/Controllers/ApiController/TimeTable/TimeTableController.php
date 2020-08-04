@@ -93,6 +93,7 @@ class TimeTableController extends Controller
         if ( $validator->fails() ) {
             return response( ['errors'=>$validator->errors()->all()], 422 );
         }
+        
         return $this->timeTableRepository->UpdateTimeTable($request);
     }
 

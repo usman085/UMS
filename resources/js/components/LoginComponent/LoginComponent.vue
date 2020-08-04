@@ -64,16 +64,18 @@ export default {
                     'password': this.password
                 })
                 .then((res) => {
+                    console.log(res);
                     let userAuth = {
+                        'id':res.data.success.user.id,
                         'token': res.data.success.token,
                         'user_name': res.data.success.user.name,
                         'user_role': res.data.success.user.role,
                         'user_email': res.data.success.user.email,
                     }
+                    localStorage.setItem('token', cryptAuth);
                     let cryptAuth = JSON.stringify(cryptoJSON.encrypt(userAuth, 'ums'))
-
                     if (res.data.success.user.role == '5') {
-                         this.$store.dispatch('overlay');
+                        this.$store.dispatch('overlay');
                         localStorage.setItem('adminLogin', cryptAuth);
                         this.$router.push({
                             name: 'AdminDashboard'

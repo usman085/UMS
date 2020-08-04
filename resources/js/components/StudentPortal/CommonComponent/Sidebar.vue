@@ -1,63 +1,121 @@
 <template>
 <div>
     <v-navigation-drawer width="271" v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
-        <v-list shaped>
-            <template v-for="item in items">
-                <v-row v-if="item.heading" :key="item.heading" align="center">
-                    <v-col cols="6">
-                        <v-subheader v-if="item.heading">
-                            {{
-                item.heading
-                }}
-                        </v-subheader>
-                    </v-col>
+        <v-list shaped="">
+            <v-list-item :to="{name:'studentDashboard'}">
+                <v-list-item-icon>
+                    <v-icon>mdi-view-dashboard</v-icon>
+                </v-list-item-icon>
 
-                </v-row>
-                <v-list-group v-else-if="item.children" :key="item.text" v-model="item.model" :prepend-icon=" item.model ? item.icon : item['icon-alt']" append-icon class="list-acnhor">
-                    <template v-slot:activator>
-                        <v-list-item-content class="list-acnhor">
-                            <v-list-item-title>
-                                {{
-                  item.text
-                  }}
-                            </v-list-item-title>
-                        </v-list-item-content>
-                    </template>
-                    <div>
+                <v-list-item-title>Dashboard</v-list-item-title>
+            </v-list-item>
 
-                        <v-list-item class="list-acnhor body-2" v-for="(child, i) in item.children" :key="i" :to="child.url">
-                            <v-list-item-action v-if="child.icon">
-                                <v-icon>{{ child.icon }}</v-icon>
-                            </v-list-item-action>
-                            <v-list-item-content>
-                                <v-list-item-title class="text">
-                                    <v-item>{{ child.text }}</v-item>
-                                </v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
+            <v-list-group prepend-icon="mdi-tooltip-edit">
+                <template v-slot:activator>
+                    <v-list-item-title>Assignments</v-list-item-title>
+                </template>
 
-                    </div>
-                </v-list-group>
+                <v-list-item :to="{name:'Assignments'}">
+                    <v-list-item-icon>
+                        <v-icon>mdi-tooltip-edit</v-icon>
+                    </v-list-item-icon>
 
-                <v-list-item v-else :key="item.text" :to="item.url">
-                    <v-list-item-action class="list-acnhor">
-                        <v-icon class="list-acnhor">
-                            {{
-                    item.icon
-                    }}
-                        </v-icon>
-                    </v-list-item-action>
-
-                    <v-list-item-content class="list-acnhor">
-                        <v-list-item-title>
-                            {{
-                    item.text
-                    }}
-                        </v-list-item-title>
-                    </v-list-item-content>
+                    <v-list-item-title>Asign Assignments</v-list-item-title>
                 </v-list-item>
 
-            </template>
+                <v-list-item :to="{name:'AssignmentCourses'}">
+                    <v-list-item-icon>
+                        <v-icon>mdi-clipboard-text</v-icon>
+                    </v-list-item-icon>
+
+                    <v-list-item-title>Assignment Collector</v-list-item-title>
+                </v-list-item>
+
+            </v-list-group>
+
+            <v-list-item :to="{name:'ShowAllNotification'}">
+                <v-list-item-icon>
+                    <v-badge :content="NotificationCount" color="red" overlap>
+                        <v-icon>mdi-bell</v-icon>
+                    </v-badge>
+
+                </v-list-item-icon>
+
+                <v-list-item-title>Notifications</v-list-item-title>
+            </v-list-item>
+
+            <v-list-item :to="{name:'ApplicationInbox'}">
+                <v-list-item-icon>
+                    <v-icon>mdi-email</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Application</v-list-item-title>
+            </v-list-item>
+
+            <v-list-item :to="{name:'classRoutine'}">
+                <v-list-item-icon>
+                    <v-icon>mdi-calendar-text</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Class Routine</v-list-item-title>
+            </v-list-item>
+
+            <v-list-item :to="{name:'AcademicSyllabus'}">
+                <v-list-item-icon>
+                    <v-icon>mdi-book-open-page-variant</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Academic Syllabus</v-list-item-title>
+            </v-list-item>
+
+            <v-list-group prepend-icon="mdi-tooltip-edit">
+                <template v-slot:activator>
+                    <v-list-item-title>Result Cards</v-list-item-title>
+                </template>
+
+                <v-list-item :to="{name:'ResultCardFinal'}">
+                    <v-list-item-icon>
+                        <v-icon>mdi-tooltip-edit</v-icon>
+                    </v-list-item-icon>
+
+                    <v-list-item-title>Final Exam</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item :to="{name:'SectionalCard'}">
+                    <v-list-item-icon>
+                        <v-icon>mdi-clipboard-text</v-icon>
+                    </v-list-item-icon>
+
+                    <v-list-item-title>Mid Term Exam</v-list-item-title>
+                </v-list-item>
+
+            </v-list-group>
+
+            <v-list-item :to="{name:'AttendanceSheet'}">
+                <v-list-item-icon>
+                    <v-icon>mdi-account-check</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Attendance Sheet</v-list-item-title>
+            </v-list-item>
+
+            <v-list-item :to="{name:'ExamRoutine'}">
+                <v-list-item-icon>
+                    <v-icon>mdi-calendar-text</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Exam Routine</v-list-item-title>
+            </v-list-item>
+
+            <v-list-item :to="{name:'studentFeedBack'}">
+                <v-list-item-icon>
+                    <v-icon>mdi-comment-text-outline</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Send Feedback</v-list-item-title>
+            </v-list-item>
+
+            <v-list-item :to="{name:'StudentCustomerSupport'}">
+                <v-list-item-icon>
+                    <v-icon>mdi-account</v-icon>
+                </v-list-item-icon>
+                <v-list-item-title>Contact Us</v-list-item-title>
+            </v-list-item>
+
         </v-list>
     </v-navigation-drawer>
 
@@ -89,16 +147,32 @@
 
                 <v-list-item>
                     <v-list-item-title>
-                        <v-btn @click='logout()' small color="primary" class="ml-1">
+                        <v-btn @click="logout()" small color="primary" class="ml-1">
                             <v-icon class="mr-2">mdi-logout</v-icon>Logout
                         </v-btn>
                     </v-list-item-title>
                 </v-list-item>
             </v-list>
         </v-menu>
-        <v-btn icon to="/student-portal/notification">
-            <v-icon>mdi-bell</v-icon>
-        </v-btn>
+
+        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200">
+            <template v-slot:activator="{ on, attrs }">
+                <v-badge color="red" dot overlap>
+                    <v-icon v-bind="attrs" v-on="on">mdi-bell</v-icon>
+                </v-badge>
+            </template>
+
+            <v-card>
+                <v-list>
+                    <v-list-item>
+                        <v-list-item-title>Application Approved</v-list-item-title>
+                    </v-list-item>
+                </v-list>
+
+                <v-divider></v-divider>
+
+            </v-card>
+        </v-menu>
         <v-btn icon large>
             <v-avatar size="32px" item>
                 <router-link :to="{ name: 'ProfileComponent' }">
@@ -120,98 +194,48 @@ export default {
     methods: {
         logout: function () {
             localStorage.removeItem("studentLogin");
+             localStorage.removeItem('token');
             this.$router.push({
                 name: "login"
             });
-        }
-    },
+        },
+        getNotificationCount: function () {
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
 
+            axios.post(process.env.MIX_APP_URL + '/get-notification-count', "", {
+                    headers: headers
+                })
+                .then(res => {
+                    console.log(res);
+                    this.$store.dispatch('NotificationCount', res.data.notificationCount)
+                })
+                .catch(err => {})
+        }
+
+    },
+    created() {
+        this.getNotificationCount();
+    },
+    computed: {
+        NotificationCount: function () {
+            return this.$store.state.NotificationCount;
+        },
+        //User Auth function authorizing Admin & use in Header
+        userAuth: function () {
+            return cryptoJSON.decrypt(
+                JSON.parse(localStorage.getItem("studentLogin")),
+                "ums"
+            );
+        },
+    },
     data: () => ({
         dialog: false,
         drawer: null,
-        items: [{
-                icon: "mdi-view-dashboard",
-                text: "Dash Board",
-                url: "/student-portal/dash-board"
-            },
-            {
-                icon: "mdi-chevron-up",
-                "icon-alt": "mdi-chevron-down",
-                text: "Assignments",
-                model: false,
-                children: [{
-                        text: "Asign Assignments",
-                        icon: " mdi-tooltip-edit ",
-                        url: "/student-portal/Assignments"
-                    },
-                    {
-                        text: "Assignment Collector",
-                        icon: "mdi-clipboard-text",
-                        url: "/student-portal/Assignment-collector"
-                    }
-                ]
-            },
-            {
-                icon: "mdi-calendar-text",
-                text: "Class Routine",
-                url: "/student-portal/Class-Routine"
-            },
-            {
-                icon: "mdi-book-open-page-variant",
-                text: "Academic Syllabus",
-                url: "/student-portal/Academic-syllabus"
-            },
-            {
-                icon: "mdi-bell",
-                text: "Notifications",
-                url: "/student-portal/notification"
-            },
-            {
-                icon: " mdi-email",
-                text: "Application",
-                url: "/student-portal/application"
-            },
-            {
-                icon: "mdi-account-check",
-                text: "Attendance Sheet",
-                url: "/student-portal/Attendance-Sheet"
-            },
+        menu: false,
 
-            {
-                icon: "mdi-calendar-text",
-                text: "Exam Routine",
-                url: "/student-portal/Exam-Routine"
-            },
-
-            {
-                icon: "mdi-chevron-up",
-                "icon-alt": "mdi-chevron-down",
-                text: "Result Cards",
-                model: false,
-                children: [{
-                        text: "Final Exam",
-                        icon: "mdi-tooltip-edit ",
-                        url: "/student-portal/Result-Card-final"
-                    },
-                    {
-                        text: "Mid Term Exam",
-                        icon: "mdi-clipboard-text",
-                        url: "/student-portal/Result-Card-sectional"
-                    }
-                ]
-            },
-
-            {
-                icon: "mdi-comment-text-outline",
-                text: "Send Feedback",
-                url: "/student-portal/feedback"
-            },
-            {
-                icon: "mdi-account",
-                text: "Contact Us",
-                url: "/student-portal/customer-support"
-            }
-        ]
     })
 };
 </script>

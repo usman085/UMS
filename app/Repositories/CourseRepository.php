@@ -136,9 +136,9 @@ class CourseRepository implements CourseInterface
         ]);
         $courseUpdate=Course::where('id',$request->id)->update([
             'course_outline'=>1
-           ]);
+        ]);
         if($addCourseOutline && $courseUpdate){
-           return response(['message'=>'Add Successfully'],200);
+            return response(['message'=>'Add Successfully'],200);
         }
         else{
             return response(['message'=>'error'],200);
