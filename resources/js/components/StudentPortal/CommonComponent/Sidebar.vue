@@ -35,7 +35,7 @@
 
             <v-list-item :to="{name:'ShowAllNotification'}">
                 <v-list-item-icon>
-                    <v-badge :content="NotificationCount" color="red" overlap>
+                    <v-badge :value="NotificationCount > 0" :content="NotificationCount" color="red" overlap>
                         <v-icon>mdi-bell</v-icon>
                     </v-badge>
 
@@ -157,27 +157,37 @@
 
         <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" max-width="40%">
             <template v-slot:activator="{ on, attrs }">
-                <v-badge color="red" dot overlap>
+                <v-badge color="red" :value="$store.state.NotificationBox.length >0" dot overlap>
                     <v-icon v-bind="attrs" v-on="on">mdi-bell</v-icon>
                 </v-badge>
             </template>
 
-            <v-card>
+            <v-card max-height="30%">
                 <v-list subheader>
-                    <v-subheader>Lastest Update</v-subheader>
+                    <v-subheader>Lastest Notification Activities</v-subheader>
+                    <template v-if="$store.state.NotificationBox.length">
+                        <v-list-item class="notification-list" two-line v-for="(item,index) in $store.state.NotificationBox" :key="index">
+                            <v-list-item-avatar>
+                                <div class="notification-icon">
+                                    <v-icon>mdi-bell</v-icon>
+                                </div>
+                            </v-list-item-avatar>
+                            <v-list-item-content>
+                                <v-list-item-title>{{ item.title }}</v-list-item-title>
+                                <v-list-item-subtitle>{{ item.body }}</v-list-item-subtitle>
+                            </v-list-item-content>
+                            
+                        </v-list-item>
+                    </template>
+                    <template v-else>
+                        <v-list-item>
+                        
+                            <v-list-item-content class="text-center">
+                                <v-list-item-title>No Activities!</v-list-item-title>
 
-                    <v-list-item two-line v-for="(item,index) in $store.state.NotificationBox" :key="index">
-                     
-                        <v-list-item-avatar>
-                            <div class="notification-icon"><v-icon>mdi-bell</v-icon></div>
-                        </v-list-item-avatar>
-                        <v-list-item-content>
-                            <v-list-item-title>{{ item.title }}</v-list-item-title>
-                            <v-list-item-subtitle>{{ item.body }}</v-list-item-subtitle>
-
-                        </v-list-item-content>
-                    </v-list-item>
-                    <v-divider></v-divider>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </template>
 
                 </v-list>
 
@@ -204,7 +214,7 @@ export default {
     methods: {
         logout: function () {
             localStorage.removeItem("studentLogin");
-            localStorage.removeItem('token');
+            
             this.$router.push({
                 name: "login"
             });
@@ -219,7 +229,6 @@ export default {
                     headers: headers
                 })
                 .then(res => {
-                   
                     this.$store.dispatch('NotificationCount', res.data.notificationCount)
                 })
                 .catch(err => {})
@@ -251,8 +260,14 @@ export default {
 </script>
 
 <style scoped>
+.notification-list:hover{
+    cursor: pointer;
+}
+.notification-list{
+    border-bottom: 1px solid #eee;
+}
 .notification-icon {
-    background:#1565c02e;
+    background: #1565c02e;
     width: 100%;
     display: block;
     height: 100%;

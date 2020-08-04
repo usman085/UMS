@@ -26,18 +26,20 @@
         <!-- Notifications -->
         <div class="notifications-content">
             <v-divider></v-divider>
-            <v-row v-for="item in 5" :key="item" class="notification-lines">
+            <v-row v-for="item in notification" :key="item.id" class="notification-lines">
 
                 <v-list-item three-line>
                     <v-list-item-avatar>
-                        <span class="tag-badge">T</span>
+                        <span class="tag-badge">
+                            <v-icon>mdi-bell</v-icon>
+                        </span>
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                        <v-list-item-title>Your Application Is Approved</v-list-item-title>
-                        <v-list-item-subtitle>Hi, Dear Friend Your Application is Approved Now By HOD, Kindly Contact ti office</v-list-item-subtitle>
+                        <v-list-item-title>{{ item.notification.title }}</v-list-item-title>
+                        <v-list-item-subtitle>{{ item.notification.body }}</v-list-item-subtitle>
                         <router-link :to="{name:'notificationDetail',params:{id:'12'}}" class="read-now">Read Now</router-link>
-                        <span class="notification-time">1 day ago</span>
+                        <span class="notification-time">{{ item.send_at }}</span>
                     </v-list-item-content>
                 </v-list-item>
                 <v-divider></v-divider>
@@ -53,7 +55,40 @@
 
 <script>
 export default {
-    name: 'NotificationList'
+    name: 'NotificationList',
+    data:function(){
+        return{
+            notification:[],
+        };
+    },
+    methods:{
+        getNotification:function(){
+             // Headers are defined for authentication
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token,
+            };
+            
+            axios.post(process.env.MIX_APP_URL+'/all-notification','',{headers:headers})
+                .then(res=>{
+                    
+                    this.notification=res.data.notification;
+                    console.log(res);
+                    })
+                .catch(err=>{})
+        }
+    },
+    mounted() {
+        this.getNotification();
+    },
+    computed: {
+        userAuth: function () {
+            return cryptoJSON.decrypt(
+                JSON.parse(localStorage.getItem("studentLogin")),
+                "ums"
+            );
+        },
+    },
 }
 </script>
 

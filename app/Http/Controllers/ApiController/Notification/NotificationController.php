@@ -15,4 +15,9 @@ class NotificationController extends Controller
     public function getNotificationCount(){
         return $this->notificationRepository->getNotificationCount();
     }
+
+    public function getNotification(){
+        return $this->notificationRepository->getNotification();
+    }
+
 }

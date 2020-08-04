@@ -128,7 +128,7 @@ const store = new Vuex.Store({
             state.EditCourseOutlineModal = !state.EditCourseOutlineModal;
         },
         NotificationBox(state, data) {
-            state.NotificationBox.push(data);
+            state.NotificationBox.unshift(data);
         }
     },
     // *** Action Functions

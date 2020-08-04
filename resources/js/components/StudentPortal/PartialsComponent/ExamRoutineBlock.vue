@@ -61,7 +61,7 @@ export default {
                 .then(response => {
                     this.loading = false;
                     this.examSchedule = response.data.examSchedule.exam_routine_detail;
-                    console.log( this.examSchedule );
+                   
                 })
                 .catch((error) => {});
         },

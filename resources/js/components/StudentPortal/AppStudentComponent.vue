@@ -27,7 +27,7 @@ import Echo from 'laravel-echo';
 import CxltToastr from 'cxlt-vue2-toastr'
 import Vue from 'vue';
 var toastrConfigs = {
-    position: 'top right',
+    position: 'bottom right',
     showDuration: 1
 }
 Vue.use(CxltToastr, toastrConfigs)
@@ -81,7 +81,8 @@ export default {
                    
                      this.$store.dispatch('NotificationBox',{
                         title: notification.notification.title,
-                        body: notification.notification.body
+                        body: notification.notification.body,
+                        
                     });
                        
                 });

@@ -77,7 +77,7 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/get-class-room-detail','ApiController\ClassRoom\ClassRoomController@getAllClassRoom');
     Route::post('/insert-time-table','ApiController\TimeTable\TimeTableController@InserTimeTable');
 
-
+    Route::post('/all-notification','ApiController\Notification\NotificationController@getNotification');
     // Exam Routine
     // Student Side
     Route::post('/get-student-exam-routine','ApiController\ExamRoutine\ExamRoutineController@getStudentExamRoutine');
