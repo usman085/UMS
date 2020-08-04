@@ -28,13 +28,10 @@ class ApplicationController extends Controller
             'user_id'=>Auth::user()->id,
             'forward_to'=> 5
         ]);
-
         $users=User::where('role',5)->get();
-
-        
         if($ApplicationCreate){
             $message=collect(['title'=>'New Application','body'=> Auth::user()->name.' Send  a application']);
-        Notification::send($users,new NotificationGenrater($message));
+            Notification::send($users,new NotificationGenrater($message));
         return response(['message'=>'Send Successfully']);
         }
            

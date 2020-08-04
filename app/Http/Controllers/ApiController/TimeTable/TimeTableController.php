@@ -84,20 +84,17 @@ class TimeTableController extends Controller
     public function UpdateTimeTable(Request $request){
         $validator = Validator::make( $request->all(), 
         [
-            
             'timeTableData'=>'required',
             'time_table_id'=>'required',
         ]);
             
-
         if ( $validator->fails() ) {
             return response( ['errors'=>$validator->errors()->all()], 422 );
         }
-        
         return $this->timeTableRepository->UpdateTimeTable($request);
     }
 
-     /**
+    /**
      * Insert TimeTable 
      * @param Request $request
      * 

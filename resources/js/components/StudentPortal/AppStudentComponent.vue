@@ -22,23 +22,69 @@
 <script>
 import SideBar from './CommonComponent/Sidebar';
 import sendFeedbackAlert from './PartialsComponent/SendFeedAlert';
+import Echo from 'laravel-echo';
+
+import CxltToastr from 'cxlt-vue2-toastr'
+import Vue from 'vue';
+var toastrConfigs = {
+    position: 'top right',
+    showDuration: 1
+}
+Vue.use(CxltToastr, toastrConfigs)
 export default {
-
     name: "AppStudent",
-
+    data() {
+        return {
+            Echo: '',
+        }
+    },
     components: {
         SideBar,
         sendFeedbackAlert
     },
-    created(){
-        this.listenForChanges();
+    computed: {
+        //User Auth function authorizing Admin & use in Header
+        userAuth: function () {
+            return cryptoJSON.decrypt(
+                JSON.parse(localStorage.getItem("studentLogin")),
+                "ums"
+            );
+        },
     },
-    methods:{
-        listenForChanges() {
-        Echo.channel('posts')
-          .listen('PostPublished', e => {
-             alert('gfd');
-          });
+    created() {
+        this.Echo = new Echo({
+            broadcaster: 'pusher',
+            key: process.env.MIX_PUSHER_APP_KEY,
+            cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+            encrypted: true,
+            auth: {
+                headers: { 
+                    Authorization: 'Bearer ' + this.userAuth.token,
+                },
+            },
+        });
+        this.pusherListner();
+
+    },
+    methods: {
+        pusherListner: function () {
+
+            this.Echo.private('App.Models.User.' + this.userAuth.id)
+                .notification(notification => {
+                    this.$store.dispatch('NotificationCount', notification.TotalNotification);
+
+                    this.$toast.success({
+                        title: notification.notification.title,
+                        message: notification.notification.body,
+                        timeOut: 8000
+                    })
+                   
+                     this.$store.dispatch('NotificationBox',{
+                        title: notification.notification.title,
+                        body: notification.notification.body
+                    });
+                       
+                });
         }
     }
 
