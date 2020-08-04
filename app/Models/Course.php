@@ -29,4 +29,9 @@ class Course extends Model
     public function coursesOutline(){
         return $this->hasOne('App\Models\CourseOutline');
     }
+
+      public function studentOfficialDetail()
+    {
+        return $this->hasMany('App\Models\StudentOfficialDetail');
+    }
 }

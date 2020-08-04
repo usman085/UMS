@@ -61,7 +61,7 @@ class User extends Authenticatable
        return $this->hasOne('App\Models\StudentPersonalDetail');
    }
 
-   public function studentOfficalDetail()
+   public function studentOfficialDetail()
    {
        return $this->hasOne('App\Models\StudentOfficialDetail');
    }

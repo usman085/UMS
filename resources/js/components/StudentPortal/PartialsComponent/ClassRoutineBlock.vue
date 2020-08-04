@@ -157,8 +157,9 @@ export default {
             
             axios.post(process.env.MIX_APP_URL+"/get-student-class-routine",'',{headers:headers})
                 .then(res=>{
-                   this.loading=false;
-                    this.items = res.data.timeTable.time_table_detail;
+                   
+                this.loading=false;
+                this.items = res.data.timeTable.time_table_detail;
                      
                 }).catch(err=>{})
         }

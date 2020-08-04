@@ -87,11 +87,11 @@ class TimeTableRepository implements TimeTableInterface {
 
     public function TimeTableDataForStudent(){
 
-        $user=User::with('studentOfficalDetail')->where('id',Auth::user()->id)->first();
+        $user=User::with('studentOfficialDetail')->where('id',Auth::user()->id)->first();
 
-        $data =TimeTable::with('TimeTableDetail','TimeTableDetail.course','TimeTableDetail.classRoom')->where('program_id',$user->studentOfficalDetail->program_id)
-        ->where('semester',$user->studentOfficalDetail->current_semester)
-        ->where('shift_id',$user->studentOfficalDetail->shift_id)->first();
+        $data =TimeTable::with('TimeTableDetail','TimeTableDetail.course','TimeTableDetail.classRoom')->where('program_id',$user->studentOfficialDetail->program_id)
+        ->where('semester',$user->studentOfficialDetail->current_semester)
+        ->where('shift_id',$user->studentOfficialDetail->shift_id)->first();
         return response(['timeTable'=>$data],200);
     }
 }

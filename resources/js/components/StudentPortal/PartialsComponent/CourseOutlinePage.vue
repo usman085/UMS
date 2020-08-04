@@ -1,58 +1,74 @@
 <template>
 <v-row justify="center">
     <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-        <v-card>
-            <v-toolbar dark color="primary">
-                <v-btn icon dark @click="$store.dispatch('CourseOutlinePageModalToggle')">
-                    <v-icon>mdi-close</v-icon>
-                </v-btn>
-                <v-toolbar-title>Scheme Of Studies</v-toolbar-title>
-                <v-spacer></v-spacer>
-            </v-toolbar>
-            <v-list subheader>
-                <v-list-item>
-                    <v-list-item-content class="text-center">
-                        <v-list-item-title>Semester 1</v-list-item-title>
-                        <v-list-item-subtitle>BSSE-Fall-17</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-list-item>
-                    <v-list-item-content>
-                        <v-list-item-title>
-                            <span cl>Course Name</span>: DBMS
-                        </v-list-item-title>
-                        <v-list-item-title>
-                            <span>Structure: Lectures: 3, Labs: 1 Credit Hours: 4</span>
-                        </v-list-item-title>
+        
+            <v-card>
+        
+                <v-toolbar dark color="primary">
+                    <v-btn icon dark @click="$store.dispatch('CourseOutlinePageModalToggle')">
+                        <v-icon>mdi-close</v-icon>
+                    </v-btn>
+                    <v-toolbar-title>Scheme Of Studies</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                </v-toolbar>
+                    <div v-if="outlineData != null ">
+                <v-list subheader>
+                    <v-list-item>
+                        <v-list-item-content class="text-center">
+                            <v-list-item-title>Semester 1</v-list-item-title>
+                            <v-list-item-subtitle>BSSE-Fall-17</v-list-item-subtitle>
+                        </v-list-item-content>
+                    </v-list-item>
+            <v-item-group>
+            <v-list>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title class=" mb-3">
+                    <span class="mr-2">Course Name :</span>
+                    {{courseDetail.course_title}}
+                  </v-list-item-title>
+                    <v-list-item-title  class=" mb-3">   
+                    <span class="mr-2">Prerequisites: </span>
+                    {{ outlineData.prerequisite }}
+                    </v-list-item-title>  
+                  <v-list-item-title class=" mb-3">
+                    <span class="mr-2">Credit Hours: </span>
+                   {{courseDetail.course_code}}
+                  </v-list-item-title>
+                  <v-list-item-title class=" mb-3">
+                    <span class="mr-2 ">Lectures:</span>
+                    {{ outlineData.lectures }}
+                  </v-list-item-title>
 
-                        <v-list-item-title>Prerequisites: None</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-            </v-list>
+                   <v-list-item-title class=" mb-3">
+                    <span class="mr-2 "> Labs:</span>
+                    {{ outlineData.labs }} 
+                  </v-list-item-title>
+ 
 
-            <v-divider></v-divider>
-            <v-list three-line subheader>
-                <v-list-item>
-                    <v-list-item-content>
-                        <v-list-item-title>Objective :</v-list-item-title>
-                        <v-list-item-subtitle>The course is designed to familiarize students with the basic structured programming skills. It emphasizes upon problem analysis, algorithm designing, and program development and testing.</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-list-item>
-                    <v-list-item-content>
-                        <v-list-item-title>Course Outline:</v-list-item-title>
-                        <v-list-item-subtitle>Overview of computers and programming. Overview of language for e.g. C language C. Basics of structured and Modular programming. Basic Algorithms and problem solving, development of basic algorithms, analyzing problem, designing solution, testing designed solution. Fundamental programming constructs, translation of algorithms to programs, data types, control structures, functions, arrays, records, files, testing programs</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-list-item>
-                    <v-list-item-content>
-                        <v-list-item-title>Reference Material:</v-list-item-title>
-                        <v-list-item-subtitle>1. Problem Solving and Program Design in C / 6E Hanly & Koffman Addison-Wesley | Published: 02/06/2009 ISBN-10: 0321535421 | ISBN-13: 9780321535429</v-list-item-subtitle>
-                        <v-list-item-subtitle>2. C How to Program, 5/E (Harvey & Paul) Deitel & Deitel, ISBN-10: 0132404168 ISBN13: 9780132404167 Publisher: Prentice Hall Copyright: 2007</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
+                
+                </v-list-item-content>
+              </v-list-item>
             </v-list>
-        </v-card>
+            </v-item-group>
+                </v-list>
+
+                <v-divider></v-divider>
+                <v-list three-line subheader>
+                    <v-list-item>
+                        <v-list-item-content>
+                       <div class="outline-wraper" v-html="outlineData.course_outline"></div> 
+                        </v-list-item-content>
+                    </v-list-item>
+                 
+                </v-list>
+                </div>
+        <div v-else>
+            <span>No Data</span>
+        </div>
+            </v-card>
+        
+   
     </v-dialog>
 </v-row>
 </template>
@@ -60,8 +76,11 @@
 <script>
 export default {
     name: "CourseOutlinePage",
+    props: ['outlineData','courseDetail'],
     data() {
-        return {};
+        return {
+
+        };
     },
     computed: {
         dialog: function () {

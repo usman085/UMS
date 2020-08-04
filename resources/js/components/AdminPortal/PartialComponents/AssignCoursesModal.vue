@@ -353,7 +353,7 @@
                                                     </tr>
                                                 </template>
                                                 <template v-else>
-                                                    <td colspan="5" class="text-center"><span>No Courses Assign</span></td>
+                                                   
                                                 </template>
                                             </tbody>
                                         </template>

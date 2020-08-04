@@ -19,6 +19,15 @@ class StudentOfficialDetail extends Model
         return $this->BelongsTo('App\Models\Program');
       }
 
+       public function course()
+      {
+        return $this->BelongsTo('App\Models\Course');
+      }
+
+      public function AssignedCourses()
+    {
+        return $this->belongsToMany('App\Models\Course')->withPivot('semester')->withPivot('id');
+    }
       /**
     *  Student Official Detail belongs to shift 
     * 
@@ -36,8 +45,5 @@ class StudentOfficialDetail extends Model
     *
     */
 
-      public function studentDetail()
-      {
-        return $this->BelongsTo('App\Models\StudentDetail');
-      }
+     
 }

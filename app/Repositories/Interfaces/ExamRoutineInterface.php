@@ -12,7 +12,7 @@ interface ExamRoutineInterface
     public function UpdateExamRoutine($request);
 
     public function getExamSchedule($id);
-    
+     
     public function deleteExamRoutine($request);
 
     public function getExamRoutine();
@@ -20,4 +20,8 @@ interface ExamRoutineInterface
     public function checkExamRoutine($request);
 
     public function InsertExamRoutine($request);
+
+    // For  student Side
+
+    public function getStudentExamRoutine();
 }

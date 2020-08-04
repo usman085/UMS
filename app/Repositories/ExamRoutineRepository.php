@@ -5,7 +5,7 @@ use App\Repositories\Interfaces\ExamRoutineInterface;
 use App\Models\ExamRoutine;
 use App\Models\ExamRoutineDetail;
 use App\Repositories\Interfaces\ExamRoutineDetailInterface;
-
+use App\Models\User;
 use Auth;
 
 class ExamRoutineRepository implements ExamRoutineInterface 
@@ -92,8 +92,25 @@ protected $examRoutineDetail;
     {
         
         $examSchedule = ExamRoutine::with('ExamRoutineDetail.course','ExamRoutineDetail.classRoom','ExamRoutineDetail','program')->where('id',$id)->get();
-        //  dd( $examSchedule);
+  
         return response (['examSchedule' => $examSchedule ]);
 
+    }
+
+    // For Student Side
+
+    public function getStudentExamRoutine(){
+
+        $Student = user::with('studentOfficialDetail')->where('id',Auth::user()->id)->first();
+
+        $examSchedule = ExamRoutine::with('ExamRoutineDetail','ExamRoutineDetail.course','ExamRoutineDetail.classRoom',)
+        ->where('program_id',$Student->studentOfficialDetail->program_id)
+        ->where('shift_id',$Student->studentOfficialDetail->shift_id )
+        ->where('semester',$Student->studentOfficialDetail->current_semester)->first();
+        
+     
+      
+            return response([ 'examSchedule'=>$examSchedule ], 200  );
+     
     }
 }

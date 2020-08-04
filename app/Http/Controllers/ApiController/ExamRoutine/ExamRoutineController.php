@@ -37,7 +37,8 @@ protected $ExamRoutineRepository;
     {
         return $this->ExamRoutineRepository->getExamRoutine( );
     }
-  public function deleteExamRoutine( Request $request ) 
+  
+    public function deleteExamRoutine( Request $request ) 
     {
         $validator = Validator::make( $request->all(), 
         [
@@ -53,8 +54,6 @@ protected $ExamRoutineRepository;
     {
         return $this->ExamRoutineRepository->InsertExamRoutine( $request);
     }
-
-
     
     public function checkExamRoutine(Request $request)
     {
@@ -72,11 +71,26 @@ protected $ExamRoutineRepository;
         return $this->ExamRoutineRepository->checkExamRoutine($request);
     }
 
-    public function UpdateExamRoutine(Request $request){
+    public function UpdateExamRoutine(Request $request)
+    {
+    
         return $this->ExamRoutineRepository->UpdateExamRoutine($request);
+    
     }
+    
     public function getExamSchedule(Request $request)
     {
-          return $this->ExamRoutineRepository->getExamSchedule($request->id);
+    
+        return $this->ExamRoutineRepository->getExamSchedule($request->id);
+    
     }
+
+    // For Student Side
+    public function getStudentExamRoutine()
+    {
+    
+        return $this->ExamRoutineRepository->getStudentExamRoutine();
+    
+    }
+    
 }

@@ -146,11 +146,15 @@ class CourseRepository implements CourseInterface
     }
 
     public function getCourseForStudent(){
-        $course=User::with('studentOfficalDetail.program.AssignedCourses.coursesOutline')
+        $course=User::with('studentOfficialDetail.program.AssignedCourses')
         ->where('id',Auth::user()->id)->first();
-
+   
+       
         if($course){
-            return response(['course'=> $course->studentOfficalDetail->program,'currentSemester'=>$course->studentOfficalDetail->current_semester],200);
+            return response([
+            'course'=> $course->studentOfficialDetail->program,
+            'currentSemester'=>$course->studentOfficialDetail->current_semester, ],200);
+           
          }
          else{
              return response(['message'=>'error'],200);
