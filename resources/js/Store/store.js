@@ -20,6 +20,7 @@ const store = new Vuex.Store({
         NotificationBox: [],
         NotificationCount: 0,
         NotificationPreviewModal: false,
+        Notifications: [],
         SubmitAssignmentModal: false,
         ApplicationRequestTimeModal: false,
         AssignmentDetailPageModal: false,
@@ -129,10 +130,16 @@ const store = new Vuex.Store({
         },
         NotificationBox(state, data) {
             state.NotificationBox.unshift(data);
+        },
+        Notifications(state, data) {
+            state.Notifications = data;
         }
     },
     // *** Action Functions
     actions: {
+        Notifications(context, data) {
+            context.commit('Notifications', data);
+        },
         NotificationBox(context, data) {
             context.commit('NotificationBox', data);
         },

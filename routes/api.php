@@ -22,6 +22,7 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     
     Route::post('/get-student-class-routine','ApiController\TimeTable\TimeTableController@TimeTableDataForStudent');
   // course
+  Route::post('/get-notification-detail','ApiController\Notification\NotificationController@getNotificationDetail');
   Route::post('/get-notification-count','ApiController\Notification\NotificationController@getNotificationCount');
   Route::post('/submit-application','ApiController\Application\ApplicationController@submitApplication');
     Route::post('/insert-course','ApiController\Course\CourseController@insertCourse');

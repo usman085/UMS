@@ -26,25 +26,34 @@
         <!-- Notifications -->
         <div class="notifications-content">
             <v-divider></v-divider>
-            <v-row v-for="item in notification" :key="item.id" class="notification-lines">
-
-                <v-list-item three-line>
-                    <v-list-item-avatar>
-                        <span class="tag-badge">
-                            <v-icon>mdi-bell</v-icon>
-                        </span>
-                    </v-list-item-avatar>
-
-                    <v-list-item-content>
-                        <v-list-item-title>{{ item.notification.title }}</v-list-item-title>
-                        <v-list-item-subtitle>{{ item.notification.body }}</v-list-item-subtitle>
-                        <router-link :to="{name:'notificationDetail',params:{id:'12'}}" class="read-now">Read Now</router-link>
-                        <span class="notification-time">{{ item.send_at }}</span>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-divider></v-divider>
-
-            </v-row>
+            <template v-if="notification.length > 0">
+                <v-row v-for="item in notification" :key="item.id" class="notification-lines">
+                    <v-list-item three-line :class="{ unread: item.read_status == null}" >
+                        <v-list-item-avatar>
+                            <span class="tag-badge">
+                                <v-icon>mdi-bell</v-icon>
+                            </span>
+                        </v-list-item-avatar>
+                        <v-list-item-content>
+                            <!-- #1565c02e; -->
+                            <v-list-item-title>{{ item.notification.title }}</v-list-item-title>
+                            <v-list-item-subtitle>{{ item.notification.body }}</v-list-item-subtitle>
+                            <router-link :to="{name:'notificationDetail',params:{id:item.id}}" class="read-now">Read Now</router-link>
+                            <span class="notification-time">{{ item.send_at }}</span>
+                        </v-list-item-content>
+                    </v-list-item>
+                    <v-divider></v-divider>
+                </v-row>
+            </template>
+            <template v-else>
+                <div v-if="!loading" class="text-center loading">
+                    No Notifications Found 😟 !
+                </div>
+                <div v-else class="text-center loading">
+                    <v-progress-circular indeterminate color="primary" size="50"></v-progress-circular>
+                    <p>Loading....</p>
+                </div>
+            </template>
         </div>
         <!--notifications-content-->
         <!-- Notifications -->
@@ -56,26 +65,26 @@
 <script>
 export default {
     name: 'NotificationList',
-    data:function(){
-        return{
-            notification:[],
+    data: function () {
+        return {
+            loading: true
         };
     },
-    methods:{
-        getNotification:function(){
-             // Headers are defined for authentication
+    methods: {
+        getNotification: function () {
+            // Headers are defined for authentication
             let headers = {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token,
             };
-            
-            axios.post(process.env.MIX_APP_URL+'/all-notification','',{headers:headers})
-                .then(res=>{
-                    
-                    this.notification=res.data.notification;
-                    console.log(res);
-                    })
-                .catch(err=>{})
+            axios.post(process.env.MIX_APP_URL + '/all-notification', '', {
+                    headers: headers
+                })
+                .then(res => {
+                    this.$store.dispatch('Notifications', res.data.notification);
+                    this.loading = false;
+                })
+                .catch(err => {})
         }
     },
     mounted() {
@@ -88,11 +97,20 @@ export default {
                 "ums"
             );
         },
+        notification: function () {
+            return this.$store.state.Notifications;
+        }
     },
 }
 </script>
 
 <style scoped>
+.loading {
+    margin: 20px 0;
+}
+.unread{
+ background: #1565c02e;
+}
 .tag-badge {
     padding: 8px 12px;
     color: white;

@@ -103,7 +103,7 @@ class TimeTableRepository implements TimeTableInterface {
 
         $data =TimeTable::with('TimeTableDetail','TimeTableDetail.course','TimeTableDetail.classRoom')->where('program_id',$user->studentOfficialDetail->program_id)
         ->where('semester',$user->studentOfficialDetail->current_semester)
-        ->where('shift_id',$user->studentOfficialDetail->shift_id)->first();
+        ->where('shift_id',$user->studentOfficialDetail->shift_id)->where('status',1)->first();
         return response(['timeTable'=>$data],200);
     }
 }

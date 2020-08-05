@@ -6,4 +6,6 @@ interface NotificationInterface{
     public function getNotificationCount();
 
     public function getNotification();
+
+    public function getNotificationDetail($id);
 }
