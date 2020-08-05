@@ -155,7 +155,7 @@
             </v-list>
         </v-menu>
 
-        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" max-width="40%">
+        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" max-width="60%">
             <template v-slot:activator="{ on, attrs }">
                 <v-badge color="red" :value="$store.state.NotificationBox.length >0" dot overlap>
                     <v-icon v-bind="attrs" v-on="on">mdi-bell</v-icon>

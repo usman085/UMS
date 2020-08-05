@@ -18,7 +18,7 @@ class NotificationRepository implements NotificationInterface{
       return response(['notification'=> $data]);
     }
     public function getNotification(){
-      $notification= Auth::user()->notifications->map(function($notification){
+      $notification= Auth::user()->notifications->take(25)->map(function($notification){
         return[
           'id'=>$notification->id,
           'read_status'=>$notification->read_at,

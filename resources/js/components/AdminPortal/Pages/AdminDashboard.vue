@@ -2,7 +2,7 @@
 
 <Dashboard></Dashboard>
 
-</template>
+</template> 
 
 <script>
 // import dashboard Component
