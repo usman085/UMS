@@ -47,10 +47,7 @@ class User extends Authenticatable
     *
     */
 
-    public function user()
- {
-        return $this->belongsTo( 'App\Models\User' );
-    }
+    
 
     /**
     *   student detail relationship with Student Personal Detail .
@@ -72,5 +69,8 @@ class User extends Authenticatable
     public function studentEducationalDetail()
  {
         return $this->hasOne( 'App\Models\StudentEducationalDetail' );
+    }
+    public function applications(){
+        return $this->hasMany('App\Models\Application')->orderBy('created_at','desc');
     }
 }

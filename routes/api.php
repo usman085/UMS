@@ -20,11 +20,20 @@ Route::post('/register','ApiController\Auth\AuthController@register');
 
 Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () {
     
+      // ********  Application Routes  **********//
+
+      Route::post('/all-applications','ApiController\Application\ApplicationController@getApplications');
+      Route::post('/submit-application','ApiController\Application\ApplicationController@submitApplication');
+      Route::post('/all-application-detail','ApiController\Application\ApplicationController@getApplicationDetail');
+   // ********  Application Routes  **********//
+
     Route::post('/get-student-class-routine','ApiController\TimeTable\TimeTableController@TimeTableDataForStudent');
   // course
+  Route::post('/search-notification','ApiController\Notification\NotificationController@searchNotification');
+  Route::post('/delete-notification','ApiController\Notification\NotificationController@delNotification');
+  Route::post('/mark-as-read-notification','ApiController\Notification\NotificationController@markAsReadNotification');
   Route::post('/get-notification-detail','ApiController\Notification\NotificationController@getNotificationDetail');
   Route::post('/get-notification-count','ApiController\Notification\NotificationController@getNotificationCount');
-  Route::post('/submit-application','ApiController\Application\ApplicationController@submitApplication');
     Route::post('/insert-course','ApiController\Course\CourseController@insertCourse');
     Route::post('/get-all-course','ApiController\Course\CourseController@getCourse');
     Route::post('/del-course','ApiController\Course\CourseController@delCourse');

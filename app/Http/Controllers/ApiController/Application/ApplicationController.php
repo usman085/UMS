@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\ApplicationInterface;
 use App\Models\Application;
+use Illuminate\Support\Facades\Validator;
 use App\Notifications\NotificationGenrater;
 use App\Models\User;
 
@@ -53,5 +54,22 @@ class ApplicationController extends Controller
         }
         else
             return response(['message'=>'Error occurs']);
+    }
+
+    public function getApplications(){
+        return $this->ApplicationRepository->getApplications();
+    }
+
+    public function getApplicationDetail(Request $request){
+        $validator = Validator::make( $request->all(), 
+        [
+            'id'=>'required'
+        ]);
+        
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
+
+        return $this->ApplicationRepository->getApplicationDetail($request->id);
     }
 }

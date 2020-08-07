@@ -4,7 +4,7 @@
         <h3 class="box-title">Notifications</h3>
         <v-row>
             <v-col cols="8">
-                <v-text-field label="Search"></v-text-field>
+                <v-text-field label="Search" v-model="search" @input="searchNotification()"></v-text-field>
             </v-col>
             <v-col cols="4">
                 <v-menu offset-y>
@@ -28,7 +28,7 @@
             <v-divider></v-divider>
             <template v-if="notification.length > 0">
                 <v-row v-for="item in notification" :key="item.id" class="notification-lines">
-                    <v-list-item three-line :class="{ unread: item.read_status == null}" >
+                    <v-list-item three-line :class="{ unread: item.read_status == null}">
                         <v-list-item-avatar>
                             <span class="tag-badge">
                                 <v-icon>mdi-bell</v-icon>
@@ -36,7 +36,30 @@
                         </v-list-item-avatar>
                         <v-list-item-content>
                             <!-- #1565c02e; -->
-                            <v-list-item-title>{{ item.notification.title }}</v-list-item-title>
+                            <v-list-item-title>{{ item.notification.title }}
+                                <span class="notification-options">
+                                    <v-menu offset-y>
+                                        <template v-slot:activator="{on}">
+                                            <v-icon v-on="on">mdi-dots-vertical</v-icon>
+                                        </template>
+                                        <v-list>
+                                            <v-list-item v-if="item.read_status == null" @click="markAsRead(item.id)">
+                                                <v-list-item-title>
+                                                    <v-icon>mdi-read</v-icon>
+                                                    Mark as Read
+                                                </v-list-item-title>
+                                            </v-list-item>
+                                            <v-list-item @click="deleteNotification(item.id)"> 
+                                                <v-list-item-title>
+                                                    <v-icon>mdi-delete</v-icon>
+                                                    Delete
+                                                </v-list-item-title>
+                                            </v-list-item>
+                                        </v-list>
+                                    </v-menu>
+
+                                </span>
+                            </v-list-item-title>
                             <v-list-item-subtitle>{{ item.notification.body }}</v-list-item-subtitle>
                             <router-link :to="{name:'notificationDetail',params:{id:item.id}}" class="read-now">Read Now</router-link>
                             <span class="notification-time">{{ item.send_at }}</span>
@@ -67,10 +90,78 @@ export default {
     name: 'NotificationList',
     data: function () {
         return {
-            loading: true
+            loading: true,
+            search:'',
         };
     },
     methods: {
+        searchNotification:function(){
+            if(this.search.length > 3){
+                 // Headers are defined for authentication
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token,
+            };
+            axios.post(process.env.MIX_APP_URL + '/search-notification',{'query':this.search}, {
+                    headers: headers
+                })
+                .then(res => {
+                    this.$store.dispatch('Notifications', res.data.notification);
+                    this.loading = false;
+                })
+                .catch(err => {})
+            }else{
+                this.getNotification();
+            }
+        },
+        markAsRead: function (id) {
+            // Headers are defined for authentication
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token,
+            };
+            axios.post(process.env.MIX_APP_URL + '/mark-as-read-notification', {
+                    'id': id
+                }, {
+                    headers: headers
+                })
+                .then(res => {
+                    this.getNotification();
+                    this.getNotificationCount();
+                })
+                .catch(err => {})
+        },
+        deleteNotification:function(id){
+             // Headers are defined for authentication
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token,
+            };
+            axios.post(process.env.MIX_APP_URL + '/delete-notification', {
+                    'id': id
+                }, {
+                    headers: headers
+                })
+                .then(res => {
+                    this.getNotification();
+                    this.getNotificationCount();
+                })
+                .catch(err => {})
+        },
+        getNotificationCount: function () {
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token
+            };
+
+            axios.post(process.env.MIX_APP_URL + '/get-notification-count', "", {
+                    headers: headers
+                })
+                .then(res => {
+                    this.$store.dispatch('NotificationCount', res.data.notificationCount)
+                })
+                .catch(err => {})
+        },
         getNotification: function () {
             // Headers are defined for authentication
             let headers = {
@@ -108,9 +199,15 @@ export default {
 .loading {
     margin: 20px 0;
 }
-.unread{
- background: #1565c02e;
+
+.unread {
+    background: #1565c02e;
 }
+
+.notification-options {
+    float: right;
+}
+
 .tag-badge {
     padding: 8px 12px;
     color: white;

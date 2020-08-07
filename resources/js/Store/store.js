@@ -58,7 +58,7 @@ const store = new Vuex.Store({
             state.PopNotification = !state.PopNotification;
         },
         NotificationCount(state, data) {
-            console.log(data);
+
             state.NotificationCount = data;
         },
         CourseOutlineView(state) {

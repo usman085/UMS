@@ -55,4 +55,49 @@ class NotificationController extends Controller
         return $this->notificationRepository->getNotificationDetail($request->id);
     }
 
+    /**
+     * Mark Notification As Read function
+     *
+     * @param Request $request
+     * @return response Specific Notification
+     */
+
+    public function markAsReadNotification(Request $request){
+        $validator = Validator::make( $request->all(), 
+        [
+            'id' => 'required',
+        ]);
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
+        return $this->notificationRepository->markAsReadNotification($request->id);
+    }
+
+    /**
+     * Delete Notification function
+     *
+     * @param Request $request
+     * @return response Specific Notification
+     */
+
+    public function delNotification(Request $request){
+        $validator = Validator::make( $request->all(), 
+        [
+            'id' => 'required',
+        ]);
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
+        return $this->notificationRepository->delNotification($request->id);
+    }
+
+    public function searchNotification(Request $request){
+        $validator = Validator::make( $request->all(), 
+        [
+            'query' => 'required',
+        ]);
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
+    }
 }

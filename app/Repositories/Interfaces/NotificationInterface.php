@@ -8,4 +8,9 @@ interface NotificationInterface{
     public function getNotification();
 
     public function getNotificationDetail($id);
+
+
+    public function markAsReadNotification($id);
+
+    public function delNotification($id);
 }

@@ -29,4 +29,16 @@ class NotificationRepository implements NotificationInterface{
       
       return response(['notification'=> $notification]);
     }
+
+    public function markAsReadNotification($id){
+      $notification = Auth::user()->notifications->where('id',$id)->first();
+      $notification->markAsRead();
+      return response(['message'=> 'Successfuly done']);
+    }
+
+    
+    public function delNotification($id){
+      $notification = Auth::user()->notifications->where('id',$id)->first()->delete();
+      return response(['message'=> 'Successfuly done']);
+    }
 }
