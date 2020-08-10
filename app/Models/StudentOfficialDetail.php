@@ -15,7 +15,7 @@ class StudentOfficialDetail extends Model
     *
     */
       public function program()
-      {
+      { 
         return $this->BelongsTo('App\Models\Program');
       }
 

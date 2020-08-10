@@ -12,4 +12,8 @@ class Application extends Model
     public function getCreatedAtAttribute($value){
         return  \Carbon\Carbon::createFromTimeStamp(strtotime($value))->diffForHumans();
       }
+
+      public function userDetail(){
+          return $this->belongsTo('App\Models\User','user_id');
+      }
 }

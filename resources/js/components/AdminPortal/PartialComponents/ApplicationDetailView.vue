@@ -126,9 +126,13 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 Vue.use(CKEditor);
 export default {
     name: 'ApplicationDetailView',
+    created(){
+        this.getApplicationDetail(this.$route.params.id);
+    },
     data: function () {
         return {
             dialog: false,
+              application:null,
             forwardto:['Account Department','libaray'],
             forwardApplication:false,
             editor: ClassicEditor,
@@ -137,6 +141,31 @@ export default {
                 // The configuration of the editor.
             },
         };
+    },
+    computed: {
+        userAuth: function () {
+            return cryptoJSON.decrypt(
+                JSON.parse(localStorage.getItem("adminLogin")),
+                "ums"
+            );
+        }
+    },
+    methods:{
+        getApplicationDetail:function(id){
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token,
+            };
+            axios.post(process.env.MIX_APP_URL + '/admin-application-detail',{'id':id}, {
+                    headers: headers
+                })
+                .then(res => {
+                  console.log(res);
+                    this.application=res.data.application;
+                  
+                })
+                .catch(err => {})
+        }
     }
 
 }

@@ -8,4 +8,8 @@ interface ApplicationInterface{
     public function getApplications();
 
     public function getApplicationDetail($id);
+
+    public function getAdminApplication();
+
+    public function getAdminApplicationDetail($id);
 }

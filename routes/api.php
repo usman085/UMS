@@ -24,6 +24,8 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
 
       Route::post('/all-applications','ApiController\Application\ApplicationController@getApplications');
       Route::post('/submit-application','ApiController\Application\ApplicationController@submitApplication');
+      Route::post('/admin-application-detail','ApiController\Application\ApplicationController@getAdminApplicationDetail');
+      Route::post('/all-admin-applications','ApiController\Application\ApplicationController@getAdminApplication');
       Route::post('/all-application-detail','ApiController\Application\ApplicationController@getApplicationDetail');
    // ********  Application Routes  **********//
 

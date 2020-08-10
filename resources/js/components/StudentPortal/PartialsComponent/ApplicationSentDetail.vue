@@ -1,6 +1,7 @@
 <template>
 <div class="application-detail-content">
     <v-card class="mx-auto" max-width="95%">
+        <template v-if="application != null">
         <v-card-title>
             <v-icon class="back-btn" @click="$router.push({name:'ApplicationInbox'})">mdi-arrow-left</v-icon>
              {{ application.application_title|capitalize }}
@@ -31,6 +32,13 @@
                 
             </div>
         </v-card-text>
+        </template>
+        <template v-else>
+             <div  class="text-center loading">
+                    <v-progress-circular indeterminate color="primary" size="50"></v-progress-circular>
+                    <p>Loading....</p>
+                </div>
+        </template>
     </v-card>
 </div>
 <!--application-detail-content-->
@@ -44,7 +52,7 @@ export default {
     },
     data:function(){
         return{
-            application:''
+            application:null
         }
     },
     computed: {
@@ -67,7 +75,7 @@ export default {
                 .then(res => {
                   
                     this.application=res.data.application;
-                    // this.items = res.data.applications;
+                  
                 })
                 .catch(err => {})
         }
@@ -83,6 +91,9 @@ export default {
 
 .application-detail-content {
     padding: 10px 0;
+}
+.loading {
+    margin: 20px 0;
 }
 .back-btn{
     padding-right:5px ;

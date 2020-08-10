@@ -60,6 +60,22 @@ class ApplicationController extends Controller
         return $this->ApplicationRepository->getApplications();
     }
 
+    public function getAdminApplication(){
+        return $this->ApplicationRepository->getAdminApplication();
+    }
+
+    public function getAdminApplicationDetail(Request $request){
+        $validator = Validator::make( $request->all(), 
+        [
+            'id'=>'required'
+        ]);
+        
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
+
+        return $this->ApplicationRepository->getAdminApplicationDetail($request->id);
+    }
     public function getApplicationDetail(Request $request){
         $validator = Validator::make( $request->all(), 
         [
