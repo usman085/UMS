@@ -16,9 +16,13 @@
                             <v-list-item-subtitle v-html="item.application_content.slice(0, 125)"></v-list-item-subtitle>
                         </router-link>
                         <span class="application-status">
-                            <v-chip class="ma-2" color="green" v-if="item.status == 'Accepted'" text-color="white">{{item.status|capitalize}}</v-chip>
+                            <v-chip class="ma-2" color="green" v-if="item.status == 'Accepted'" text-color="white">{{item.status|capitalize}}
+                                 <v-icon class="note-btn" @click="noteMsg()">mdi-note</v-icon>
+                            </v-chip>
                             <v-chip class="ma-2" color="secondary" v-if="item.status == 'pending'" text-color="white">{{item.status|capitalize}}</v-chip>
-                            <v-chip class="ma-2" color="danger" v-if="item.status == 'Reject'" text-color="white">{{item.status|capitalize}}</v-chip>
+                            <v-chip class="ma-2" color="danger" v-if="item.status == 'Reject'" text-color="white">{{item.status|capitalize}}
+                                  <v-icon class="note-btn" @click="noteMsg()">mdi-note</v-icon>
+                            </v-chip>
                         </span>
                     </v-list-item-content>
 
@@ -40,16 +44,21 @@
             </div>
         </template>
     </v-list>
+    <ApplicationNote :dialog="dialog"/>
 </v-card>
+
 </template>
 
 <script>
-
+import EventBus from '../../../EventBus/eventBus';
+import ApplicationNote from './ApplicationNote';
 export default {
     name: 'ApplicationInbox',
+    components:{ApplicationNote},
     data: () => ({
         page: 1,
         loading: true,
+        dialog:false,
         items: [],
     }),
     computed: {
@@ -62,8 +71,14 @@ export default {
     },
     mounted() {
         this.getApplications();
+        EventBus.$on('noteClose',()=>{
+                this.dialog=false;
+        })
     },
     methods: {
+        noteMsg:function(){
+            this.dialog=true;
+        },
         getApplications: function (page = 1) {
             let headers = {
                 "Content-Type": "application/json",
@@ -92,7 +107,9 @@ export default {
 .application-content {
     text-decoration: none;
 }
-
+.note-btn{
+    margin-left: 10px;
+}
 .loading {
     margin: 20px 0;
 }

@@ -15,9 +15,13 @@
                     </v-chip>
                 </span>
                 <span class="status-chip">
-                    <v-chip class="ma-2" color="green" v-if="application.status == 'Accepted'" text-color="white">{{application.status|capitalize}}</v-chip>
-                        <v-chip class="ma-2" color="secondary" v-if="application.status == 'pending'" text-color="white">{{application.status|capitalize}}</v-chip>
-                        <v-chip class="ma-2" color="danger" v-if="application.status == 'Reject'" text-color="white">{{application.status|capitalize}}</v-chip>
+                   <v-chip class="ma-2" color="green" v-if="application.status == 'Accepted'" text-color="white">{{application.status|capitalize}}
+                                 <v-icon class="note-btn" @click="noteMsg()">mdi-note</v-icon>
+                            </v-chip>
+                            <v-chip class="ma-2" color="secondary" v-if="application.status == 'pending'" text-color="white">{{application.status|capitalize}}</v-chip>
+                            <v-chip class="ma-2" color="danger" v-if="application.status == 'Reject'" text-color="white">{{application.status|capitalize}}
+                                  <v-icon class="note-btn" @click="noteMsg()">mdi-note</v-icon>
+                            </v-chip>
                 </span>
                 <p>
                     Submit Date: {{application.created_at}}
@@ -40,18 +44,26 @@
                 </div>
         </template>
     </v-card>
+     <ApplicationNote :dialog="dialog"/>
 </div>
 <!--application-detail-content-->
 </template>
 
 <script>
+import EventBus from '../../../EventBus/eventBus';
+import ApplicationNote from './ApplicationNote';
 export default {
     name: 'ApplicationSentDetail',
     created(){
+         EventBus.$on('noteClose',()=>{
+                this.dialog=false;
+        })
         this.getApplicationDetail(this.$route.params.id);
     },
+    components:{ApplicationNote},
     data:function(){
         return{
+               dialog:false,
             application:null
         }
     },
@@ -64,6 +76,9 @@ export default {
         }
     },
     methods:{
+        noteMsg:function(){
+            this.dialog=true;
+        },
         getApplicationDetail:function(id){
             let headers = {
                 "Content-Type": "application/json",
@@ -97,6 +112,9 @@ export default {
 }
 .back-btn{
     padding-right:5px ;
+}
+.note-btn{
+    margin-left: 10px;
 }
 .application-detail-content-title {
     font-size: 22px;
