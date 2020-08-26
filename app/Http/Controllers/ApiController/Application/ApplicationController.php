@@ -45,7 +45,7 @@ class ApplicationController extends Controller
             'forward_to'=> 5
         ]);
 
-        $users=_::where('role',5)->get();
+        $users=User::where('role',5)->get();
 
         if($ApplicationCreate){
             $message=collect(['title'=>'New Application','body'=> Auth::user()->name.' Send  a application']);

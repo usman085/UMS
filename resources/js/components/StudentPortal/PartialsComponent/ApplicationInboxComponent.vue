@@ -1,9 +1,8 @@
 <template>
 <v-card max-width="100%" class="mx-auto">
     <v-list three-line>
-        <template v-if="items.length > 0">
-            <template v-for="(item, index) in items">
-
+        <template v-if="items.data">
+            <template v-for="(item, index) in items.data">
                 <v-list-item :key="item.id">
                     <v-list-item-avatar>
                         <span class="tag-badge">
@@ -25,25 +24,31 @@
 
                 </v-list-item>
                 <v-divider :key="index" :inset="true"></v-divider>
+
             </template>
+            <div class="text-center">
+                <v-pagination v-model="page" :length="items.last_page" @input="getApplications"></v-pagination>
+            </div>
         </template>
-         <template v-else>
-                <div v-if="!loading" class="text-center loading">
-                    No Application Found 😟 !
-                </div>
-                <div v-else class="text-center loading">
-                    <v-progress-circular indeterminate color="primary" size="50"></v-progress-circular>
-                    <p>Loading....</p>
-                </div>
-            </template>
+        <template v-else>
+            <div v-if="!loading" class="text-center loading">
+                No Application Found 😟 !
+            </div>
+            <div v-else class="text-center loading">
+                <v-progress-circular indeterminate color="primary" size="50"></v-progress-circular>
+                <p>Loading....</p>
+            </div>
+        </template>
     </v-list>
 </v-card>
 </template>
 
 <script>
+
 export default {
     name: 'ApplicationInbox',
     data: () => ({
+        page: 1,
         loading: true,
         items: [],
     }),
@@ -59,12 +64,12 @@ export default {
         this.getApplications();
     },
     methods: {
-        getApplications: function () {
+        getApplications: function (page = 1) {
             let headers = {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token,
             };
-            axios.post(process.env.MIX_APP_URL + '/all-applications', '', {
+            axios.post(process.env.MIX_APP_URL + '/all-applications?page=' + page, '', {
                     headers: headers
                 })
                 .then(res => {
@@ -87,9 +92,11 @@ export default {
 .application-content {
     text-decoration: none;
 }
+
 .loading {
     margin: 20px 0;
 }
+
 .tag-badge {
     padding: 8px 12px;
     color: white;

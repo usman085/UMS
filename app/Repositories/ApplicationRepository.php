@@ -7,8 +7,8 @@ use Auth;
 class ApplicationRepository implements ApplicationInterface{
 
     public function getApplications(){
-            $application = Auth::user()->applications->take(50);
-
+            $application = Auth::user()->applications()->paginate(15);
+            
         return response(['applications'=>$application],200);
     }
 

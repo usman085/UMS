@@ -260,6 +260,11 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+*{
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
 .notification-list:hover{
     cursor: pointer;
 }
@@ -273,7 +278,9 @@ export default {
     height: 100%;
     line-height: 2.2;
 }
-
+.v-list-item__title{
+ font-size: 15px;
+}
 .v-application a {
     text-decoration: none;
 }

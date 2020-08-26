@@ -28,7 +28,7 @@
             <v-divider></v-divider>
             <template v-if="notification.length > 0">
                 <v-row v-for="item in notification" :key="item.id" class="notification-lines">
-                    <v-list-item three-line :class="{ unread: item.read_status == null}">
+                    <v-list-item three-line :class="{ unread: item.read_at == null}">
                         <v-list-item-avatar>
                             <span class="tag-badge">
                                 <v-icon>mdi-bell</v-icon>
@@ -36,20 +36,20 @@
                         </v-list-item-avatar>
                         <v-list-item-content>
                             <!-- #1565c02e; -->
-                            <v-list-item-title>{{ item.notification.title }}
+                            <v-list-item-title>{{ item.data.message.title }}
                                 <span class="notification-options">
                                     <v-menu offset-y>
                                         <template v-slot:activator="{on}">
                                             <v-icon v-on="on">mdi-dots-vertical</v-icon>
                                         </template>
                                         <v-list>
-                                            <v-list-item v-if="item.read_status == null" @click="markAsRead(item.id)">
+                                            <v-list-item v-if="item.read_at == null" @click="markAsRead(item.id)">
                                                 <v-list-item-title>
                                                     <v-icon>mdi-read</v-icon>
                                                     Mark as Read
                                                 </v-list-item-title>
                                             </v-list-item>
-                                            <v-list-item @click="deleteNotification(item.id)"> 
+                                            <v-list-item @click="deleteNotification(item.id)">
                                                 <v-list-item-title>
                                                     <v-icon>mdi-delete</v-icon>
                                                     Delete
@@ -60,13 +60,16 @@
 
                                 </span>
                             </v-list-item-title>
-                            <v-list-item-subtitle>{{ item.notification.body }}</v-list-item-subtitle>
+                            <v-list-item-subtitle>{{ item.data.message.body }}</v-list-item-subtitle>
                             <router-link :to="{name:'notificationDetail',params:{id:item.id}}" class="read-now">Read Now</router-link>
                             <span class="notification-time">{{ item.send_at }}</span>
                         </v-list-item-content>
                     </v-list-item>
                     <v-divider></v-divider>
                 </v-row>
+                <div class="text-center">
+                    <v-pagination v-model="page" :length="last_page" @input="getNotification"></v-pagination>
+                </div>
             </template>
             <template v-else>
                 <div v-if="!loading" class="text-center loading">
@@ -91,26 +94,30 @@ export default {
     data: function () {
         return {
             loading: true,
-            search:'',
+            search: '',
+            last_page: 0,
+            page: 1
         };
     },
     methods: {
-        searchNotification:function(){
-            if(this.search.length > 3){
-                 // Headers are defined for authentication
-            let headers = {
-                "Content-Type": "application/json",
-                Authorization: "Bearer  " + this.userAuth.token,
-            };
-            axios.post(process.env.MIX_APP_URL + '/search-notification',{'query':this.search}, {
-                    headers: headers
-                })
-                .then(res => {
-                    this.$store.dispatch('Notifications', res.data.notification);
-                    this.loading = false;
-                })
-                .catch(err => {})
-            }else{
+        searchNotification: function () {
+            if (this.search.length > 3) {
+                // Headers are defined for authentication
+                let headers = {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer  " + this.userAuth.token,
+                };
+                axios.post(process.env.MIX_APP_URL + '/search-notification', {
+                        'query': this.search
+                    }, {
+                        headers: headers
+                    })
+                    .then(res => {
+                        this.$store.dispatch('Notifications', res.data.notification);
+                        this.loading = false;
+                    })
+                    .catch(err => {})
+            } else {
                 this.getNotification();
             }
         },
@@ -131,8 +138,8 @@ export default {
                 })
                 .catch(err => {})
         },
-        deleteNotification:function(id){
-             // Headers are defined for authentication
+        deleteNotification: function (id) {
+            // Headers are defined for authentication
             let headers = {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token,
@@ -162,17 +169,19 @@ export default {
                 })
                 .catch(err => {})
         },
-        getNotification: function () {
+        getNotification: function (page = 1) {
             // Headers are defined for authentication
             let headers = {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token,
             };
-            axios.post(process.env.MIX_APP_URL + '/all-notification', '', {
+            axios.post(process.env.MIX_APP_URL + '/all-notification?page=' + page, '', {
                     headers: headers
                 })
                 .then(res => {
-                    this.$store.dispatch('Notifications', res.data.notification);
+
+                    this.last_page = res.data.notification.last_page;
+                    this.$store.dispatch('Notifications', res.data.notification.data);
                     this.loading = false;
                 })
                 .catch(err => {})

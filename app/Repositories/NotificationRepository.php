@@ -18,15 +18,7 @@ class NotificationRepository implements NotificationInterface{
       return response(['notification'=> $data]);
     }
     public function getNotification(){
-      $notification= Auth::user()->notifications->take(25)->map(function($notification){
-        return[
-          'id'=>$notification->id,
-          'read_status'=>$notification->read_at,
-          'notification'=>$notification->data['message'],
-          'send_at'=> \Carbon\Carbon::createFromTimeStamp(strtotime($notification->created_at))->diffForHumans()
-        ];
-      });
-      
+      $notification= Auth::user()->notifications()->select('id','read_at','data','created_at')->paginate(25); 
       return response(['notification'=> $notification]);
     }
 
