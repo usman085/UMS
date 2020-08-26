@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\CourseOutline;
 use App\Models\User;
 use Auth;
+
 class CourseRepository implements CourseInterface 
 {
     
