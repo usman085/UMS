@@ -30,6 +30,11 @@ const routes = [
         name: 'login',
         beforeEnter: checkCurrentLogin
     },
+    // *** Merege All Imported Routes from different file
+    // *** Merege Route In routes Variable useing Spread Aprator
+    ...StudentRoutes, // *** Push Student Routes To Main Routes
+    ...AdminRoutes, // *** Push Admin Routes To Main Routes
+    ...TeacherRoutes, // *** Push Teacher Routes To Main Routes
 
     // **** Main Root Wild Card
     {
@@ -43,17 +48,7 @@ const routes = [
     }
 ];
 
-// *** Merege All Imported Routes from different file
-// *** Merege Route In routes Variable
 
-// *** Push Student Routes To Main Routes
-Array.prototype.push.apply(routes, StudentRoutes);
-
-// *** Push Admin Routes To Main Routes
-Array.prototype.push.apply(routes, AdminRoutes);
-
-// *** Push Teacher Routes To Main Routes
-Array.prototype.push.apply(routes, TeacherRoutes);
 
 
 

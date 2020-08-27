@@ -58,7 +58,7 @@ export default {
             cluster: process.env.MIX_PUSHER_APP_CLUSTER,
             encrypted: true,
             auth: {
-                headers: { 
+                headers: {
                     Authorization: 'Bearer ' + this.userAuth.token,
                 },
             },
@@ -67,38 +67,37 @@ export default {
 
     },
     methods: {
-        getNotification: function () {
-            // Headers are defined for authentication
-            let headers = {
-                "Content-Type": "application/json",
-                Authorization: "Bearer  " + this.userAuth.token,
-            };
-            axios.post(process.env.MIX_APP_URL + '/all-notification', '', {
-                    headers: headers
-                })
-                .then(res => {
-                    this.$store.dispatch('Notifications',res.data.notification);
-                })
-                .catch(err => {})
-        },
+        // getNotification: function () {
+        //     // Headers are defined for authentication
+        //     let headers = {
+        //         "Content-Type": "application/json",
+        //         Authorization: "Bearer  " + this.userAuth.token,
+        //     };
+        //     axios.post(process.env.MIX_APP_URL + '/all-notification', '', {
+        //             headers: headers
+        //         })
+        //         .then(res => {
+        //             this.$store.dispatch('Notifications',res.data.notification);
+        //         })
+        //         .catch(err => {})
+        // },
         pusherListner: function () {
 
             this.Echo.private('App.Models.User.' + this.userAuth.id)
                 .notification(notification => {
                     this.$store.dispatch('NotificationCount', notification.TotalNotification);
-                    this.getNotification();
                     this.$toast.success({
                         title: notification.notification.title,
                         message: notification.notification.body,
                         timeOut: 8000
                     })
-                   
-                     this.$store.dispatch('NotificationBox',{
+
+                    this.$store.dispatch('NotificationBox', {
                         title: notification.notification.title,
                         body: notification.notification.body,
-                        
+
                     });
-                       
+
                 });
         }
     }

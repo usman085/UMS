@@ -205,9 +205,11 @@
 </template>
 
 <script>
+import notificationMix from '../../../Mixins/notificationMixin';
 export default {
     name: "SideBar",
     components: {},
+    mixins:[notificationMix],
     props: {
         source: String
     },
@@ -219,24 +221,11 @@ export default {
                 name: "login"
             });
         },
-        getNotificationCount: function () {
-            let headers = {
-                "Content-Type": "application/json",
-                Authorization: "Bearer  " + this.userAuth.token
-            };
-
-            axios.post(process.env.MIX_APP_URL + '/get-notification-count', "", {
-                    headers: headers
-                })
-                .then(res => {
-                    this.$store.dispatch('NotificationCount', res.data.notificationCount)
-                })
-                .catch(err => {})
-        }
+        
 
     },
     created() {
-        this.getNotificationCount();
+        this.getNotificationCount(); //mixins function
     },
     computed: {
         NotificationCount: function () {

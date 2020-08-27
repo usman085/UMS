@@ -89,8 +89,11 @@
 </template>
 
 <script>
+import notificationMix from '../../../Mixins/notificationMixin';
 export default {
+
     name: 'NotificationList',
+     mixins:[notificationMix],
     data: function () {
         return {
             loading: true,
@@ -155,20 +158,6 @@ export default {
                 })
                 .catch(err => {})
         },
-        getNotificationCount: function () {
-            let headers = {
-                "Content-Type": "application/json",
-                Authorization: "Bearer  " + this.userAuth.token
-            };
-
-            axios.post(process.env.MIX_APP_URL + '/get-notification-count', "", {
-                    headers: headers
-                })
-                .then(res => {
-                    this.$store.dispatch('NotificationCount', res.data.notificationCount)
-                })
-                .catch(err => {})
-        },
         getNotification: function (page = 1) {
             // Headers are defined for authentication
             let headers = {
@@ -179,7 +168,6 @@ export default {
                     headers: headers
                 })
                 .then(res => {
-
                     this.last_page = res.data.notification.last_page;
                     this.$store.dispatch('Notifications', res.data.notification.data);
                     this.loading = false;
