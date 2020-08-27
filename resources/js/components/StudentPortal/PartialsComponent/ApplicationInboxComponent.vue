@@ -29,7 +29,7 @@
 
             </template>
             <div class="text-center">
-                <v-pagination v-model="page" :length="items.last_page" @input="getApplications"></v-pagination>
+                <v-pagination v-model="page" circle :length="items.last_page" @input="getApplications"></v-pagination>
             </div>
         </template>
         <template v-else>

@@ -68,7 +68,7 @@
                     <v-divider></v-divider>
                 </v-row>
                 <div class="text-center">
-                    <v-pagination v-model="page" :length="last_page" @input="getNotification"></v-pagination>
+                    <v-pagination circle v-model="page" :length="last_page" @input="getNotification"></v-pagination>
                 </div>
             </template>
             <template v-else>
