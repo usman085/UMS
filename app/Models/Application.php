@@ -16,4 +16,13 @@ class Application extends Model
       public function userDetail(){
           return $this->belongsTo('App\Models\User','user_id');
       }
+
+      public function applicationNote(){
+        return $this->hasOne('App\Models\ApplicationNote');
+    }
+
+    public function Applicant(){
+        return $this->belongsTo('App\Models\User','user_id');
+    }
+
 }

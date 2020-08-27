@@ -12,4 +12,6 @@ interface ApplicationInterface{
     public function getAdminApplication();
 
     public function getAdminApplicationDetail($id);
+
+    public function updateStatus($data);
 }

@@ -1,9 +1,9 @@
 <template>
 <div class="application-detail-content">
-    <v-card class="mx-auto" max-width="95%">
+    <v-card class="mx-auto" max-width="95%" v-if="application">
         <v-card-title>
             <v-icon class="back-arrow" @click="$router.push({name:'AdminApplicationInbox'})">mdi-arrow-left-bold</v-icon>
-            Request For Time
+            {{ application.application_title }}
             <v-spacer></v-spacer>
             <v-menu offset-y>
                 <template v-slot:activator="{ on, attrs }">
@@ -12,7 +12,7 @@
                     </v-btn>
                 </template>
                 <v-list>
-                    <v-list-item @click="dialog = true">
+                    <v-list-item @click="statusModal()">
                         <v-list-item-title>Status</v-list-item-title>
                     </v-list-item>
                     <v-list-item @click="forwardApplication=true">
@@ -24,7 +24,7 @@
         <v-card-text>
             <div>
                 <p>
-                    From: M Usman Khan | Monday 20,2020
+                    From: {{ application.user_detail.name }} | {{ application.created_at }}
                 </p>
 
             </div>
@@ -32,14 +32,20 @@
                 Application Content
             </p>
 
-            <div class="text--primary">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-
-                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
-                desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            <div class="text--primary" v-html="application.application_content">
             </div>
+
+            <v-divider></v-divider>
+            Applicant Details:<br />
+            <p><b> Status</b>: {{application.status}}</p>
+            <p><b> Name</b>: {{application.user_detail.name}}</p>
+            <p><b> Email</b>: {{application.user_detail.email}}</p>
+            <p><b> Program</b>: {{application.user_detail.student_official_detail.program.program_title}}</p>
+            <p><b> Semester</b>: {{application.user_detail.student_official_detail.current_semester | numberToNth}}</p>
+            <p><b> Shift</b>: {{application.user_detail.student_official_detail.shift.shift}}</p>
+            <p><b> Roll No</b>: {{application.user_detail.student_official_detail.roll_no}}</p>
+            <p><b> Registration No</b>: {{application.user_detail.student_official_detail.registration_no}}</p>
+            <p><b> Session Year</b>: {{application.user_detail.student_official_detail.session_year}}</p>
         </v-card-text>
     </v-card>
     <!-- modal for status -->
@@ -53,9 +59,9 @@
                 </v-card-title>
 
                 <v-card-text>
-                   <div class="descption-content">
+                    <div class="descption-content">
                         <span class="descripton-head">Application Message.</span>
-                        <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+                        <ckeditor :editor="editor" v-model="application_note" :config="editorConfig"></ckeditor>
                     </div>
                 </v-card-text>
 
@@ -63,10 +69,10 @@
 
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="primary"  @click="dialog = false">
+                    <v-btn color="primary" @click="StatusAction('Accepted')">
                         Accept
                     </v-btn>
-                    <v-btn color="red" class="reject" @click="dialog = false">
+                    <v-btn color="red" @click="StatusAction('Rejected')" class="reject">
                         Reject
                     </v-btn>
                 </v-card-actions>
@@ -76,13 +82,12 @@
 
     <!-- Modal for status -->
 
-
     <!-- modal for status -->
     <div class="text-center">
         <v-dialog v-model="forwardApplication" width="700">
             <v-card class="application-replay">
                 <v-card-title class="headline" primary-title>
-                   Forward Application
+                    Forward Application
                     <v-spacer></v-spacer>
                     <v-icon @click="forwardApplication = false">mdi-close</v-icon>
                 </v-card-title>
@@ -95,9 +100,9 @@
                             </v-col>
                         </v-row>
                     </v-container>
-                   <div class="descption-content">
+                    <div class="descption-content">
                         <span class="descripton-head">Application Message.</span>
-                        <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+                        <ckeditor :editor="editor" v-model="application_note" :config="editorConfig"></ckeditor>
                     </div>
                 </v-card-text>
 
@@ -105,8 +110,8 @@
 
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="primary"  @click="forwardApplication = false">
-                     <v-icon>mdi-share</v-icon>   Forward
+                    <v-btn color="primary" @click="forwardApplication = false">
+                        <v-icon>mdi-share</v-icon> Forward
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -126,17 +131,17 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 Vue.use(CKEditor);
 export default {
     name: 'ApplicationDetailView',
-    created(){
+    created() {
         this.getApplicationDetail(this.$route.params.id);
     },
     data: function () {
         return {
             dialog: false,
-              application:null,
-            forwardto:['Account Department','libaray'],
-            forwardApplication:false,
+            application: null,
+            forwardto: ['Account Department', 'libaray'],
+            forwardApplication: false,
             editor: ClassicEditor,
-            editorData: '',
+            application_note: '',
             editorConfig: {
                 // The configuration of the editor.
             },
@@ -150,19 +155,41 @@ export default {
             );
         }
     },
-    methods:{
-        getApplicationDetail:function(id){
+    methods: {
+        StatusAction:function(status){
+           
+                 let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token,
+            };
+            axios.post(process.env.MIX_APP_URL + '/aplication-detail-status', {
+                    'id': this.application.id,
+                    'application_note':this.application_note,
+                    'status':status}, {headers: headers})
+                .then(res => {
+                    this.dialog=false;
+                    console.log(res);
+                })
+                .catch(err => {})
+        },
+        statusModal:function(){
+            this.dialog=true;
+        },
+        getApplicationDetail: function (id) {
             let headers = {
                 "Content-Type": "application/json",
                 Authorization: "Bearer  " + this.userAuth.token,
             };
-            axios.post(process.env.MIX_APP_URL + '/admin-application-detail',{'id':id}, {
+            axios.post(process.env.MIX_APP_URL + '/admin-application-detail', {
+                    'id': id
+                }, {
                     headers: headers
                 })
                 .then(res => {
-                  console.log(res);
-                    this.application=res.data.application;
-                  
+                    this.application = res.data.applications;
+                    console.log(res.data.applications);
+                    console.log(this.application);
+
                 })
                 .catch(err => {})
         }
@@ -176,9 +203,11 @@ export default {
     font-weight: bold;
     float: right;
 }
-.reject{
+
+.reject {
     color: white;
 }
+
 .back-arrow {
     padding-right: 5px;
 }
@@ -186,9 +215,11 @@ export default {
 .application-detail-content {
     padding: 10px 0;
 }
-.application-replay{
+
+.application-replay {
     overflow-x: hidden;
 }
+
 .application-detail-content-title {
     font-size: 22px;
 }
@@ -196,13 +227,14 @@ export default {
 .sending-dept {
     font-weight: bold;
 }
+
 .descripton-head {
     padding: 5px 0;
 }
+
 .ck {
     padding: 10px 0 !important;
 }
-
 
 .descption-content {
     padding: 10px;

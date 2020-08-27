@@ -19,7 +19,7 @@
                                  <v-icon class="note-btn" @click="noteMsg()">mdi-note</v-icon>
                             </v-chip>
                             <v-chip class="ma-2" color="secondary" v-if="application.status == 'pending'" text-color="white">{{application.status|capitalize}}</v-chip>
-                            <v-chip class="ma-2" color="danger" v-if="application.status == 'Reject'" text-color="white">{{application.status|capitalize}}
+                            <v-chip class="ma-2" color="red" v-if="application.status == 'Rejected'" text-color="white">{{application.status|capitalize}}
                                   <v-icon class="note-btn" @click="noteMsg()">mdi-note</v-icon>
                             </v-chip>
                 </span>
@@ -44,7 +44,7 @@
                 </div>
         </template>
     </v-card>
-     <ApplicationNote :dialog="dialog"/>
+     <ApplicationNote :dialog="dialog" :data="application"/>
 </div>
 <!--application-detail-content-->
 </template>

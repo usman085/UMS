@@ -79,7 +79,7 @@ class TimeTableRepository implements TimeTableInterface {
             'shift_id'=>$request->shift,
             'semester'=>$request->semester,
             'add_by'=>Auth::user()->id
-        ]);
+        ]); 
             $message=collect(['title'=>'New Time Table Add','body'=>'Admin Make New Time Table']); 
             $users=User::whereHas('studentOfficialDetail', function($q) use ($request) {
             $q->where('program_id',$request->program)->where('shift_id',$request->shift)->where('current_semester',$request->semester);

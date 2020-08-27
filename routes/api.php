@@ -21,7 +21,7 @@ Route::post('/register','ApiController\Auth\AuthController@register');
 Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () {
     
       // ********  Application Routes  **********//
-
+      Route::post('/aplication-detail-status','ApiController\Application\ApplicationController@updateStatus');
       Route::post('/all-applications','ApiController\Application\ApplicationController@getApplications');
       Route::post('/submit-application','ApiController\Application\ApplicationController@submitApplication');
       Route::post('/admin-application-detail','ApiController\Application\ApplicationController@getAdminApplicationDetail');

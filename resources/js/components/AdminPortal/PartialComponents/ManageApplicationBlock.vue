@@ -21,7 +21,7 @@
                         <span class="application-status">
                             <v-chip class="ma-2" color="green" v-if="item.status == 'Accepted'" text-color="white">{{item.status|capitalize}}</v-chip>
                             <v-chip class="ma-2" color="secondary" v-if="item.status == 'pending'" text-color="white">{{item.status|capitalize}}</v-chip>
-                            <v-chip class="ma-2" color="danger" v-if="item.status == 'Reject'" text-color="white">{{item.status|capitalize}}</v-chip>
+                            <v-chip class="ma-2" color="red" v-if="item.status == 'Rejected'" text-color="white">{{item.status|capitalize}}</v-chip>
                         </span>
                     </v-list-item-content>
 

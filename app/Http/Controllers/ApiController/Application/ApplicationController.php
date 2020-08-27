@@ -35,7 +35,19 @@ class ApplicationController extends Controller
      * 
      * @return Response Message
      */
+    public function updateStatus(Request $request){
+        $validator = Validator::make( $request->all(), 
+        [
+            'id'=>'required',
+            'status'=>'required'
+        ]);
+        
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
+        }
 
+        return $this->ApplicationRepository->updateStatus($request);
+    }
     public function submitApplication(Request $request){
 
         $ApplicationCreate=Application::create([

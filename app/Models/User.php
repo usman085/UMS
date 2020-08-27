@@ -48,7 +48,6 @@ class User extends Authenticatable
     */
 
     
-
     /**
     *   student detail relationship with Student Personal Detail .
     */
