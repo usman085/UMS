@@ -23,13 +23,18 @@ class ApplicationRepository implements ApplicationInterface{
 
     public function updateStatus($data){
             DB::beginTransaction();
-            $application= Application::where('id',$data->id)->update(['status'=>$data->status]);    
+            //
+            $application= Application::where('id',$data->id)->update(['status'=>$data->status]);
+
             if(ApplicationNote::where('application_id',$data->id)->first()){
+
                 $noteCreated=ApplicationNote::where('application_id',$data->id)->update([
                     'note'=>$data->application_note,
                     'add_by_id'=>Auth::user()->id
                 ]);
+
             }else{
+                
                 $noteCreated=ApplicationNote::create([
                     'application_id'=> $data->id,
                     'note'=>$data->application_note,
