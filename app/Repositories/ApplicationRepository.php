@@ -51,7 +51,7 @@ class ApplicationRepository implements ApplicationInterface{
                 //*** Notification Genrate Regarding Applicant */
                 $app= Application::where('id',$data->id)->with('Applicant')->first();
                 $message=collect(['title'=>'Your Application is '.ucfirst($data->status), 'body'=>
-                'Your Application Regarding '.$app->application_title.' is '.$data->status
+                'Your Application Regarding "'.$app->application_title.'" is '.$data->status
                 ]); 
                 Notification::send($app->Applicant,new NotificationGenrater($message));
 

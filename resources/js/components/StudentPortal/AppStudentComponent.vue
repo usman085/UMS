@@ -27,8 +27,8 @@ import Echo from 'laravel-echo';
 import CxltToastr from 'cxlt-vue2-toastr'
 import Vue from 'vue';
 var toastrConfigs = {
-    position: 'bottom right',
-    showDuration: 1
+    
+    // showDuration: 1,
 }
 Vue.use(CxltToastr, toastrConfigs)
 export default {
@@ -86,10 +86,13 @@ export default {
             this.Echo.private('App.Models.User.' + this.userAuth.id)
                 .notification(notification => {
                     this.$store.dispatch('NotificationCount', notification.TotalNotification);
-                    this.$toast.success({
+                    this.$toast.info({
                         title: notification.notification.title,
                         message: notification.notification.body,
-                        timeOut: 8000
+                         timeOut: 8000,
+                         position:'bottom right',
+                         color:'#1565c0',
+                        progressBar:true
                     })
 
                     this.$store.dispatch('NotificationBox', {

@@ -43,7 +43,7 @@
 
             <v-list-item :to="{name:'AdminNotification'}">
                 <v-list-item-icon>
-                    <v-badge :content="NotificationCount" color="red" overlap>
+                    <v-badge :value="NotificationCount > 0" :content="NotificationCount" color="red" overlap>
                         <v-icon>mdi-bell</v-icon>
                     </v-badge>
                 </v-list-item-icon>
