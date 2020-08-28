@@ -74,7 +74,13 @@ export default {
                         title: notification.notification.title,
                         message: notification.notification.body,
                         timeOut: 8000
-                    })
+                    });
+
+                     this.$store.dispatch('NotificationBox', {
+                        title: notification.notification.title,
+                        body: notification.notification.body,
+                    });
+                    
                 });
         }
     }

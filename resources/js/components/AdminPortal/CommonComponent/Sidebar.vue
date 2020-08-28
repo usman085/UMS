@@ -133,24 +133,47 @@
                 </v-list-item>
             </v-list>
         </v-menu>
-       <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200">
+      <!-- Bells Activity -->
+     <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" max-width="60%">
             <template v-slot:activator="{ on, attrs }">
-                    <v-badge color="red" dot overlap>
-                        <v-icon v-bind="attrs" v-on="on">mdi-bell</v-icon>
-                    </v-badge>
+                <v-badge color="red" :value="$store.state.NotificationBox.length >0" dot overlap>
+                    <v-icon v-bind="attrs" v-on="on">mdi-bell</v-icon>
+                </v-badge>
             </template>
 
-            <v-card>
-                <v-list>
-                    <v-list-item>
-                        <v-list-item-title>Application Approved</v-list-item-title>
-                    </v-list-item>
+            <v-card max-height="30%">
+                <v-list subheader>
+                    <v-subheader>Lastest Notification Activities</v-subheader>
+                    <template v-if="$store.state.NotificationBox.length">
+                        <v-list-item class="notification-list" two-line v-for="(item,index) in $store.state.NotificationBox" :key="index">
+                            <v-list-item-avatar>
+                                <div class="notification-icon">
+                                    <v-icon>mdi-bell</v-icon>
+                                </div>
+                            </v-list-item-avatar>
+                            <v-list-item-content>
+                                <v-list-item-title>{{ item.title }}</v-list-item-title>
+                                <v-list-item-subtitle>{{ item.body }}</v-list-item-subtitle>
+                            </v-list-item-content>
+                            
+                        </v-list-item>
+                    </template>
+                    <template v-else>
+                        <v-list-item>
+                        
+                            <v-list-item-content class="text-center">
+                                <v-list-item-title>No Activities!</v-list-item-title>
+
+                            </v-list-item-content>
+                        </v-list-item>
+                    </template>
+
                 </v-list>
- 
-                <v-divider></v-divider>
 
             </v-card>
         </v-menu>
+
+      <!-- Bell Activity -->
         <v-btn icon large>
             <v-avatar size="32px" item>
                 <router-link :to="{ name: 'ProfileComponent' }">
@@ -191,7 +214,7 @@ export default {
         logout: function () {
 
             localStorage.removeItem("adminLogin");
-             localStorage.removeItem('token');
+            localStorage.removeItem('token');
             this.$router.push({
                 name: "login"
             });
@@ -219,6 +242,13 @@ export default {
 </script>
 
 <style scoped>
+*{
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+.v-list-item__title{
+ font-size: 15px;
+}
 .v-application a,
 .v-application a:focus {
     text-decoration: none;
@@ -243,7 +273,19 @@ export default {
     overflow-y: auto;
     overflow-x: hidden !important;
 }
-
+.notification-list:hover{
+    cursor: pointer;
+}
+.notification-list{
+    border-bottom: 1px solid #eee;
+}
+.notification-icon {
+    background: #1565c02e;
+    width: 100%;
+    display: block;
+    height: 100%;
+    line-height: 2.2;
+}
 ::-webkit-scrollbar {
     width: 1px;
 }

@@ -95,7 +95,6 @@ export default {
                     this.$store.dispatch('NotificationBox', {
                         title: notification.notification.title,
                         body: notification.notification.body,
-
                     });
 
                 });
