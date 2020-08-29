@@ -28,17 +28,17 @@ class TimeTableController extends Controller
      */
     
     
-    public function getAllTimeTable()
-    {
+    public function getAllTimeTable(){
 
         return $this->timeTableRepository->getAllTimeTable();
     }
-     /**
+    /**
      * Get All TimeTable
      * @param Id
      * 
      * @return TimeTable-Specfic-ID
      */
+
     public function TimeTableDataById(Request $request){
         $validator = Validator::make( $request->all(), 
         [
@@ -58,8 +58,7 @@ class TimeTableController extends Controller
      * @return TimeTable-Specfic-ID
      */
 
-    public function checkTimeTable(Request $request)
-    {
+    public function checkTimeTable(Request $request){
         $validator = Validator::make( $request->all(), 
         [
             'program'=>'required',
@@ -74,7 +73,7 @@ class TimeTableController extends Controller
         return $this->timeTableRepository->checkTimeTable($request);
     }
 
-     /**
+    /**
      * Update TimeTable 
      * @param Request $request
      * 
@@ -91,6 +90,7 @@ class TimeTableController extends Controller
         if ( $validator->fails() ) {
             return response( ['errors'=>$validator->errors()->all()], 422 );
         }
+
         return $this->timeTableRepository->UpdateTimeTable($request);
     }
 
@@ -113,15 +113,15 @@ class TimeTableController extends Controller
         if ( $validator->fails() ) {
             return response( ['errors'=>$validator->errors()->all()], 422 );
         }
-       
         return $this->timeTableRepository->inserTimeTable($request);   
     }
-     /**
+    /**
      * Change Status  TimeTable 
      * @param Request $request
      * 
      * @return Response Change Message  Or Error
      */
+
     public function changeTimeTableStatus(Request $request){
         $validator = Validator::make( $request->all(), 
         [
@@ -134,12 +134,14 @@ class TimeTableController extends Controller
         }
         return $this->timeTableRepository->changeTimeTableStatus($request->id,$request->status);
     }
-     /**
+
+    /**
      * Insert TimeTable 
      * @param Request $request
      * 
      * @return Response Del Or not
      */
+
     public function delTimeTable(Request $request){
         $validator = Validator::make( $request->all(), 
         [
@@ -152,6 +154,12 @@ class TimeTableController extends Controller
         return $this->timeTableRepository->delTimeTable($request->id);
     }
     
+    /**
+     * Time Table Data For Student 
+     * @param Request $request
+     * 
+     * @return Response Del Or not
+     */
 
     public function TimeTableDataForStudent(){
         return $this->timeTableRepository->TimeTableDataForStudent();

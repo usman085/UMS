@@ -387,9 +387,6 @@ export default {
                 .then(response => {
                     this.loading = false;
                     this.course = response.data.course.assigned_courses;
-                
-
-
                     this.$store.dispatch('overlay');
 
                         console.log(this.course[0].pivot);

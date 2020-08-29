@@ -17,13 +17,15 @@ class NotificationController extends Controller
      */
 
     public function __construct(NotificationInterface $NotificationInterface){
-         $this->notificationRepository=$NotificationInterface;
+        $this->notificationRepository=$NotificationInterface;
     }
+
     /**
      * Get Notification Count
      *
      * @return Response Total Notification Value
      */
+
     public function getNotificationCount(){
         return $this->notificationRepository->getNotificationCount();
     }
@@ -37,6 +39,7 @@ class NotificationController extends Controller
     public function getNotification(){
         return $this->notificationRepository->getNotification();
     }
+
     /**
      * Get Notification Detail function
      *
@@ -90,6 +93,12 @@ class NotificationController extends Controller
         }
         return $this->notificationRepository->delNotification($request->id);
     }
+
+    /**
+     * Get Search Notification 
+     *
+     * @return Response Matching Data 
+     */
 
     public function searchNotification(Request $request){
         $validator = Validator::make( $request->all(), 

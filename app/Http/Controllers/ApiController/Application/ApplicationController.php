@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\ApiController\Application;
 
+use App\Repositories\Interfaces\ApplicationInterface;
+use App\Notifications\NotificationGenrater;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\Interfaces\ApplicationInterface;
 use App\Models\Application;
-use Illuminate\Support\Facades\Validator;
-use App\Notifications\NotificationGenrater;
 use App\Models\User;
-
 use Notification;
 use Auth;
+
+
 
 class ApplicationController extends Controller
 {
@@ -25,16 +26,18 @@ class ApplicationController extends Controller
      */
 
     public function __construct(ApplicationInterface $ApplicationInterface){
+
             $this->ApplicationRepository = $ApplicationInterface;
     }
 
     /**
-     * Submit Application
+     * Update Application Status and genrate notification
      *
      * @param Request $request
      * 
      * @return Response Message
      */
+
     public function updateStatus(Request $request){
         $validator = Validator::make( $request->all(), 
         [
@@ -48,34 +51,58 @@ class ApplicationController extends Controller
 
         return $this->ApplicationRepository->updateStatus($request);
     }
-    public function submitApplication(Request $request){
 
-        $ApplicationCreate=Application::create([
+    /**
+     * Submit Application
+     *
+     * @param Request $request
+     * @return Response & Genter Notifications
+     */
+
+    public function submitApplication(Request $request){
+        $validator = Validator::make( $request->all(), 
+        [
             'application_title'=>$request->applicationTitle,
             'application_content'=>$request->applicationContent,
-            'user_id'=>Auth::user()->id,
-            'forward_to'=> 5
         ]);
-
-        $users=User::where('role',5)->get();
-
-        if($ApplicationCreate){
-            $message=collect(['title'=>'New Application','body'=> Auth::user()->name.' Send  a application']);
-            Notification::send($users,new NotificationGenrater($message));
-            return response(['message'=>'Send Successfully']);
+        
+        if ( $validator->fails() ) {
+            return response( ['errors'=>$validator->errors()->all()], 422 );
         }
-        else
-            return response(['message'=>'Error occurs']);
+
+        return $this->ApplicationRepository->submitApplication($request);
     }
+
+    /**
+     * Get Applications
+     *
+     * @param Request $request
+     * @return Response & All applications
+     */
 
     public function getApplications(){
         return $this->ApplicationRepository->getApplications();
     }
 
+    /**
+     * Get Admin Application
+     *
+     * @param Request $request
+     * @return Response & All Application Regarding Admins
+     */
+
     public function getAdminApplication(){
+
         return $this->ApplicationRepository->getAdminApplication();
     }
 
+    /**
+     * Get Admin Application Detail
+     *
+     * @param Request $request
+     * @return Response with Applicant detail
+     */
+    
     public function getAdminApplicationDetail(Request $request){
         $validator = Validator::make( $request->all(), 
         [
@@ -88,6 +115,13 @@ class ApplicationController extends Controller
 
         return $this->ApplicationRepository->getAdminApplicationDetail($request->id);
     }
+
+    /**
+     * GEt Application Detail
+     *
+     * @param Request $request
+     * @return response Applicants Sent Detail
+     */
     public function getApplicationDetail(Request $request){
         $validator = Validator::make( $request->all(), 
         [

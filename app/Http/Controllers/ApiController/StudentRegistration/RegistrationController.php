@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class RegistrationController extends Controller
 {
-     protected $StudentRegisterRepository;
+    protected $StudentRegisterRepository;
     
     /**
     * Class Constructor
@@ -18,13 +18,11 @@ class RegistrationController extends Controller
     * @return void
     */
     
-    public function __construct(StudentRegisterInterface $StudentRegisterInterface)
-    {
+    public function __construct(StudentRegisterInterface $StudentRegisterInterface){
         
-      $this->StudentRegisterRepository=$StudentRegisterInterface;
-      
+        $this->StudentRegisterRepository=$StudentRegisterInterface;
     }
-   
+
     /**
     * Get Gender 
     * 
@@ -33,8 +31,7 @@ class RegistrationController extends Controller
     * @return Response Get  Gender
     */
     
-    public function getGender()
-    {
+    public function getGender(){
         return $this->StudentRegisterRepository->getGender();
     }
 
@@ -47,8 +44,7 @@ class RegistrationController extends Controller
     * @return Response Get  Shift
     */
     
-    public function getShift()
-    {
+    public function getShift(){
         return $this->StudentRegisterRepository->getShift();
     }
 
@@ -65,7 +61,7 @@ class RegistrationController extends Controller
         return $this->StudentRegisterRepository->getBloodGroup();
     }
 
-     /**
+    /**
     * Get All Country 
     *
     * 
@@ -75,16 +71,18 @@ class RegistrationController extends Controller
     public function allCountry(){
         return $this->StudentRegisterRepository->allCountry();
     }
-     /**
+
+    /**
     * Get All Country 
     *
     * 
     * @return All-City
     */
+
     public function allCity(){
         return $this->StudentRegisterRepository->allCity();
     }
-     /**
+    /**
     * Get All States 
     *
     * 
@@ -94,7 +92,7 @@ class RegistrationController extends Controller
         return $this->StudentRegisterRepository->getStates();
     }
 
-     /**
+    /**
     * Get Program 
     * 
     * 
@@ -102,8 +100,7 @@ class RegistrationController extends Controller
     * @return Response Get Program 
     */
     
-    public function getAllProgram()
-    {
+    public function getAllProgram(){
         return $this->StudentRegisterRepository->getAllProgram();
     }
     
@@ -116,23 +113,21 @@ class RegistrationController extends Controller
     * @return Response Get  Guardian
     */
     
-    public function getGuardian()
-    {
+    public function getGuardian(){
         return $this->StudentRegisterRepository->getGuardian();
     }
 
     /**
     * register student  
     * 
-    * 
+    * @param Request $request
     * 
     * @return Response   register student
     */
     
-    public function registerStudent(Request $request)
-    {
-       
-         $validator = Validator::make( $request->all(), 
+    public function registerStudent(Request $request){
+
+        $validator = Validator::make( $request->all(), 
         [
             'student_name'=> 'required',
             'father_name'=>'required',
@@ -158,13 +153,10 @@ class RegistrationController extends Controller
             'college_passing_year'=>'required',
         ]);
 
-        if ( $validator->fails() ) 
-        {
+        if ( $validator->fails() ) {
             return response( ['errors'=>$validator->errors()->all()], 422 );
-        }
-        else
-        {
-         return $this->StudentRegisterRepository->registerStudent($request); 
+        }else{
+        return $this->StudentRegisterRepository->registerStudent($request); 
         }
     }
 

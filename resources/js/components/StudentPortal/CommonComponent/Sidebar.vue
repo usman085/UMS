@@ -201,25 +201,37 @@
             </v-avatar>
         </v-btn>
     </v-app-bar>
+    <pacer :message="'Logout.......'" />
 </div>
 </template>
 
 <script>
 import notificationMix from '../../../Mixins/notificationMixin';
+import pacer from '../../CommonGobalComponent/Pacer';
 export default {
     name: "SideBar",
-    components: {},
+    components: {pacer},
     mixins:[notificationMix],
     props: {
         source: String
     },
     methods: {
         logout: function () {
-            localStorage.removeItem("studentLogin");
+           
+            let headers = {
+                "Content-Type": "application/json",
+                Authorization: "Bearer  " + this.userAuth.token,
+            };
+            // send request to Api Route
+            axios.post(process.env.MIX_APP_URL + "/logout", "", {headers: headers,})
+            .then(res=>{
+                
+                localStorage.removeItem("studentLogin");
+                this.$router.push({
+                    name: "login"
+                });
+            })
             
-            this.$router.push({
-                name: "login"
-            });
         },
         
 

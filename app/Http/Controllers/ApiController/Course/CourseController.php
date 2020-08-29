@@ -77,8 +77,8 @@ class CourseController extends Controller
         }
             return   $this->courseRepository->delCourse( $request );
     }
-  
-      /**
+
+    /**
     * Delete Course
     *
     *
@@ -100,7 +100,7 @@ class CourseController extends Controller
     /**
     * Edit Course
     *
-    *
+    *@param Request $request
     *
     * @return Response  Edit Course
     */
@@ -142,10 +142,10 @@ class CourseController extends Controller
         if ( $validator->fails() ) {
             return response( ['errors'=>$validator->errors()->all()], 422 );
         }
-       return $this->courseRepository->addCourseOutline($request);
+        return $this->courseRepository->addCourseOutline($request);
     }
 
-     /**
+    /**
     * Update Course Oultine
     *
     * @param Request $request
@@ -168,6 +168,14 @@ class CourseController extends Controller
 
         return $this->courseRepository->updateCourseOutline($request);
     }
+
+    /**
+    * Get  Course for student
+    *
+    * @param Request $request
+    *
+    * @return Response Current Login Student Course 
+    */
 
     public function getCourseForStudent(){
         return $this->courseRepository->getCourseForStudent();

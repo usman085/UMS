@@ -36,6 +36,7 @@ class AuthController extends Controller {
     public function  __construct( AuthInterface $AuthInterface ) {
         $this->authRepository = $AuthInterface;
     }
+
     /**
     * Login Function
     *
@@ -76,8 +77,15 @@ class AuthController extends Controller {
 
     }
 
+    /**
+    * Logout Function
+    *
+    * Authenticate the User And Revoke the Token and Return Login User
+    *
+    * @param Request object
+    */
+
     public function logout ( Request $request ) {
-        
         $token = $request->user()->token();
         $token->revoke();
         $response = ['message' => 'You have been successfully logged out!'];

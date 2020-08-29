@@ -103,5 +103,6 @@ Route::group(['middleware' => ['cors', 'jsonResponse','auth:api']], function () 
     Route::post('/get-exam-schedule','ApiController\ExamRoutine\ExamRoutineController@getExamSchedule');
   
     // *** Route Group End ***//
+    Route::post('/logout','ApiController\Auth\AuthController@logout');
 });
 

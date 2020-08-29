@@ -19,13 +19,12 @@ protected $ExamRoutineRepository;
     * @return void
     */
     
-    public function __construct(ExamRoutineInterface $ExamRoutineInterface)
-    {
-        
-      $this->ExamRoutineRepository=$ExamRoutineInterface;
-      
+    public function __construct(ExamRoutineInterface $ExamRoutineInterface){
+
+    $this->ExamRoutineRepository=$ExamRoutineInterface;
     }
-     /**
+
+    /**
     * Get Exam Routine 
     * 
     * 
@@ -33,13 +32,19 @@ protected $ExamRoutineRepository;
     * @return Response Get  Routine
     */
     
-    public function getExamRoutine()
-    {
-        return $this->ExamRoutineRepository->getExamRoutine( );
+    public function getExamRoutine(){
+        return $this->ExamRoutineRepository->getExamRoutine();
     }
-  
-    public function deleteExamRoutine( Request $request ) 
-    {
+
+    /**
+    * Delete Exam Routine 
+    * 
+    * 
+    * 
+    * @return Response Get  Routine
+    */
+
+    public function deleteExamRoutine( Request $request ){
         $validator = Validator::make( $request->all(), 
         [
             'id' => 'required',
@@ -50,13 +55,29 @@ protected $ExamRoutineRepository;
         return   $this->ExamRoutineRepository->deleteExamRoutine( $request );
     }
     
-    public function InsertExamRoutine(Request $request)
-    {
+    /**
+    * Insert Exam Routine 
+    * 
+    * @param Request $request
+    * 
+    * @return Response Get  Routine
+    */
+
+    public function InsertExamRoutine(Request $request){
+
         return $this->ExamRoutineRepository->InsertExamRoutine( $request);
     }
     
-    public function checkExamRoutine(Request $request)
-    {
+    /**
+    * Check Exam Routine 
+    * 
+    * @param Request $request
+    * 
+    * @return Response Boolean
+    */
+
+    public function checkExamRoutine(Request $request){
+
         $validator = Validator::make( $request->all(), 
         [
             'program'=>'required',
@@ -71,26 +92,42 @@ protected $ExamRoutineRepository;
         return $this->ExamRoutineRepository->checkExamRoutine($request);
     }
 
-    public function UpdateExamRoutine(Request $request)
-    {
+    /**
+    * Update Exam Routine 
+    * 
+    *@param Request $request
+    * 
+    * @return Response Get  Routine
+    */
+
+    public function UpdateExamRoutine(Request $request){
     
         return $this->ExamRoutineRepository->UpdateExamRoutine($request);
-    
     }
     
-    public function getExamSchedule(Request $request)
-    {
-    
+    /**
+    * Get Exam Routine Schedule 
+    * 
+    * @param Request $request
+    * 
+    * @return Response Get  Routine
+    */
+
+    public function getExamSchedule(Request $request){
+
         return $this->ExamRoutineRepository->getExamSchedule($request->id);
-    
     }
 
-    // For Student Side
-    public function getStudentExamRoutine()
-    {
-    
+    /**
+    * Get Exam Routine for Student 
+    * 
+    * 
+    * 
+    * @return Response Get  Routine
+    */
+
+    public function getStudentExamRoutine(){
         return $this->ExamRoutineRepository->getStudentExamRoutine();
-    
     }
     
 }

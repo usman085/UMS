@@ -50,7 +50,7 @@ class ProgramController extends Controller
     /**
     * Get program 
     * 
-    * 
+    * @param Request $request
     * 
     * @return Response Get All program
     */
@@ -64,7 +64,7 @@ class ProgramController extends Controller
     /**
     * Delete program 
     * 
-    * 
+    * @param Request $request
     * 
     * @return Response Delete Program By Requested ID
     */
@@ -87,7 +87,7 @@ class ProgramController extends Controller
     /**
     * Edit program 
     * 
-    * 
+    * @param Request $request
     * 
     * @return Response Edit Program
     */
@@ -111,7 +111,7 @@ class ProgramController extends Controller
     /**
     * Assigned Courses To Program
     *
-    *
+    *@param Request $request
     *
     * @return Response  Assign Course
     */
@@ -133,7 +133,7 @@ class ProgramController extends Controller
     /**
     * Assign Course To Program
     *
-    *
+    *@param Request $request
     *
     * @return Response  Assign Course
     */
@@ -156,7 +156,7 @@ class ProgramController extends Controller
     /**
     * Delete Course To Program
     *
-    *
+    *@param Request $request
     *
     * @return Response  Assign Course
     */
