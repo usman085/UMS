@@ -79,6 +79,14 @@
                     <v-list-item-title>Manage Time Table</v-list-item-title>
                 </v-list-item>
 
+                 <v-list-item :to="{name:'AssignedAssignments'}">
+                    <v-list-item-icon>
+                        <v-icon>mdi-hexagon-multiple</v-icon>
+                    </v-list-item-icon>
+
+                    <v-list-item-title>Assign Assignments</v-list-item-title>
+                </v-list-item>
+
             </v-list-group>
 
             <v-list-item :to="{name:'Adminfeedback'}">

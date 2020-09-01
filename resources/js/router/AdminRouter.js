@@ -20,10 +20,12 @@ import notificationPage from '../components/AdminPortal/Pages/Notification';
 import ManageApplication from '../components/AdminPortal/Pages/ManageApplication';
 import ManageApplicationBlock from '../components/AdminPortal/PartialComponents/ManageApplicationBlock';
 import ApplicationDetailView from '../components/AdminPortal/PartialComponents/ApplicationDetailView';
+import ManageAssigment from '../components/AdminPortal/Pages/ManageAssignment';
+import AssignAssignments from '../components/AdminPortal/PartialComponents/AssignedAssignment';
+import AssignNewAssignment from '../components/AdminPortal/PartialComponents/newAssignment';
 //**** ****  Import Guard Router 
-import {
-    guardRouteAdmin
-} from './RouterGuard';
+import {guardRouteAdmin} from './RouterGuard';
+
 
 
 // **** **** Admin Portal Routes & Child Routes Components Paths
@@ -171,7 +173,33 @@ const AdminRoutes = [{
             component: ManageCourse,
             name: 'ManageCourse'
         },
-
+        // Assign assigment Block
+        {
+            path:"/manage-assignments",
+            component: ManageAssigment,
+            children:[
+                {
+                    // *** ManageProgram Route
+                    path: 'assigned-assignments',
+                    component: AssignAssignments,
+                    name: 'AssignedAssignments'
+                },
+                {
+                    // *** ManageProgram Route
+                    path: 'assign-assignment-to-students',
+                    component: AssignNewAssignment,
+                    name: 'AssignNewAssignments'
+                },
+                {
+                    path: '',
+                    redirect: 'assigned-assignments'
+                },
+                {
+                    path: '*',
+                    redirect: 'assigned-assignments'
+                }
+            ]
+        },
         // children Route End
         {
             path: '/',
